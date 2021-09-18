@@ -11,6 +11,6 @@
 [Detail](https://stackoverflow.com/questions/38602321/cloning-laravel-project-from-github)
 
 ## Contributions
-- Helena
+- Helena Helena
 - Kadek
 - Albert
