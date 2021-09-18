@@ -7,4 +7,10 @@
 - jalanin **php artisan key:generate**
 - jalanin **php artisan migrate**
 - jalanin **php artisan serve**
+
 [Detail](https://stackoverflow.com/questions/38602321/cloning-laravel-project-from-github)
+
+## Contributions
+- Helena
+- Kadek
+- Albert
