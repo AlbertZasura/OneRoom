@@ -18,7 +18,8 @@ class DatabaseSeeder extends Seeder
             MessageSeeder::class,
             ClassesSeeder::class,
             CourseSeeder::class,
-            SessionSeeder::class
+            SessionSeeder::class,
+            ExamSeeder::class
         ]);
     }
 }
