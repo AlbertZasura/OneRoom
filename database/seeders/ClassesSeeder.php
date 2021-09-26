@@ -14,11 +14,15 @@ class ClassesSeeder extends Seeder
      */
     public function run()
     {
-        $faker = \Faker\Factory::create();
-        for ($i=0; $i < 5; $i++) { 
+        $classNames=[
+           "SMP 1","SMP 2","SMP 3",
+           "SMA 1","SMA 2","SMA 3"
+        ];
+
+        for ($i=0; $i < count($classNames) ; $i++) { 
             $classes = new Classes;
             $classes->fill([
-                'name' => $faker->name()
+                'name' => $classNames[$i]
             ]);
             $classes->save();
         }
