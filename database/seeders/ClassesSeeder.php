@@ -1,10 +1,11 @@
 <?php
 
 namespace Database\Seeders;
-use Illuminate\Database\Seeder;
-use App\Models\Message;
 
-class MessageSeeder extends Seeder
+use Illuminate\Database\Seeder;
+use App\Models\Classes;
+
+class ClassesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -15,13 +16,11 @@ class MessageSeeder extends Seeder
     {
         $faker = \Faker\Factory::create();
         for ($i=0; $i < 5; $i++) { 
-            $messages = new Message;
-            $messages->fill([
-                "user_id" => 1,
-                'title' => $faker->title,
-                'content' => $faker->text
+            $classes = new Classes;
+            $classes->fill([
+                'name' => $faker->name()
             ]);
-            $messages->save();
+            $classes->save();
         }
     }
 }
