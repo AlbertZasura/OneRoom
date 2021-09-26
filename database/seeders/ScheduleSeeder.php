@@ -21,7 +21,7 @@ class ScheduleSeeder extends Seeder
                 "date" => now(),
                 "start_date" => now()->toDateTimeString(),
                 "end_date" => "2021-09-27 14:14:39",
-                "course_id" => $i
+                "course_id" => $i + 1
             ]);
             $schedules->save();
         }

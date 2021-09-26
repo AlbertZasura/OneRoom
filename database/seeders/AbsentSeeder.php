@@ -19,8 +19,8 @@ class AbsentSeeder extends Seeder
             $absents = new Absent;
             $absents->fill([
                 "status" => "Hadir",
-                "course_id" => $i,
-                "user_id" => $i
+                "course_id" => $i + 1,
+                "user_id" => $i + 1
             ]);
             $absents->save();
         }
