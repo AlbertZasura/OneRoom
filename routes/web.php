@@ -17,5 +17,5 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/messages', [MessageController::class, 'index']);
-
+// Route::get('/messages', [MessageController::class, 'index']);
+Route::resource('messages', MessageController::class);
