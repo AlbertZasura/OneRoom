@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Message;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class MessageController extends Controller
 {
@@ -15,7 +17,7 @@ class MessageController extends Controller
     public function index()
     {
         $messages = Message::all();
-        return view('message.index', [
+        return view('messages.index', [
             'messages' => $messages
         ]);
     }
@@ -27,7 +29,7 @@ class MessageController extends Controller
      */
     public function create()
     {
-        //
+        return view('messages.create');
     }
 
     /**
@@ -38,7 +40,19 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required'
+        ]);
+
+        $user = User::find(1)->first();
+        Message::create([
+            'user_id' => $user->id,
+            'title' => $request->title,
+            'content' => $request->content
+        ]);
+
+        return redirect()->route('messages.index')->with('success','Message created successfully.');
     }
 
     /**
@@ -49,8 +63,7 @@ class MessageController extends Controller
      */
     public function show(Message $message)
     {
-        $m = Message::find($message)->first();
-        return view('message.show', ['message' => $m]);
+        return view('messages.show', ['message' => $message]);
     }
 
     /**
@@ -61,7 +74,7 @@ class MessageController extends Controller
      */
     public function edit(Message $message)
     {
-        //
+        return view('messages.edit', ['message' => $message]);
     }
 
     /**
@@ -73,7 +86,19 @@ class MessageController extends Controller
      */
     public function update(Request $request, Message $message)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'content' => 'required'
+        ]);
+
+        $user = User::find(1)->first();
+        $message->update([
+            'user_id' => $user->id,
+            'title' => $request->title,
+            'content' => $request->content
+        ]);
+
+        return redirect()->route('messages.index')->with('success','Message updated successfully.');
     }
 
     /**
@@ -84,6 +109,8 @@ class MessageController extends Controller
      */
     public function destroy(Message $message)
     {
-        //
+        $message->delete();
+        return redirect()->route('messages.index')
+                        ->with('success','Message deleted successfully');
     }
 }

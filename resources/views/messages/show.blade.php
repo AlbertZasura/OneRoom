@@ -7,6 +7,7 @@
     <title>Document</title>
 </head>
 <body>
+    <h1>Show</h1>
     <p class="card-text"> {{ $message->title }}</p>
     <p class="card-text"> {{ $message->content }}</p>
 </body>
