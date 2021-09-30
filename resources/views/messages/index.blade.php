@@ -17,6 +17,8 @@
             @method('DELETE')      
             <button type="submit" class="btn btn-danger">Delete</button>
         </form>
+        <a class="btn btn-info" href="{{ route('messages.show',$message->id) }}">Show</a>    
+        <a class="btn btn-primary" href="{{ route('messages.edit',$message->id) }}">Edit</a>
     @endforeach
 </body>
 </html>
