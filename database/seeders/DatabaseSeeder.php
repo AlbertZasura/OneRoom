@@ -21,7 +21,8 @@ class DatabaseSeeder extends Seeder
             SessionSeeder::class,
             ScheduleSeeder::class,
             AbsentSeeder::class,
-            ExamSeeder::class
+            ExamSeeder::class,
+            AssignmentSeeder::class
         ]);
     }
 }
