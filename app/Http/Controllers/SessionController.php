@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Session;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class SessionController extends Controller
@@ -15,7 +16,7 @@ class SessionController extends Controller
     public function index()
     {
         $session = Session::all();
-        return view('message.index', [
+        return view('messages.index', [
             'session' => $session
         ]);
     }
@@ -27,7 +28,7 @@ class SessionController extends Controller
      */
     public function create()
     {
-        //
+        return view('messages.create');
     }
 
     /**
@@ -38,7 +39,20 @@ class SessionController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required'
+        ]);
+
+        $user = User::find(1)->first();
+        Session::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'file' => 'teste.txt',
+            'user_id' => $user->id,
+        ]);
+
+        return redirect()->route('session.index')->with('success','Message created successfully.');
     }
 
     /**
@@ -60,7 +74,7 @@ class SessionController extends Controller
      */
     public function edit(Session $session)
     {
-        //
+        return view('messages.edit', ['session' => $session]);
     }
 
     /**
@@ -72,7 +86,20 @@ class SessionController extends Controller
      */
     public function update(Request $request, Session $session)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required'
+        ]);
+
+        $user = User::find(1)->first();
+        Session::create([
+            'title' => $request->title,
+            'description' => $request->description,
+            'file' => 'teste.txt',
+            'user_id' => $user->id,
+        ]);
+
+        return redirect()->route('session.index')->with('success','Message created successfully.');
     }
 
     /**
@@ -83,6 +110,8 @@ class SessionController extends Controller
      */
     public function destroy(Session $session)
     {
-        //
+        $session->delete();
+        return redirect()->route('session.index')
+                        ->with('success','Message deleted successfully');
     }
 }
