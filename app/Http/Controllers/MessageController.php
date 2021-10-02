@@ -44,8 +44,8 @@ class MessageController extends Controller
             'title' => 'required',
             'content' => 'required'
         ]);
-
-        $user = User::find(1)->first();
+        
+        $user = Auth::user();
         Message::create([
             'user_id' => $user->id,
             'title' => $request->title,

@@ -9,6 +9,8 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\AssignmentController;
+use App\Http\Controllers\LoginController;
+use App\Http\Controllers\RegisterController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -30,10 +32,17 @@ Route::get('/assignment', [AssignmentController::class, 'index']);
 
 Route::resource('messages', MessageController::class);
 Route::resource('exams', ExamController::class);
-Route::resource('class', [ClassController::class]);
+Route::resource('class', ClassController::class);
 
 //helena
 Route::resource('courses', CourseController::class);
 Route::resource('schedules', ScheduleController::class);
 Route::resource('absents', AbsentController::class);
+
+// Route::get('/register', [RegisterController::class, 'create']);
+Route::resource('/register', RegisterController::class);
+Route::resource('login', LoginController::class);
+Route::get('/logins', [LoginController::class, 'login'])->name('login');
+Route::get('/registers', [RegisterController::class, 'register']);
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
 //end
