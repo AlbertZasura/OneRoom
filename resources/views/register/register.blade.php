@@ -40,18 +40,8 @@
                     <input type="text" name="phone" class="form-control" placeholder="Enter phone">
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>status:</strong>
-                    <input type="text" name="status" class="form-control" placeholder="Enter status">
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>role:</strong>
-                    <input type="text" name="role" class="form-control" placeholder="Enter role">
-                </div>
-            </div>
+            <input type="text" name="status" value="0" hidden>
+            <input type="text" name="role" value="0" hidden>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>identification_number:</strong>

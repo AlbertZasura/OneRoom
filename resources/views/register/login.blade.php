@@ -25,14 +25,14 @@
             
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
-                    <strong>email:</strong>
-                    <input type="email" name="email" class="form-control" placeholder="Enter email">
+                    <strong>Email:</strong>
+                    <input type="email" name="email" class="form-control" placeholder="Enter email" autofocus>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>password:</strong>
-                    <input type="password" name="password" class="form-control">
+                    <input type="password" name="password" class="form-control" placeholder="Enter email">
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12 text-center">

@@ -3,7 +3,6 @@
 use App\Http\Controllers\AbsentController;
 use App\Http\Controllers\CourseController;
 use App\Http\Controllers\MessageController;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\SessionController;
 use App\Http\Controllers\ClassController;

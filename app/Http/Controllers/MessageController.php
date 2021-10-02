@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Message;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -45,9 +44,8 @@ class MessageController extends Controller
             'content' => 'required'
         ]);
         
-        $user = Auth::user();
         Message::create([
-            'user_id' => $user->id,
+            'user_id' => Auth::user()->id,
             'title' => $request->title,
             'content' => $request->content
         ]);
@@ -91,9 +89,8 @@ class MessageController extends Controller
             'content' => 'required'
         ]);
 
-        $user = User::find(1)->first();
         $message->update([
-            'user_id' => $user->id,
+            'user_id' => Auth::user()->id,
             'title' => $request->title,
             'content' => $request->content
         ]);
