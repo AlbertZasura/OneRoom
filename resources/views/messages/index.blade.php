@@ -9,15 +9,12 @@
 <body>
     <h1>Index</h1>
     @if (Auth::user())
-    <form action="{{ route('logout') }}" method="POST">   
+    <form action="/logout" method="POST">   
         @csrf
         <button type="submit" class="btn btn-danger">Logout</button>
     </form>
     @else
-    <form action="{{ route('login') }}" method="GET">   
-        @csrf
-        <button type="submit" class="btn btn-danger">Login</button>
-    </form>
+    <a class="btn btn-info" href="/login">Login</a>  
     @endif
     
     @foreach ($messages as $key => $message )
