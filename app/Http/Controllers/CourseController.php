@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CourseController extends Controller
 {
@@ -43,7 +44,7 @@ class CourseController extends Controller
             'name' => 'required'
         ]);
 
-        $user = User::find(1)->first();
+        $user = Auth::user();
         Course::create([
             'user_id' => $user->id,
             'name' => $request->name
@@ -87,7 +88,7 @@ class CourseController extends Controller
             'name' => 'required'
         ]);
 
-        $user = User::find(1)->first();
+        $user = Auth::user();
         $course->update([
             'user_id' => $user->id,
             'name' => $request->name

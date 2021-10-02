@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Schedule;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ScheduleController extends Controller
 {
@@ -46,7 +47,7 @@ class ScheduleController extends Controller
             'end_date' => 'required'
         ]);
 
-        $user = User::find(1)->first();
+        $user = Auth::user();
         Schedule::create([
             'user_id' => $user->id,
             'course_id' => $request->course_id,
@@ -96,7 +97,7 @@ class ScheduleController extends Controller
             'end_date' => 'required'
         ]);
 
-        $user = User::find(1)->first();
+        $user = Auth::user();
         $schedule->update([
             'user_id' => $user->id,
             'course_id' => $request->course_id,

@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Absent;
-use App\Models\User;
+
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AbsentController extends Controller
 {
@@ -46,7 +47,7 @@ class AbsentController extends Controller
             'course_id' => 'required'
         ]);
 
-        $user = User::find(1)->first();
+        $user = Auth::user();
         Absent::create([
             'created_at' => $user->created_at,
             'status' => $request->status,
@@ -95,7 +96,7 @@ class AbsentController extends Controller
             'course_id' => 'required'
         ]);
 
-        $user = User::find(1)->first();
+        $user = Auth::user();
         $absent->update([
             'created_at' => $user->created_at,
             'status' => $request->status,
