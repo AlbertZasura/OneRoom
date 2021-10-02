@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Session;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class SessionController extends Controller
 {
@@ -15,6 +16,7 @@ class SessionController extends Controller
      */
     public function index()
     {
+        
         $session = Session::all();
         return view('messages.index', [
             'session' => $session
@@ -49,7 +51,7 @@ class SessionController extends Controller
             'title' => $request->title,
             'description' => $request->description,
             'file' => 'teste.txt',
-            'user_id' => $user->id,
+            'user_id' =>Auth::id(),
         ]);
 
         return redirect()->route('session.index')->with('success','Message created successfully.');
