@@ -39,10 +39,9 @@ Route::resource('courses', CourseController::class);
 Route::resource('schedules', ScheduleController::class);
 Route::resource('absents', AbsentController::class);
 
-// Route::get('/register', [RegisterController::class, 'create']);
-Route::resource('/register', RegisterController::class);
-Route::resource('login', LoginController::class);
-Route::get('/logins', [LoginController::class, 'login'])->name('login');
-Route::get('/registers', [RegisterController::class, 'register']);
-Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+Route::get('/register', [RegisterController::class, 'register']);
+Route::post('/register', [RegisterController::class, 'store']);
+Route::get('/login', [LoginController::class, 'login']);
+Route::post('/login', [LoginController::class, 'store']);
+Route::post('/logout', [LoginController::class, 'logout']);
 //end

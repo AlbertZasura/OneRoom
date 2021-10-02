@@ -18,7 +18,7 @@
             </ul>
         </div>
     @endif
-    <form action="{{ route('login.store') }}" method="POST">
+    <form action="/login" method="POST">
         @csrf
       
          <div class="row">
