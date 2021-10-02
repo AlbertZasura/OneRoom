@@ -8,6 +8,18 @@
 </head>
 <body>
     <h1>Index</h1>
+    @if (Auth::user())
+    <form action="{{ route('logout') }}" method="POST">   
+        @csrf
+        <button type="submit" class="btn btn-danger">Logout</button>
+    </form>
+    @else
+    <form action="{{ route('login') }}" method="GET">   
+        @csrf
+        <button type="submit" class="btn btn-danger">Login</button>
+    </form>
+    @endif
+    
     @foreach ($messages as $key => $message )
         <p class="card-text"> </p>
         <p class="card-text">{{ $key+1 }}. {{ $message->title }}</p>
