@@ -15,8 +15,8 @@ class ClassController extends Controller
     public function index()
     {
         $class = Classes::all();
-        return view('message.index', [
-            'cls' => $class
+        return view('messages.index', [
+            'classes' => $class
         ]);
     }
 
@@ -27,7 +27,7 @@ class ClassController extends Controller
      */
     public function create()
     {
-        //
+        return view('messages.create');
     }
 
     /**
@@ -38,7 +38,13 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required'
+        ]);
+
+        Classes::create($request->all());
+
+        return redirect()->route('classes.index')->with('success','Class created successfully.');
     }
 
     /**
@@ -49,7 +55,7 @@ class ClassController extends Controller
      */
     public function show(Classes $classes)
     {
-        //
+        return view('messages.show', ['classes' => $classes]);
     }
 
     /**
@@ -60,7 +66,7 @@ class ClassController extends Controller
      */
     public function edit(Classes $classes)
     {
-        //
+        return view('messages.edit', ['classes' => $classes]);
     }
 
     /**
@@ -72,7 +78,12 @@ class ClassController extends Controller
      */
     public function update(Request $request, Classes $classes)
     {
-        //
+        $request->validate([
+            'name' => 'required'
+        ]);
+
+        $classes->update($request->all());
+        return redirect()->route('classes.index')->with('success','Classes updated successfully.');
     }
 
     /**
@@ -83,6 +94,8 @@ class ClassController extends Controller
      */
     public function destroy(Classes $classes)
     {
-        //
+        $classes->delete();
+        return redirect()->route('classes.index')
+                        ->with('success','Class deleted successfully');
     }
 }

@@ -26,11 +26,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 Route::get('/session', [SessionController::class, 'index']);
-Route::get('/class', [ClassController::class, 'index']);
-Route::get('/exam', [ExamController::class, 'index']);
 Route::get('/assignment', [AssignmentController::class, 'index']);
 
 Route::resource('messages', MessageController::class);
+Route::resource('exams', ExamController::class);
+Route::resource('class', [ClassController::class]);
 
 //helena
 Route::resource('courses', CourseController::class);
