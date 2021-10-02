@@ -30,7 +30,7 @@ Route::get('/', function () {
 Route::get('/session', [SessionController::class, 'index']);
 Route::get('/assignment', [AssignmentController::class, 'index']);
 
-Route::resource('messages', MessageController::class);
+Route::resource('messages', MessageController::class)->middleware('auth');
 Route::resource('exams', ExamController::class);
 Route::resource('class', ClassController::class);
 
@@ -39,9 +39,9 @@ Route::resource('courses', CourseController::class);
 Route::resource('schedules', ScheduleController::class);
 Route::resource('absents', AbsentController::class);
 
-Route::get('/register', [RegisterController::class, 'register']);
+Route::get('/register', [RegisterController::class, 'register'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
-Route::get('/login', [LoginController::class, 'login']);
+Route::get('/login', [LoginController::class, 'login'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'store']);
 Route::post('/logout', [LoginController::class, 'logout']);
 //end
