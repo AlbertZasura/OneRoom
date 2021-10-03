@@ -63,8 +63,8 @@
                     <div class="errors">{{ $message}}</div>
                 @enderror
             </div>
-            <input type="text" name="status" value="0" hidden>
-            <input type="text" name="role" value="0" hidden>
+            <input type="number" name="status" value="{{$role==="admin" ? 1 : 0}}" hidden>
+            <input type="text" name="role" value="{{$role}}" hidden>
             <div class="col-xs-12 col-sm-12 col-md-12">
                     <button type="submit" class="btn btn-primary">Submit</button>
             </div>
