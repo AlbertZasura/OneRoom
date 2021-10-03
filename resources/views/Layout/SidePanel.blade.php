@@ -19,7 +19,12 @@
 
 
         @if(Auth::guest())
+        <div class="container">
             @yield('contentGuest')
+
+        </div>
+
+
         @else
         
             <div class="d-flex">
