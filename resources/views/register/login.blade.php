@@ -2,8 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <script src="https://kit.fontawesome.com/6538af5efe.js" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <title>Document</title>
 </head>
 <body>
@@ -36,26 +39,32 @@
             </div>
         </div>
     </form>
-    <p>Belum punya akun? <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#registerModal" id="open">Daftar disini</button></p>
-    
+    <p>Belum punya akun?
+        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerModal">
+            Daftar disini
+        </button>
+    </p>
 
-    <div class="modal" tabindex="-1" role="dialog" id="registerModal">
-        <div class="modal-dialog" role="document">
+    <!-- Modal -->
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
             <div class="modal-content">
-                <div class="alert alert-danger" style="display:none"></div>
                 <div class="modal-header">
-                    <h5 class="modal-title">Uefa Champion League</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
+                {{-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> --}}
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <p>Daftar Sebagai</p>
-                <button type="button" class="btn btn-info btn-lg">Guru</button>
+                    <button type="button" class="btn btn-info btn-lg">Guru</button>
                     <p>Atau</p>
-                <button type="button" class="btn btn-info btn-lg">Siswa</button>
+                    <button type="button" class="btn btn-info btn-lg">Siswa</button>
                     <p>Atau</p>
-                <button type="button" class="btn btn-info btn-lg">Admin</button>
+                    <button type="button" class="btn btn-info btn-lg">Admin</button>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>
