@@ -1,5 +1,7 @@
 @extends('Layout.SidePanel')
 
+@section('title', 'Messages Center')
+
 @section('content')
     <h1>Index</h1>
     @if (Auth::user())
