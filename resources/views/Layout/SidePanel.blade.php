@@ -74,6 +74,9 @@
 <body>
     
     <div class="container">
+
+        @yield('contentGuest')
+
         <div class="d-flex">
             <div class="side-panel-menu bg-dark-toska">
                 <div class="profile-picture">
