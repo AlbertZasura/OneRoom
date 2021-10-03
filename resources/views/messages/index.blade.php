@@ -1,9 +1,10 @@
+
 @extends('Layout.SidePanel')
 
 @section('title', 'Messages Center')
 
 @section('content')
-    <h1>Index</h1>
+    <h1>Pengumuman</h1>
     @if (Auth::user())
     <form action="/logout" method="POST">   
         @csrf
@@ -14,9 +15,30 @@
     @endif
     
     @foreach ($messages as $key => $message )
-        <p class="card-text"> </p>
-        <p class="card-text">{{ $key+1 }}. {{ $message->title }}</p>
-        <p class="card-text"> {{ $message->content }}</p>
+        <table style="width:200%">
+            <tr>
+                <th style="width:25%"></th>
+                <th style="width:25%"></th>
+                <th style="width:25%"></th>
+                <th style="width:25%"></th>
+            </tr>
+            <tr>
+                <td>
+                    <a class="card-text">{{ $message->created_at->format('H:i') }}</a> 
+                </td>
+                <td>
+                    <a class="card-text">{{ $message->title }}</a>
+                </td>
+                <td>
+                <a class="card-text">{{ Auth::user()->name }}</a>
+                </td>
+                <td>
+                <a class="card-text">{{ $message->created_at->format('d M Y') }}</a>
+                </td>
+            </tr>
+            <br>
+            <br>
+        </table>     
         <form action="{{ route('messages.destroy',$message->id) }}" method="POST">   
             @csrf
             @method('DELETE')      
