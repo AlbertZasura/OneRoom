@@ -107,5 +107,10 @@
         top: 0;
     }
 
+    .edit-prof-wrap{
+        height: 21px;
+        overflow: hidden;
+    }
+
 
 /* ======= end effect side panel resize ========== */

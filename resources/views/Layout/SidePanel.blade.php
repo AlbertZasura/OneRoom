@@ -35,7 +35,7 @@
                             <div class="text-center fw-bold fs-5">
                                 {{ Auth::user()->name }}
                             </div>
-                            <div class="text-center fs-6"><a href="#" class="text-white text-decoration-none">edit profile</a></div>
+                            <div class="text-center fs-6 edit-prof-wrap"><a href="#" class="text-white text-decoration-none">edit profile</a></div>
 
                         </div>
 
