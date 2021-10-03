@@ -10,120 +10,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js" integrity="sha384-W8fXfP3gkOKtndU4JGtKDvXbO53Wy8SZCQHczT5FMiiqmQfUpWbYdTil/SxwZgAN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
-    <style>
-        .w-50{
-            width: 50%;
-        }
-        .d-flex{
-            display: flex;
-        }
-        .a-center{
-            align-items: center;
-        }
-        .bg-dark-toska{
-            background: #278EA5;
-        }
-        .side-panel-menu{
-            /* width: 254px; */
-            padding: 20px 20px;
-            color: #fff;
-            height: 100%;
-        }
-        .img-responsive{
-            width: 100%;
-            height: auto;
-        }
-        .profile-picture{
-            width: 150px;
-            height: 150px;
-            margin: 0 auto;
-            overflow: hidden;
-            border-radius: 50%;
-            transition: all .5s;
-        }
-
-        .text-center{
-            text-align: center;
-
-        }
-        .text-white{
-            color: #fff;
-        }
-        .text-decoration-none{
-            text-decoration: none;
-        }
-        .fs-25{
-            font-size: 25px;
-        }
-        .fs-20{
-            font-size: 20px;
-        }
-        .fs-18{
-            font-size: 18px;
-        }
-        .ml-20{
-            margin-left: 20px;
-        }
-        .mt-20{
-            margin-top: 20px;
-        }
-        .w-25px{
-            width: 25px;
-        }
-        .mb-10{
-            margin-bottom: 10px;
-        }
-        .overflow-hidden{
-            overflow: hidden;
-        }
-
-
-        /* ======= effect side panel resize ========== */
-
-            .resize-side-panel{
-                overflow: hidden;
-                width: 60px;
-                transition: width .5s;
-            }
-            
-            .resize-side-panel:hover {
-                width: 254px;
-            }
-
-            .resize-side-panel .profile-picture{
-                width: 40px;
-                height: 40px;
-            }
-
-            .resize-side-panel .profile-wrapper{
-                margin-left: -10px;
-                transition: all .5s;
-            }
-
-            .resize-side-panel:hover .profile-wrapper{
-                margin-left: 0px;
-            }
-
-            .resize-side-panel:hover .profile-picture{
-                width: 150px;
-                height: 150px;
-            }
-
-            .resize-side-panel .text-profile{
-                position: relative;
-                top: -80px;
-                transition: all .5s;
-                
-            }
-
-            .resize-side-panel:hover .text-profile{
-                top: 0;
-            }
-
-
-        /* ======= end effect side panel resize ========== */
-
-    </style>
+    <link rel="stylesheet" href={{ asset('css/layout.css') }}>
+ 
 </head>
 <body>
     
@@ -131,7 +19,12 @@
 
 
         @if(Auth::guest())
+        <div class="container">
             @yield('contentGuest')
+
+        </div>
+
+
         @else
         
             <div class="d-flex">
@@ -147,7 +40,7 @@
                             <div class="text-center fw-bold fs-5">
                                 {{ Auth::user()->name }}
                             </div>
-                            <div class="text-center fs-6"><a href="#" class="text-white text-decoration-none">edit profile</a></div>
+                            <div class="text-center fs-6 edit-prof-wrap"><a href="#" class="text-white text-decoration-none">edit profile</a></div>
 
                         </div>
 
