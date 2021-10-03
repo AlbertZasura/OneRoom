@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+@extends('Layout.SidePanel')
+
+@section('content')
     <h1>Index</h1>
     @if (Auth::user())
     <form action="/logout" method="POST">   
@@ -29,5 +23,4 @@
         <a class="btn btn-info" href="{{ route('messages.show',$message->id) }}">Show</a>    
         <a class="btn btn-primary" href="{{ route('messages.edit',$message->id) }}">Edit</a>
     @endforeach
-</body>
-</html>
+@stop
