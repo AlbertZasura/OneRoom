@@ -38,8 +38,8 @@ Route::resource('courses', CourseController::class);
 Route::resource('schedules', ScheduleController::class);
 Route::resource('absents', AbsentController::class);
 
-Route::get('/register', [RegisterController::class, 'register'])->middleware('guest');
-Route::post('/register', [RegisterController::class, 'store']);
+Route::get('/register/{role?}', [RegisterController::class, 'register'])->middleware('guest');
+Route::post('/register/{role?}', [RegisterController::class, 'store']);
 Route::get('/login', [LoginController::class, 'login'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'store']);
 Route::post('/logout', [LoginController::class, 'logout']);

@@ -8,21 +8,22 @@ use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
-    public function register()
+    public function register($role = 'student')
     {
-        return view('register.register');
+        return view('register.register',['role'=> $role]);
     }
 
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required',
-            'email' => 'required',
-            'phone' => 'required',
+            'name' => 'required|max:255|min:4',
+            'email' => 'required|email:dns|unique:users',
+            'phone' => 'required|numeric|unique:users',
             'status' => 'required',
             'role' => 'required',
-            "identification_number" => 'required',
-            "password" => 'required'
+            "identification_number" => 'required|numeric',
+            "password" => 'required|min:6|confirmed',
+            'password_confirmation' => 'required| min:6'
         ]);
 
         $user=User::create([
@@ -34,7 +35,6 @@ class RegisterController extends Controller
             "identification_number" => $request->identification_number,
             "password" => bcrypt($request->password)
         ]);
-
         Auth::login($user);
         return redirect()->route('messages.index')->with('success','register successfully.');
     }

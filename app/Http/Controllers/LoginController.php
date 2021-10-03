@@ -16,8 +16,8 @@ class LoginController extends Controller
     public function store(Request $request)
     {
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
-            'password' => ['required'],
+            'email' => 'required|email:dns',
+            'password' => 'required'
         ]);
 
         if (Auth::attempt($credentials)) {
@@ -25,9 +25,7 @@ class LoginController extends Controller
             return redirect()->route('messages.index')->with('success','login successfully');
         }
 
-        return back()->withErrors([
-            'email' => 'The provided credentials do not match our records.',
-        ]);
+        return back()->with('loginError','Email dan Password salah!');
     }
     
     public function logout(Request $request)
