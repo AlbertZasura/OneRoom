@@ -14,7 +14,7 @@ class RegisterController extends Controller
         if (!in_array($role,["student","teacher","admin"])) {
             $role="student"; 
         }
-        return view('register.register',['role'=> $role]);
+        return view('authentications.register',['role'=> $role]);
     }
 
     public function store(Request $request)

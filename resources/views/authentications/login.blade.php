@@ -36,24 +36,5 @@
         </button>
     </p>
 
-    <!-- Modal -->
-    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                {{-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> --}}
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body text-center">
-                    <h1>Daftar Sebagai</h1>
-                    <a href="/register/teacher" class="btn btn-info">Guru</a>
-                    <p>Atau</p>
-                    <a href="/register" class="btn btn-info">Siswa</a>
-                    <p>Atau</p>
-                    <a href="/register/admin" class="btn btn-info">Admin</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    @include('authentications.partials._role_modal')
 @stop
