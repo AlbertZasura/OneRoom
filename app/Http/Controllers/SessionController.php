@@ -46,7 +46,6 @@ class SessionController extends Controller
             'description' => 'required'
         ]);
 
-        $user = User::find(1)->first();
         Session::create([
             'title' => $request->title,
             'description' => $request->description,
@@ -93,12 +92,11 @@ class SessionController extends Controller
             'description' => 'required'
         ]);
 
-        $user = User::find(1)->first();
         Session::create([
             'title' => $request->title,
             'description' => $request->description,
             'file' => 'teste.txt',
-            'user_id' => $user->id,
+            'user_id' => Auth::id(),
         ]);
 
         return redirect()->route('session.index')->with('success','Message created successfully.');

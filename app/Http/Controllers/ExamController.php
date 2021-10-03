@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Exam;
-use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ExamController extends Controller
 {
@@ -51,7 +51,7 @@ class ExamController extends Controller
         ]);
 
         Exam::create([
-            'user_id' => User::find(1)->first()->id,
+            'user_id' => Auth::user()->id,
             'title' => $request->title,
             'type' => $request->type,
             'start_date' => $request->start_date,
@@ -107,7 +107,7 @@ class ExamController extends Controller
         ]);
 
         $exam->update([
-            'user_id' => User::find(1)->first()->id,
+            'user_id' => Auth::user()->id,
             'title' => $request->title,
             'type' => $request->type,
             'start_date' => $request->start_date,
