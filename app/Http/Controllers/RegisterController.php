@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Auth;
 
 class RegisterController extends Controller
 {
-    public function register()
+    public function register($role = 'student')
     {
-        return view('register.register');
+        return view('register.register',['role'=> $role]);
     }
 
     public function store(Request $request)

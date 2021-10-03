@@ -1,14 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+@extends('Layout.SidePanel')
+
+@section('contentGuest')
     <h1>Daftar</h1>
-    <p>Sebagai </p>
+    <p>Sebagai {{$role}}</p>
     <form action="/register" method="POST">
         @csrf
       
@@ -22,15 +16,17 @@
                     <div class="errors">{{ $message}}</div>
                 @enderror
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Nomor Induk:</strong>
-                    <input type="text" name="identification_number" value="{{old('identification_number')}}" class="form-control" placeholder="ex: 1234..." required>
+            @if ($role !="admin")
+                <div class="col-xs-12 col-sm-12 col-md-12">
+                    <div class="form-group">
+                        <strong>Nomor Induk {{$role}}:</strong>
+                        <input type="text" name="identification_number" value="{{old('identification_number')}}" class="form-control" placeholder="ex: 1234..." required>
+                    </div>
+                    @error('identification_number')
+                        <div class="errors">{{ $message}}</div>
+                    @enderror
                 </div>
-                @error('identification_number')
-                    <div class="errors">{{ $message}}</div>
-                @enderror
-            </div>
+            @endif
             <div class="col-xs-12 col-sm-12 col-md-12">
                 <div class="form-group">
                     <strong>Nomor Handphone:</strong>
@@ -69,12 +65,11 @@
             </div>
             <input type="text" name="status" value="0" hidden>
             <input type="text" name="role" value="0" hidden>
-            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+            <div class="col-xs-12 col-sm-12 col-md-12">
                     <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </div>
         <p>sudah punya akun? <a href="/login">Login disini</a></p>
        
     </form>
-</body>
-</html>
+@stop

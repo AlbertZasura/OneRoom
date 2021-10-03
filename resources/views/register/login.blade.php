@@ -25,7 +25,7 @@
                     <input type="password" name="password" class="form-control" placeholder="Type your password here..." required>
                 </div>
             </div>
-            <div class="col-xs-12 col-sm-12 col-md-12 text-center">
+            <div class="col-xs-12 col-sm-12 col-md-12">
                     <button type="submit" class="btn btn-primary">Login</button>
             </div>
         </div>
@@ -42,24 +42,18 @@
             <div class="modal-content">
                 <div class="modal-header">
                 {{-- <h5 class="modal-title" id="exampleModalLabel">Modal title</h5> --}}
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body">
-                    <p>Daftar Sebagai</p>
-                    <button type="button" class="btn btn-info btn-lg">Guru</button>
+                <div class="modal-body text-center">
+                    <h1>Daftar Sebagai</h1>
+                    <a href="/register/teacher" class="btn btn-info">Guru</a>
                     <p>Atau</p>
-                    <button type="button" class="btn btn-info btn-lg">Siswa</button>
+                    <a href="/register" class="btn btn-info">Siswa</a>
                     <p>Atau</p>
-                    <button type="button" class="btn btn-info btn-lg">Admin</button>
+                    <a href="/register/admin" class="btn btn-info">Admin</a>
                     </div>
-                </div>
-                <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>
     </div>
-</body>
-</html>
 @stop
