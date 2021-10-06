@@ -13,8 +13,11 @@
     @else
     <a class="btn btn-info" href="/login">Login</a>  
     @endif
+    @can('create', App\Models\Message::class )
+        <a class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#uploadAnnouncement">Tambah Pengumuman</a> 
+    @endcan
+        @foreach ($messages as $key => $message )
     
-    <a class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#uploadAnnouncement">Tambah Pengumuman</a> 
     @foreach ($messages as $key => $message )
         <table class="table table-hover" style="width:250%">
             <tbody>
