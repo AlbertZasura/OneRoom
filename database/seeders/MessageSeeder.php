@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use App\Models\Message;
+use Nette\Utils\Random;
 
 class MessageSeeder extends Seeder
 {
@@ -17,8 +18,8 @@ class MessageSeeder extends Seeder
         for ($i=0; $i < 5; $i++) { 
             $messages = new Message;
             $messages->fill([
-                "user_id" => 1,
-                'title' => $faker->title,
+                "user_id" => rand(1,10),
+                'title' => "PENGUMUMAN",
                 'content' => $faker->text
             ]);
             $messages->save();
