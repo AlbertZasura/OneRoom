@@ -46,6 +46,23 @@
         color: gray;
         cursor: pointer;
     }
+    #action-closes-popup {
+        box-shadow: none;
+        border-color: transparent;
+        background-color: #F03E3E;
+        color: #fff;
+        border-radius: 16px;
+        min-width: 80px;
+    }
+    #action-submit-popup {
+        box-shadow: none;
+        border-color: transparent;
+        background-color: #3EDBF0;
+        color: #fff;
+        border-radius: 16px;
+        min-width: 80px;
+        margin-left: 10px;
+    }
 </style>
 <div class="overlay-popup hidden visuallyhidden" id="overlayPopup">
     <div id="pop-up-content" class=" hidden visually-transform">

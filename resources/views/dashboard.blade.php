@@ -10,7 +10,11 @@
 
     <x-pop-up>
         <h1>pop up insert content</h1>
-        <button id="action-closes-popup">close</button>
+        <div class="d-flex justify-content-end">
+            <button id="action-closes-popup">Cancel</button>
+            <button id="action-submit-popup">Submit</button>
+
+        </div>
     </x-pop-up>
 
 @stop
