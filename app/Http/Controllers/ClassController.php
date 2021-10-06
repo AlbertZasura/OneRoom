@@ -15,7 +15,8 @@ class ClassController extends Controller
     public function index()
     {
         $class = Classes::all();
-        return view('messages.index', [
+        dd($class);
+        return view('classes.index', [
             'classes' => $class
         ]);
     }

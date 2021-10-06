@@ -16,7 +16,6 @@
     @can('create', App\Models\Message::class )
         <a class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#uploadAnnouncement">Tambah Pengumuman</a> 
     @endcan
-        @foreach ($messages as $key => $message )
     
     @foreach ($messages as $key => $message )
         <table class="table table-hover" style="width:250%">

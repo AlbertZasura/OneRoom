@@ -35,7 +35,7 @@ Route::get('/assignment', [AssignmentController::class, 'index']);
 
 Route::resource('messages', MessageController::class)->middleware('auth');
 Route::resource('exams', ExamController::class);
-Route::resource('class', ClassController::class);
+Route::resource('classes', ClassController::class);
 
 //helena
 Route::resource('courses', CourseController::class);
