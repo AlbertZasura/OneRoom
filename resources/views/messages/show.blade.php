@@ -42,7 +42,7 @@
         </tr>
     </table>
     <br>
-    <div class="card" style="width: 100%; height: 50%;">
+    <div class="card" style="width: 80%; height: 50%;">
         <div class="card-body">
             <a> {{ $message->content }}</a>
         </div>
