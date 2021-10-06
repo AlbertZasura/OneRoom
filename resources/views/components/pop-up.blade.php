@@ -56,19 +56,41 @@
     </div>
 </div>
 <script>
+    // window.onLoad = function(){
+
+        if (document.getElementById("action-closes-popup")) {
+            console.log("testing")
+            document.getElementById("action-closes-popup").addEventListener("click", function() {
+                let popup =  document.getElementById("pop-up-content")
+                let overlay =  document.getElementById("overlayPopup")
+                popup.classList.add('visually-transform');  
+                overlay.classList.add('visuallyhidden');  
+                popup.addEventListener('transitionend', function(e) {
+                    popup.classList.add('hidden');
+                    overlay.classList.add('hidden');
+                }, {
+                    capture: false,
+                    once: true,
+                    passive: false
+                });
+            })
+        }
+
+
+    // }
     document.getElementById("closePopup").addEventListener("click", function() {
-        let popup =  document.getElementById("pop-up-content")
-        let overlay =  document.getElementById("overlayPopup")
-            popup.classList.add('visually-transform');  
-            overlay.classList.add('visuallyhidden');  
-            popup.addEventListener('transitionend', function(e) {
-                popup.classList.add('hidden');
-                overlay.classList.add('hidden');
-            }, {
-                capture: false,
-                once: true,
-                passive: false
-            });
+            let popup =  document.getElementById("pop-up-content")
+            let overlay =  document.getElementById("overlayPopup")
+                popup.classList.add('visually-transform');  
+                overlay.classList.add('visuallyhidden');  
+                popup.addEventListener('transitionend', function(e) {
+                    popup.classList.add('hidden');
+                    overlay.classList.add('hidden');
+                }, {
+                    capture: false,
+                    once: true,
+                    passive: false
+                });
 
             
     })

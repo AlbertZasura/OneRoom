@@ -10,6 +10,7 @@
 
     <x-pop-up>
         <h1>pop up insert content</h1>
+        <button id="action-closes-popup">close</button>
     </x-pop-up>
 
 @stop
