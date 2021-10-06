@@ -1,6 +1,22 @@
 @extends('Layout.SidePanel')
 
 @section('contentGuest')
+<script>
+    function showPassword(){
+        document.getElementById("passwordLogin").type = 'text'
+        document.getElementById("openEye").classList.add("d-none")
+        document.getElementById("closeEye").classList.remove("d-none")
+    }
+
+    function hidePassword(){
+        document.getElementById("passwordLogin").type = 'password'
+        document.getElementById("openEye").classList.remove("d-none")
+        document.getElementById("closeEye").classList.add("d-none")
+    }
+
+    
+</script>
+
     <h1>Login</h1>
     @if (session('loginError'))
         <div class="alert alert-warning">
@@ -20,9 +36,11 @@
                 @enderror
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
+                <div class="form-group pos-relative">
                     <strong>password:</strong>
-                    <input type="password" name="password" class="form-control" placeholder="Type your password here..." required>
+                    <input type="password" id="passwordLogin" name="password" class="form-control" placeholder="Type your password here..." required>
+                    <i class="far fa-eye visible-password" id="openEye" onclick="showPassword()"></i>
+                    <i class="far fa-eye-slash visible-password d-none" id="closeEye" onclick="hidePassword()"></i>
                 </div>
             </div>
             <div class="col-xs-12 col-sm-12 col-md-12">
