@@ -32,7 +32,7 @@ class RegisterController extends Controller
         }
         $request->validate([
             'name' => 'required|max:255|min:4',
-            'email' => 'required|email:dns|unique:users',
+            'email' => 'required|email|unique:users',
             'phone' => 'required|numeric|unique:users',
             'status' => 'required|numeric',
             'role' => 'required',
@@ -40,7 +40,7 @@ class RegisterController extends Controller
             "password" => 'required|min:6|confirmed',
             'password_confirmation' => 'required| min:6'
         ]);
-        // dd($request);
+        
         $user=User::create([
             'name' => $request->name,
             'email' => $request->email,

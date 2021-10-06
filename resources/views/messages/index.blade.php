@@ -13,9 +13,10 @@
     @else
     <a class="btn btn-info" href="/login">Login</a>  
     @endif
-    
-    <a class="btn btn-outline-dark" data-bs-toggle="modal">Tambah Pengumuman</a> 
-    @foreach ($messages as $key => $message )
+    @can('create', App\Models\Message::class )
+        <a class="btn btn-outline-dark" data-bs-toggle="modal">Tambah Pengumuman</a> 
+    @endcan
+        @foreach ($messages as $key => $message )
         <table class="table table-hover" style="width:250%">
             <tbody>
                 <tr class='clickable-row' data-href="{{ route('messages.show',$message->id) }}">
