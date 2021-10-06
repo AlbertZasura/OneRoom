@@ -114,3 +114,25 @@
 
 
 /* ======= end effect side panel resize ========== */
+
+.pos-relative{
+    position: relative;
+}
+
+.pos-absolute{
+    position: absolute;
+}
+
+.visible-password{
+    position: absolute;
+    right: 15px;
+    top: 35px;
+}
+
+.d-none{
+    display: none;
+}
+
+.d-block{
+    display: block;
+}
