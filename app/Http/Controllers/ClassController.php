@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Classes;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class ClassController extends Controller
@@ -14,7 +15,7 @@ class ClassController extends Controller
      */
     public function index()
     {
-        $classes = Classes::all();
+        $classes = Classes::with('users')->latest()->get();
         return view('classes.index', [
             'classes' => $classes
         ]);
@@ -27,7 +28,7 @@ class ClassController extends Controller
      */
     public function create()
     {
-        return view('messages.create');
+        // return view('messages.create');
     }
 
     /**
@@ -55,7 +56,7 @@ class ClassController extends Controller
      */
     public function show(Classes $class)
     {
-        $classes = Classes::all();
+        $classes = Classes::with('users')->latest()->get();
         return view('classes.show', ['class' => $class, 'classes' => $classes]);
     }
 
@@ -67,6 +68,7 @@ class ClassController extends Controller
      */
     public function edit(Classes $classes)
     {
+        
         return view('messages.edit', ['classes' => $classes]);
     }
 
@@ -87,16 +89,35 @@ class ClassController extends Controller
         return redirect()->route('classes.index')->with('success','Classes updated successfully.');
     }
 
+    public function user_list(Classes $class)
+    {
+        $users = User::doesntHave('classes')->where('role','!=','0')->get();
+        return view('classes.assign_user', [
+            'class' => $class,
+            'users' => $users,
+        ]);
+    }
+
+    public function assign_user(Request $request,Classes $class,User $user )
+    {
+        $type=$request->input('type');
+        if ($type==='attach') {
+            $class->users()->attach($user);
+        }else if ($type==='detach') {
+            $class->users()->detach($user);
+        }
+        return redirect()->route('classes.show',$class->id)->with('success','Kelas berhasil dirubah.');
+    }
+
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Classes  $classes
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Classes $classes)
+    public function destroy(Classes $class)
     {
-        $classes->delete();
-        return redirect()->route('classes.index')
-                        ->with('success','Class deleted successfully');
+        $class->delete();
+        return redirect()->route('classes.index')->with('success','Class deleted successfully');
     }
 }

@@ -1,18 +1,9 @@
 
-@extends('classes.index')
+@extends('Layout.SidePanel')
 
-@section('title', "$class->name")
+@section('title', 'Tambah Anggota')
 
-@section('show')
-    @can('create', App\Models\Classes::class )
-        <a href="/classes/{{$class->id}}/assign_user">
-            <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Tambah Anggota</h5>
-                </div>
-            </div>
-        </a>
-    @endcan
+@section('content')
     <table class="table table-hover" style="width:250%">
         <thead>
             <tr>
@@ -23,7 +14,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($class->users as $key => $user )
+            @foreach ($users as $key => $user )
                 <tr>
                     <th>
                         <p>{{ $key+1 }}.</p> 
@@ -35,14 +26,13 @@
                         <p>{{ $user->role }}</p> 
                     </td>
                     <td>
-                        <form action="/classes/{{$class->id}}/assign_user/{{$user->id}}?type=detach" method="POST">
+                        <form action="/classes/{{$class->id}}/assign_user/{{$user->id}}?type=attach" method="POST">
                             @csrf
-                            <button type="submit" class="btn btn-danger">Keluarkan</button>
+                            <button type="submit" class="btn btn-primary">Tambahkan</button>
                         </form>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-
 @stop
