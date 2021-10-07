@@ -6,6 +6,7 @@ use App\Models\Session;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class SessionController extends Controller
 {
@@ -17,10 +18,11 @@ class SessionController extends Controller
     public function index()
     {
         
-        $session = Session::all();
-        return view('messages.index', [
-            'session' => $session
-        ]);
+        // $session = Session::all();
+        // return view('messages.index', [
+        //     'session' => $session
+        // ]);
+        return view('materi');
     }
 
     /**
@@ -41,17 +43,27 @@ class SessionController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'title' => 'required',
-            'description' => 'required'
-        ]);
+        // dd($request->file_upload);
 
-        Session::create([
-            'title' => $request->title,
-            'description' => $request->description,
-            'file' => 'teste.txt',
-            'user_id' =>Auth::id(),
+        $this->validate($request, [
+            'file_upload' => 'required|file|max:10000', // max 10MB
         ]);
+        $path = Storage::putFile(
+            'public/file',
+            $request->file('file_upload'),
+        );
+
+        // $request->validate([
+        //     'title' => 'required',
+        //     'description' => 'required'
+        // ]);
+
+        // Session::create([
+        //     'title' => $request->title,
+        //     'description' => $request->description,
+        //     'file' => 'teste.txt',
+        //     'user_id' =>Auth::id(),
+        // ]);
 
         return redirect()->route('session.index')->with('success','Message created successfully.');
     }

@@ -30,12 +30,16 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 });
 
-Route::get('/session', [SessionController::class, 'index']);
+// Route::get('/session', [SessionController::class, 'index']);
+// Route::post('/session/store', [SessionController::class, 'store']);
+
 Route::get('/assignment', [AssignmentController::class, 'index']);
 
 Route::resource('messages', MessageController::class)->middleware('auth');
 Route::resource('exams', ExamController::class);
 Route::resource('class', ClassController::class);
+
+Route::resource('session', SessionController::class);
 
 //helena
 Route::resource('courses', CourseController::class);
