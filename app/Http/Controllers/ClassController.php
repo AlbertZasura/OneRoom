@@ -14,10 +14,9 @@ class ClassController extends Controller
      */
     public function index()
     {
-        $class = Classes::all();
-        dd($class);
+        $classes = Classes::all();
         return view('classes.index', [
-            'classes' => $class
+            'classes' => $classes
         ]);
     }
 
@@ -54,9 +53,10 @@ class ClassController extends Controller
      * @param  \App\Models\Classes  $classes
      * @return \Illuminate\Http\Response
      */
-    public function show(Classes $classes)
+    public function show(Classes $class)
     {
-        return view('messages.show', ['classes' => $classes]);
+        $classes = Classes::all();
+        return view('classes.show', ['class' => $class, 'classes' => $classes]);
     }
 
     /**
