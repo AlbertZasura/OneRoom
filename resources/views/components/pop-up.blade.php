@@ -23,7 +23,7 @@
         background: #fff;
         max-width: 600px;
         position: relative;
-        top: 38%;
+        top: 25%;
         margin: auto;
     }
     .overlay-popup{
