@@ -6,9 +6,6 @@
 
     <h1>Materi</h1>
 
-
-
-
     <div class="d-flex">
         <div class="w-25">
             @foreach($course as $i)
@@ -21,9 +18,8 @@
         </div>
         <div class="w-75">
 
-        @yield('mainContent')
+            @yield('mainContent')
 
-        
         </div>
 
     </div>
