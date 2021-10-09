@@ -20,7 +20,8 @@ class SessionSeeder extends Seeder
                 'title' => 'Testing',
                 'description' => 'Testing description',
                 'file' => 'materi_mtk.pdf',
-                "user_id" => 1,
+                "user_id" => $i+1,
+                "course_id" => $i+1,
             ]);
             $sessions->save();
         }

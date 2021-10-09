@@ -4,9 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Models\Session;
 use App\Models\User;
+use App\Models\Classes;
+use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Carbon\Carbon;
 
 class SessionController extends Controller
 {
@@ -18,11 +21,15 @@ class SessionController extends Controller
     public function index()
     {
         
-        // $session = Session::all();
-        // return view('messages.index', [
-        //     'session' => $session
-        // ]);
-        return view('materi');
+        $session = Session::all();
+        $course = Course::all();
+        
+
+        return view('materi.index', [
+            'session' => $session, 
+            'course' => $course
+        ]);
+        
     }
 
     /**
@@ -43,29 +50,44 @@ class SessionController extends Controller
      */
     public function store(Request $request)
     {
-        // dd($request->file_upload);
+        
+        
+        // $this->validate($request, [
+        //     'file_upload' => 'required|file|max:10000', // max 10MB
+        // ]);
 
-        $this->validate($request, [
+       
+
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
             'file_upload' => 'required|file|max:10000', // max 10MB
         ]);
-        $path = Storage::putFile(
-            'public/file',
-            $request->file('file_upload'),
-        );
 
-        // $request->validate([
-        //     'title' => 'required',
-        //     'description' => 'required'
-        // ]);
+        
+        
+        $todayDate = Carbon::now();
+        $DateFormat = Carbon::parse($todayDate)->format('Y-m-d');
+        $TimeFormat = Carbon::parse($todayDate)->format('H-i-s');
 
-        // Session::create([
-        //     'title' => $request->title,
-        //     'description' => $request->description,
-        //     'file' => 'teste.txt',
-        //     'user_id' =>Auth::id(),
-        // ]);
+        $file = $request->file('file_upload');
+        $fileName =  Auth::id()."_".$DateFormat."_".$TimeFormat."_".$file->getClientOriginalName();
+        if($request->file('file_upload')){
+            $file->storeAs('public/file', $fileName);
+            Session::create([
+                'title' => $request->title,
+                'description' => $request->description,
+                'file' => $fileName,
+                'user_id' =>Auth::id(),
+                'course_id' => $request->coId
+            ]);
+    
+            return redirect()->route('session.index')->with('success','Message created successfully.');
 
-        return redirect()->route('session.index')->with('success','Message created successfully.');
+        }else{
+            abort("no file upload");
+        }
+
     }
 
     /**
@@ -76,7 +98,7 @@ class SessionController extends Controller
      */
     public function show(Session $session)
     {
-        //
+        return view('materi.show', ['session' => $session]);
     }
 
     /**

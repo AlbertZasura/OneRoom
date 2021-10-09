@@ -17,12 +17,12 @@ class DatabaseSeeder extends Seeder
         $this->call([
             MessageSeeder::class,
             ClassesSeeder::class,
-            // CourseSeeder::class,
-            // SessionSeeder::class,
-            // ScheduleSeeder::class,
-            // AbsentSeeder::class,
-            // ExamSeeder::class,
-            // AssignmentSeeder::class
+            CourseSeeder::class,
+            SessionSeeder::class,
+            ScheduleSeeder::class,
+            AbsentSeeder::class,
+            ExamSeeder::class,
+            AssignmentSeeder::class
         ]);
     }
 }

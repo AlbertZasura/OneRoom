@@ -15,6 +15,7 @@
     padding: 20px 20px;
     color: #fff;
     height: 100%;
+    z-index: 10;
 }
 .img-responsive{
     width: 100%;
@@ -64,6 +65,29 @@
     overflow: hidden;
 }
 
+.ml-70{
+    margin-left: 70px;
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.text-right{
+    text-align: right;
+}
+
+.w-200px{
+    width: 200px;
+}
+
+.card-box{
+    background: #39BDC8;
+    border-radius: 5px;
+    padding: 4px 8px;
+    color: #fff;
+}
+
 
 /* ======= effect side panel resize ========== */
 
@@ -71,6 +95,7 @@
         overflow: hidden;
         width: 60px;
         transition: width .5s;
+        position: absolute;
     }
     
     .resize-side-panel:hover {
