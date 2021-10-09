@@ -19,6 +19,9 @@
                         <div id="collapse{{$item->id}}" class="accordion-collapse collapse" aria-labelledby="heading{{$item->id}}" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 <div>{{$item->description}}</div>
+                                <div onclick="window.location='{{route('uploaded',$item->id)}}'" class="cursor-pointer d-flex a-center text-navi view-session">
+                                    <i class="fas fa-scroll mr-10"></i> <span>Lihat Materi</span>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -56,7 +59,7 @@
 
         <script>
             function openEditSession(){
-                document.getElementById("formEditSession").classList.remove("d-none");
+                document.getElementById("formEditSession").classList.toggle("d-none");
             }
         </script>
 

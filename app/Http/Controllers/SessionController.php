@@ -20,14 +20,16 @@ class SessionController extends Controller
      */
     public function index()
     {
+
         
-        $session = Session::all();
+        
+        $cls = Auth::user()->classes->first();
+        
         $course = Course::all();
         
-
         return view('materi.index', [
-            'session' => $session, 
-            'course' => $course
+            'course' => $course,
+            'cls' => $cls
         ]);
         
     }

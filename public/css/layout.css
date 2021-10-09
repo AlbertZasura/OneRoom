@@ -38,6 +38,17 @@
     color: #3D6CB9;
 }
 
+.mr-10{
+    margin-right: 10px;
+}
+
+.view-session{
+    border: 1px solid #3D6CB9;
+    width: 169px;
+    border-radius: 5px;
+    padding: 7px 10px;
+}
+
 .accordion-button-none::after{
     background-image:none;
 

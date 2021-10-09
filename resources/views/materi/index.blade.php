@@ -16,7 +16,7 @@
             @endforeach
         </div>
         <div class="ml-20 w-85">
-
+            <h2>{{$cls->name}}</h2>
             @yield('mainContent')
 
         </div>
