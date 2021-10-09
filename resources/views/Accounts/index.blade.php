@@ -125,19 +125,13 @@
 
 
     function selectTable() {
-        // Variables
-        let dropdown, table, rows, cells, Jabatan, filter;
+        let dropdown, filter;
         dropdown = document.getElementById("filterTable");
-        table = document.getElementById("myTable");
-        rows = table.getElementsByTagName("tr");
         filter = dropdown.value;
-
         $("#myTable tr").filter(function() {
             $(this).toggle($(this).text().toLowerCase().indexOf(filter) > -1)
             });
     }
-        
-    
-</script>
 
+</script>
 @stop
