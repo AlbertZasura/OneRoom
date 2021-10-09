@@ -21,8 +21,6 @@ class SessionController extends Controller
     public function index()
     {
 
-        
-        
         $cls = Auth::user()->classes->first();
         
         $course = Course::all();
