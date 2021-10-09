@@ -4,16 +4,6 @@
 
 @section('content')
     <h1>Akun</h1>
-   
-    @if (Auth::user())
-    <form action="/logout" method="POST">   
-        @csrf
-        <button type="submit" class="btn btn-danger">Logout</button>
-    </form>
-    @else
-    <a class="btn btn-info" href="/login">Login</a>  
-    @endif
-   
     @foreach ($users as $key => $user )
     
         <table class="table table-hover" style="width:100%">

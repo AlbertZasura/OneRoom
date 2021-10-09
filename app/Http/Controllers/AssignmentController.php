@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Assignment;
+use App\Models\Course;
 use Illuminate\Http\Request;
 
 class AssignmentController extends Controller
@@ -14,9 +15,9 @@ class AssignmentController extends Controller
      */
     public function index()
     {
-        $asg = Assignment::all();
-        return view('message.index', [
-            'asg' => $asg
+        $courses = Course::all(); 
+        return view('assignments.index', [
+            'courses' => $courses
         ]);
     }
 
