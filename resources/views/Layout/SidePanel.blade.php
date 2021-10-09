@@ -36,7 +36,7 @@
                     </div>
                     <div class="overflow-hidden">
                         <div class="text-profile">
-                            <div class="text-center fw-bold fs-5">
+                            <div class="text-center fw-bold fs-5" style="white-space: nowrap;">
                                 {{ Auth::user()->name }}
                             </div>
                             <div class="text-center fs-6 edit-prof-wrap"><a href="#" class="text-white text-decoration-none">edit profile</a></div>
@@ -112,17 +112,20 @@
                         </div>
                         @if (Auth::user())
                         <div class="d-flex a-center mb-10">
+                            <div class="fs-20 w-25px">
+                                <i class="fs-20 fas fa-sign-out-alt"></i>
+                            </div>
                             <div class="fs-18 ml-20">
                                 @csrf
                                 <form action="/logout" method="POST">   
-                                    <button type="submit" class="btn text-white"><i class="fs-20 fas fa-bullhorn"></i>Logout</button>
+                                    <button type="submit" class="btn text-white">Logout</button>
                                 </form>
                             </div>
                         </div>
                         @endif
                     </div>
                 </div>
-                <div class="">
+                <div class="{{ str_contains(url()->current(), '/dashboard') ?  '' : 'ml-70'  }}">
                     @yield('content')
                 </div>
 
