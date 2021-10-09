@@ -50,7 +50,7 @@
                                 <i class="fas fa-chart-line"></i>
                             </div>
                             <div class="fs-18 ml-20">
-                                dashboard
+                                <a href="#" class="btn text-white">dashboard</a>
                             </div>
                         </div>
                         <div class="d-flex a-center mb-10">
@@ -58,7 +58,8 @@
                                 <i class="far fa-calendar-alt"></i>
                             </div>
                             <div class="fs-18 ml-20">
-                                Schedule
+                                <a href="#" class="btn text-white">Schedule</a>
+                                
                             </div>
                         </div>
                         <div class="d-flex a-center mb-10">
@@ -66,7 +67,8 @@
                                 <i class="fas fa-pencil-ruler"></i>
                             </div>
                             <div class="fs-18 ml-20">
-                                Assignment
+                                <a href="/assignments" class="btn text-white">Tugas</a>
+                                
                             </div>
                         </div>
                         <div class="d-flex a-center mb-10">
@@ -74,7 +76,8 @@
                                 <i class="fas fa-paste"></i>
                             </div>
                             <div class="fs-18 ml-20">
-                                Exam
+                                <a href="#" class="btn text-white">Exam</a>
+                                
                             </div>
                         </div>
                         <div class="d-flex a-center mb-10">
@@ -82,7 +85,8 @@
                                 <i class="fas fa-book"></i>
                             </div>
                             <div class="fs-18 ml-20">
-                                Courses
+                                <a href="{{route('courses.index')}}" class="btn text-white">Courses</a>
+                                
                             </div>
                         </div>
                         <div class="d-flex a-center mb-10">
@@ -90,7 +94,7 @@
                                 <i class="fas fa-chalkboard"></i>
                             </div>
                             <div class="fs-18 ml-20">
-                                <a href="{{route('classes.index')}}" class="text-white">Class</a>
+                                <a href="{{route('classes.index')}}" class="btn text-white">Class</a>
                             </div>
                         </div>
                         <div class="d-flex a-center mb-10">
@@ -98,7 +102,8 @@
                                 <i class="fas fa-clipboard-list"></i>
                             </div>
                             <div class="fs-18 ml-20">
-                                Absen
+                                <a href="#" class="btn text-white">Absen</a>
+                                
                             </div>
                         </div>
                         <div class="d-flex a-center mb-10">
@@ -125,7 +130,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="{{ str_contains(url()->current(), '/dashboard') ?  '' : 'ml-70'  }}">
+                <div class="{{ str_contains(url()->current(), '/dashboard') ?  'w-100' : 'ml-70 w-100'  }}">
                     @yield('content')
                 </div>
 
