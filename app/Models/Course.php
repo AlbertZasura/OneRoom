@@ -13,4 +13,12 @@ class Course extends Model
         return $this->hasMany(Session::class);
     }
 
+    public function classes(){
+        return $this->belongsToMany(Classes::class,'classes_courses','course_id','class_id');
+    }
+
+    public function assignments(){
+        return $this->hasMany(Assignment::class);
+    }
+
 }

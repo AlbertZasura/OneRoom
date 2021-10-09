@@ -67,7 +67,7 @@
                                 <i class="fas fa-pencil-ruler"></i>
                             </div>
                             <div class="fs-18 ml-20">
-                                <a href="#" class="btn text-white">Assignment</a>
+                                <a href="/assignments" class="btn text-white">Tugas</a>
                                 
                             </div>
                         </div>

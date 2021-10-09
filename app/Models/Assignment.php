@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Assignment extends Model
 {
     use HasFactory;
+
+    public function class(){
+        return $this->belongsTo(Classes::class,'class_id');
+    }
+
+    public function course(){
+        return $this->belongsTo(Course::class);
+    }
 }
