@@ -16,9 +16,11 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $courses = Course::all();
-        return view('messages.index', [
-            'courses' => $courses
+        $course = Course::all();
+        
+
+        return view('materi.index', [
+            'course' => $course
         ]);
     }
 
@@ -61,7 +63,9 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
-        return view('messages.show', ['course' => $course]);
+        $c = Course::all();
+        $ses = $course->sessions;
+        return view('materi.show', ['ses' => $ses, 'course' => $c, 'courseId' => $course->id]);
     }
 
     /**
