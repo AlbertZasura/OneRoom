@@ -10,7 +10,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="{{ asset('css/layout.css') }}">
-    <script src="{{ asset('js/mainscript.js')}}"></script>
+    {{-- <script src="{{ asset('js/mainscript.js')}}"></script> --}}
 
 </head>
 <body>
@@ -90,7 +90,7 @@
                                 <i class="fas fa-chalkboard"></i>
                             </div>
                             <div class="fs-18 ml-20">
-                                Class
+                                <a href="{{route('classes.index')}}" class="text-white">Class</a>
                             </div>
                         </div>
                         <div class="d-flex a-center mb-10">
@@ -106,9 +106,20 @@
                                 <i class="fas fa-bullhorn"></i>
                             </div>
                             <div class="fs-18 ml-20">
-                                Announcement
+                                <a href="{{route('messages.index')}}" class="btn text-white">Announcement</a>
+                                
                             </div>
                         </div>
+                        @if (Auth::user())
+                        <div class="d-flex a-center mb-10">
+                            <div class="fs-18 ml-20">
+                                @csrf
+                                <form action="/logout" method="POST">   
+                                    <button type="submit" class="btn text-white"><i class="fs-20 fas fa-bullhorn"></i>Logout</button>
+                                </form>
+                            </div>
+                        </div>
+                        @endif
                     </div>
                 </div>
                 <div class="">

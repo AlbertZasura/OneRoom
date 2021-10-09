@@ -26,5 +26,12 @@ class ClassesSeeder extends Seeder
             ]);
             $classes->save();
         }
+
+        for ($i=0; $i < count($classNames) ; $i++) { 
+            for ($j=6; $j>$i ; $j--) { 
+                $class=Classes::find($i+1);
+                $class->users()->attach($j);
+            }
+        }
     }
 }

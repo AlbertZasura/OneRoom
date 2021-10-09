@@ -24,19 +24,25 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // Auth::routes();
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 Route::get('/', function () {
-    return view('welcome');
-})->middleware('auth');
-Route::get('/dashboard', function () {
     return view('dashboard');
-});
+})->middleware('auth');
 
-Route::get('/session', [SessionController::class, 'index']);
+// Route::get('/session', [SessionController::class, 'index']);
+// Route::post('/session/store', [SessionController::class, 'store']);
+
 Route::get('/assignment', [AssignmentController::class, 'index']);
 
 Route::resource('messages', MessageController::class)->middleware('auth');
 Route::resource('exams', ExamController::class);
-Route::resource('class', ClassController::class);
+Route::resource('classes', ClassController::class)->middleware('auth');
+Route::get('/classes/{class}/assign_user', [ClassController::class, 'user_list'])->middleware('auth');
+Route::post('/classes/{class}/assign_user/{user}', [ClassController::class, 'assign_user'])->middleware('auth');
+
+Route::resource('session', SessionController::class);
 
 //helena
 Route::resource('courses', CourseController::class);

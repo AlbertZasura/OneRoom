@@ -5,14 +5,7 @@
 
 @section('content')
     <h1>Pengumuman</h1>
-    @if (Auth::user())
-    <form action="/logout" method="POST">   
-        @csrf
-        <button type="submit" class="btn btn-danger">Logout</button>
-    </form>
-    @else
-    <a class="btn btn-info" href="/login">Login</a>  
-    @endif
+    
     @can('create', App\Models\Message::class )
         <a class="btn btn-outline-dark" id="open-popup" >Tambah Pengumuman</a> 
     @endcan

@@ -2,12 +2,12 @@
 
 namespace App\Policies;
 
-use App\Models\Message;
+use App\Models\Classes;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
 
-class MessagePolicy
+class ClassesPolicy
 {
     use HandlesAuthorization;
 
@@ -26,10 +26,10 @@ class MessagePolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Message  $message
+     * @param  \App\Models\Classes  $classes
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Message $message)
+    public function view(User $user, Classes $classes)
     {
         //
     }
@@ -49,34 +49,34 @@ class MessagePolicy
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Message  $message
+     * @param  \App\Models\Classes  $classes
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Message $message)
+    public function update(User $user, Classes $classes)
     {
-        //
+        return $user->role === 'admin' ? Response::allow() : Response::deny('You are not an Admin.');
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Message  $message
+     * @param  \App\Models\Classes  $classes
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Message $message)
+    public function delete(User $user, Classes $classes)
     {
-        //
+        return $user->role === 'admin' ? Response::allow() : Response::deny('You are not an Admin.');
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Message  $message
+     * @param  \App\Models\Classes  $classes
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Message $message)
+    public function restore(User $user, Classes $classes)
     {
         //
     }
@@ -85,12 +85,16 @@ class MessagePolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Message  $message
+     * @param  \App\Models\Classes  $classes
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Message $message)
+    public function forceDelete(User $user, Classes $classes)
     {
-        //
+        return $user->role === 'admin' ? Response::allow() : Response::deny('You are not an Admin.');
     }
-    
+
+    public function user_list(User $user)
+    {
+        return $user->role === 'admin' ? Response::allow() : Response::deny('You are not an Admin.');
+    }
 }
