@@ -54,7 +54,7 @@ class ClassesPolicy
      */
     public function update(User $user, Classes $classes)
     {
-        //
+        return $user->role === 'admin' ? Response::allow() : Response::deny('You are not an Admin.');
     }
 
     /**
@@ -66,7 +66,7 @@ class ClassesPolicy
      */
     public function delete(User $user, Classes $classes)
     {
-        //
+        return $user->role === 'admin' ? Response::allow() : Response::deny('You are not an Admin.');
     }
 
     /**
@@ -89,6 +89,11 @@ class ClassesPolicy
      * @return \Illuminate\Auth\Access\Response|bool
      */
     public function forceDelete(User $user, Classes $classes)
+    {
+        return $user->role === 'admin' ? Response::allow() : Response::deny('You are not an Admin.');
+    }
+
+    public function user_list(User $user)
     {
         return $user->role === 'admin' ? Response::allow() : Response::deny('You are not an Admin.');
     }

@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Classes;
 use App\Models\User;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ClassController extends Controller
 {
@@ -15,7 +17,18 @@ class ClassController extends Controller
      */
     public function index()
     {
-        $classes = Classes::with('users')->latest()->get();
+        switch(Auth::user()->role){
+            case 'teacher':
+                $classes = Auth::user()->classes;
+                break;
+            case 'admin':
+                $classes = Classes::with('users')->latest()->get();
+                break;
+            default:
+                $classes = Auth::user()->classes;
+                break;
+
+        }
         return view('classes.index', [
             'classes' => $classes
         ]);
@@ -56,7 +69,14 @@ class ClassController extends Controller
      */
     public function show(Classes $class)
     {
-        $classes = Classes::with('users')->latest()->get();
+        switch(Auth::user()->role){
+            case 'teacher':
+                $classes = Auth::user()->classes;
+                break;
+            case 'admin':
+                $classes = Classes::with('users')->latest()->get();
+                break;
+        }
         return view('classes.show', ['class' => $class, 'classes' => $classes]);
     }
 
@@ -91,7 +111,16 @@ class ClassController extends Controller
 
     public function user_list(Classes $class)
     {
-        $users = User::doesntHave('classes')->where('role','!=','0')->get();
+        $this->authorize('user_list', Classes::class);
+        $users = User::where( function (Builder $query) use ($class){
+            $query->where('role',1)->where( function (Builder $q) use ($class){
+                $q->whereRelation('classes','classes.id','!=',$class->id)->orDoesntHave('classes');
+            });
+        })->orWhere( function (Builder $query){
+             $query->doesntHave('classes')->where('role',2);
+        })->get();
+        
+
         return view('classes.assign_user', [
             'class' => $class,
             'users' => $users,

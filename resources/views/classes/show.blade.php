@@ -4,14 +4,25 @@
 @section('title', "$class->name")
 
 @section('show')
-    @can('create', App\Models\Classes::class )
-        <a href="/classes/{{$class->id}}/assign_user">
-            <div class="card text-white bg-primary mb-3" style="max-width: 18rem;">
-                <div class="card-body">
-                    <h5 class="card-title">Tambah Anggota</h5>
-                </div>
-            </div>
-        </a>
+    <div class="d-flex align-items-center">
+        <h1 class="text-uppercase">{{$class->name}}</h1>
+        @can('update',$class )
+            <a href="{{ route('classes.edit',$class->id) }}" class="btn"><i class='fs-25 fa fa-pencil text-primary'></i></a>
+        @endcan
+        @can('delete', $class )
+            <form action="{{ route('classes.destroy',$class) }}" method="POST">   
+                @csrf
+                @method('DELETE')      
+                <button class="btn" type="submit"><i class='fs-25 fa fa-trash text-danger'></i></button>
+            </form>
+        @endcan
+    </div>
+    @can('user_list', App\Models\Classes::class )
+        <div class="card">
+            <a href="/classes/{{$class->id}}/assign_user" class="card-body btn btn-outline-dark">
+                <i class='fa fa-plus '></i> Tambah Anggota
+            </a>
+        </div>
     @endcan
     <table class="table table-hover" style="width:250%">
         <thead>
@@ -19,7 +30,7 @@
                 <th>#</th>
                 <th>Nama</th>
                 <th>Jabatan</th>
-                <th>Action</th>
+                <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
