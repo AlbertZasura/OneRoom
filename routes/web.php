@@ -34,14 +34,14 @@ Route::get('/', function () {
 // Route::get('/session', [SessionController::class, 'index']);
 // Route::post('/session/store', [SessionController::class, 'store']);
 
-Route::get('/assignment', [AssignmentController::class, 'index']);
 
 Route::resource('messages', MessageController::class)->middleware('auth');
 Route::resource('exams', ExamController::class);
 Route::resource('classes', ClassController::class)->middleware('auth');
 Route::get('/classes/{class}/assign_user', [ClassController::class, 'user_list'])->middleware('auth');
 Route::post('/classes/{class}/assign_user/{user}', [ClassController::class, 'assign_user'])->middleware('auth');
-
+Route::get('/assignments', [AssignmentController::class, 'course'])->middleware('auth');
+Route::resource('course.assignments', AssignmentController::class)->middleware('auth');
 Route::resource('session', SessionController::class);
 
 //helena

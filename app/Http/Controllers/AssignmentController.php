@@ -13,18 +13,34 @@ class AssignmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function course()
     {
         $courses = Course::all(); 
-        return view('assignments.index', [
+        return view('assignments.course', [
             'courses' => $courses
+        ]);
+    }
+
+    public function index(Course $course)
+    {
+        $courses = Course::all();  
+        // dd($course->classes->first());
+        $assignments = is_null($course->classes->first()) ? '': $course->classes->first()->assignments ;
+        if (request('class')) {
+            $assignments = Assignment::where('class_id',request('class'))->where('course_id',$course->id)->get();
+        }
+        
+        return view('assignments.index', [
+            'course' => $course,
+            'courses' => $courses,
+            'assignments'=> $assignments
         ]);
     }
 
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Htt p\Response
      */
     public function create()
     {
@@ -48,9 +64,13 @@ class AssignmentController extends Controller
      * @param  \App\Models\Assignment  $assignment
      * @return \Illuminate\Http\Response
      */
-    public function show(Assignment $assignment)
+    public function show(Course $course, Assignment $assignment)
     {
-        //
+        $this->authorize('view', $assignment);
+        return view('assignments.show', [
+            'assignment' => $assignment,
+            'course' => $course
+        ]);
     }
 
     /**
@@ -82,8 +102,10 @@ class AssignmentController extends Controller
      * @param  \App\Models\Assignment  $assignment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Assignment $assignment)
+    public function destroy(Course $course, Assignment $assignment)
     {
-        //
+        $this->authorize('delete', $assignment);
+        $assignment->delete();
+        return redirect()->route('course.assignments.index',$course)->with('success','Tugas berhasil dihapus');
     }
 }

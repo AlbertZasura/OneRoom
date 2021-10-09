@@ -116,8 +116,8 @@
                                 <i class="fs-20 fas fa-sign-out-alt"></i>
                             </div>
                             <div class="fs-18 ml-20">
-                                @csrf
                                 <form action="/logout" method="POST">   
+                                    @csrf
                                     <button type="submit" class="btn text-white">Logout</button>
                                 </form>
                             </div>

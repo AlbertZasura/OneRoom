@@ -1,27 +1,54 @@
 
-@extends('Layout.SidePanel')
+@extends('Assignments.course')
 
-@section('title', 'Classes Center')
+@section('title', 'Assignment Center')
 
-@section('content')
-    <h1>Tugas</h1>
-    @foreach ($courses as $course )
-        <div class="card text-white bg-primary mb-3">
-            <div class="card-body">
-                <h5 class="card-title">{{$course->name}}</h5>
-                <a href="{{route('assignment.show',$c->id)}}" class="stretched-link"></a>
-                <p class="card-text text-end"><small> {{$c->users->count()}} orang</small></p>
-            </div>
+@section('show')
+    <div class="row">
+        <div class="col-md-6">
+            <form action="{{route('course.assignments.index',$course)}}">
+                <select class="form-select" name="class">
+                    @foreach ($course->classes as $key => $class )
+                        @if (request()->get('class'))
+                            <option {{(request()->get('class')==$class->id) ? "selected" : ""}} value="{{$class->id}}">{{$class->name}}</option>
+                        @else
+                            <option {{($key===0) ? "selected" : "" }} value="{{$class->id}}">{{$class->name}}</option>
+                        @endif   
+                    @endforeach
+                </select>
+                <button class="btn" type="submit">Search</button>
+            </form>
         </div>
-    @endforeach
-    @can('create', App\Models\Classes::class )
+    </div>
+
+    
+    @can('user_list', App\Models\Classes::class )
         <div class="card">
-            <a data-bs-toggle="modal" data-bs-target="#createClasses" class="card-body btn btn-outline-dark">
-                <i class='fa fa-plus '></i> Tambah Kelas
+            <a href="#" class="card-body btn btn-outline-dark">
+                <i class='fa fa-plus '></i> Tambah Tugas
             </a>
         </div>
     @endcan
-    @include('classes._create')
+
+    @if ($assignments)
+    @foreach ($assignments as $assignment )
+    <div class="card">
+        <div class="d-grid d-md-flex align-items-center">
+            <i class='fs-25 fa fa-file-signature me-2'></i>
+            <h5 class="card-title flex-grow-1">{{$assignment->title}}</h5>
+            <a href="{{ route('classes.edit',$assignment->class->id) }}" class="btn"><i class='fs-25 fa fa-download'></i></a>
+            @can('delete', $assignment )
+            <form action="{{ route('course.assignments.destroy',[$course,$assignment]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')      
+                            <button class="btn" type="submit"><i class='fs-25 fa fa-trash text-danger'></i></button>
+                        </form>
+                        @endcan
+                        <a href="{{route('course.assignments.show',[$course,$assignment])}}" class="m-1">{{$assignment->class->users->count()}} / {{$assignment->class->users->count()}}</a>
+                    </div>
+                </div>   
+                @endforeach
+    @endif
+                {{-- @include('classes._create') --}}
    
-    @yield('show')
 @stop

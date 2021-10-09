@@ -4,7 +4,7 @@ namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use App\Models\Assignment;
+use App\Models\Course;
 
 class AssignmentSeeder extends Seeder
 {
@@ -50,8 +50,12 @@ class AssignmentSeeder extends Seeder
                     "created_at" =>  now()->toDateTimeString(),
                     "updated_at" => now()->toDateTimeString(),
                 ]
-            ]);
-            
+            ]
+        );
+        $course=Course::find(1);
+        for ($i=1; $i < 4 ; $i++) { 
+            $course->classes()->attach($i);
+        }
         
     }
 }
