@@ -14,10 +14,9 @@
                     <div class="text-right">{{$i->sessions->count()}} Materi</div>
                 </div>
             @endforeach
-            <div></div>
         </div>
-        <div class="ml-20 w-100%">
-
+        <div class="ml-20 w-85">
+            <h2>{{$cls->name}}</h2>
             @yield('mainContent')
 
         </div>

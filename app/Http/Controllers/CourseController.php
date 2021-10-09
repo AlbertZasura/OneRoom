@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Course;
+use App\Models\Session;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,11 +17,14 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $course = Course::all();
+        $cls = Auth::user()->classes->first();
         
 
+        $course = Course::all();
+        
         return view('materi.index', [
-            'course' => $course
+            'course' => $course,
+            'cls' => $cls
         ]);
     }
 
@@ -65,7 +69,8 @@ class CourseController extends Controller
     {
         $c = Course::all();
         $ses = $course->sessions;
-        return view('materi.show', ['ses' => $ses, 'course' => $c, 'courseId' => $course->id]);
+        $cls = Auth::user()->classes->first();
+        return view('materi.show', ['ses' => $ses, 'course' => $c, 'courseId' => $course->id, 'cls' => $cls]);
     }
 
     /**
@@ -113,4 +118,14 @@ class CourseController extends Controller
         return redirect()->route('courses.index')
                         ->with('success','Course deleted successfully');
     }
+
+    public function downloadFile($id){
+       
+        $fl = Session::find($id);
+       
+        $file_path = public_path('storage/file/'.$fl->file);
+        return response()->download($file_path);
+
+    }
+
 }
