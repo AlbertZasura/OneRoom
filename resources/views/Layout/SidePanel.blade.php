@@ -116,8 +116,8 @@
                                 <i class="fs-20 fas fa-sign-out-alt"></i>
                             </div>
                             <div class="fs-18 ml-20">
-                                @csrf
                                 <form action="/logout" method="POST">   
+                                    @csrf
                                     <button type="submit" class="btn text-white">Logout</button>
                                 </form>
                             </div>
@@ -125,7 +125,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="{{ str_contains(url()->current(), '/dashboard') ?  '' : 'ml-70 w-85'  }}">
+                <div class="{{ str_contains(url()->current(), '/dashboard') ?  'w-100' : 'ml-70 w-100'  }}">
                     @yield('content')
                 </div>
 
