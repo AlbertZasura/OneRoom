@@ -15,6 +15,7 @@
     padding: 20px 20px;
     color: #fff;
     height: 100%;
+    z-index: 10;
 }
 .img-responsive{
     width: 100%;
@@ -27,6 +28,30 @@
     overflow: hidden;
     border-radius: 50%;
     transition: all .5s;
+}
+
+.w-85{
+    width: 85%;
+}
+
+.text-navi{
+    color: #3D6CB9;
+}
+
+.mr-10{
+    margin-right: 10px;
+}
+
+.view-session{
+    border: 1px solid #3D6CB9;
+    width: 169px;
+    border-radius: 5px;
+    padding: 7px 10px;
+}
+
+.accordion-button-none::after{
+    background-image:none;
+
 }
 
 .text-center{
@@ -66,6 +91,25 @@
 
 .ml-70{
     margin-left: 70px;
+}
+
+.cursor-pointer{
+    cursor: pointer;
+}
+
+.text-right{
+    text-align: right;
+}
+
+.w-200px{
+    width: 200px;
+}
+
+.card-box{
+    background: #39BDC8;
+    border-radius: 5px;
+    padding: 4px 8px;
+    color: #fff;
 }
 
 
