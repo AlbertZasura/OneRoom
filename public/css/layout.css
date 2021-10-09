@@ -30,6 +30,19 @@
     transition: all .5s;
 }
 
+.w-85{
+    width: 85%;
+}
+
+.text-navi{
+    color: #3D6CB9;
+}
+
+.accordion-button-none::after{
+    background-image:none;
+
+}
+
 .text-center{
     text-align: center;
 

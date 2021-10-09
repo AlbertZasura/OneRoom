@@ -125,7 +125,7 @@
                         @endif
                     </div>
                 </div>
-                <div class="{{ str_contains(url()->current(), '/dashboard') ?  'w-100' : 'ml-70 w-100'  }}">
+                <div class="{{ str_contains(url()->current(), '/dashboard') ?  '' : 'ml-70 w-85'  }}">
                     @yield('content')
                 </div>
 
