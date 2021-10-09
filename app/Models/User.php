@@ -58,4 +58,8 @@ class User extends Authenticatable
         return Arr::get($this->roles, $value);
     }
 
+    public function messages(){
+        return $this->hasMany(Message::class);
+    }
+
 }
