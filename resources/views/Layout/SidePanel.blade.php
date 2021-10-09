@@ -112,10 +112,13 @@
                         </div>
                         @if (Auth::user())
                         <div class="d-flex a-center mb-10">
+                            <div class="fs-20 w-25px">
+                                <i class="fs-20 fas fa-sign-out-alt"></i>
+                            </div>
                             <div class="fs-18 ml-20">
                                 @csrf
                                 <form action="/logout" method="POST">   
-                                    <button type="submit" class="btn text-white"><i class="fs-20 fas fa-bullhorn"></i>Logout</button>
+                                    <button type="submit" class="btn text-white">Logout</button>
                                 </form>
                             </div>
                         </div>
