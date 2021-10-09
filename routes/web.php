@@ -10,6 +10,7 @@ use App\Http\Controllers\ExamController;
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,6 +48,8 @@ Route::resource('session', SessionController::class);
 Route::resource('courses', CourseController::class);
 Route::resource('schedules', ScheduleController::class);
 Route::resource('absents', AbsentController::class);
+Route::resource('users', UserController::class);
+Route::get('/accounts', [UserController::class, 'index']);
 
 Route::get('/register/{role?}', [RegisterController::class, 'register'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);

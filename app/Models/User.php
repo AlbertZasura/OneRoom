@@ -57,6 +57,11 @@ class User extends Authenticatable
     {
         return Arr::get($this->roles, $value);
     }
+
+    public function messages(){
+        return $this->hasMany(Message::class);
+    }
+
     
     public function classes(){
         return $this->belongsToMany(Classes::class,'classes_users','user_id','class_id');
