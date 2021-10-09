@@ -23,12 +23,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 // Auth::routes();
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 Route::get('/', function () {
-    return view('welcome');
-})->middleware('auth');
-Route::get('/dashboard', function () {
     return view('dashboard');
-});
+})->middleware('auth');
 
 // Route::get('/session', [SessionController::class, 'index']);
 // Route::post('/session/store', [SessionController::class, 'store']);
