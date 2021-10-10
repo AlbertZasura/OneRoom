@@ -9,6 +9,8 @@ class Assignment extends Model
 {
     use HasFactory;
 
+    protected $guarded = ['id'];
+
     public function class(){
         return $this->belongsTo(Classes::class,'class_id');
     }

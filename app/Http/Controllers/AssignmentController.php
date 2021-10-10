@@ -4,7 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Models\Assignment;
 use App\Models\Course;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AssignmentController extends Controller
 {
@@ -53,9 +55,26 @@ class AssignmentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Course $course)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'deadline' => 'required',
+            'file' => 'required|file|max:10000', // max 10MB
+        ]);
+        
+        $file = $request->file('file');
+        $fileName =  now()->format('Y-m-d-H-i-s')."".Auth::id()."_".$file->getClientOriginalName();
+        $file->storeAs('public/file', $fileName);
+        Assignment::create([
+                'title' => $request->title,
+                'deadline' => Carbon::parse($request->deadline)->format('Y-m-d H:i:s'),
+                'file' => 'app/public/file/'.$fileName,
+                'user_id' =>Auth::id(),
+                'course_id' => $course->id,
+                'class_id' => $request->class
+            ]);
+        return back()->with('success','Tugas berhasil dibuat.');
     }
 
     /**
@@ -107,5 +126,11 @@ class AssignmentController extends Controller
         $this->authorize('delete', $assignment);
         $assignment->delete();
         return redirect()->route('course.assignments.index',$course)->with('success','Tugas berhasil dihapus');
+    }
+
+    public function download(Assignment $assignment)
+    {
+        $pathToFile = storage_path($assignment->file);
+        return response()->download($pathToFile);
     }
 }
