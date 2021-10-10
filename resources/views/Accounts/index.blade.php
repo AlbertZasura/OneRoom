@@ -1,6 +1,6 @@
 @extends('Layout.SidePanel')
 
-@section('title', 'Accounts Center')
+@section('title', 'Accounts')
 
 @section('content')
     <h1>Akun</h1>
@@ -17,21 +17,17 @@
     <table>
         <tr>
             <td>
-                <div class="btn-group">
-                    <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Jabatan
-                    </button>
-                    <div class="dropdown-menu">
-                        <a class="dropdown-item" href="#">Semua jabatan</a>
-                        <a class="dropdown-item" href="#">Guru</a>
-                        <a class="dropdown-item" href="#">Siswa</a>
-                    </div>
-                </div>
+                
+                <select class="form-select" id = "filterTable" oninput="selectTable()" aria-label="Default select example">
+                    <option value="">Semua jabatan</option>
+                    <option value="teacher">teacher</option>
+                    <option value="student">student</option>
+                </select>
             </td>
             
             <td>
-                <div class="input-group rounded"  style="width:300px"> 
-                    <input type="search" class="form-control rounded" placeholder="Cari nama" aria-label="Search"
+                <div class="input-group rounded" style="width:300px"> 
+                    <input type="text" id="myInput" class="form-control rounded" placeholder="Cari nama" aria-label="Search"
                     aria-describedby="search-addon" />
                     <span class="input-group-text border-0" id="search-addon">
                         <i class="fas fa-search"></i>
@@ -43,20 +39,20 @@
     </table>
     
     
-        <table class="table table-hover" style="width:150%">
+        <table class="table table-hover" id="tableSearch"  style="width:75%">
         <thead>
             <tr>
             <th scope="col">Nama Akun</th>
             <th scope="col">Tanggal Daftar</th>
-            <th scope="col">jabatan</th>
+            <th scope="col">Jabatan</th>
             <th></th>
             <th></th>
             </tr>
         </thead>   
         
-        <tbody>
+        <tbody id = "myTable">
         @foreach ($users as $key => $user )
-                <tr class='clickable-row' data-href="{{ route('users.show', $user->id) }}">
+                <tr class='clickable-row'  id="open-popup">
                     <td>
                         <a>{{ $user->name }}</a>
                     </td>
@@ -77,13 +73,65 @@
             </tbody>
             
         </table>
-    
+
+    <x-pop-up>
+        <div>
+            <div class="">
+                <div class="">
+                <div class="">
+                    <h5 class="modal-title" id="exampleModalLabel">Detail Informasi </h5>
+                
+                </div>
+                <div class="modal-body">
+                    <form>
+                    <div class="mb-3">
+                        <label for="recipient-name" class="col-form-label"><b>Nama</b></label>
+                        <input type="text" name="name" class="form-control" id="name" value="{{old('name')}}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label"><b>Nomor Induk</b></label>
+                        <input class="form-control" name="identification_number" id="identification_number" value="{{old('identification_number')}}"  required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label"><b>Nomor Handphone</b></label>
+                        <input class="form-control" name="phone"  id="phone" value="{{old('phone')}}" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="message-text" class="col-form-label"><b>Email</b></label>
+                        <input class="form-control" name="email" id="email" value="{{old('email')}}" required>
+                    </div>
+                    </form>
+            </div>
+        </div>
+   </x-pop-up> 
 
        
-<script>
-     $(document).ready(function(){
-        $('.btn btn-primary dropdown-toggle').dropdown()
-    });
-</script>
 
+<script>
+    jQuery(document).ready(function($) {
+        $(".clickable-row").click(function() {
+            //window.location = $(this).data("href");
+        });
+    });
+
+    $(document).ready(function(){
+        $("#myInput").on("keyup", function() {
+            var value = $(this).val().toLowerCase();
+            $("#myTable tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+            });
+        });
+    });
+
+
+    function selectTable() {
+        let dropdown, filter;
+        dropdown = document.getElementById("filterTable");
+        filter = dropdown.value;
+        $("#myTable tr").filter(function() {
+            $(this).toggle($(this).text().toLowerCase().indexOf(filter) > -1)
+            });
+    }
+
+</script>
 @stop
