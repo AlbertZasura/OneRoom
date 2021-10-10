@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use Illuminate\Support\Facades\DB;
 use App\Models\Exam;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,8 +16,20 @@ class ExamController extends Controller
     public function index()
     {
         $exam = Exam::all();
-        return view('messages.index', [
-            'exam' => $exam
+
+        $course = '';
+        $exType = '';
+
+        $exam_type = DB::table('exams')
+                        ->select('type', DB::raw('count(*) as total'))
+                        ->groupBy('type')
+                        ->get();
+
+        return view('exams.index', [
+            'exam' => $exam,
+            'examType' => $exam_type,
+            'course' => $course,
+            'exType'  => $exType
         ]);
     }
 
@@ -70,9 +82,92 @@ class ExamController extends Controller
      * @param  \App\Models\Exam  $exam
      * @return \Illuminate\Http\Response
      */
+
+    public function userSubmitList($exam_id){
+
+        $exam_user = Exam::find($exam_id);
+
+        $t = $exam_user->users;
+
+        // dd($exam_user->users);
+        return view('exams.detail_exam', [
+            'userList' => $t,
+        ]);
+    }
+
+    public function filterExam($type, $course_id){
+
+        dd($course_id);
+
+        $ex = Exam::where('type','like', $type)->first();
+
+        $exam = DB::table('exams')->where('type','like', $type)->get();
+
+        $course = $ex->courses;
+
+        // dd($course);
+
+        $exType = $type;
+
+
+        $exam_type = DB::table('exams')
+                        ->select('type', DB::raw('count(*) as total'))
+                        ->groupBy('type')
+                        ->get();
+
+        
+        return view('exams.show', [
+            'exam' => $exam,
+            'examType' => $exam_type,
+            'course' => $course,
+            'exType'  => $exType
+        ]);
+    }
+
+
+    public function listExam($type){
+
+        $ex = Exam::where('type','like', $type)->first();
+
+        $exam = DB::table('exams')->where('type','like', $type)->get();
+
+        $course = $ex->courses;
+
+        // dd($course);
+
+        $exType = $type;
+
+
+        $exam_type = DB::table('exams')
+                        ->select('type', DB::raw('count(*) as total'))
+                        ->groupBy('type')
+                        ->get();
+
+        
+        return view('exams.show', [
+            'exam' => $exam,
+            'examType' => $exam_type,
+            'course' => $course,
+            'exType'  => $exType
+        ]);
+    }
+
     public function show(Exam $exam)
     {
-        return view('messages.show', ['exam' => $exam]);
+       
+        $exam = Exam::all();
+
+        $exam_type = DB::table('exams')
+                        ->select('type', DB::raw('count(*) as total'))
+                        ->groupBy('type')
+                        ->get();
+
+        
+        return view('exams.show', [
+            'exam' => $exam,
+            'examType' => $exam_type
+        ]);
+
     }
 
     /**

@@ -24,7 +24,6 @@ class ExamSeeder extends Seeder
                         'start_date' => now()->toDateTimeString(),
                         'end_date' => '2021-09-26 15:10:12',
                         'file' => 'soal_mtk.pdf',
-                        "course_id" => 1,
                         "user_id" => 1,
                         "class_id" => 1,
                         "created_at" =>  now()->toDateTimeString(),
@@ -36,7 +35,6 @@ class ExamSeeder extends Seeder
                         'start_date' => now()->toDateTimeString(),
                         'end_date' => '2021-10-26 15:10:12',
                         'file' => 'soal_ipa.pdf',
-                        "course_id" => 1,
                         "user_id" => 1,
                         "class_id" => 2,
                         "created_at" =>  now()->toDateTimeString(),
@@ -48,7 +46,6 @@ class ExamSeeder extends Seeder
                         'start_date' => now()->toDateTimeString(),
                         'end_date' => '2021-11-26 15:10:12',
                         'file' => 'soal_ips.pdf',
-                        "course_id" => 1,
                         "user_id" => 1,
                         "class_id" => 3,
                         "created_at" =>  now()->toDateTimeString(),
@@ -56,6 +53,26 @@ class ExamSeeder extends Seeder
                     ]
                 ]);
                 
-            }
-        }
+                for ($i=0; $i < 3 ; $i++) { 
+                    for ($j=5; $j>$i+1 ; $j--) { 
+                        $class=Exam::find($i+1);
+                        $class->courses()->attach($j);
+                    }
+                }
+
+                for ($i=0; $i < 3 ; $i++) { 
+                    for ($j=30; $j>$i+1 ; $j--) { 
+                        $class=Exam::find($i+1);
+                        $class->users()->attach($j);
+                    }
+                }
+
+    }
+}
+
+
+
+
+    
+
         

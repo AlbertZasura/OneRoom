@@ -20,8 +20,6 @@ class CreateExamsTable extends Migration
             $table->dateTime('start_date', $precision = 0);
             $table->dateTime('end_date', $precision = 0);
             $table->string('file');
-            $table->unsignedBigInteger('course_id');
-            $table->foreign('course_id')->references('id')->on('courses');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->unsignedBigInteger('class_id');
