@@ -39,12 +39,12 @@
     </table>
     
     
-        <table class="table table-hover" id="tableSearch"  style="width:75%">
+        <table class="table table-hover table-responsive" id="tableSearch"  style="width:75%">
         <thead>
             <tr>
             <th scope="col">No</th>
             <th scope="col">Nama Akun</th>
-            <th scope="col">Tanggal Daftar</th>
+            <th scope="col">Tanggal Daftar</th> 
             <th scope="col">Jabatan</th>
             <th></th>
             <th></th>
@@ -53,7 +53,7 @@
         
         <tbody id = "myTable">
         @foreach ($users as $key => $user )
-                <tr class='clickable-row'  id="open-popup" data-bs-toggle="modal" data-href="#modal{{$user->id}}">
+                <tr class='clickable-row' data-bs-toggle="modal" data-bs-target="#modal{{$user->id}}" >
                     <td>
                         <a>{{ $key+1}}</a>
                     </td>
@@ -63,65 +63,82 @@
                     <td>
                         <a>{{ $user->created_at->format('d M Y') }}</a> 
                     </td>
-                    <td style="width:30%">
+                    <td style="width:20%">
                         <a>{{ $user->role }}</a>
                     </td>
                     <td>
-                        <a href=""><i class="fas fa-check fa-lg" style="color:green"></i></a>
+                        <form action="{{ route('users.update', $user->id) }}" method="POST">
+                            @csrf
+                            @method('PUT')
+                            <button class="btn" type="submit"><i class="fas fa-check fa-lg" style="color:green"></i></button>
+                        </form>
                     </td>
                     <td>
-                        <a href=""><i class="fas fa-times fa-lg" style="color:red"></i></a>
+                        <form action="{{  route('users.destroy',$user->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')      
+                            <button class="btn" type="submit"><i class="fas fa-times fa-lg" style="color:red"></i></button>
+                        </form>
                     </td>
                 </tr>
 
-                <x-pop-up>
-                        <div>
-                            <div class="" id="modal{{$user->id}}">
-                                <div class="">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" >Detail Informasi </h5>
-                                
-                                </div>
-                                <div class="modal-body">
-                                    <form>
-                                    <div class="mb-3">
-                                        <label for="recipient-name" class="col-form-label"><b>Nama</b></label>
-                                        <a>{{ $user->name }}</a>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="message-text" class="col-form-label"><b>Nomor Induk</b></label>
-                                        <a>{{ $user->identification_number }}</a>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="message-text" class="col-form-label"><b>Nomor Handphone</b></label>
-                                        <a>{{ $user->phone }}</a>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="message-text" class="col-form-label"><b>Email</b></label>
-                                        <a>{{ $user->email }}</a>
-                                    </div>
-                                    </form>
-                            </div>
+                
+                <div class="modal fade" id="modal{{$user->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" >
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" >Detail Informasi</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
-                </x-pop-up> 
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="recipient-name" class="col-form-label"><b>Nama</b></label>
+                                <input type="text" name="name" class="form-control" id="name" value="{{ $user->name }}" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message-text" class="col-form-label"><b>Nomor Induk</b></label>
+                                <input type="text" name="identification_number" class="form-control" id="identification_number" value="{{ $user->identification_number }}" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message-text" class="col-form-label"><b>Nomor Handphone</b></label>
+                                <input type="text" name="phone" class="form-control" id="phone" value="{{ $user->phone }}" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message-text" class="col-form-label"><b>Email</b></label>
+                                <input type="text" name="email" class="form-control" id="email" value="{{ $user->email }}" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message-text" class="col-form-label"><b>Jabatan</b></label>
+                                <input type="text" name="role" class="form-control" id="role" value="{{ $user->role }}" readonly>
+                            </div>
+                            
+                    </div>
+                </div>
+                
                 @endforeach
-            </tbody>
-            
+            </tbody>   
         </table>
+        <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                    </li>
+                    <li class="page-item"><a class="page-link" href="#">1</a></li>
+                    <li class="page-item"><a class="page-link" href="#">2</a></li>
+                    <li class="page-item"><a class="page-link" href="#">3</a></li>
+                    <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                    </li>
+                </ul>
+            </nav>
 
-    
-    
-  
        
 
 <script>
-    jQuery(document).ready(function($) {
-        
-        $(".clickable-row").click(function() {
-           window.location = $(this).data("href");
-        });
-    });
-
     $(document).ready(function(){
         $("#myInput").on("keyup", function() {
             var value = $(this).val().toLowerCase();
@@ -130,7 +147,6 @@
             });
         });
     });
-
 
     function selectTable() {
         let dropdown, filter;

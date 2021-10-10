@@ -11,7 +11,7 @@
     @endcan
     
     @foreach ($messages as $key => $message )
-        <table class="table table-hover" style="width:250%">
+        <table class="table table-hover" style="width:75%">
             <tbody>
                 <tr class='clickable-row' data-href="{{ route('messages.show',$message->id) }}">
                     <td>

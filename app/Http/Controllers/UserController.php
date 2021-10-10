@@ -16,7 +16,7 @@ class UserController extends Controller
     public function index()
     {
 
-        $users = User::all();
+        $users = User::where('status', 0)->get();
         return view('Accounts.index', [
             'users' => $users
         ]);
@@ -60,7 +60,6 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        return view('users.show', ['user' => $user]);
     }
 
     /**
@@ -81,9 +80,14 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        $user->update([
+            'user_id' => Auth::user()->id,
+            'status' => "1"
+        ]);
+
+        return redirect()->route('users.index')->with('success','User updated successfully.');
     }
 
     /**
@@ -92,8 +96,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        $user->update([
+            'user_id' => Auth::user()->id,
+            'status' => "2"
+        ]);
+        return back()->with('success','User declined successfully'); 
     }
 }
