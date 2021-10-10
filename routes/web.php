@@ -53,6 +53,15 @@ Route::resource('users', UserController::class);
 Route::get('/accounts', [UserController::class, 'index']);
 Route::post('/accounts', [UserController::class, 'store']);
 
+Route::get('/exams/list/{type}', [ExamController::class, 'listExam'])->name('exlist');
+Route::get('/exams/list/filter/{type}/{course_id}', [ExamController::class, 'filterExam'])->name('filterlist');
+Route::get('/exams/submit/list/{exam_id}', [ExamController::class, 'userSubmitList'])->name('examsubmitlist');
+
+
+// Route::get('/exams/list', function () {
+//     return view('welcome');
+// })->name('Elist');
+
 Route::get('/register/{role?}', [RegisterController::class, 'register'])->middleware('guest');
 Route::post('/register', [RegisterController::class, 'store']);
 Route::get('/login', [LoginController::class, 'login'])->name('login')->middleware('guest');

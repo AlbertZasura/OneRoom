@@ -76,7 +76,7 @@
                                 <i class="fas fa-paste"></i>
                             </div>
                             <div class="fs-18 ml-20">
-                                <a href="#" class="btn text-white">Exam</a>
+                                <a href="{{route('exams.index')}}" class="btn text-white">Exam</a>
                                 
                             </div>
                         </div>

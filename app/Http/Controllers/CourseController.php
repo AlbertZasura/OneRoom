@@ -19,7 +19,6 @@ class CourseController extends Controller
     {
         $cls = Auth::user()->classes->first();
         
-
         $course = Course::all();
         
         return view('materi.index', [
