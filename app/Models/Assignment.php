@@ -18,4 +18,8 @@ class Assignment extends Model
     public function course(){
         return $this->belongsTo(Course::class);
     }
+
+    public function users(){
+        return $this->belongsToMany(User::class,'assignments_users','assignment_id','user_id')->withTimestamps();
+    }
 }

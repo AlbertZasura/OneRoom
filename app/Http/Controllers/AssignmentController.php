@@ -133,4 +133,21 @@ class AssignmentController extends Controller
         $pathToFile = storage_path($assignment->file);
         return response()->download($pathToFile);
     }
+
+    public function upload(Request $request,Assignment $assignment)
+    {
+        $request->validate([
+            'notes' => 'required',
+            'file' => 'required|file|max:10000' // max 10MB
+        ]);
+        
+        $file = $request->file('file');
+        $fileName =  now()->format('Y-m-d-H-i-s')."".Auth::id()."_".$file->getClientOriginalName();
+        $file->storeAs('public/file', $fileName);
+        $assignment->users()->attach(Auth::user()->id,[
+            'file' => 'app/public/file/'.$fileName,
+            'notes' => $request->notes
+        ]);
+        return back()->with('success','Tugas berhasil dikumpulkan.');
+    }
 }

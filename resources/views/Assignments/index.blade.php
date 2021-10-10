@@ -30,7 +30,7 @@
             </a>
         </div>
     @endcan
-
+        
     @if ($assignments)
         @foreach ($assignments as $assignment )
             <div class="card p-3">
@@ -47,6 +47,8 @@
                             <button class="btn" type="submit"><i class='fs-25 fa fa-trash text-danger'></i></button>
                         </form>
                     @endcan
+                    <a data-bs-toggle="modal" data-bs-target="#uploadAssignments{{$assignment->id}}" class="btn"><i class='fa fa-plus '></i></a>
+                    @include('assignments._upload')
                     <a href="{{route('course.assignments.show',[$course,$assignment])}}" class="m-1 btn">{{$assignment->class->users->count()}} / {{$assignment->class->users->count()}}</a>
                 </div>
             </div>   

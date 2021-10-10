@@ -62,8 +62,11 @@ class User extends Authenticatable
         return $this->hasMany(Message::class);
     }
 
-    
+    public function assignments(){
+        return $this->belongsToMany(Assignment::class,'assignments_users','user_id','assignment_id')->withTimestamps(); 
+    }
+
     public function classes(){
-        return $this->belongsToMany(Classes::class,'classes_users','user_id','class_id');
+        return $this->belongsToMany(Classes::class,'classes_users','user_id','class_id')->withTimestamps(); 
     }
 }

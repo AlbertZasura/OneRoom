@@ -11,7 +11,7 @@ class Classes extends Model
     protected $guarded = ['id'];
 
     public function users(){
-        return $this->belongsToMany(User::class,'classes_users','class_id','user_id');
+        return $this->belongsToMany(User::class,'classes_users','class_id','user_id')->withTimestamps(); 
     }
 
     public function assignments(){
@@ -19,7 +19,7 @@ class Classes extends Model
     }
 
     public function courses(){
-        return $this->belongsToMany(Course::class,'classes_courses','class_id','course_id');
+        return $this->belongsToMany(Course::class,'classes_courses','class_id','course_id')->withTimestamps(); 
     }
     
 }
