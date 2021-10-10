@@ -42,6 +42,7 @@
         <table class="table table-hover" id="tableSearch"  style="width:75%">
         <thead>
             <tr>
+            <th scope="col">No</th>
             <th scope="col">Nama Akun</th>
             <th scope="col">Tanggal Daftar</th>
             <th scope="col">Jabatan</th>
@@ -52,7 +53,10 @@
         
         <tbody id = "myTable">
         @foreach ($users as $key => $user )
-                <tr class='clickable-row'  id="open-popup">
+                <tr class='clickable-row'  id="open-popup" data-bs-toggle="modal" data-href="#modal{{$user->id}}">
+                    <td>
+                        <a>{{ $key+1}}</a>
+                    </td>
                     <td>
                         <a>{{ $user->name }}</a>
                     </td>
@@ -69,48 +73,52 @@
                         <a href=""><i class="fas fa-times fa-lg" style="color:red"></i></a>
                     </td>
                 </tr>
+
+                <x-pop-up>
+                        <div>
+                            <div class="" id="modal{{$user->id}}">
+                                <div class="">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" >Detail Informasi </h5>
+                                
+                                </div>
+                                <div class="modal-body">
+                                    <form>
+                                    <div class="mb-3">
+                                        <label for="recipient-name" class="col-form-label"><b>Nama</b></label>
+                                        <a>{{ $user->name }}</a>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="message-text" class="col-form-label"><b>Nomor Induk</b></label>
+                                        <a>{{ $user->identification_number }}</a>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="message-text" class="col-form-label"><b>Nomor Handphone</b></label>
+                                        <a>{{ $user->phone }}</a>
+                                    </div>
+                                    <div class="mb-3">
+                                        <label for="message-text" class="col-form-label"><b>Email</b></label>
+                                        <a>{{ $user->email }}</a>
+                                    </div>
+                                    </form>
+                            </div>
+                        </div>
+                </x-pop-up> 
                 @endforeach
             </tbody>
             
         </table>
 
-    <x-pop-up>
-        <div>
-            <div class="">
-                <div class="">
-                <div class="">
-                    <h5 class="modal-title" id="exampleModalLabel">Detail Informasi </h5>
-                
-                </div>
-                <div class="modal-body">
-                    <form>
-                    <div class="mb-3">
-                        <label for="recipient-name" class="col-form-label"><b>Nama</b></label>
-                        <input type="text" name="name" class="form-control" id="name" value="{{old('name')}}" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="message-text" class="col-form-label"><b>Nomor Induk</b></label>
-                        <input class="form-control" name="identification_number" id="identification_number" value="{{old('identification_number')}}"  required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="message-text" class="col-form-label"><b>Nomor Handphone</b></label>
-                        <input class="form-control" name="phone"  id="phone" value="{{old('phone')}}" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="message-text" class="col-form-label"><b>Email</b></label>
-                        <input class="form-control" name="email" id="email" value="{{old('email')}}" required>
-                    </div>
-                    </form>
-            </div>
-        </div>
-   </x-pop-up> 
-
+    
+    
+  
        
 
 <script>
     jQuery(document).ready(function($) {
+        
         $(".clickable-row").click(function() {
-            //window.location = $(this).data("href");
+           window.location = $(this).data("href");
         });
     });
 

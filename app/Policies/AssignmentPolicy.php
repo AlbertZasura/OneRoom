@@ -42,7 +42,7 @@ class AssignmentPolicy
      */
     public function create(User $user)
     {
-        //
+        return in_array($user->role,["teacher","admin"]) ? Response::allow() : Response::deny('You cannot access.');
     }
 
     /**

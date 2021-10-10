@@ -14,7 +14,7 @@ class Course extends Model
     }
 
     public function classes(){
-        return $this->belongsToMany(Classes::class,'classes_courses','course_id','class_id');
+        return $this->belongsToMany(Classes::class,'classes_courses','course_id','class_id')->withTimestamps(); 
     }
 
     public function assignments(){
