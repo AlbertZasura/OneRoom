@@ -19,7 +19,6 @@ class AssignmentSeeder extends Seeder
             [
                 [
                     'title' => 'UTS Matematika',
-                    'notes' => 'ujian tengah semester',
                     'deadline' => now()->toDateTimeString(),
                     'file' => 'soal_mtk.pdf',
                     "course_id" => 1,
@@ -30,7 +29,6 @@ class AssignmentSeeder extends Seeder
                 ],
                 [
                     'title' => 'Ulangan IPA',
-                    'notes' => 'ulangan',
                     'deadline' => now()->toDateTimeString(),
                     'file' => 'soal_ipa.pdf',
                     "course_id" => 1,
@@ -41,7 +39,6 @@ class AssignmentSeeder extends Seeder
                 ],
                 [
                     'title' => 'UAS IPS',
-                    'notes' => 'ujian akhir semester',
                     'deadline' => now()->toDateTimeString(),
                     'file' => 'soal_ips.pdf',
                     "course_id" => 1,

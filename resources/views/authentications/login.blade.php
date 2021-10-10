@@ -52,7 +52,7 @@
         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerModal">
             Daftar disini
         </button>
-        <button type="button" class="btn btn-primary"     id="open-popup">
+        <button type="button" class="btn btn-primary" id="open-popup">
             Daftar disini
         </button>
     </p>
