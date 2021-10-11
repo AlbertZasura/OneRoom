@@ -44,6 +44,7 @@ Route::get('/assignments', [AssignmentController::class, 'course'])->middleware(
 Route::resource('course.assignments', AssignmentController::class)->middleware('auth');
 Route::get('assignments/{assignment}/download', [AssignmentController::class, 'download'])->name('assignments.download')->middleware('auth');
 Route::post('assignments/{assignment}/upload', [AssignmentController::class, 'upload'])->name('assignments.upload')->middleware('auth');
+Route::post('assignments/{assignment}/scoring', [AssignmentController::class, 'scoring'])->name('assignments.scoring')->middleware('auth');
 Route::resource('session', SessionController::class);
 Route::get('courses/download/{id}', [CourseController::class, 'downloadFile'])->name('uploaded');
 

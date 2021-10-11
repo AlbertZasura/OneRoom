@@ -17,6 +17,10 @@ class Course extends Model
         return $this->belongsToMany(Classes::class,'classes_courses','course_id','class_id')->withTimestamps(); 
     }
 
+    public function userClasses($user){
+        return $this->classes()->whereRelation('users','users.id','==',$user); 
+    }
+
     public function assignments(){
         return $this->hasMany(Assignment::class);
     }
