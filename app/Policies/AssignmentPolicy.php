@@ -42,7 +42,7 @@ class AssignmentPolicy
      */
     public function create(User $user)
     {
-        return in_array($user->role,["teacher","admin"]) ? Response::allow() : Response::deny('You cannot access.');
+        return in_array($user->role,["teacher"]) ? Response::allow() : Response::deny('You cannot access.');
     }
 
     /**
@@ -91,5 +91,10 @@ class AssignmentPolicy
     public function forceDelete(User $user, Assignment $assignment)
     {
         //
+    }
+
+    public function upload(User $user)
+    {
+        return in_array($user->role,["student"]) ? Response::allow() : Response::deny('You cannot access.');
     }
 }

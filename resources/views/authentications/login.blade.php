@@ -1,22 +1,6 @@
 @extends('Layout.SidePanel')
 
 @section('contentGuest')
-<script>
-    function showPassword(){
-        document.getElementById("passwordLogin").type = 'text'
-        document.getElementById("openEye").classList.add("d-none")
-        document.getElementById("closeEye").classList.remove("d-none")
-    }
-
-    function hidePassword(){
-        document.getElementById("passwordLogin").type = 'password'
-        document.getElementById("openEye").classList.remove("d-none")
-        document.getElementById("closeEye").classList.add("d-none")
-    }
-
-    
-</script>
-
     <h1>Login</h1>
     @if (session('loginError'))
         <div class="alert alert-warning">
@@ -79,4 +63,17 @@
     </x-pop-up>
 
     <!-- @include('authentications.partials._role_modal') -->
+    <script>
+        function showPassword(){
+            document.getElementById("passwordLogin").type = 'text'
+            document.getElementById("openEye").classList.add("d-none")
+            document.getElementById("closeEye").classList.remove("d-none")
+        }
+    
+        function hidePassword(){
+            document.getElementById("passwordLogin").type = 'password'
+            document.getElementById("openEye").classList.remove("d-none")
+            document.getElementById("closeEye").classList.add("d-none")
+        }
+    </script>
 @stop
