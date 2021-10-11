@@ -48,7 +48,7 @@ Route::resource('session', SessionController::class);
 Route::get('courses/download/{id}', [CourseController::class, 'downloadFile'])->name('uploaded');
 
 //helena
-Route::resource('courses', CourseController::class);
+Route::resource('courses', CourseController::class)->middleware('auth');
 Route::resource('schedules', ScheduleController::class);
 Route::resource('absents', AbsentController::class);
 Route::resource('users', UserController::class);
@@ -58,6 +58,7 @@ Route::post('/accounts', [UserController::class, 'store']);
 Route::get('/exams/list/{type}', [ExamController::class, 'listExam'])->name('exlist');
 Route::get('/exams/list/filter/{type}/{course_id}', [ExamController::class, 'filterExam'])->name('filterlist');
 Route::get('/exams/submit/list/{exam_id}', [ExamController::class, 'userSubmitList'])->name('examsubmitlist');
+Route::post('/exams/submitscore/{id}', [ExamController::class, 'assignExamScore'])->name('submitscroeexam');
 
 
 // Route::get('/exams/list', function () {

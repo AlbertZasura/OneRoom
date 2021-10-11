@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Models\Exam;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -83,6 +84,29 @@ class ExamController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function assignExamScore(Request $request, $id){
+
+        // dd(request()->input('pivotId'));
+        // $exam_id
+        // dd(request()->input('e'));
+        $user = User::find($id);
+        // dd($user->exams()->first()->pivot);
+        // $user->exams()->attach($request->e, ['score' => $request->score]);
+        $user->examsId(request()->input('pivotId'))->updateExistingPivot($request->e, ['score' => $request->score]);
+
+
+
+        // dd($id);
+        // $exam_user = Exam::find($id);
+        // dd($exam_user->users);
+        // $exam_user->users->attach($user_id, ['score' => $request->score]);
+
+        
+        return redirect()->route('examsubmitlist', $request->e)->with('success','Score successfully created.');    
+        
+        
+    }
+
     public function userSubmitList($exam_id){
 
         $exam_user = Exam::find($exam_id);
@@ -91,7 +115,7 @@ class ExamController extends Controller
 
         // dd($exam_user->users);
         return view('exams.detail_exam', [
-            'userList' => $t,
+            'userList' => $t, 'exam_id' => $exam_id
         ]);
     }
 
