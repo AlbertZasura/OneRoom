@@ -10,7 +10,7 @@ class Assignment extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
-
+    public $kkm=75;
     public function class(){
         return $this->belongsTo(Classes::class,'class_id');
     }
@@ -20,6 +20,10 @@ class Assignment extends Model
     }
 
     public function users(){
-        return $this->belongsToMany(User::class,'assignments_users','assignment_id','user_id')->withTimestamps();
+        return $this->belongsToMany(User::class,'assignments_users','assignment_id','user_id')->withPivot('notes', 'score', 'file')->withTimestamps();
+    }
+
+    public function usersFile($time){
+        return $this->users()->wherePivot('created_at',$time);
     }
 }

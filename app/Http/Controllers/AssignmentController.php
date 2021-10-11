@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Models\Assignment;
+use App\Models\Classes;
 use App\Models\Course;
 use Carbon\Carbon;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,7 +19,9 @@ class AssignmentController extends Controller
      */
     public function course()
     {
-        $courses = Course::all(); 
+        $courses = Course::whereHas('classes.users',function(Builder $query){
+            $query->where('user_id',Auth::user()->id);
+        })->get();
         return view('assignments.course', [
             'courses' => $courses
         ]);
@@ -25,17 +29,32 @@ class AssignmentController extends Controller
 
     public function index(Course $course)
     {
-        $courses = Course::all();  
-        // dd($course->classes->first());
-        $assignments = is_null($course->classes->first()) ? '': $course->classes->first()->assignments ;
-        if (request('class')) {
-            $assignments = Assignment::where('class_id',request('class'))->where('course_id',$course->id)->get();
+        $user = Auth::user();
+        $courses = Course::whereHas('classes.users',function(Builder $query) use ($user){
+            $query->where('user_id',$user->id);
+        })->get();
+        // $assignments = is_null($course->classes->first()) ? '': $course->classes->first()->assignments ;
+        switch(Auth::user()->role){
+            case 'student':
+                $assignments = Assignment::where('course_id',$course->id)->where('class_id',$user->classes->first()->id);
+                break;
+            case 'teacher':
+                $classes = Classes::whereRelation('users','users.id',$user->id)->whereRelation('courses','courses.id',$course->id)->get();
+                $assignments = Assignment::where('course_id',$course->id)->whereIn('class_id',$user->classes->pluck('id'));
+                if (request('class')) {
+                    $assignments =$assignments->where('class_id',request('class'));
+                }else{
+                    $assignments =$assignments->where('class_id',$classes->first()->id);
+                }
+                break;
         }
+
         
         return view('assignments.index', [
             'course' => $course,
             'courses' => $courses,
-            'assignments'=> $assignments
+            'assignments'=> $assignments->latest()->get(),
+            'classes' => $classes ?? 'null'
         ]);
     }
 
@@ -86,9 +105,12 @@ class AssignmentController extends Controller
     public function show(Course $course, Assignment $assignment)
     {
         $this->authorize('view', $assignment);
+        // dd($assignment->users);
+        $users= $assignment->users()->simplePaginate(20);
         return view('assignments.show', [
             'assignment' => $assignment,
-            'course' => $course
+            'course' => $course,
+            'users'=> $users
         ]);
     }
 
@@ -130,7 +152,14 @@ class AssignmentController extends Controller
 
     public function download(Assignment $assignment)
     {
-        $pathToFile = storage_path($assignment->file);
+        $type=request()->input('type');
+        $user=request()->input('u');
+        $time=request()->input('t');
+        if ($type==='answer') {
+            $pathToFile = storage_path($assignment->usersFile($time)->first()->pivot->file);
+        }else if ($type==='question') {
+            $pathToFile = storage_path($assignment->file);
+        }
         return response()->download($pathToFile);
     }
 
@@ -149,5 +178,17 @@ class AssignmentController extends Controller
             'notes' => $request->notes
         ]);
         return back()->with('success','Tugas berhasil dikumpulkan.');
+    }
+
+    public function scoring(Request $request,Assignment $assignment)
+    {
+        $request->validate([
+            'score' => 'required'
+        ]);
+        $assignment->usersFile($request->t)->updateExistingPivot($request->u,[
+            'score' => $request->score
+        ]);
+
+        return back()->with('success','Tugas berhasil dinilai.');
     }
 }

@@ -66,7 +66,7 @@
             <input type="number" name="status" value="{{$role==="admin" ? 1 : 0}}" hidden>
             <input type="text" name="role" value="{{$role}}" hidden>
             <div class="col-xs-12 col-sm-12 col-md-12">
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </div>
         <p>sudah punya akun? <a href="/login">Login disini</a></p>
