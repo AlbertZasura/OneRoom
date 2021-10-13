@@ -60,6 +60,8 @@ Route::get('/exams/list/{type}', [ExamController::class, 'listExam'])->name('exl
 Route::get('/exams/list/filter/{type}/{course_id}', [ExamController::class, 'filterExam'])->name('filterlist');
 Route::get('/exams/submit/list/{exam_id}', [ExamController::class, 'userSubmitList'])->name('examsubmitlist');
 Route::post('/exams/submitscore/{id}', [ExamController::class, 'assignExamScore'])->name('submitscroeexam');
+Route::post('/exams/submitExam', [ExamController::class, 'submitExams']);
+Route::get('/exams/downlodExam/{id}', [ExamController::class, 'downloadExamsUser'])->name('downloadexams');
 
 
 // Route::get('/exams/list', function () {

@@ -6,6 +6,7 @@ use App\Models\Exam;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class ExamController extends Controller
 {
@@ -84,6 +85,63 @@ class ExamController extends Controller
      * @return \Illuminate\Http\Response
      */
 
+    public function downloadExamsUser($id){
+
+        // dd($id);
+        
+        $user = User::find(Auth::id());
+
+        // dd($user->examsId($id));
+
+        $exam = Exam::find($id);
+
+        // $user->examsId(request()->input('pivotId'));
+
+        $exam_file = $exam->usersExams($user->id)->first()->pivot;
+        // dd($exam_file);
+
+        // $fl = Session::find($id);
+       
+        $file_path = public_path('storage/file/'.$exam_file->file);
+        return response()->download($file_path);
+
+    }
+
+    public function submitExams(Request $request){
+     
+
+        $request->validate([
+            'file_upload' => 'required|file|max:10000', // max 10MB
+        ]);
+
+        $todayDate = Carbon::now();
+        $DateFormat = Carbon::parse($todayDate)->format('Y-m-d');
+        $TimeFormat = Carbon::parse($todayDate)->format('H-i-s');
+        $user = User::find(Auth::user()->id);
+        // dd($user->id);
+        // dd($user->exams());
+        $file = $request->file('file_upload');
+        $fileName =  Auth::id()."_".$DateFormat."_".$TimeFormat."_".$file->getClientOriginalName();
+        if($request->file('file_upload')){
+            $file->storeAs('public/file', $fileName);
+            $user->exams()->attach($request->e, ['file' => $fileName, 'notes' => $request->notes]);
+
+            // Session::create([
+            //     'title' => $request->title,
+            //     'description' => $request->description,
+            //     'file' => $fileName,
+            //     'user_id' =>Auth::id(),
+            //     'course_id' => $request->coId
+            // ]);
+    
+            return redirect()->route('exams.index')->with('success','exams created successfully.');
+
+        }else{
+            dd("no file upload");
+        }
+
+    }
+
     public function assignExamScore(Request $request, $id){
 
         // dd(request()->input('pivotId'));
@@ -121,7 +179,7 @@ class ExamController extends Controller
 
     public function filterExam($type, $course_id){
 
-        dd($course_id);
+        // dd($course_id);
 
         $ex = Exam::where('type','like', $type)->first();
 

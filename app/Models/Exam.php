@@ -20,5 +20,9 @@ class Exam extends Model
     public function users(){
         return $this->belongsToMany(User::class,'exams_users','exam_id', 'user_id')->withPivot('id','notes','score','file')->withTimestamps();
     }
+
+    public function usersExams($user_id){
+        return $this->users()->wherePivot('user_id',$user_id);
+    }
     
 }

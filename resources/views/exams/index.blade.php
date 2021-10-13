@@ -13,7 +13,6 @@
                 <div class="cursor-pointer card-box mb-2" onclick="window.location='{{route('exlist',$item->type)}}'">
                     <div>{{$item->type}}</div>
                     <div class="text-right">{{$item->total}} Ujian</div>
-                  
                 </div>
 
             @endforeach
