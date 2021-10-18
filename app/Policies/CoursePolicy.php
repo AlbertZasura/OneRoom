@@ -2,12 +2,12 @@
 
 namespace App\Policies;
 
-use App\Models\Assignment;
+use App\Models\Course;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
 
-class AssignmentPolicy
+class CoursePolicy
 {
     use HandlesAuthorization;
 
@@ -26,12 +26,13 @@ class AssignmentPolicy
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Assignment  $assignment
+     * @param  \App\Models\Course  $course
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Assignment $assignment)
+    public function view(User $user, Course $course)
     {
-        return in_array($user->role,["teacher","admin"]) ? Response::allow() : Response::deny('You cannot access.');
+        
+        return $user->role === 'teacher' ? Response::allow() : Response::deny('You are not an teacher.');
     }
 
     /**
@@ -42,17 +43,17 @@ class AssignmentPolicy
      */
     public function create(User $user)
     {
-        return in_array($user->role,["teacher"]) ? Response::allow() : Response::deny('You cannot access.');
+        
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Assignment  $assignment
+     * @param  \App\Models\Course  $course
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Assignment $assignment)
+    public function update(User $user, Course $course)
     {
         //
     }
@@ -61,22 +62,22 @@ class AssignmentPolicy
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Assignment  $assignment
+     * @param  \App\Models\Course  $course
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Assignment $assignment)
+    public function delete(User $user, Course $course)
     {
-        return in_array($user->role,["teacher","admin"]) ? Response::allow() : Response::deny('You cannot access.');
+        //
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Assignment  $assignment
+     * @param  \App\Models\Course  $course
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Assignment $assignment)
+    public function restore(User $user, Course $course)
     {
         //
     }
@@ -85,16 +86,11 @@ class AssignmentPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Assignment  $assignment
+     * @param  \App\Models\Course  $course
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Assignment $assignment)
+    public function forceDelete(User $user, Course $course)
     {
         //
-    }
-
-    public function upload(User $user)
-    {
-        return in_array($user->role,["student"]) ? Response::allow() : Response::deny('You cannot access.');
     }
 }

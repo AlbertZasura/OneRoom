@@ -63,7 +63,7 @@ class User extends Authenticatable
     }
 
     public function assignments(){
-        return $this->belongsToMany(Assignment::class,'assignments_users','user_id','assignment_id')->withTimestamps(); 
+        return $this->belongsToMany(Assignment::class,'assignments_users','user_id','assignment_id')->withPivot('notes', 'score', 'file')->withTimestamps(); 
     }
 
     public function classes(){
@@ -71,7 +71,11 @@ class User extends Authenticatable
     }
 
     public function exams(){
-        return $this->belongsToMany(Exam::class,'exams_users', 'user_id', 'exam_id');
+        return $this->belongsToMany(Exam::class,'exams_users', 'user_id', 'exam_id')->withPivot('id', 'notes','score','file')->withTimestamps();
+    }
+
+    public function examsId($id){
+        return $this->exams()->wherePivot('id',$id);
     }
 
 }
