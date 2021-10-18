@@ -73,7 +73,7 @@ class MessageController extends Controller
      */
     public function edit(Message $message)
     {
-        return view('messages.edit', ['message' => $message]);
+        
     }
 
     /**
@@ -85,18 +85,7 @@ class MessageController extends Controller
      */
     public function update(Request $request, Message $message)
     {
-        $request->validate([
-            'title' => 'required',
-            'content' => 'required'
-        ]);
-
-        $message->update([
-            'user_id' => Auth::user()->id,
-            'title' => $request->title,
-            'content' => $request->content
-        ]);
-
-        return redirect()->route('messages.index')->with('success','Message updated successfully.');
+    
     }
 
     /**
@@ -107,8 +96,6 @@ class MessageController extends Controller
      */
     public function destroy(Message $message)
     {
-        $message->delete();
-        return redirect()->route('messages.index')
-                        ->with('success','Message deleted successfully');
+        
     }
 }

@@ -17,7 +17,7 @@
                 <a>Pengirim</a> 
             </td>
             <td>
-                <a>{{ Auth::user()->name }}</a>
+                <a>{{ $message->user->name  }}</a>
                 <br>
             </td>
         </tr>

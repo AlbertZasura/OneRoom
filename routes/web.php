@@ -51,9 +51,10 @@ Route::get('courses/download/{id}', [CourseController::class, 'downloadFile'])->
 Route::resource('courses', CourseController::class);
 Route::resource('schedules', ScheduleController::class);
 Route::resource('absents', AbsentController::class);
-Route::resource('users', UserController::class);
+Route::resource('users', UserController::class)->middleware('auth');
 Route::get('/accounts', [UserController::class, 'index']);
 Route::post('/accounts', [UserController::class, 'store']);
+Route::get('/profiles', [UserController::class, 'edit']);
 
 Route::get('/exams/list/{type}', [ExamController::class, 'listExam'])->name('exlist');
 Route::get('/exams/list/filter/{type}/{course_id}', [ExamController::class, 'filterExam'])->name('filterlist');
