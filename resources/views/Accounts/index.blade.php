@@ -63,7 +63,7 @@
                     <td>
                         <a>{{ $user->created_at->format('d M Y') }}</a> 
                     </td>
-                    <td style="width:20%">
+                    <td>
                         <a>{{ $user->role }}</a>
                     </td>
                     <td>
