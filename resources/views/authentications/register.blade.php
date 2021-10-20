@@ -1,75 +1,68 @@
 @extends('Layout.SidePanel')
 
 @section('contentGuest')
-    <h1>Daftar</h1>
-    <p>Sebagai {{$role}}</p>
-    <form action="/register" method="POST">
-        @csrf
-      
-         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Name:</strong>
-                    <input type="text" name="name" class="form-control" value="{{old('name')}}" placeholder="ex: John Doe..." required autofocus>
-                </div>
-                @error('name')
-                    <div class="errors">{{ $message}}</div>
-                @enderror
-            </div>
-            @if ($role !="admin")
-                <div class="col-xs-12 col-sm-12 col-md-12">
-                    <div class="form-group">
-                        <strong>Nomor Induk {{$role}}:</strong>
-                        <input type="text" name="identification_number" value="{{old('identification_number')}}" class="form-control" placeholder="ex: 1234..." required>
-                    </div>
-                    @error('identification_number')
-                        <div class="errors">{{ $message}}</div>
+    <div class="register text-center">
+        <main class="form-signin rounded">
+            <form action="/register" method="POST">
+                @csrf
+                @include('components.notifications')
+                <h1 class="fw-normal"><strong>Daftar</strong></h1>
+                <h5 class="mb-4 fw-normal">Sebagai {{$role}}</h5>
+                <div class="form-floating">
+                    <input type="text"  name="name" class="form-control rounded-top @error('name')is-invalid @enderror" value="{{old('name')}}" id="name" placeholder="ex: John Doe..." required autofocus>
+                    <label for="name">Nama</label>
+                    @error('name')
+                    <div class="invalid-feedback">{{ $message}}</div>
                     @enderror
                 </div>
-            @endif
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Nomor Handphone:</strong>
-                    <input type="text" name="phone" value="{{old('phone')}}" class="form-control" placeholder="ex: 081312122161..." required>
+                @if ($role !="admin")
+                <div class="form-floating">
+                    <input type="text"  name="identification_number" class="form-control @error('identification_number')is-invalid @enderror" value="{{old('identification_number')}}" id="identification_number" placeholder="ex: 1234..." required >
+                    <label for="identification_number">Nomor Induk {{$role}}</label>
+                    @error('identification_number')
+                    <div class="invalid-feedback">{{ $message}}</div>
+                    @enderror
                 </div>
-                @error('phone')
-                    <div class="errors">{{ $message}}</div>
-                @enderror
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Email:</strong>
-                    <input type="email" name="email" value="{{old('email')}}" class="form-control" placeholder="ex: johndoe@gmail.com..." required>
+                @endif
+                <div class="form-floating">
+                    <input type="text"  name="phone" class="form-control @error('phone')is-invalid @enderror" value="{{old('phone')}}" id="phone" placeholder="ex: 081312122161..." required>
+                    <label for="phone">Nomor Handphone</label>
+                    @error('phone')
+                    <div class="invalid-feedback">{{ $message}}</div>
+                    @enderror
                 </div>
-                @error('email')
-                    <div class="errors">{{ $message}}</div>
-                @enderror
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Password:</strong>
-                    <input type="password" name="password" class="form-control" placeholder="type password here..." required>
+                <div class="form-floating">
+                    <input type="email"  name="email" class="form-control @error('email')is-invalid @enderror" value="{{old('email')}}" id="email"placeholder="ex: johndoe@gmail.com..." required>
+                    <label for="email">Email</label>
+                    @error('email')
+                    <div class="invalid-feedback">{{ $message}}</div>
+                    @enderror
                 </div>
-                @error('password')
-                    <div class="errors">{{ $message}}</div>
-                @enderror
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Konfirmasi Password:</strong>
-                    <input type="password" name="password_confirmation" class="form-control" placeholder="type password again here..." required>
+                <div class="form-floating">
+                    <input type="password" name="password" class="form-control @error('password')is-invalid @enderror" id="password" placeholder="Password" required>
+                    <label for="password">Password</label>
+                    @error('password')
+                    <div class="invalid-feedback">{{ $message}}</div>
+                    @enderror
                 </div>
-                @error('password_confirmation')
-                    <div class="errors">{{ $message}}</div>
-                @enderror
-            </div>
-            <input type="number" name="status" value="{{$role==="admin" ? 1 : 0}}" hidden>
-            <input type="text" name="role" value="{{$role}}" hidden>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </div>
-        </div>
-        <p>sudah punya akun? <a href="/login">Login disini</a></p>
-       
-    </form>
-@stop
+                <div class="form-floating">
+                    <input type="password" name="password_confirmation" class="form-control @error('password_confirmation')is-invalid @enderror rounded-bottom" id="password_confirmation" placeholder="type password again here..." required>
+                    <label for="password_confirmation">Konfirmasi Password</label>
+                    @error('password_confirmation')
+                    <div class="invalid-feedback">{{ $message}}</div>
+                    @enderror
+                </div>
+                <input type="number" name="status" value="{{$role==="admin" ? 1 : 0}}" hidden>
+                <input type="text" name="role" value="{{$role}}" hidden>
+            
+                {{-- <div class="checkbox mb-3">
+                    <label>
+                        <input type="checkbox" value="remember-me"> Remember me
+                    </label>
+                </div> --}}
+                <button class="mt-4 w-100 btn btn-lg btn-primary" type="submit">Submit</button>
+                <p class="mt-3 mb-3 text-muted">Sudah punya akun? <a href="/login">Login disini</a></p>
+            </form>
+        </main>
+    </div> 
+@endsection

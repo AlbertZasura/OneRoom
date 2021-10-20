@@ -51,6 +51,6 @@ class RegisterController extends Controller
             "password" => bcrypt($request->password)
         ]);
         Auth::login($user);
-        return redirect()->route('messages.index')->with('success','register successfully.');
+        return redirect()->route('home')->with('success','Akun berhasil dibuat!');
     }
 }

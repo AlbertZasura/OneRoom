@@ -20,7 +20,7 @@
         <form action="{{ route('course.assignments.destroy',[$course,$assignment]) }}" method="POST">   
             @csrf
             @method('DELETE')      
-            <button class="btn" type="submit"><i class='fs-25 fa fa-trash text-danger'></i></button>
+            <button class="btn" type="submit" onclick="return confirm('Apakah Anda yakin untuk menghapus tugas {{ $assignment->title }} ?')"><i class='fs-25 fa fa-trash text-danger'></i></button>
         </form>
         <p class="m-1">{{$assignment->users->count()}} / {{$assignment->class->students->count()}}</p>
     </div>

@@ -29,7 +29,7 @@ use Illuminate\Support\Facades\Route;
 // });
 Route::get('/', function () {
     return view('dashboard');
-})->middleware('auth');
+})->middleware('auth')->name('home');
 
 // Route::get('/session', [SessionController::class, 'index']);
 // Route::post('/session/store', [SessionController::class, 'store']);

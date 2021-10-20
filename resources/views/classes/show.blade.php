@@ -13,7 +13,7 @@
             <form action="{{ route('classes.destroy',$class) }}" method="POST">   
                 @csrf
                 @method('DELETE')      
-                <button class="btn" type="submit"><i class='fs-25 fa fa-trash text-danger'></i></button>
+                <button class="btn" type="submit" onclick="return confirm('Apakah Anda yakin untuk menghapus kelas ini?')"><i class='fs-25 fa fa-trash text-danger'></i></button>
             </form>
         @endcan
     </div>
@@ -30,7 +30,9 @@
                 <th>#</th>
                 <th>Nama</th>
                 <th>Jabatan</th>
-                <th>Aksi</th>
+                @can('assign_user', App\Models\Classes::class )
+                    <th>Aksi</th>
+                @endcan
             </tr>
         </thead>
         <tbody>
@@ -45,12 +47,14 @@
                     <td>
                         <p>{{ $user->role }}</p> 
                     </td>
-                    <td>
-                        <form action="/classes/{{$class->id}}/assign_user/{{$user->id}}?type=detach" method="POST">
-                            @csrf
-                            <button type="submit" class="btn btn-danger">Keluarkan</button>
-                        </form>
-                    </td>
+                    @can('assign_user', App\Models\Classes::class )
+                        <td>
+                            <form action="/classes/{{$class->id}}/assign_user/{{$user->id}}?type=detach" method="POST">
+                                @csrf
+                                <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin untuk mengeluarkan {{ $user->name }} dari kelas?')">Keluarkan</button>
+                            </form>
+                        </td>
+                    @endcan
                 </tr>
             @endforeach
         </tbody>

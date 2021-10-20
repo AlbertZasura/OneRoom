@@ -93,7 +93,7 @@ class AssignmentController extends Controller
                 'course_id' => $course->id,
                 'class_id' => $request->class
             ]);
-        return back()->with('success','Tugas berhasil dibuat.');
+        return back()->with('success','Tugas berhasil ditambahkan!');
     }
 
     /**
@@ -147,7 +147,7 @@ class AssignmentController extends Controller
     {
         $this->authorize('delete', $assignment);
         $assignment->delete();
-        return redirect()->route('course.assignments.index',$course)->with('success','Tugas berhasil dihapus');
+        return redirect()->route('course.assignments.index',$course)->with('success','Tugas berhasil dihapus!');
     }
 
     public function download(Assignment $assignment)
@@ -177,7 +177,7 @@ class AssignmentController extends Controller
             'file' => 'app/public/file/'.$fileName,
             'notes' => $request->notes
         ]);
-        return back()->with('success','Tugas berhasil dikumpulkan.');
+        return back()->with('success','Tugas berhasil dikumpulkan!');
     }
 
     public function scoring(Request $request,Assignment $assignment)

@@ -1,44 +1,49 @@
 @extends('Layout.SidePanel')
 
 @section('contentGuest')
-    <h1>Login</h1>
-    @if (session('loginError'))
-        <div class="alert alert-warning">
-            {{ session('loginError') }}
+    <div class="mt-5 border border-dark border-1 rounded-3 p-5">
+        <main class="row">
+            <div class="col-md-8">
+                <h1>Images</h1>
+            </div>
+            <div class="col-md-4">
+                <form action="/login" method="POST">
+                    @csrf
+                    @include('components.notifications')
+                    <h1 class="my-5 fw-normal"><strong>Login</strong></h1>
+                    <div class="form-floating">
+                        <input type="email"  name="email" class="form-control rounded-top @error('email')is-invalid @enderror" value="{{old('email')}}" id="email"placeholder="ex: johndoe@gmail.com..." required autofocus>
+                        <label for="email">Email</label>
+                        @error('email')
+                        <div class="invalid-feedback">{{ $message}}</div>
+                        @enderror
+                    </div>
+                    <div class="form-floating">
+                        <input type="password" name="password" class="form-control rounded-bottom @error('password')is-invalid @enderror" id="passwordLogin" placeholder="Password" required>
+                        <label for="password">Password</label>
+                        <i class="far fa-eye visible-password" id="openEye" onclick="showPassword()"></i>
+                        <i class="far fa-eye-slash visible-password d-none" id="closeEye" onclick="hidePassword()"></i>
+                        @error('password')
+                        <div class="invalid-feedback">{{ $message}}</div>
+                        @enderror
+                    </div>
+                    {{-- <div class="checkbox mb-3">
+                        <label>
+                            <input type="checkbox" value="remember-me"> Remember me
+                        </label>
+                    </div> --}}
+                    <button class="mt-4 w-100 btn btn-lg btn-primary" type="submit">Login</button>
+                    <p class="mt-3 mb-3 text-muted">Belum punya akun?
+                        <a class="text-decoration-none" data-bs-toggle="modal" data-bs-target="#registerModal">
+                            Daftar disini
+                        </a>
+                    </p>
+                </form>
+            </div> 
+        </main>
+        @include('authentications._role_modal')
         </div>
-    @endif
-    <form action="/login" method="POST">
-        @csrf
-         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group">
-                    <strong>Email:</strong>
-                    <input type="email" name="email" class="form-control" placeholder="Type your email here.." required autofocus>
-                </div>
-                @error('email')
-                    <div class="errors">{{ $message}}</div>
-                @enderror
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                <div class="form-group pos-relative">
-                    <strong>password:</strong>
-                    <input type="password" id="passwordLogin" name="password" class="form-control" placeholder="Type your password here..." required>
-                    <i class="far fa-eye visible-password" id="openEye" onclick="showPassword()"></i>
-                    <i class="far fa-eye-slash visible-password d-none" id="closeEye" onclick="hidePassword()"></i>
-                </div>
-            </div>
-            <div class="col-xs-12 col-sm-12 col-md-12">
-                    <button type="submit" class="btn btn-primary">Login</button>
-            </div>
-        </div>
-    </form>
-    <p>Belum punya akun?
-        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#registerModal">
-            Daftar disini
-        </button>
-    </p>
-    @include('authentications.partials._role_modal')
-    <script>
+        <script>
         function showPassword(){
             document.getElementById("passwordLogin").type = 'text'
             document.getElementById("openEye").classList.add("d-none")
@@ -51,4 +56,4 @@
             document.getElementById("closeEye").classList.add("d-none")
         }
     </script>
-@stop
+@endsection

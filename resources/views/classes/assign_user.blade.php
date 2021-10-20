@@ -28,7 +28,7 @@
                     <td>
                         <form action="/classes/{{$class->id}}/assign_user/{{$user->id}}?type=attach" method="POST">
                             @csrf
-                            <button type="submit" class="btn btn-primary">Tambahkan</button>
+                            <button type="submit" class="btn btn-primary" onclick="return confirm('Apakah Anda yakin untuk menambahkan {{ $user->name }} ke dalam kelas?')">Tambahkan</button>
                         </form>
                     </td>
                 </tr>

@@ -97,4 +97,9 @@ class ClassesPolicy
     {
         return $user->role === 'admin' ? Response::allow() : Response::deny('You are not an Admin.');
     }
+
+    public function assign_user(User $user)
+    {
+        return $user->role === 'admin' ? Response::allow() : Response::deny('You are not an Admin.');
+    }
 }

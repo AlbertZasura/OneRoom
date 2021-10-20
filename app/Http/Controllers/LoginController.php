@@ -22,7 +22,7 @@ class LoginController extends Controller
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->route('messages.index')->with('success','login successfully');
+            return redirect()->route('home')->with('success','Berhasil masuk!');
         }
 
         return back()->with('loginError','Email dan Password salah!');
@@ -36,6 +36,6 @@ class LoginController extends Controller
 
         $request->session()->regenerateToken();
 
-        return redirect('/login');
+        return redirect('/login')->with('success','Berhasil keluar!');
     }
 }

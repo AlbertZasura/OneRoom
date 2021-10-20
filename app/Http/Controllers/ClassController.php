@@ -58,7 +58,7 @@ class ClassController extends Controller
 
         Classes::create($request->all());
 
-        return redirect()->route('classes.index')->with('success','Class created successfully.');
+        return redirect()->route('classes.index')->with('success','Class berhasil dibuat!');
     }
 
     /**
@@ -106,7 +106,7 @@ class ClassController extends Controller
         ]);
 
         $classes->update($request->all());
-        return redirect()->route('classes.index')->with('success','Classes updated successfully.');
+        return redirect()->route('classes.index')->with('success','Kelas berhasil di update!');
     }
 
     public function user_list(Classes $class)
@@ -135,7 +135,7 @@ class ClassController extends Controller
         }else if ($type==='detach') {
             $class->users()->detach($user);
         }
-        return redirect()->route('classes.show',$class->id)->with('success','Kelas berhasil dirubah.');
+        return redirect()->route('classes.show',$class->id)->with('success', $type==='attach'? $user->name.' berhasil ditambahkan!' : $user->name.' berhasil dikeluarkan!');
     }
 
     /**
@@ -147,6 +147,6 @@ class ClassController extends Controller
     public function destroy(Classes $class)
     {
         $class->delete();
-        return redirect()->route('classes.index')->with('success','Class deleted successfully');
+        return redirect()->route('classes.index')->with('success','Kelas berhasil dihapus!');
     }
 }
