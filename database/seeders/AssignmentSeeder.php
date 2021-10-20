@@ -49,10 +49,5 @@ class AssignmentSeeder extends Seeder
                 ]
             ]
         );
-        $course=Course::find(1);
-        for ($i=1; $i < 4 ; $i++) { 
-            $course->classes()->attach($i);
-        }
-        
     }
 }

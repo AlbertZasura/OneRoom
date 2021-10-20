@@ -4,7 +4,7 @@
 @section('title', 'Tambah Anggota')
 
 @section('content')
-    <table class="table table-hover" style="width:250%">
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th>#</th>

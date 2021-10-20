@@ -6,9 +6,9 @@
 @section('show')
     <div class="d-flex align-items-center">
         <h1 class="text-uppercase">{{$class->name}}</h1>
-        @can('update',$class )
+        {{-- @can('update',$class )
             <a href="{{ route('classes.edit',$class->id) }}" class="btn"><i class='fs-25 fa fa-pencil text-primary'></i></a>
-        @endcan
+        @endcan --}}
         @can('delete', $class )
             <form action="{{ route('classes.destroy',$class) }}" method="POST">   
                 @csrf
@@ -18,13 +18,13 @@
         @endcan
     </div>
     @can('user_list', App\Models\Classes::class )
-        <div class="card">
+        <div class="card mb-1">
             <a href="/classes/{{$class->id}}/assign_user" class="card-body btn btn-outline-dark">
                 <i class='fa fa-plus '></i> Tambah Anggota
             </a>
         </div>
     @endcan
-    <table class="table table-hover" style="width:250%">
+    <table class="table table-hover">
         <thead>
             <tr>
                 <th>#</th>

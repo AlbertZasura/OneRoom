@@ -38,8 +38,8 @@
                     @enderror
                     <div class="form-group mb-3">
                         <label for="class" class="col-form-label"><b>Kelas</b></label>
-                        <input type="text" value="{{$assignments->first()->class->name}}" class="form-control" disabled>
-                        <input type="text" name="class" value="{{$assignments->first()->class->id}}" placeholder="test" class="form-control" id="class" hidden>
+                        <input type="text" value="{{$selectedClasses->name}}" class="form-control" disabled>
+                        <input type="text" name="class" value="{{$selectedClasses->id}}" placeholder="test" class="form-control" id="class" hidden>
                     </div>
                 </div>
                 <div class="modal-footer">

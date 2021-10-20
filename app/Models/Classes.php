@@ -14,6 +14,10 @@ class Classes extends Model
         return $this->belongsToMany(User::class,'classes_users','class_id','user_id')->withTimestamps(); 
     }
 
+    public function students(){
+        return $this->users()->where('role',2); 
+    }
+
     public function assignments(){
         return $this->hasMany(Assignment::class,'class_id');
     }

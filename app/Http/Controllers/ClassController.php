@@ -89,7 +89,7 @@ class ClassController extends Controller
     public function edit(Classes $classes)
     {
         
-        return view('messages.edit', ['classes' => $classes]);
+        // return view('messages.edit', ['classes' => $classes]);
     }
 
     /**

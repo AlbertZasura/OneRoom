@@ -10,7 +10,7 @@
             <div class="card-body">
                 <h5 class="card-title">{{$course->name}}</h5>
                 <a href="{{route('course.assignments.index',$course)}}" class="stretched-link"></a>
-                <p class="card-text text-end"><small> {{$course->assignments->count()}} Tugas</small></p>
+                <p class="card-text text-end"><small> {{$course->classAssignments(Auth::user()->classes->pluck('id'))->count()}} Tugas</small></p>
             </div>
         </div>
     @endforeach

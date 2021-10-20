@@ -25,6 +25,10 @@ class Course extends Model
         return $this->hasMany(Assignment::class);
     }
 
+    public function classAssignments($class){
+        return $this->assignments()->whereIn('class_id', $class);
+    }
+
     public function exams(){
         return $this->belongsToMany(Exam::class,'courses_exams','course_id', 'exam_id');
     }

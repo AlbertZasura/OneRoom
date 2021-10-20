@@ -15,8 +15,6 @@ class CourseSeeder extends Seeder
      */
     public function run()
     {
-        //
-
         DB::table('courses')->insert([
             [
                 "name" => "Matematika",
@@ -49,6 +47,11 @@ class CourseSeeder extends Seeder
                 "updated_at" => now()->toDateTimeString()
             ]
         ]);
+
+        $course=Course::find(1);
+        for ($i=1; $i < 4 ; $i++) { 
+            $course->classes()->attach($i);
+        }
 
     }
 }
