@@ -60,4 +60,4 @@
         </tbody>
     </table>
 
-@stop
+@endsection

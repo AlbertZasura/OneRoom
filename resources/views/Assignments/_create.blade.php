@@ -18,7 +18,7 @@
                     <div class="form-group mb-3">
                         <label for="deadline" class="col-form-label"><b>Deadline</b></label>
                         <div class="input-group date">
-                            <input type="text" name="deadline" class="datetimepicker form-control" id="deadline" required>
+                            <input type="datetime-local" name="deadline" class="datetimepicker form-control" id="deadline" required>
                             {{-- <span class="input-group-append">
                                 <span class="input-group-text bg-white">
                                     <i class="fa fa-calendar"></i>

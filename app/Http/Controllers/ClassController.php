@@ -118,7 +118,7 @@ class ClassController extends Controller
             });
         })->orWhere( function (Builder $query){
              $query->doesntHave('classes')->where('role',2);
-        })->get();
+        })->filter(request(['search','role']))->get();
         
 
         return view('classes.assign_user', [
@@ -148,5 +148,10 @@ class ClassController extends Controller
     {
         $class->delete();
         return redirect()->route('classes.index')->with('success','Kelas berhasil dihapus!');
+    }
+
+    public function chatRoom(Classes $class)
+    {
+        return view('classes.chatroom', ['class' => $class]);
     }
 }

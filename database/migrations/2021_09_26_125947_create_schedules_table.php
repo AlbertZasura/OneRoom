@@ -16,10 +16,12 @@ class CreateSchedulesTable extends Migration
         Schema::create('schedules', function (Blueprint $table) {
             $table->id();
             $table->date('date');
-            $table->dateTime('start_date', $precision = 0);
-            $table->dateTime('end_date', $precision = 0);
+            $table->timeTz('start_time', $precision = 0);
+            $table->timeTz('end_time', $precision = 0);
             $table->unsignedBigInteger('course_id');
             $table->foreign('course_id')->references('id')->on('courses');
+            $table->unsignedBigInteger('class_id');
+            $table->foreign('class_id')->references('id')->on('classes');
             $table->timestamps();
         });
     }

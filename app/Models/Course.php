@@ -33,4 +33,8 @@ class Course extends Model
         return $this->belongsToMany(Exam::class,'courses_exams','course_id', 'exam_id');
     }
 
+    public function schedules(){
+        return $this->hasMany(Schedule::class);
+    }
+
 }

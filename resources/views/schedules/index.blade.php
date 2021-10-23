@@ -1,13 +1,12 @@
-
 @extends('Layout.SidePanel')
 
-@section('title', 'Tambah Anggota')
+@section('title', "Jadwal Kelas {{ $class->name }}")
 
 @section('content')
-    <h1>Daftar Anggota Sekolah</h1>    
+    <h1>Jadwal kelas {{ $class->name }}</h1>
     <br>
     <form action="/classes/{{$class->id}}/assign_user">
-        <div class="row mb-3">
+        <div class="row">
             <div class="col-md-2">
                 <select class="form-select" name="role">
                     <option selected value="">Semua</option>
@@ -23,35 +22,45 @@
             </div>
         </div>
     </form>
+    <div class="row mb-2">
+        <div class="col-md-6">
+            <a data-bs-toggle="modal" data-bs-target="#createSchedules" class="btn btn-outline-dark">
+                <i class='fa fa-plus '></i> Buat Jadwal Baru
+            </a>
+        </div>
+    </div>    
     <table class="table table-hover">
         <thead>
             <tr>
                 <th>#</th>
-                <th>Nama</th>
-                <th>Jabatan</th>
-                <th>Action</th>
+                <th>Hari</th>
+                <th>Mata Pelajaran</th>
+                <th>Jam</th>
+                <th>Aksi</th>
             </tr>
         </thead>
         <tbody>
-            @foreach ($users as $key => $user )
+            @foreach ($schedules as $key => $s )
                 <tr>
                     <th>
                         <p>{{ $key+1 }}.</p> 
                     </th>
                     <td>
-                        <p>{{ $user->name }}</p> 
+                        <p>{{ \Carbon\Carbon::parse($s->date)->isoFormat('dddd') }}</p> 
                     </td>
                     <td>
-                        <p>{{ $user->role }}</p> 
+                        <p>{{ $s->course->name }}</p> 
                     </td>
                     <td>
-                        <form action="/classes/{{$class->id}}/assign_user/{{$user->id}}?type=attach" method="POST">
-                            @csrf
-                            <button type="submit" class="btn btn-primary" onclick="return confirm('Apakah Anda yakin untuk menambahkan {{ $user->name }} ke dalam kelas?')">Tambahkan</button>
-                        </form>
+                        <p>{{ $s->start_time}} - {{ $s->end_time}}
+                        </p> 
+                    </td>
+                    <td>
+                        <p>{{ $s->end_time }}</p> 
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-@stop
+    @include('schedules._create')
+@endsection

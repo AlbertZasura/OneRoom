@@ -49,6 +49,7 @@ Route::middleware('auth')->group(function () {
     
     Route::get('/classes/{class}/assign_user', [ClassController::class, 'user_list']);
     Route::post('/classes/{class}/assign_user/{user}', [ClassController::class, 'assign_user']);
+    Route::get('/classes/{class}/chatroom', [ClassController::class, 'chatRoom']);
     Route::resource('classes', ClassController::class);
     
     Route::get('/assignments', [AssignmentController::class, 'course']);
@@ -62,7 +63,8 @@ Route::middleware('auth')->group(function () {
     Route::get('courses/download/{id}', [CourseController::class, 'downloadFile'])->name('uploaded');
     Route::resource('courses', CourseController::class);
     
-    Route::resource('schedules', ScheduleController::class);
+    Route::resource('classes.schedules', ScheduleController::class);
+    Route::get('/schedules', [ScheduleController::class, 'listClass']);
     
     Route::resource('absents', AbsentController::class);
     

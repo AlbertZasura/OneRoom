@@ -20,8 +20,8 @@
                 <i class='fa fa-plus '></i> Tambah Kelas
             </a>
         </div>
+        @include('classes._create')
     @endcan
-    @include('classes._create')
    
     @yield('show')
-@stop
+@endsection

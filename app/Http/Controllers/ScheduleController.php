@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Classes;
 use App\Models\Schedule;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -14,11 +14,18 @@ class ScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function listClass(){
+        return view('schedules.list_class', [
+            'classes' => Classes::latest()->filter(request(['search']))->get()
+        ]);
+    }
+
+     public function index(Classes $class)
     {
-        $schedules = Schedule::all();
-        return view('messages.index', [
-            'schedules' => $schedules
+        $schedules = $class->schedules;
+        return view('schedules.index', [
+            'schedules' => $schedules,
+            'class' => $class
         ]);
     }
 
@@ -38,25 +45,24 @@ class ScheduleController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store( Classes $class,Request $request)
     {
         $request->validate([
-            'course_id' => 'required',
+            'course' => 'required',
             'date' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required'
+            'start_time' => 'required',
+            'end_time' => 'required'
         ]);
 
-        $user = Auth::user();
         Schedule::create([
-            'user_id' => $user->id,
-            'course_id' => $request->course_id,
+            'class_id' => $class->id,
+            'course_id' => $request->course,
             'date' => $request->date,
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time
         ]);
 
-        return redirect()->route('schedules.index')->with('success','Schedule created successfully.');
+        return redirect()->route('classes.schedules.index', $class)->with('success',"Jadwal kelas {{$class->name}} berhasil dibuat!");
     }
 
     /**

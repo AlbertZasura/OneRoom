@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
             ClassesSeeder::class,
             CourseSeeder::class,
             SessionSeeder::class,
-            ScheduleSeeder::class,
+            // ScheduleSeeder::class,
             AbsentSeeder::class,
             ExamSeeder::class,
             AssignmentSeeder::class
