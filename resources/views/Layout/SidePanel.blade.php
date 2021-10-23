@@ -49,7 +49,7 @@
                             <i class="fas fa-chart-line"></i>
                         </div>
                         <div class="fs-18 ml-20">
-                            <a href="#" class="btn text-white">dashboard</a>
+                            <a href="{{route('home')}}" class="btn text-white">Dashboard</a>
                         </div>
                     </div>
                     <div class="d-flex a-center mb-10">
@@ -111,7 +111,6 @@
                         </div>
                         <div class="fs-18 ml-20">
                             <a href="{{route('messages.index')}}" class="btn text-white">Announcement</a>
-                            
                         </div>
                     </div>
                     @if (Auth::user())

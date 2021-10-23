@@ -5,16 +5,35 @@
 @section('content')
 
     <h1>dashboard</h1>
-
-    <button id="open-popup">show pop up</button>
-
-    <x-pop-up>
-        <h1>pop up insert content</h1>
-        <div class="d-flex justify-content-end">
-            <button id="action-closes-popup">Cancel</button>
-            <button id="action-submit-popup">Submit</button>
-
+    <div class="row">
+        <div class="col-md-6"></div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header d-flex justify-content-between align-items-center ">
+                    <i class="fas fa-bullhorn"></i>
+                  <h4 class="ms-3">Pengumuman</h3>
+                    <a href="{{ route('messages.index') }}" class="ms-auto text-decoration-none" target="_blank">View more</a>
+                </div>
+                <table class="table table-hover mb-0">
+                    <tbody>
+                        @foreach ($messages as $message)
+                        <tr class='clickable-row' data-href="{{ route('messages.show',$message->id) }}">
+                            <a href="{{ route('messages.show',$message->id) }}" target="_blank">
+                                <th scope="row" style="width: 25%">{{ $message->created_at->format('d M Y') }}</th>
+                                <td>{{ Str::limit($message->title, 50) }}</td>
+                            </a>    
+                        </tr>
+                        @endforeach
+                    </tbody>
+                  </table>
+              </div>
         </div>
-    </x-pop-up>
-
-@stop
+    </div>
+<script>
+    jQuery(document).ready(function($) {
+        $(".clickable-row").click(function() {
+            window.location = $(this).data("href");
+        });
+    });
+</script>
+@endsection
