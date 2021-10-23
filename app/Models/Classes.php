@@ -15,6 +15,7 @@ class Classes extends Model
             return $query->where('name','like','%'.$search.'%');
         });
     }
+    
     public function users(){
         return $this->belongsToMany(User::class,'classes_users','class_id','user_id')->withTimestamps(); 
     }

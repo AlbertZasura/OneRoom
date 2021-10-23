@@ -5,18 +5,28 @@
 @section('content')
     <h1>Jadwal kelas {{ $class->name }}</h1>
     <br>
-    <form action="/classes/{{$class->id}}/assign_user">
+    <form action="{{ route('classes.schedules.index',$class) }}">
         <div class="row">
             <div class="col-md-2">
-                <select class="form-select" name="role">
-                    <option selected value="">Semua</option>
-                    <option value="1">Guru</option>
-                    <option value="2">Murid</option>
+                <select class="form-select" name="weekday">
+                    <option selected value="">Semua Hari</option>
+                    <option value="1">Minggu</option>
+                    <option value="2">Senin</option>
+                    <option value="3">Selasa</option>
+                    <option value="4">Rabu</option>
+                    <option value="5">Kamis</option>
+                    <option value="6">Jumat</option>
+                    <option value="7">Sabtu</option>
                 </select>
             </div>
             <div class="col-md-4">
                 <div class="input-group mb-3">
-                    <input type="text" class="form-control" placeholder="Cari Nama" name="search" value="{{ request('search') }}">
+                    <select class="form-select" name="course">
+                        <option selected value="">Semua Mata Pelajaran</option>
+                        @foreach ($class->courses as $c)
+                            <option value="{{ $c->id }}">{{ $c->name }}</option>
+                        @endforeach
+                    </select>
                     <button class="btn btn-outline-secondary" type="submit">Cari</button>
                 </div>
             </div>
@@ -46,7 +56,7 @@
                         <p>{{ $key+1 }}.</p> 
                     </th>
                     <td>
-                        <p>{{ \Carbon\Carbon::parse($s->date)->isoFormat('dddd') }}</p> 
+                        <p>{{ \Carbon\Carbon::parse($s->date)->isoFormat('dddd, D MMMM Y') }}</p> 
                     </td>
                     <td>
                         <p>{{ $s->course->name }}</p> 
@@ -56,9 +66,17 @@
                         </p> 
                     </td>
                     <td>
-                        <p>{{ $s->end_time }}</p> 
+                        <div class="d-flex align-items-center">
+                            <a data-bs-toggle="modal" data-bs-target="#editSchedules{{ $s->id }}" class="btn btn-sm btn-primary">Edit Jadwal</a>
+                            <form action="{{ route('classes.schedules.destroy',[$class,$s]) }}" method="POST">   
+                                @csrf
+                                @method('DELETE')      
+                                <button class="btn" type="submit" onclick="return confirm('Apakah Anda yakin untuk menghapus jadwal {{ $s->course->name }} ?')"><i class='fa fa-trash text-danger'></i></button>
+                            </form>
+                        </div>
+                        @include('schedules._edit')
                     </td>
-                </tr>
+                </tr> 
             @endforeach
         </tbody>
     </table>

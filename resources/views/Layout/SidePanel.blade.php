@@ -57,8 +57,7 @@
                             <i class="far fa-calendar-alt"></i>
                         </div>
                         <div class="fs-18 ml-20">
-                            <a href="#" class="btn text-white">Schedule</a>
-                            
+                            <a href="/schedules" class="btn text-white">Schedule</a>
                         </div>
                     </div>
                     <div class="d-flex a-center mb-10">
@@ -67,7 +66,6 @@
                         </div>
                         <div class="fs-18 ml-20">
                             <a href="/assignments" class="btn text-white">Tugas</a>
-                            
                         </div>
                     </div>
                     <div class="d-flex a-center mb-10">

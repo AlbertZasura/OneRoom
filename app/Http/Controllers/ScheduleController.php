@@ -22,7 +22,7 @@ class ScheduleController extends Controller
 
      public function index(Classes $class)
     {
-        $schedules = $class->schedules;
+        $schedules = Schedule::where('class_id',$class->id)->filter(request(['course','weekday']))->orderBy('date')->get();
         return view('schedules.index', [
             'schedules' => $schedules,
             'class' => $class
@@ -36,7 +36,7 @@ class ScheduleController extends Controller
      */
     public function create()
     {
-        return view('messages.create');
+        // return view('messages.create');
     }
 
     /**
@@ -62,7 +62,7 @@ class ScheduleController extends Controller
             'end_time' => $request->end_time
         ]);
 
-        return redirect()->route('classes.schedules.index', $class)->with('success',"Jadwal kelas {{$class->name}} berhasil dibuat!");
+        return redirect()->route('classes.schedules.index', $class)->with('success',"Jadwal kelas {$class->name} berhasil dibuat!");
     }
 
     /**
@@ -73,7 +73,7 @@ class ScheduleController extends Controller
      */
     public function show(Schedule $schedule)
     {
-        return view('messages.show', ['schedule' => $schedule]);
+        // return view('messages.show', ['schedule' => $schedule]);
     }
 
     /**
@@ -84,7 +84,7 @@ class ScheduleController extends Controller
      */
     public function edit(Schedule $schedule)
     {
-        return view('messages.edit', ['schedule' => $schedule]);
+        // return view('messages.edit', ['schedule' => $schedule]);
     }
 
     /**
@@ -94,37 +94,32 @@ class ScheduleController extends Controller
      * @param  \App\Models\Schedule  $schedule
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Schedule $schedule)
+    public function update(Classes $class, Schedule $schedule,Request $request)
     {
         $request->validate([
-            'course_id' => 'required',
             'date' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required'
+            'start_time' => 'required',
+            'end_time' => 'required'
         ]);
 
-        $user = Auth::user();
         $schedule->update([
-            'user_id' => $user->id,
-            'course_id' => $request->course_id,
             'date' => $request->date,
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date
+            'start_time' => $request->start_time,
+            'end_time' => $request->end_time
         ]);
 
-        return redirect()->route('schedules.index')->with('success','Schedule updated successfully.');
+        return redirect()->route('classes.schedules.index', $class)->with('success',"Jadwal kelas {$class->name} untuk Mata Pelajaran {$schedule->course->name} berhasil dirubah!");
     }
-
+    
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Models\Schedule  $schedule
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Schedule $schedule)
+    public function destroy(Classes $class, Schedule $schedule)
     {
         $schedule->delete();
-        return redirect()->route('schedules.index')
-                        ->with('success','Schedule deleted successfully');
+        return redirect()->route('classes.schedules.index', $class)->with('success',"Jadwal kelas {$class->name} berhasil dihapus!");
     }
 }
