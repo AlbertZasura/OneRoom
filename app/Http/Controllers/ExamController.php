@@ -91,8 +91,6 @@ class ExamController extends Controller
 
     public function downloadExamsUser($id){
 
-        // dd($id);
-        
         $user = User::find(Auth::id());
 
         // dd($user->examsId($id));
@@ -101,14 +99,28 @@ class ExamController extends Controller
 
         // $user->examsId(request()->input('pivotId'));
 
-        $exam_file = $exam->usersExams($user->id)->first()->pivot;
-        // dd($exam_file);
-
-        // $fl = Session::find($id);
+        // dd($exam->usersExams($user->id));
+        // $exam_file = $exam->usersExams($user->id)->first()->pivot;
+        
        
-        $file_path = public_path('storage/file/'.$exam_file->file);
+        $file_path = public_path('storage/file/'.$exam->file);
         return response()->download($file_path);
 
+    }
+
+    public function donwloadExamStudent(){
+        
+        $user = User::find(request()->input('user_id'));
+
+        $exam = Exam::find(request()->input('e'));
+
+        $exam->usersExams(request()->input('user_id'));
+        
+        $exam_file = $exam->usersExams(request()->input('user_id'))->first()->pivot;
+
+        $file_path = public_path('storage/file/'.$exam_file->file);
+
+        return response()->download($file_path);
     }
 
     public function submitExams(Request $request){
@@ -200,7 +212,7 @@ class ExamController extends Controller
 
         if($request->file('file_upload')){
             $file->storeAs('public/file', $fileName);
-
+            
             Exam::create([
                 'title' => $request->title,
                 'type' => request()->input('type'),
@@ -208,10 +220,15 @@ class ExamController extends Controller
                 'end_date' => $request->deadline,
                 'file' => $fileName,
                 'user_id' =>Auth::id(),
-                'class_id' => 1
+                'class_id' => request()->input('class_id'),
             ]);
+
+            $last_exam = Exam::latest('created_at')->first();
+
+            $last_exam->courses()->attach(request()->input('course_id'));
+
     
-            return redirect()->route('exams.index')->with('success','exams created successfully.');
+            return redirect()->route('exams.index')->with('success','Ujian Berhasil Dibuat.');
 
         }else{
             dd("no file upload");
@@ -225,15 +242,11 @@ class ExamController extends Controller
 
     public function filterExam($type, $course_id){
 
-        // dd($course_id);
-
         $ex = Exam::where('type','like', $type)->first();
 
         $exam = DB::table('exams')->where('type','like', $type)->get();
 
         $course = $ex->courses;
-
-        // dd($course);
 
         $exType = $type;
 
@@ -255,28 +268,28 @@ class ExamController extends Controller
     public function listExam($type){
 
         if(request()->input('class_id')){
-            // dd(request()->input('class_id'));
             $exam = Exam::where('type','like', $type)->where('class_id', 'like', request()->input('class_id'))->get();
         }else{
             $exam = Exam::where('type','like', $type)->get();
         }
 
-        
-        
         $ex = Exam::where('type','like', $type)->first();
         $c = Course::find(request()->input('course_id'));
-        // $tempExamCourse = $c->exams;
-        // dd($c->exams->where('type','like', $type));
         
         if(request()->input('course_id')){
             $exam = $c->exams->where('type','like', $type);
         }
-
+        
         if(request()->input('course_id') && request()->input('class_id')){
             $exam = $c->exams->where('type','like', $type)->where('class_id', 'like', request()->input('class_id'));
         }
+        
+        // $user = Auth::user();
 
-        // $exam = Exam::where('type','like', $type)->get();
+        // dd(Auth::user()->exams->first()->pivot);
+
+        // dd($ex->usersExams(Auth::id())->first()->pivot);
+        
 
         $course = Course::all();
 
