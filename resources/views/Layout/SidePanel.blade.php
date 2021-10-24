@@ -26,6 +26,7 @@
     
     @if(Auth::guest())
         <div class="container">
+            @include('sweetalert::alert')
             @yield('contentGuest')
         </div>
     @else
@@ -140,6 +141,7 @@
 
             <div class="{{ str_contains(url()->current(), '/dashboard') ?  'w-100' : 'ml-70 w-100'  }}">
                 @include('components.notifications')
+                @include('sweetalert::alert')
                 @yield('content')
             </div>
 

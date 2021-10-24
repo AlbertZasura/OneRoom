@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Alert;
 
 class ClassController extends Controller
 {
@@ -132,10 +133,12 @@ class ClassController extends Controller
         $type=$request->input('type');
         if ($type==='attach') {
             $class->users()->attach($user);
+            Alert::success('Berhasil', $user->name.' berhasil ditambahkan!');
         }else if ($type==='detach') {
             $class->users()->detach($user);
+            Alert::success('Berhasil', $user->name.' berhasil dikeluarkan!');
         }
-        return redirect()->route('classes.show',$class->id)->with('success', $type==='attach'? $user->name.' berhasil ditambahkan!' : $user->name.' berhasil dikeluarkan!');
+        return redirect()->route('classes.show',$class->id);
     }
 
     /**
