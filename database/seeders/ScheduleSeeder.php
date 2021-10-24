@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Schedule;
+use Carbon\Carbon;
 use Illuminate\Database\Seeder;
 
 class ScheduleSeeder extends Seeder
@@ -15,15 +16,20 @@ class ScheduleSeeder extends Seeder
     public function run()
     {
         //
-        for ($i=0; $i < 5; $i++) { 
-            $schedules = new Schedule;
-            $schedules->fill([
-                "date" => now(),
-                "start_date" => now()->toDateTimeString(),
-                "end_date" => "2021-09-27 14:14:39",
-                "course_id" => $i + 1
-            ]);
-            $schedules->save();
+        for ($i=1; $i <= 6; $i++) { 
+            for ($j=1; $j <= 6; $j++) { 
+                $schedules = new Schedule;
+                $dateTime = Carbon::create(now()->year, rand(now()->month,12), rand(1,30), rand(0,now()->hour), rand(0,60), 7, 'GMT');
+                $endTime = $dateTime;
+                $schedules->fill([
+                    "date" => $dateTime,
+                    "start_time" =>$dateTime,
+                    "end_time" => now(),
+                    "course_id" => $i,
+                    "class_id" => $j 
+                ]);
+                $schedules->save();
+            }
         }
     }
 }

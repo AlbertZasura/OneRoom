@@ -15,6 +15,7 @@ class CourseSeeder extends Seeder
      */
     public function run()
     {
+        //create course
         DB::table('courses')->insert([
             [
                 "name" => "Matematika",
@@ -48,8 +49,9 @@ class CourseSeeder extends Seeder
             ]
         ]);
 
-        $course=Course::find(1);
-        for ($i=1; $i < 4 ; $i++) { 
+        //integration course with class
+        for ($i=1; $i < 6 ; $i++) { 
+            $course=Course::find($i);
             $course->classes()->attach($i);
         }
 

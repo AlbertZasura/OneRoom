@@ -18,11 +18,9 @@
         @endcan
     </div>
     @can('user_list', App\Models\Classes::class )
-        <div class="card mb-1">
-            <a href="/classes/{{$class->id}}/assign_user" class="card-body btn btn-outline-dark">
-                <i class='fa fa-plus '></i> Tambah Anggota
-            </a>
-        </div>
+        <a href="/classes/{{$class->id}}/assign_user" class="card-body btn btn-outline-dark">
+            <i class='fa fa-plus '></i> Tambah Anggota
+        </a>
     @endcan
     <table class="table table-hover">
         <thead>

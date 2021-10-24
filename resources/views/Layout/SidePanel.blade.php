@@ -62,21 +62,23 @@
                         </div>
                         <div class="fs-18 ml-20">
                             @can('schedulesChart', App\Models\Schedule::class )
-                                <a href="/schedules" class="btn text-white">Schedule</a>
+                                <a href="/schedules" class="btn text-white">Jadwal</a>
                             @endcan
                             @can('listClass', App\Models\Schedule::class )
-                                <a href="/schedules/all" class="btn text-white">Schedule</a>
+                                <a href="/schedules/all" class="btn text-white">Jadwal</a>
                             @endcan
                         </div>
                     </div>
-                    <div class="d-flex a-center mb-10">
-                        <div class="fs-25 w-25px">
-                            <i class="fas fa-pencil-ruler"></i>
+                    @can('viewAny', App\Models\Assignment::class )
+                        <div class="d-flex a-center mb-10">
+                            <div class="fs-25 w-25px">
+                                <i class="fas fa-pencil-ruler"></i>
+                            </div>
+                            <div class="fs-18 ml-20">
+                                <a href="/assignments" class="btn text-white">Tugas</a>
+                            </div>
                         </div>
-                        <div class="fs-18 ml-20">
-                            <a href="/assignments" class="btn text-white">Tugas</a>
-                        </div>
-                    </div>
+                    @endcan
                     <div class="d-flex a-center mb-10">
                         <div class="fs-25 w-25px">
                             <i class="fas fa-paste"></i>

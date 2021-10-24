@@ -10,26 +10,18 @@
         <a class="btn btn-outline-dark" id="open-popup" >Tambah Pengumuman</a> 
     @endcan
     
-    @foreach ($messages as $key => $message )
-        <table class="table table-hover" style="width:75%">
-            <tbody>
+    <table class="table table-hover" style="width:75%">
+        <tbody>
+            @foreach ($messages as $key => $message )
                 <tr class='clickable-row' data-href="{{ route('messages.show',$message->id) }}">
-                    <td>
-                        <a>{{ $message->created_at->format('H:i') }}</a> 
-                    </td>
-                    <td style="width:30%">
-                        <a>{{ $message->title }}</a>
-                    </td>
-                    <td>
-                        <a>{{ $message->user->name }}</a>
-                    </td>
-                    <td>
-                        <a>{{ $message->created_at->format('d M Y') }}</a>
-                    </td>
+                    <td>{{ $message->created_at->format('H:i') }} </td>
+                    <td  style="width: 30%">{{ $message->title }}</td>
+                    <td>{{ $message->user->name }}</td>
+                    <td>{{ $message->created_at->format('d M Y') }}</td>
                 </tr>
-            </tbody>
-        </table>
-    @endforeach
+            @endforeach
+        </tbody>
+    </table>
 
 <form action="{{ route('messages.store') }}" method="POST">
 @csrf
