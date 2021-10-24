@@ -35,6 +35,15 @@ class CoursePolicy
         return $user->role === 'teacher' ? Response::allow() : Response::deny('You are not an teacher.');
     }
 
+    public function viewAdmin(User $user){
+        return $user->role === 'admin' ? Response::allow() : Response::deny('You are not an admin.');
+    }
+
+    public function elseAdmin(User $user){
+        return $user->role != 'admin' ? Response::allow() : Response::deny('You are not an admin.');
+    }
+
+
     /**
      * Determine whether the user can create models.
      *
