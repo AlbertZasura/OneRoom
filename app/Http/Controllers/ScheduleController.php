@@ -14,7 +14,16 @@ class ScheduleController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function listClass(){
+    public function schedulesChart(){
+        $schedules = Schedule::whereIn('class_id',Auth::user()->classes->pluck('id'));
+        return view('schedules.chart', [
+            'schedules' => $schedules->get(),
+            'schedules_group' => $schedules->get()->groupBy('date'),
+            'current' => $schedules->whereDate('date',now())->whereTime('start_time','>',now())->orderBy('start_time')->get()
+        ]);
+    }
+    
+     public function listClass(){
         return view('schedules.list_class', [
             'classes' => Classes::latest()->filter(request(['search']))->get()
         ]);

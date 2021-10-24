@@ -64,8 +64,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('courses', CourseController::class);
     
     Route::resource('classes.schedules', ScheduleController::class);
-    Route::get('/schedules', [ScheduleController::class, 'listClass']);
-    
+    Route::get('/schedules/all', [ScheduleController::class, 'listClass']);
+    Route::get('/schedules', [ScheduleController::class, 'schedulesChart']);
+
     Route::resource('absents', AbsentController::class);
     
     Route::get('/accounts', [UserController::class, 'index']);
