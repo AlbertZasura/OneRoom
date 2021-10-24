@@ -45,6 +45,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/exams/submitscore/{id}', [ExamController::class, 'assignExamScore'])->name('submitscroeexam');
     Route::post('/exams/submitExam', [ExamController::class, 'submitExams']);
     Route::get('/exams/downlodExam/{id}', [ExamController::class, 'downloadExamsUser'])->name('downloadexams');
+    Route::post('/exams/createExam', [ExamController::class, 'createExams']);
     Route::resource('exams', ExamController::class);
     
     Route::get('/classes/{class}/assign_user', [ClassController::class, 'user_list']);

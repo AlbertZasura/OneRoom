@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Models\Exam;
 use App\Models\User;
+use App\Models\Classes;
+use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -21,6 +23,7 @@ class ExamController extends Controller
 
         $course = '';
         $exType = '';
+        $class = '';
 
         $exam_type = DB::table('exams')
                         ->select('type', DB::raw('count(*) as total'))
@@ -31,7 +34,8 @@ class ExamController extends Controller
             'exam' => $exam,
             'examType' => $exam_type,
             'course' => $course,
-            'exType'  => $exType
+            'exType'  => $exType,
+            'class' => $class
         ]);
     }
 
@@ -177,6 +181,48 @@ class ExamController extends Controller
         ]);
     }
 
+    public function createExams(Request $request){
+
+
+        $request->validate([
+            'title' => 'required',
+            'startDate' => 'required',
+            'deadline' => 'required',
+        ]);
+
+        $todayDate = Carbon::now();
+        $DateFormat = Carbon::parse($todayDate)->format('Y-m-d');
+        $TimeFormat = Carbon::parse($todayDate)->format('H-i-s');
+        $file = $request->file('file_upload');
+        $fileName =  Auth::id()."_".$DateFormat."_".$TimeFormat."_".$file->getClientOriginalName();
+        
+        $user = User::find(Auth::user()->id);
+
+        if($request->file('file_upload')){
+            $file->storeAs('public/file', $fileName);
+
+            Exam::create([
+                'title' => $request->title,
+                'type' => request()->input('type'),
+                'start_date' => $request->startDate,
+                'end_date' => $request->deadline,
+                'file' => $fileName,
+                'user_id' =>Auth::id(),
+                'class_id' => 1
+            ]);
+    
+            return redirect()->route('exams.index')->with('success','exams created successfully.');
+
+        }else{
+            dd("no file upload");
+        }
+
+        
+
+
+        
+    }
+
     public function filterExam($type, $course_id){
 
         // dd($course_id);
@@ -190,7 +236,6 @@ class ExamController extends Controller
         // dd($course);
 
         $exType = $type;
-
 
         $exam_type = DB::table('exams')
                         ->select('type', DB::raw('count(*) as total'))
@@ -209,16 +254,35 @@ class ExamController extends Controller
 
     public function listExam($type){
 
+        if(request()->input('class_id')){
+            // dd(request()->input('class_id'));
+            $exam = Exam::where('type','like', $type)->where('class_id', 'like', request()->input('class_id'))->get();
+        }else{
+            $exam = Exam::where('type','like', $type)->get();
+        }
+
+        
+        
         $ex = Exam::where('type','like', $type)->first();
+        $c = Course::find(request()->input('course_id'));
+        // $tempExamCourse = $c->exams;
+        // dd($c->exams->where('type','like', $type));
+        
+        if(request()->input('course_id')){
+            $exam = $c->exams->where('type','like', $type);
+        }
 
-        $exam = DB::table('exams')->where('type','like', $type)->get();
+        if(request()->input('course_id') && request()->input('class_id')){
+            $exam = $c->exams->where('type','like', $type)->where('class_id', 'like', request()->input('class_id'));
+        }
 
-        $course = $ex->courses;
+        // $exam = Exam::where('type','like', $type)->get();
 
-        // dd($course);
+        $course = Course::all();
+
+        $class = Classes::all();
 
         $exType = $type;
-
 
         $exam_type = DB::table('exams')
                         ->select('type', DB::raw('count(*) as total'))
@@ -230,7 +294,8 @@ class ExamController extends Controller
             'exam' => $exam,
             'examType' => $exam_type,
             'course' => $course,
-            'exType'  => $exType
+            'exType'  => $exType,
+            'class' => $class
         ]);
     }
 
