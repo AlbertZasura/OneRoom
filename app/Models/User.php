@@ -88,4 +88,8 @@ class User extends Authenticatable
         return $this->exams()->wherePivot('id',$id);
     }
 
+    public function examsUsers($exam_id){
+        return $this->exams()->wherePivot('exam_id',$exam_id);
+    }
+
 }
