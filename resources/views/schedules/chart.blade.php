@@ -4,29 +4,32 @@
 
 @section('content')
     {{-- <h1>{{ now()->isoFormat('MMMM Y') }}</h1> --}}
-    
-    <h3>Jadwal Selanjutnya</h3>
-    @foreach ($current as $s )
-        <div class="card text-white bg-primary mb-3">
-            <div class="card-body">
-                <h5 class="card-title">{{$s->course->name}}</h5>
-                <p class="card-text text-start">{{ $s->class->name }}</p>
-                <p class="card-text text-end">{{ $s->start_time }} - {{ $s->end_time }}</p>
+    <div class="d-flex">
+        <div class="w-200px">
+            <h1>Jadwal</h1><br>
+            <h5>Jadwal Selanjutnya</h5>
+            @foreach ($current as $s )
+                <div class="card-box mb-2">
+                    <div class="card-body">
+                        <div>{{$s->course->name}} <strong>{{$s->class->name}}</strong></div>
+                        <div></div>
+                        <div class="text-right">{{ $s->start_time }} - {{ $s->end_time }}</div>
+                    </div>
+                </div>
+            @endforeach
+        </div>
+        <div class="ml-20 w-85">
+            @foreach ($schedules_group as $sch)
+                @include('schedules._show')
+            @endforeach
+            <div id='wrap' class="container">
+                <div id='calendar'></div>
+                <div style='clear:both'></div>
             </div>
         </div>
-    @endforeach
-   
-    @foreach ($schedules_group as $sch)
-        @include('schedules._show')
-    @endforeach
-    <br>
-    <div id='wrap' class="container">
-        <div id='calendar'></div>
-        <div style='clear:both'></div>
     </div>
-    
-    <script>
 
+    <script>
         $(document).ready(function() {
             var date = new Date();
             var d = date.getDate();
