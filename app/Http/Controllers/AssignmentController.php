@@ -5,10 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Assignment;
 use App\Models\Classes;
 use App\Models\Course;
+use App\Exports\AssignmentExport;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 
 class AssignmentController extends Controller
 {
@@ -190,5 +192,9 @@ class AssignmentController extends Controller
         ]);
 
         return back()->with('success','Tugas berhasil dinilai.');
+    }
+
+    public function export(Assignment $assignment){
+        return Excel::download(new AssignmentExport($assignment->id), "Daftar Siswa kelas {$assignment->class->name} - Tugas {$assignment->title}.xlsx");
     }
 }
