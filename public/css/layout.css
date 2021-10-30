@@ -46,6 +46,18 @@
     color: #1597E5;
 }
 
+.option-course.active{
+    background: rgba(57, 189, 200, 0.2);
+}
+
+.option-teacher.active{
+    background: rgba(57, 189, 200, 0.2);
+}
+
+.option-class.active{
+    background: rgba(57, 189, 200, 0.2);
+}
+
 .btn-add-course{
     border-color: #1597E5;
     color: #1597E5;
