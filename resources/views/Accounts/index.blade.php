@@ -10,7 +10,7 @@
             <td>
                 
                 <select class="form-select" id = "filterTable" oninput="selectTable()" aria-label="Default select example">
-                    <option value="">Semua jabatan</option>
+                    <option value="">Semua Jabatan</option>
                     <option value="teacher">teacher</option>
                     <option value="student">student</option>
                 </select>
@@ -109,23 +109,8 @@
                 @endforeach
             </tbody>   
         </table>
-        <nav aria-label="Page navigation example">
-                <ul class="pagination">
-                    <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Previous">
-                        <span aria-hidden="true">&laquo;</span>
-                    </a>
-                    </li>
-                    <li class="page-item"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item">
-                    <a class="page-link" href="#" aria-label="Next">
-                        <span aria-hidden="true">&raquo;</span>
-                    </a>
-                    </li>
-                </ul>
-            </nav>
+        {{ $users->links() }}
+        
 
        
 

@@ -5,10 +5,11 @@
 
 @section('content')
     <h1>Pengumuman</h1>
-    
+    <br>
+    <br>
     @can('create', App\Models\Message::class )
-        <a class="btn btn-outline-dark" id="open-popup" >Tambah Pengumuman</a> 
-    @endcan
+        <button class="btn btn-outline-dark" id="open-popup" ><i class="fas fa-plus-circle"></i>&nbspTambah Pengumuman</button>
+        @endcan
     
     <table class="table table-hover" style="width:75%">
         <tbody>
@@ -35,14 +36,11 @@
                         </form>
                     </td>
                     @endcan
-                    <td>{{ $message->created_at->format('H:i') }} </td>
-                    <td  style="width: 30%">{{ $message->title }}</td>
-                    <td>{{ $message->user->name }}</td>
-                    <td>{{ $message->created_at->format('d M Y') }}</td>
                 </tr>
             @endforeach
         </tbody>
     </table>
+    {{ $messages->links() }}
 
 <form action="{{ route('messages.store') }}" method="POST">
 @csrf
@@ -66,7 +64,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="message-text" class="col-form-label"><b>File</b></label>
-                    <input class="form-control" name="files" type="file" id="files" value="{{old('files')}}" required>
+                    <input class="form-control" name="files" type="file" id="files" value="{{old('files')}}" >
                 </div>
                 </form>
             </div>

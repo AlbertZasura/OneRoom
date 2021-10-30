@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Message;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Alert;
 
 class MessageController extends Controller
 {
@@ -15,7 +16,7 @@ class MessageController extends Controller
      */
     public function index()
     {
-        $messages = Message::with('user')->latest()->get();
+        $messages = Message::with('user')->latest()->simplePaginate(10);
         return view('messages.index', [
             'messages' => $messages
         ]);
@@ -51,7 +52,8 @@ class MessageController extends Controller
             'content' => $request->content
         ]);
 
-        return redirect()->route('messages.index')->with('success','Message created successfully.');
+        Alert::warning('Berhasil', 'Pengumuman berhasil dibuat!');
+        return redirect()->route('messages.index');
     }
 
     /**
@@ -97,7 +99,7 @@ class MessageController extends Controller
     public function destroy(Message $message)
     {
         $message->delete();
-        return redirect()->route('messages.index')
-                        ->with('success','Message deleted successfully');
+        Alert::warning('Berhasil', 'Pengumuman berhasil dihapus!');
+        return redirect()->route('messages.index');
     }
 }

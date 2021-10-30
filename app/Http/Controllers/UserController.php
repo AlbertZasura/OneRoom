@@ -18,7 +18,7 @@ class UserController extends Controller
     public function index()
     {
 
-        $users = User::where('status', 0)->get();
+        $users = User::where('status', 0)->simplePaginate(10);
         return view('Accounts.index', [
             'users' => $users
         ]);
@@ -93,7 +93,8 @@ class UserController extends Controller
             'status' => "1"
         ]);
 
-        return redirect()->route('users.index')->with('success','User updated successfully.');
+        Alert::warning('Berhasil', 'Pengguna berhasil diterima!');
+        return redirect()->route('users.index');
     }
 
     public function updateProfile(Request $request, User $user)
@@ -132,7 +133,9 @@ class UserController extends Controller
             'user_id' => Auth::user()->id,
             'status' => "2"
         ]);
-        return back()->with('success','Pengguna berhasil ditolak'); 
+
+        Alert::warning('Berhasil', 'Pengguna berhasil ditolak!');
+        return back(); 
     }
 
     //update user profile image

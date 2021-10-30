@@ -19,7 +19,7 @@
                         <img class="img-fluid rounded-circle img-thumbnail" id="image_preview" style="width:200px;height:200px;" src="{{ ('img/profile.png') }}">
                         @endif 
                             <div>
-                                <label for="picture">Change Profile Picture</label>
+                                <label for="picture">Ubah Gambar Profil</label>
                                 <input type="file" name="profile_picture" id="profile_picture" class="form-control rounded-pill">
                                 <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}" >
                             </div>
@@ -51,14 +51,14 @@
                                 <div class="invalid-feedback">{{ $message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-12"><label class="labels">Konfirmasi Password</label><input type="password" class="form-control @error('password_confirmation')is-invalid @enderror rounded-bottom" name="password_confirmation" id="password_confirmation" placeholder="type password again here..." value="" required>
+                            <div class="col-md-12"><label class="labels">Konfirmasi Password</label><input type="password" class="form-control @error('password_confirmation')is-invalid @enderror rounded-bottom" name="password_confirmation" id="password_confirmation" placeholder="Konfirmasi Password" value="" required>
                                 @error('password_confirmation')
                                 <div class="invalid-feedback">{{ $message}}</div>
                                 @enderror
                             </div>
                         </div>
 
-                        <div class="mt-5 text-center"><button class="btn btn-primary profile-button" type="submit">Save Profile</button></div>
+                        <div class="mt-5 text-center"><button type="button" class="btn btn-danger">Batal</button>&nbsp;<button class="btn btn-primary profile-button" type="submit">Simpan</button></div>
                     </div>
                 </div>
             </div>
