@@ -67,7 +67,7 @@
                                 <a href="/schedules" class="btn text-white">Jadwal</a>
                             @endcan
                             @can('listClass', App\Models\Schedule::class )
-                                <a href="/schedules/all" class="btn text-white">Jadwal</a>
+                                <a href="{{ route('admin.schedule') }}" class="btn text-white">Jadwal</a>
                             @endcan
                         </div>
                     </div>

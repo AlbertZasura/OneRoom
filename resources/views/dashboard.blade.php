@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <h1>dashboard</h1>
+    <h1>Dashboard</h1>
     <div class="row">
         @can('schedulesChart', App\Models\Schedule::class )
             <div class="col-md-6 mb-1">

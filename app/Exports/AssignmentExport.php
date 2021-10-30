@@ -20,7 +20,6 @@ class AssignmentExport implements FromView, ShouldAutoSize, WithStrictNullCompar
     
     public function view(): View
     {
-        // dd(Assignment::first()->users);
         return view('assignments.export', [
             'users' => Assignment::where('id',$this->id)->first()->users
         ]);

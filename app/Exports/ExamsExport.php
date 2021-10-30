@@ -20,7 +20,6 @@ class ExamsExport implements  FromView, ShouldAutoSize, WithStrictNullComparison
     */
     public function view(): View
     {
-        // dd(Assignment::first()->users);
         return view('exams.export', [
             'users' => Exam::where('id',$this->id)->first()->users
         ]);

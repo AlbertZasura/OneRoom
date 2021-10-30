@@ -35,30 +35,6 @@ Route::post('/register', [RegisterController::class, 'store']);
 Route::get('/login', [LoginController::class, 'login'])->name('login')->middleware('guest');
 Route::post('/login', [LoginController::class, 'store']);
 
-Route::resource('messages', MessageController::class)->middleware('auth');
-Route::resource('exams', ExamController::class);
-Route::resource('classes', ClassController::class)->middleware('auth');
-Route::get('/classes/{class}/assign_user', [ClassController::class, 'user_list'])->middleware('auth');
-Route::post('/classes/{class}/assign_user/{user}', [ClassController::class, 'assign_user'])->middleware('auth');
-Route::get('/assignments', [AssignmentController::class, 'course'])->middleware('auth');
-Route::resource('course.assignments', AssignmentController::class)->middleware('auth');
-Route::get('assignments/{assignment}/download', [AssignmentController::class, 'download'])->name('assignments.download')->middleware('auth');
-Route::post('assignments/{assignment}/upload', [AssignmentController::class, 'upload'])->name('assignments.upload')->middleware('auth');
-Route::post('assignments/{assignment}/scoring', [AssignmentController::class, 'scoring'])->name('assignments.scoring')->middleware('auth');
-Route::resource('session', SessionController::class);
-Route::get('courses/download/{id}', [CourseController::class, 'downloadFile'])->name('uploaded');
-
-//helena
-Route::resource('courses', CourseController::class)->middleware('auth');
-Route::resource('schedules', ScheduleController::class);
-Route::resource('absents', AbsentController::class);
-Route::resource('users', UserController::class)->middleware('auth');
-Route::get('/accounts', [UserController::class, 'index']);
-Route::post('/accounts', [UserController::class, 'store']);
-Route::get('/profiles', [UserController::class, 'edit']);
-Route::put('/profiles/{user}', [UserController::class, 'updateProfile'])->name('updateProfile');
-Route::post('/profile-image', [UserController::class, 'profileImageUpdate'])->name('profile.image');
-
 Route::middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('home');
     Route::post('/logout', [LoginController::class, 'logout']);
@@ -94,9 +70,9 @@ Route::middleware('auth')->group(function () {
     Route::get('courses/download/{id}', [CourseController::class, 'downloadFile'])->name('uploaded');
     Route::resource('courses', CourseController::class);
     
-    Route::resource('classes.schedules', ScheduleController::class);
-    Route::get('/schedules/all', [ScheduleController::class, 'listClass']);
+    Route::get('/schedules/all', [ScheduleController::class, 'listClass'])->name('admin.schedule');
     Route::get('/schedules', [ScheduleController::class, 'schedulesChart']);
+    Route::resource('classes.schedules', ScheduleController::class);
 
     Route::resource('absents', AbsentController::class);
     
@@ -104,7 +80,9 @@ Route::middleware('auth')->group(function () {
     Route::post('/accounts', [UserController::class, 'store']);
     Route::get('/profiles', [UserController::class, 'edit']);
     Route::resource('users', UserController::class);
-    
+    Route::put('/profiles/{user}', [UserController::class, 'updateProfile'])->name('updateProfile');
+    Route::post('/profile-image', [UserController::class, 'profileImageUpdate'])->name('profile.image');
+
 });
 
 // Route::get('/exams/list', function () {

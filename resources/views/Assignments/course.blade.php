@@ -5,9 +5,14 @@
 
 @section('content')
     <h1>Tugas</h1>
-    <div class="d-flex">
-        <div class="w-200px">
-            @foreach ($courses as $course )
+    @if ($courses->isEmpty())
+        <div class="mt-5">
+            <h3>Silahkan hubungi admin sekolah, untuk menempatkan Anda di salah satu kelas!</h3>
+        </div>    
+    @else
+        <div class="d-flex">
+            <div class="w-200px">
+                @foreach ($courses as $course )
                 <div class="card text-white bg-primary mb-3">
                     <div class="card-body">
                         <h5 class="card-title">{{$course->name}}</h5>
@@ -15,10 +20,12 @@
                         <p class="card-text text-end"><small> {{$course->classAssignments(Auth::user()->classes->pluck('id'))->count()}} Tugas</small></p>
                     </div>
                 </div>
-            @endforeach
+                @endforeach
+            </div>
+            <div class="ml-20 w-85">
+                @yield('show')
+            </div>
         </div>
-        <div class="ml-20 w-85">
-            @yield('show')
-        </div>
-    </div>
-@stop
+    @endif
+@endsection
+    
