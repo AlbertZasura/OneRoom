@@ -7,7 +7,7 @@
     <form action="{{ route('updateProfile', $users->id) }}" method="POST">
         @csrf
         @method('PUT')
-        <div class="container rounded bg-white mt-2 mb-2">
+        <div class="shadow p-3 container rounded bg-white mt-3 mx-auto">
             <div class="row d-flex align-items-center justify-content-center">
                 
                 <div class="col-md-5 border-right">
