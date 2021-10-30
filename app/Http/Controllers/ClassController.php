@@ -7,6 +7,7 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Alert;
 
 class ClassController extends Controller
 {
@@ -118,7 +119,7 @@ class ClassController extends Controller
             });
         })->orWhere( function (Builder $query){
              $query->doesntHave('classes')->where('role',2);
-        })->get();
+        })->filter(request(['search','role']))->get();
         
 
         return view('classes.assign_user', [
@@ -132,10 +133,12 @@ class ClassController extends Controller
         $type=$request->input('type');
         if ($type==='attach') {
             $class->users()->attach($user);
+            Alert::success('Berhasil', $user->name.' berhasil ditambahkan!');
         }else if ($type==='detach') {
             $class->users()->detach($user);
+            Alert::success('Berhasil', $user->name.' berhasil dikeluarkan!');
         }
-        return redirect()->route('classes.show',$class->id)->with('success', $type==='attach'? $user->name.' berhasil ditambahkan!' : $user->name.' berhasil dikeluarkan!');
+        return redirect()->route('classes.show',$class->id);
     }
 
     /**
@@ -148,5 +151,10 @@ class ClassController extends Controller
     {
         $class->delete();
         return redirect()->route('classes.index')->with('success','Kelas berhasil dihapus!');
+    }
+
+    public function chatRoom(Classes $class)
+    {
+        return view('classes.chatroom', ['class' => $class]);
     }
 }

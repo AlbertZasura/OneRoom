@@ -10,6 +10,12 @@ class Classes extends Model
     use HasFactory;
     protected $guarded = ['id'];
 
+    public function scopeFilter($query, array $filters){
+        $query->when($filters['search'] ?? false, function($query, $search){
+            return $query->where('name','like','%'.$search.'%');
+        });
+    }
+    
     public function users(){
         return $this->belongsToMany(User::class,'classes_users','class_id','user_id')->withTimestamps(); 
     }
@@ -26,4 +32,7 @@ class Classes extends Model
         return $this->belongsToMany(Course::class,'classes_courses','class_id','course_id')->withTimestamps(); 
     }
     
+    public function schedules(){
+        return $this->hasMany(Schedule::class,'class_id');
+    }
 }

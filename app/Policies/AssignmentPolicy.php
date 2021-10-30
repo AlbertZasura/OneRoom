@@ -19,7 +19,7 @@ class AssignmentPolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return in_array($user->role,["teacher","student"]) ? Response::allow() : Response::deny('You cannot access.');
     }
 
     /**

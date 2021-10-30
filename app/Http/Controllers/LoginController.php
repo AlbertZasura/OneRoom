@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
+use Alert;
 class LoginController extends Controller
 {
 
@@ -35,7 +35,7 @@ class LoginController extends Controller
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
-
-        return redirect('/login')->with('success','Berhasil keluar!');
+        Alert::warning('Berhasil', 'Akun berhasil keluar!');
+        return redirect('/login');
     }
 }

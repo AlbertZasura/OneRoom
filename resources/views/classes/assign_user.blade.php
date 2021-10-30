@@ -4,6 +4,25 @@
 @section('title', 'Tambah Anggota')
 
 @section('content')
+    <h1>Daftar Anggota Sekolah</h1>    
+    <br>
+    <form action="/classes/{{$class->id}}/assign_user">
+        <div class="row mb-3">
+            <div class="col-md-2">
+                <select class="form-select" name="role">
+                    <option selected value="">Semua</option>
+                    <option value="1">Guru</option>
+                    <option value="2">Murid</option>
+                </select>
+            </div>
+            <div class="col-md-4">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control" placeholder="Cari Nama" name="search" value="{{ request('search') }}">
+                    <button class="btn btn-outline-secondary" type="submit">Cari</button>
+                </div>
+            </div>
+        </div>
+    </form>
     <table class="table table-hover">
         <thead>
             <tr>

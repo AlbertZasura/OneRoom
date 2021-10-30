@@ -58,6 +58,16 @@ class User extends Authenticatable
         return Arr::get($this->roles, $value);
     }
 
+    public function scopeFilter($query, array $filters){
+        $query->when($filters['search'] ?? false, function($query, $search){
+            return $query->where('name','like','%'.$search.'%');
+        });
+
+        $query->when($filters['role'] ?? false, function($query, $role){
+            return $query->where('role', $role);
+        });
+    }
+
     public function messages(){
         return $this->hasMany(Message::class);
     }
@@ -76,6 +86,10 @@ class User extends Authenticatable
 
     public function examsId($id){
         return $this->exams()->wherePivot('id',$id);
+    }
+
+    public function examsUsers($exam_id){
+        return $this->exams()->wherePivot('exam_id',$exam_id);
     }
 
 }

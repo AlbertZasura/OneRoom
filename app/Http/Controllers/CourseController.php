@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Course;
 use App\Models\Session;
 use App\Models\User;
+use App\Models\Classes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -17,14 +18,30 @@ class CourseController extends Controller
      */
     public function index()
     {
-        $cls = Auth::user()->classes->first();
-        
-        $course = Course::all();
-        
-        return view('materi.index', [
-            'course' => $course,
-            'cls' => $cls
-        ]);
+        if(Auth::user()->role == 'admin'){
+
+            $teacher =  User::where('role', 'like', 1)->get();
+            $course = Course::all();
+            $class = Classes::all();
+
+            return view('materi.admin_course',[
+                'teacher' => $teacher,
+                'course' => $course,
+                'class' => $class
+            ]);
+            
+        }else{
+            $cls = Auth::user()->classes->first();
+            
+            $course = Course::all();
+            
+            return view('materi.index', [
+                'course' => $course,
+                'cls' => $cls
+            ]);
+
+        }
+
     }
 
     /**
