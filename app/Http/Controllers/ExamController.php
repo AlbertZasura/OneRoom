@@ -9,6 +9,8 @@ use App\Models\Course;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
+use App\Exports\ExamsExport;
+use Maatwebsite\Excel\Facades\Excel;
 
 class ExamController extends Controller
 {
@@ -108,8 +110,8 @@ class ExamController extends Controller
 
     }
 
-    public function donwloadExamStudent(){
-        
+    public function downloadExamStudent(){
+       
         $user = User::find(request()->input('user_id'));
 
         $exam = Exam::find(request()->input('e'));
@@ -189,7 +191,7 @@ class ExamController extends Controller
 
         // dd($exam_user->users);
         return view('exams.detail_exam', [
-            'userList' => $t, 'exam_id' => $exam_id
+            'userList' => $t, 'exam_id' => $exam_id,
         ]);
     }
 
@@ -373,6 +375,10 @@ class ExamController extends Controller
         ]);
 
         return redirect()->route('exams.index')->with('success','Exam updated successfully.');
+    }
+
+    public function export(Exam $exam){
+        return Excel::download(new ExamsExport($exam->id), "Daftar Siswa kelas {$exam->class->name} - Ujian {$exam->title}.xlsx");
     }
 
     /**

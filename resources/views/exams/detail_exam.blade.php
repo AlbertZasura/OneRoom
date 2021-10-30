@@ -5,7 +5,9 @@
 @section('content')
 
     <h1>Exam</h1>
-
+    <div class="py-3">
+        <a href="{{ route('exams.export',$exam_id) }}" class="btn btn-primary rounded-pill">Export Excel</a>
+    </div>
     <table class="table">
         <thead>
             <tr>
@@ -26,7 +28,7 @@
                     <div>{{$item->pivot->notes ? $item->pivot->notes : 'Tidak ada catatan' }}</div>
                 </td>
                 <td class="fs-25">
-                    <i class="fas fa-download mr-10 cursor-pointer" onclick="window.location='/exams/downloadexamstudent?user_id={{$item->id}}&pivotId={{$item->pivot->id}}&e={{$exam_id}}'" ></i>
+                    <i class="fas fa-download mr-10 cursor-pointer" onclick="window.location='/exams/downloadexamstudent/download?user_id={{$item->id}}&pivotId={{$item->pivot->id}}&e={{$exam_id}}'" ></i>
                     <i class="fas fa-plus cursor-pointer" data-bs-toggle="modal" data-bs-target="#exampleModal{{$item->id}}"></i>
                 </td>
                 <td>
@@ -62,6 +64,6 @@
             </div>
             @endforeach
         </tbody>
-        </table>
+    </table>
 
 @stop

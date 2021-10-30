@@ -1,16 +1,20 @@
 <table>
     <thead>
         <tr>
-            <th>Tanggal Pengumpulan</th>
-            <th>Nama Siswa</th>
-            <th>Nilai</th>
-            <th>Notes</th>
-            <th>Link File</th>
+            <th><strong>No.</strong></th>
+            <th><strong>Waktu Pengumpulan</strong></th>
+            <th><strong>Nama Siswa</strong></th>
+            <th><strong>Nilai</strong></th>
+            <th><strong>Catatan</strong></th>
+            <th><strong>Link File</strong></th>
         </tr>
     </thead>
     <tbody>
-        @foreach ($users as $user )
+        @foreach ($users as $key=> $user )
             <tr>
+                <td>
+                    <p>{{ $key+1 }}</p> 
+                </td>
                 <td>
                     <p>{{ $user->pivot->created_at }}</p> 
                 </td>
