@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
+use Alert;
 
 class UserController extends Controller
 {
@@ -100,8 +101,8 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required|max:255|min:4',
             'identification_number' => $request->role==="admin" ? '':'required|numeric',
-            'phone' => 'required|numeric|unique:users,phone',
-            'email' => 'required|email|unique:users,email',
+            'phone' => "required|numeric|unique:users,phone,$user->id",
+            'email' => "required|email|unique:users,email,$user->id",
             'password' => 'required|min:6|confirmed',
             'password_confirmation' => 'required| min:6'
         ]);
@@ -114,8 +115,8 @@ class UserController extends Controller
             'password' => bcrypt($request->password)
         ]);
 
-
-        return redirect('/')->with('success','Profil Berhasil di ubah');
+        Alert::warning('Berhasil', 'Profil berhasil diubah!');
+        return redirect('/');
     }
 
 
