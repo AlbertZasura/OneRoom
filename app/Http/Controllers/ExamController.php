@@ -110,8 +110,8 @@ class ExamController extends Controller
 
     }
 
-    public function donwloadExamStudent(){
-        
+    public function downloadExamStudent(){
+       
         $user = User::find(request()->input('user_id'));
 
         $exam = Exam::find(request()->input('e'));
