@@ -1,10 +1,10 @@
 <table>
     <thead>
         <tr>
-            <th>Tanggal Pengumpulan</th>
+            <th>Waktu Pengumpulan</th>
             <th>Nama Siswa</th>
             <th>Nilai</th>
-            <th>Notes</th>
+            <th>Catatan</th>
             <th>Link File</th>
         </tr>
     </thead>

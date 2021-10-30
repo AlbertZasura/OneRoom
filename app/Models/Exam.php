@@ -13,6 +13,10 @@ class Exam extends Model
         'id'
     ];
 
+    public function class(){
+        return $this->belongsTo(Classes::class,'class_id');
+    }
+
     public function courses(){
         return $this->belongsToMany(Course::class,'courses_exams', 'exam_id', 'course_id');
     }

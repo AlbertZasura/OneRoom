@@ -5,7 +5,9 @@
 @section('content')
 
     <h1>Exam</h1>
-
+    <div class="py-3">
+        <a href="{{ route('exams.export',$exam_id) }}" class="btn btn-primary rounded-pill">Export Excel</a>
+    </div>
     <table class="table">
         <thead>
             <tr>
@@ -62,6 +64,6 @@
             </div>
             @endforeach
         </tbody>
-        </table>
+    </table>
 
 @stop

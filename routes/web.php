@@ -73,7 +73,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/exams/downlodExam/{id}', [ExamController::class, 'downloadExamsUser'])->name('downloadexams');
     Route::post('/exams/createExam', [ExamController::class, 'createExams']);
     Route::get('/exams/downloadexamstudent', [ExamController::class, 'donwloadExamStudent'])->name('examstudent');
-    
+    Route::get('exams/{exam}/export', [ExamController::class, 'export'])->name('exams.export');
     
     Route::resource('exams', ExamController::class);
     
