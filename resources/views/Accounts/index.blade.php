@@ -5,15 +5,6 @@
 @section('content')
     <h1>Akun</h1>
    
-    @if (Auth::user())
-    <form action="/logout" method="POST">   
-        @csrf
-        <button type="submit" class="btn btn-danger">Logout</button>
-    </form>
-    @else
-    <a class="btn btn-info" href="/login">Login</a>  
-    @endif
-   
     <table>
         <tr>
             <td>
@@ -70,14 +61,14 @@
                         <form action="{{ route('users.update', $user->id) }}" method="POST">
                             @csrf
                             @method('PUT')
-                            <button class="btn" type="submit"><i class="fas fa-check fa-lg" style="color:green"></i></button>
+                            <button class="btn" type="submit" onclick="return confirm('Apakah Anda yakin untuk menerima {{ $user->name }}?')"><i class="fas fa-check fa-lg" style="color:green"></i></button>
                         </form>
                     </td>
                     <td>
                         <form action="{{  route('users.destroy',$user->id) }}" method="POST">
                             @csrf
                             @method('DELETE')      
-                            <button class="btn" type="submit"><i class="fas fa-times fa-lg" style="color:red"></i></button>
+                            <button class="btn" type="submit" onclick="return confirm('Apakah Anda yakin untuk menolak {{ $user->name }}?')"><i class="fas fa-times fa-lg" style="color:red"></i></button>
                         </form>
                     </td>
                 </tr>

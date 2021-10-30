@@ -34,7 +34,11 @@
             <div class="{{ str_contains(url()->current(), '/dashboard') ?  'side-panel-menu bg-dark-toska' : 'resize-side-panel side-panel-menu bg-dark-toska'  }}">
                 <div class="profile-wrapper">
                     <div class="profile-picture">
-                        <img class="img-responsive" src="https://images.pexels.com/photos/771742/pexels-photo-771742.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500" alt="">
+                        @if(Auth::user()->profile_picture) 
+                        <img class="img-responsive" src="storage/images/{{ Auth::user()->profile_picture }}" alt="">
+                        @else
+                        <img class="img-responsive" src="{{ ('img/profile.png') }}" alt="">
+                        @endif
                     </div>
 
                 </div>
@@ -43,7 +47,7 @@
                         <div class="text-center fw-bold fs-5" style="white-space: nowrap;">
                             {{ Auth::user()->name }}
                         </div>
-                        <div class="text-center fs-6 edit-prof-wrap"><a href="#" class="text-white text-decoration-none">edit profile</a></div>
+                        <div class="text-center fs-6 edit-prof-wrap"><a href="/profiles" class="text-white text-decoration-none">edit profile</a></div>
 
                     </div>
 
