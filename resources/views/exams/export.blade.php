@@ -1,16 +1,18 @@
 <table>
     <thead>
         <tr>
-            <th>Waktu Pengumpulan</th>
-            <th>Nama Siswa</th>
-            <th>Nilai</th>
-            <th>Catatan</th>
-            <th>Link File</th>
+            <th><strong>No.</strong></th>
+            <th><strong>Waktu Pengumpulan</strong></th>
+            <th><strong>Nama Siswa</strong></th>
+            <th><strong>Nilai</strong></th>
+            <th><strong>Catatan</strong></th>
+            <th><strong>Link File</strong></th>
         </tr>
     </thead>
     <tbody>
-        @foreach($users as $user)
+        @foreach($users as $key => $user)
             <tr>
+                <td>{{$key+1}}</td>
                 <td>{{$user->name}}</td>
                 <td>{{date('d-m-Y', strtotime($user->created_at))}} {{date('H:i', strtotime($user->update_at))}}</td>
                 <td>{{$user->pivot->score}}</td>

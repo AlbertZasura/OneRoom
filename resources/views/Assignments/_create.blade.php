@@ -10,32 +10,27 @@
                     @csrf
                     <div class="form-group mb-3">
                         <label for="title" class="col-form-label"><b>Topik</b></label>
-                        <input type="text" name="title" class="form-control" id="title" required>
+                        <input type="text" name="title" class="form-control @error('title')is-invalid @enderror" id="title" required>
+                        @error('title')
+                            <div class="invalid-feedback">{{ $message}}</div>
+                        @enderror
                     </div>
-                    @error('title')
-                        <div class="errors">{{ $message}}</div>
-                    @enderror
                     <div class="form-group mb-3">
                         <label for="deadline" class="col-form-label"><b>Deadline</b></label>
                         <div class="input-group date">
-                            <input type="datetime-local" name="deadline" class="datetimepicker form-control" id="deadline" required>
-                            {{-- <span class="input-group-append">
-                                <span class="input-group-text bg-white">
-                                    <i class="fa fa-calendar"></i>
-                                </span>
-                            </span> --}}
+                            <input type="datetime-local" name="deadline" class="form-control  @error('deadline')is-invalid @enderror" id="deadline" required>
                         </div>
+                        @error('deadline')
+                            <div class="invalid-feedback">{{ $message}}</div>
+                        @enderror
                     </div>
-                    @error('deadline')
-                        <div class="errors">{{ $message}}</div>
-                    @enderror
                     <div class="form-group mb-3">
                         <label class="col-form-label" for="file"><b>File</b></label>
-                        <input type="file" name="file" class="form-control" id="file" required>
+                        <input type="file" name="file" class="form-control @error('file')is-invalid @enderror" id="file" required>
+                        @error('file')
+                            <div class="invalid-feedback">{{$message}}</div>
+                        @enderror
                     </div>
-                    @error('file')
-                        <div class="errors">{{$message}}</div>
-                    @enderror
                     <div class="form-group mb-3">
                         <label for="class" class="col-form-label"><b>Kelas</b></label>
                         <input type="text" value="{{$selectedClasses->name}}" class="form-control" disabled>
@@ -50,8 +45,3 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    $(function() {
-       $('.datetimepicker').datetimepicker();
-    });
-</script>  

@@ -10,7 +10,7 @@
                     @csrf
                     <div class="form-group mb-3">
                         <label for="score" class="col-form-label"><b>Nilai</b></label>
-                        <input type="text" name="score" class="form-control" id="score" required>
+                        <input type="number" name="score" class="form-control" id="score" required>
                     </div>
                     @error('score')
                         <div class="errors">{{ $message}}</div>
