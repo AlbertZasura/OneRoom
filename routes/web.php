@@ -11,6 +11,7 @@ use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
+use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -56,6 +57,9 @@ Route::resource('users', UserController::class)->middleware('auth');
 Route::get('/accounts', [UserController::class, 'index']);
 Route::post('/accounts', [UserController::class, 'store']);
 Route::get('/profiles', [UserController::class, 'edit']);
+Route::put('/profiles/{user}', [UserController::class, 'updateProfile'])->name('updateProfile');
+Route::post('/profile-image', [UserController::class, 'profileImageUpdate'])->name('profile.image');
+
 
 Route::get('/exams/list/{type}', [ExamController::class, 'listExam'])->name('exlist');
 Route::get('/exams/list/filter/{type}/{course_id}', [ExamController::class, 'filterExam'])->name('filterlist');

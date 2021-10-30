@@ -26,6 +26,15 @@
                     <td>
                         <a>{{ $message->created_at->format('d M Y') }}</a>
                     </td>
+                    @can('create', App\Models\Message::class )
+                    <td>
+                        <form action="{{  route('messages.destroy',$message->id) }}" method="POST">
+                            @csrf
+                            @method('DELETE')      
+                            <button class="btn" type="submit" onclick="return confirm('Apakah Anda yakin untuk menghapus pengumuman?')"><i class="fas fa-times fa-lg" style="color:red"></i></button>
+                        </form>
+                    </td>
+                    @endcan
                 </tr>
             </tbody>
         </table>
