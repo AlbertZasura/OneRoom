@@ -12,6 +12,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
+use App\Exports\AssignmentExport;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -60,8 +61,9 @@ Route::middleware('auth')->group(function () {
     Route::get('assignments/{assignment}/download', [AssignmentController::class, 'download'])->name('assignments.download');
     Route::post('assignments/{assignment}/upload', [AssignmentController::class, 'upload'])->name('assignments.upload');
     Route::post('assignments/{assignment}/scoring', [AssignmentController::class, 'scoring'])->name('assignments.scoring');
+    Route::get('assignments/{assignment}/export', [AssignmentController::class, 'export'])->name('assignments.export');
     Route::resource('course.assignments', AssignmentController::class);
-    
+
     Route::resource('session', SessionController::class);
     
     Route::get('courses/download/{id}', [CourseController::class, 'downloadFile'])->name('uploaded');
