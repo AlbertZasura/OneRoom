@@ -48,7 +48,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/exams/submitExam', [ExamController::class, 'submitExams']);
     Route::get('/exams/downlodExam/{id}', [ExamController::class, 'downloadExamsUser'])->name('downloadexams');
     Route::post('/exams/createExam', [ExamController::class, 'createExams']);
-    Route::get('/exams/downloadexamstudent', [ExamController::class, 'donwloadExamStudent'])->name('examstudent');
+    Route::get('/exams/downloadexamstudent/download', [ExamController::class, 'downloadExamStudent'])->name('examstudent');
     Route::get('exams/{exam}/export', [ExamController::class, 'export'])->name('exams.export');
     
     Route::resource('exams', ExamController::class);
@@ -69,6 +69,7 @@ Route::middleware('auth')->group(function () {
     
     Route::get('courses/download/{id}', [CourseController::class, 'downloadFile'])->name('uploaded');
     Route::resource('courses', CourseController::class);
+    Route::post('course/createCourse', [CourseController::class, 'createCourse']);
     
     Route::get('/schedules/all', [ScheduleController::class, 'listClass'])->name('admin.schedule');
     Route::get('/schedules', [ScheduleController::class, 'schedulesChart']);

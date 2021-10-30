@@ -22,13 +22,29 @@ class CourseController extends Controller
 
             $teacher =  User::where('role', 'like', 1)->get();
             $course = Course::all();
-            $class = Classes::all();
+            // $class = Classes::all();
 
-            return view('materi.admin_course',[
-                'teacher' => $teacher,
-                'course' => $course,
-                'class' => $class
-            ]);
+            if(request()->input("selectClass")){
+                // $class = Classes::all();
+                // dd($teacher->find(request()->input("selectTeacherId"))->classes);
+                $class = $teacher->find(request()->input("selectTeacherId"))->classes;
+                return view('materi.admin_course',[
+                    'selectedTeacher' => $teacher->find(request()->input("selectTeacherId")),
+                    'selectedCourse' => $course->find(request()->input("selectCourseId")),
+                    'teacher' => $teacher,
+                    'course' => $course,
+                    'class' => $class
+                ]);
+
+            }else{
+                $class = "";
+                return view('materi.admin_course',[
+                    'teacher' => $teacher,
+                    'course' => $course,
+                    'class' => $class
+                ]);
+            }
+
             
         }else{
             $cls = Auth::user()->classes->first();
@@ -141,6 +157,20 @@ class CourseController extends Controller
        
         $file_path = public_path('storage/file/'.$fl->file);
         return response()->download($file_path);
+
+    }
+
+    public function createCourse(Request $request){
+
+        $request->validate([
+            'name' => 'required'
+        ]);
+
+        Course::create([
+            'name' => $request->name
+        ]);
+
+        return redirect()->route('courses.index')->with('success','Mata Pelajaran Berhasil Dibuat.');
 
     }
 
