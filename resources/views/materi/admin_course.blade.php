@@ -54,7 +54,7 @@
                         </form>
                         <div class="w-100">
                             <label onclick="selectedCourse()" class="radio-course cursor-pointer text-center border-bottom-gray hover-gray">
-                                <input type="radio" name="radiocourse" value="{{$courses->id}}"/>
+                                <input type="radio" name="radiocourse" value="{{$courses->id}}" {{ isset($selectedCourse) ? $selectedCourse->id == $courses->id ? 'checked' : '' : ''}}/>
                                 <div class="py-2">{{$courses->name}}</div>
                             </label>
                         </div>
@@ -68,7 +68,7 @@
             <div class="box-course-create scroll-y custom-scroll-y" style="height: 600px;">
                 @foreach($teacher as $teachers)
                     <label onclick="selectedTeacher()" class="radio-course cursor-pointer text-center border-bottom-gray hover-gray">
-                        <input type="radio" name="radioteacher" value="{{$teachers->id}}"/>
+                        <input type="radio" name="radioteacher" value="{{$teachers->id}}" {{ isset($selectedTeacher) ? $selectedTeacher->id == $teachers->id ? 'checked' : '' : ''}} />
                         <div class="py-2">{{$teachers->name}}</div>
                     </label>
                 @endforeach
@@ -79,7 +79,7 @@
             <div class="text-center fw-bold fs-20 mb-3">Kelas</div>
             <div class="box-course-create scroll-y custom-scroll-y" style="height: 600px;">
             @isset($selectedTeacher)
-                <div>Pilih Kelas Yang akan di ajar oleh <strong>{{$selectedTeacher->name}}</strong> dengan mata pelajaran <strong>{{$selectedCourse->name}}</strong></div>
+                <div>Pilih Kelas Yang akan di ajar oleh <strong class="text-blue">{{$selectedTeacher->name}}</strong> dengan mata pelajaran <strong class="text-blue">{{$selectedCourse->name}}</strong></div>
             @endisset
             @if($class)
                 @foreach($class as $classes)
@@ -111,6 +111,17 @@
     var courseValue = '';
     var teacherValue = '';
     var classValue = '';
+
+    $(document).ready(function(){
+        var url_str = document.URL;
+        let url = new URL(url_str);
+        let search_params = url.searchParams;
+        if(search_params.get('selectTeacherId') && search_params.get('selectCourseId')){
+            teacherValue = search_params.get('selectTeacherId');
+            courseValue = search_params.get('selectCourseId');
+
+        }
+    });
 
 
     $('.show-alert').click(function(event) {
@@ -149,8 +160,6 @@
         for (var i = 0, length = radiocourse.length; i < length; i++) {
             if (radiocourse[i].checked) {
                 courseValue = radiocourse[i].value
-                console.log("teacherValue ", teacherValue)
-                console.log("courseValue ", courseValue)
                 break;
             }
         }
@@ -171,8 +180,6 @@
         for (var i = 0, length = radioteacher.length; i < length; i++) {
             if (radioteacher[i].checked) {
                 teacherValue = radioteacher[i].value
-                console.log("teacherValue ", teacherValue)
-                console.log("courseValue ", courseValue)
                 if(courseValue && teacherValue){
 
                     // window.location = 'courses?selectClass=1&selectTeacherId=' + teacherValue.id + '&selectCourseId=' + courseValue.id;
