@@ -92,4 +92,8 @@ class User extends Authenticatable
         return $this->exams()->wherePivot('exam_id',$exam_id);
     }
 
+    public function usersClasses(){
+        return $this->belongsToMany(Classes::class,'courses_classes_users', 'user_id', 'class_id')->withPivot('course_id')->withTimestamps(); 
+    }
+
 }

@@ -6,7 +6,7 @@
 
 <div class="container">
 
-    <h1>Mapping Mata Pelajaran</h1>
+    <!-- <h1>Mapping Mata Pelajaran</h1> -->
 
     <div class="row">
         <div class="col">
@@ -81,12 +81,49 @@
             @isset($selectedTeacher)
                 <div>Pilih Kelas Yang akan di ajar oleh <strong class="text-blue">{{$selectedTeacher->name}}</strong> dengan mata pelajaran <strong class="text-blue">{{$selectedCourse->name}}</strong></div>
             @endisset
+
+            @php ($flag = 0)
+            
             @if($class)
                 @foreach($class as $classes)
-                    <label onclick="selectedClass()" class="radio-course cursor-pointer text-center border-bottom-gray hover-gray">
-                        <input type="radio" name="radioclass" value="{{$classes->id}}"/>
-                        <div class="py-2">{{$classes->name}}</div>
-                    </label>
+                    @if(count($exist_class) > 0)
+                        @foreach($exist_class as $key => $ex_cls)
+                            @if($ex_cls->id == $classes->id)
+                                <div class="d-flex a-center">
+                                    <form action="" method="POST">   
+                                        @csrf
+                                        @method('DELETE')     
+                                        <button class="btn show-alert" type="submit"><i class="far fa-trash-alt text-danger mr-10 cursor-pointer"></i></button>
+                                    </form>
+                                    <div class="w-100">
+                                        <label onclick="selectedClass()" class="radio-course cursor-pointer text-center border-bottom-gray hover-gray bg-success text-white">
+                                            <input type="radio" name="radioclass" value="{{$classes->id}}"/>
+                                            <div class="py-2">{{$classes->name}}</div>
+                                        </label>
+                                        
+                                    </div>
+                                </div>
+                                @php ($flag = 0)
+                                @break
+                            @else
+                                @php ($flag = 1)
+                            
+                            @endif
+                        @endforeach
+                        @if($flag == 1)
+                            <label onclick="selectedClass()" class="radio-course cursor-pointer text-center border-bottom-gray hover-gray">
+                                <input type="radio" name="radioclass" value="{{$classes->id}}"/>
+                                <div class="py-2">{{$classes->name}}</div>
+                            </label>
+                            @php ($flag = 0)
+                        @endif()
+                    @else
+                    <div></div>
+                        <label onclick="selectedClass()" class="radio-course cursor-pointer text-center border-bottom-gray hover-gray">
+                            <input type="radio" name="radioclass" value="{{$classes->id}}"/>
+                            <div class="py-2">{{$classes->name}}</div>
+                        </label>
+                    @endif
                 @endforeach
             @else
                 <div>Kelas Tidak Tersedia atau guru belum ditentukan penempatan kelasnya</div>
