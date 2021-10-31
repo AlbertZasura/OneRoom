@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body">
                 @foreach ( $sch as $key =>$s )
-                    <p><strong>{{ $key+1 }}.</strong> {{ $s->course->name }} {{ $s->start_time }}-{{ $s->end_time }} </p>
+                    <p><strong>{{ $key+1 }}.</strong> {{ $s->start_time }}-{{ $s->end_time }} - {{ $s->course->name }} {{ Auth::user()->role==='teacher' ? " [ ".$s->class->name." ]" : "" }}  </p>
                 @endforeach
             </div>
         </div>

@@ -13,6 +13,7 @@
     <script src="https://kit.fontawesome.com/6538af5efe.js" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.min.js" integrity="sha384-skAcpIdS7UcVUC05LJ9Dxay8AXcDYfBJqt1CJ85S/CFujBsIzCIv+l9liuYLaMQ/" crossorigin="anonymous"></script>
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="{{ asset('js/jquery-1.10.2.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/jquery-ui.custom.min.js') }}" type="text/javascript"></script>
     <script src="{{ asset('js/fullcalendar.js') }}" type="text/javascript"></script>
@@ -106,7 +107,15 @@
                             <i class="fas fa-chalkboard"></i>
                         </div>
                         <div class="fs-18 ml-20">
-                            <a href="{{route('classes.index')}}" class="btn text-white">Kelas</a>
+                            @can('viewAny', App\Models\Classes::class )
+                                <a href="{{route('classes.index')}}" class="btn text-white">Kelas</a>
+                            @else
+                                @if (!Auth::user()->classes->isEmpty())
+                                    <a href="#" class="btn text-white">Kelas</a>
+                                @else
+                                    <a href="#" class="btn text-white disabled"> Kelas</a>
+                                @endif
+                            @endcan
                         </div>
                     </div>
                     <div class="d-flex a-center mb-10">
@@ -114,8 +123,13 @@
                             <i class="fas fa-clipboard-list"></i>
                         </div>
                         <div class="fs-18 ml-20">
-                            <a href="#" class="btn text-white">Absen</a>
-                            
+                            @can('course', App\Models\Absent::class )
+                                <a href="/absent" class="btn text-white">Absen</a>
+                            @endcan
+
+                            @can('absentGrid', App\Models\Absent::class )
+                                <a href="/absents" class="btn text-white">Absen</a>
+                            @endcan
                         </div>
                     </div>
                     @can('viewAny', App\Models\User::class)

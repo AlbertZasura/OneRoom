@@ -2,12 +2,12 @@
 
 namespace App\Policies;
 
-use App\Models\Classes;
+use App\Models\Absent;
 use App\Models\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 use Illuminate\Auth\Access\Response;
 
-class ClassesPolicy
+class AbsentPolicy
 {
     use HandlesAuthorization;
 
@@ -19,17 +19,27 @@ class ClassesPolicy
      */
     public function viewAny(User $user)
     {
-        return $user->role !== 'student' ? Response::allow() : Response::deny('You cannot access!');
+        return $user->role === 'student' ? Response::allow() : Response::deny('Cannot Access');
+    }
+
+    public function course(User $user)
+    {
+        return $user->role === 'student' ? Response::allow() : Response::deny('Cannot Access');
+    }
+
+    public function absentGrid(User $user)
+    {
+        return $user->role === 'teacher' ? Response::allow() : Response::deny('Cannot Access');
     }
 
     /**
      * Determine whether the user can view the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Classes  $classes
+     * @param  \App\Models\Absent  $absent
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function view(User $user, Classes $classes)
+    public function view(User $user, Absent $absent)
     {
         //
     }
@@ -42,41 +52,41 @@ class ClassesPolicy
      */
     public function create(User $user)
     {
-        return $user->role === 'admin' ? Response::allow() : Response::deny('You are not an Admin.');
+        //
     }
 
     /**
      * Determine whether the user can update the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Classes  $classes
+     * @param  \App\Models\Absent  $absent
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function update(User $user, Classes $classes)
+    public function update(User $user, Absent $absent)
     {
-        return $user->role === 'admin' ? Response::allow() : Response::deny('You are not an Admin.');
+        //
     }
 
     /**
      * Determine whether the user can delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Classes  $classes
+     * @param  \App\Models\Absent  $absent
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function delete(User $user, Classes $classes)
+    public function delete(User $user, Absent $absent)
     {
-        return $user->role === 'admin' ? Response::allow() : Response::deny('You are not an Admin.');
+        //
     }
 
     /**
      * Determine whether the user can restore the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Classes  $classes
+     * @param  \App\Models\Absent  $absent
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function restore(User $user, Classes $classes)
+    public function restore(User $user, Absent $absent)
     {
         //
     }
@@ -85,21 +95,11 @@ class ClassesPolicy
      * Determine whether the user can permanently delete the model.
      *
      * @param  \App\Models\User  $user
-     * @param  \App\Models\Classes  $classes
+     * @param  \App\Models\Absent  $absent
      * @return \Illuminate\Auth\Access\Response|bool
      */
-    public function forceDelete(User $user, Classes $classes)
+    public function forceDelete(User $user, Absent $absent)
     {
-        return $user->role === 'admin' ? Response::allow() : Response::deny('You are not an Admin.');
-    }
-
-    public function user_list(User $user)
-    {
-        return $user->role === 'admin' ? Response::allow() : Response::deny('You are not an Admin.');
-    }
-
-    public function assign_user(User $user)
-    {
-        return $user->role === 'admin' ? Response::allow() : Response::deny('You are not an Admin.');
+        //
     }
 }

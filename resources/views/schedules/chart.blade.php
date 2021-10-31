@@ -95,9 +95,11 @@
                 allDaySlot: false,
                 selectHelper: true,
                 select: function(start, end, allDay) {
-                    let doc = document.getElementById('showSchedules'+start.getFullYear()+'-'+(start.getMonth()+1)+'-'+start.getDate());
+                    let d = start.getDate() < 10 ? '0'+start.getDate() : start.getDate();
+                    let m = ((start.getMonth()+1) < 10) ? '0'+(start.getMonth()+1) : (start.getMonth()+1);
+                    let doc = document.getElementById('showSchedules'+start.getFullYear()+'-'+m+'-'+d);
                     if(doc){
-                        var myModal = new bootstrap.Modal(document.getElementById('showSchedules'+start.getFullYear()+'-'+(start.getMonth()+1)+'-'+start.getDate()), {
+                        var myModal = new bootstrap.Modal(doc, {
                             keyboard: false
                         })
                         myModal.toggle();

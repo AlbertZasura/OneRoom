@@ -93,4 +93,11 @@ class User extends Authenticatable
         return $this->exams()->wherePivot('exam_id',$exam_id);
     }
 
+    public function absents(){
+        return $this->hasMany(Absent::class);
+    }
+
+    public function absent_schedule($schedule_id){
+        return $this->absents()->where('schedule_id',$schedule_id);
+    }
 }

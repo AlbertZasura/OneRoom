@@ -19,6 +19,10 @@ class Schedule extends Model
         $query->when($filters['weekday'] ?? false, function($query, $weekday){
             return $query->where(DB::raw("DAYOFWEEK(date)"), $weekday);
         });
+
+        $query->when($filters['class'] ?? false, function($query, $class){
+            return $query->where('class_id', $class);
+        });
     }
 
     public function course(){
@@ -27,5 +31,9 @@ class Schedule extends Model
 
     public function class(){
         return $this->belongsTo(Classes::class); 
+    }
+
+    public function absents(){
+        return $this->hasMany(Absent::class);
     }
 }

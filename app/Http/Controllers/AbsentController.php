@@ -3,9 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Absent;
-
+use App\Models\Course;
+use App\Models\Schedule;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Alert;
 
 class AbsentController extends Controller
 {
@@ -14,11 +17,61 @@ class AbsentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function absentGrid(){
+        $this->authorize('absentGrid', Absent::class);
+        $classes = Auth::user()->classes;
+        $schedules = Schedule::whereIn('class_id',Auth::user()->classes->pluck('id'))->filter(request(['class']));
+        return view('absents.grid', [
+            'schedules' => $schedules->get(),
+            'classes' => $classes
+        ]);
+    }
+    
+     public function course()
     {
-        $absents = Absent::all();
-        return view('messages.index', [
-            'absents' => $absents
+        $this->authorize('course', Absent::class);
+        $courses = Course::whereHas('classes.users',function(Builder $query){
+            $query->where('user_id',Auth::user()->id);
+        })->get();
+        return view('absents.course', [
+            'courses' => $courses
+        ]);
+    }
+    
+     public function index(Course $course)
+    {
+        $this->authorize('viewAny', Absent::class);
+        $user = Auth::user();
+        $courses = Course::whereHas('classes.users',function(Builder $query) use ($user){
+            $query->where('user_id',$user->id);
+        })->get();
+        switch($user->role){
+            case 'student':
+                $schedules = Schedule::where('course_id',$course->id)->where('class_id',$user->classes->first()->id)->orderBy('date');
+                break;
+            case 'teacher':
+                // $classes = Classes::whereRelation('users','users.id',$user->id)->whereRelation('courses','courses.id',$course->id)->get();
+                // $assignments = Assignment::where('course_id',$course->id)->whereIn('class_id',$user->classes->pluck('id'));
+                // if (request('class')) {
+                //     $assignments =$assignments->where('class_id',request('class'));
+                // }else{
+                //     $assignments =$assignments->where('class_id',$classes->first()->id);
+                // }
+                // break;
+        }
+
+        return view('absents.index', [
+            'courses' => $courses,
+            'schedules'=> $schedules->get()
+        ]);
+    }
+
+    public function listUser(Schedule $schedule)
+    {
+        $users = $schedule->class->students()->filter(request(['search']));
+        return view('absents.list_user', [
+            'schedule' => $schedule,
+            'users' => $users->get()
         ]);
     }
 
@@ -38,24 +91,16 @@ class AbsentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Course $course, Request $request)
     {
-        $request->validate([
-            'created_at' => 'required',
-            'status' => 'required',
-            'user_id' => 'required',
-            'course_id' => 'required'
-        ]);
-
-        $user = Auth::user();
+        $schedule=Schedule::find($request->schedule_id);
         Absent::create([
-            'created_at' => $user->created_at,
-            'status' => $request->status,
-            'user_id' => $user->id,
-            'course_id' => $request->course_id
+            'status' => 'Hadir',
+            'user_id' => Auth::user()->id,
+            'schedule_id' => $schedule->id
         ]);
-
-        return redirect()->route('absents.index')->with('success','Absent created successfully.');
+        Alert::success('Berhasil', 'Anda berhasil absent!');
+        return back();
     }
 
     /**
