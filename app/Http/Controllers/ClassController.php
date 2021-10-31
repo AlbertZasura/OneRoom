@@ -18,6 +18,7 @@ class ClassController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', Classes::class);
         switch(Auth::user()->role){
             case 'teacher':
                 $classes = Auth::user()->classes;

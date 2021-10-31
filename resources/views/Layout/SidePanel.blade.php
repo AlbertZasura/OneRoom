@@ -104,7 +104,15 @@
                             <i class="fas fa-chalkboard"></i>
                         </div>
                         <div class="fs-18 ml-20">
-                            <a href="{{route('classes.index')}}" class="btn text-white">Class</a>
+                            @can('viewAny', App\Models\Classes::class )
+                                <a href="{{route('classes.index')}}" class="btn text-white">Kelas</a>
+                            @else
+                                @if (!Auth::user()->classes->isEmpty())
+                                    <a href="#" class="btn text-white">Kelas</a>
+                                @else
+                                    <a href="#" class="btn text-white disabled"> Kelas</a>
+                                @endif
+                            @endcan
                         </div>
                     </div>
                     <div class="d-flex a-center mb-10">
@@ -112,8 +120,13 @@
                             <i class="fas fa-clipboard-list"></i>
                         </div>
                         <div class="fs-18 ml-20">
-                            <a href="#" class="btn text-white">Absen</a>
-                            
+                            @can('course', App\Models\Absent::class )
+                                <a href="/absent" class="btn text-white">Absen</a>
+                            @endcan
+
+                            @can('absentGrid', App\Models\Absent::class )
+                                <a href="/absents" class="btn text-white">Absen</a>
+                            @endcan
                         </div>
                     </div>
                     <div class="d-flex a-center mb-10">
