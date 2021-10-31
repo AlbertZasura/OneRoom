@@ -44,7 +44,7 @@
                         <div class="text-center fw-bold fs-5" style="white-space: nowrap;">
                             {{ Auth::user()->name }}
                         </div>
-                        <div class="text-center fs-6 edit-prof-wrap"><a href="/profiles" class="text-white text-decoration-none">edit profile</a></div>
+                        <div class="text-center fs-6 edit-prof-wrap"><a href="/profiles" class="text-white text-decoration-none">Ganti profil</a></div>
 
                     </div>
 
@@ -55,7 +55,7 @@
                             <i class="fas fa-chart-line"></i>
                         </div>
                         <div class="fs-18 ml-20">
-                            <a href="{{route('home')}}" class="btn text-white">Dashboard</a>
+                            <a href="{{route('home')}}" class="btn text-white">Halaman Utama</a>
                         </div>
                     </div>
                     <div class="d-flex a-center mb-10">
@@ -81,21 +81,23 @@
                             </div>
                         </div>
                     @endcan
+                    @can('viewAny', App\Models\Exam::class)
                     <div class="d-flex a-center mb-10">
                         <div class="fs-25 w-25px">
                             <i class="fas fa-paste"></i>
                         </div>
                         <div class="fs-18 ml-20">
-                            <a href="{{route('exams.index')}}" class="btn text-white">Exam</a>
+                            <a href="{{route('exams.index')}}" class="btn text-white">Ujian</a>
                             
                         </div>
                     </div>
+                    @endcan
                     <div class="d-flex a-center mb-10">
                         <div class="fs-25 w-25px">
                             <i class="fas fa-book"></i>
                         </div>
                         <div class="fs-18 ml-20">
-                            <a href="{{route('courses.index')}}" class="btn text-white">Courses</a>
+                            <a href="{{route('courses.index')}}" class="btn text-white">Materi</a>
                             
                         </div>
                     </div>
@@ -104,7 +106,7 @@
                             <i class="fas fa-chalkboard"></i>
                         </div>
                         <div class="fs-18 ml-20">
-                            <a href="{{route('classes.index')}}" class="btn text-white">Class</a>
+                            <a href="{{route('classes.index')}}" class="btn text-white">Kelas</a>
                         </div>
                     </div>
                     <div class="d-flex a-center mb-10">
@@ -116,12 +118,22 @@
                             
                         </div>
                     </div>
+                    @can('viewAny', App\Models\User::class)
+                    <div class="d-flex a-center mb-10">
+                        <div class="fs-20 w-25px">
+                            <i class="fas fa-user"></i>
+                        </div>
+                        <div class="fs-18 ml-20">
+                            <a href="{{route('users.index')}}" class="btn text-white">Akun</a>
+                        </div>
+                    </div>
+                    @endcan
                     <div class="d-flex a-center mb-10">
                         <div class="fs-20 w-25px">
                             <i class="fas fa-bullhorn"></i>
                         </div>
                         <div class="fs-18 ml-20">
-                            <a href="{{route('messages.index')}}" class="btn text-white">Announcement</a>
+                            <a href="{{route('messages.index')}}" class="btn text-white">Pengumuman</a>
                         </div>
                     </div>
                     @if (Auth::user())
@@ -132,7 +144,7 @@
                         <div class="fs-18 ml-20">
                             <form action="/logout" method="POST">   
                                 @csrf
-                                <button type="submit" class="btn text-white">Logout</button>
+                                <button type="submit" class="btn text-white">keluar</button>
                             </form>
                         </div>
                     </div>

@@ -13,18 +13,18 @@
                 <div class="col-md-5 border-right">
                     <div class="">
                         <div class="d-flex flex-column align-items-center text-center ">
-                        @if(Auth::user()->profile_picture) 
-                        <img class="img-fluid rounded-circle img-thumbnail" id="image_preview" style="width:200px;height:200px;" src="storage/images/{{ Auth::user()->profile_picture }}">
-                        @else
-                        <img class="img-fluid rounded-circle img-thumbnail" id="image_preview" style="width:200px;height:200px;" src="{{ ('img/profile.png') }}">
-                        @endif 
+                            @if(Auth::user()->profile_picture) 
+                            <img class="img-fluid rounded-circle img-thumbnail" id="image_preview" style="width:200px;height:200px;" src="storage/images/{{ Auth::user()->profile_picture }}">
+                            @else
+                            <img class="img-fluid rounded-circle img-thumbnail" id="image_preview" style="width:200px;height:200px;" src="{{ ('img/profile.png') }}">
+                            @endif 
                             <div>
-                                <label for="picture">Ubah Gambar Profil</label>
-                                <input type="file" name="profile_picture" id="profile_picture" class="form-control rounded-pill">
+                                <label for="profile_picture" class="btn"><b>Ubah Gambar Profil</b></label>
+                                <input name="profile_picture" id="profile_picture" style="visibility:hidden;" type="file">
                                 <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}" >
                             </div>
-                        
                         </div>
+
                         <div class="row mt-3">
                             <div class="col-md-12"><label class="labels">Nama</label><input type="text" class="form-control @error('name')is-invalid @enderror" name="name" id="name" placeholder="ex: John Doe..." value="{{ old('name', Auth::user()->name) }}">
                                 @error('name')
@@ -58,7 +58,7 @@
                             </div>
                         </div>
 
-                        <div class="mt-5 text-center"><button type="button" class="btn btn-danger">Batal</button>&nbsp;<button class="btn btn-primary profile-button" type="submit">Simpan</button></div>
+                        <div class="mt-5 text-center"><button type="button" class="btn btn-danger" onclick="window.location.href='/'">Batal</button>&nbsp;<button class="btn btn-primary profile-button" type="submit">Simpan</button></div>
                     </div>
                 </div>
             </div>

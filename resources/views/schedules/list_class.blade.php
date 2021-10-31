@@ -7,7 +7,7 @@
     <br>
     <div class="row mb-3">
         <div class="col-md-6">
-            <form action="/schedules">
+            <form action="/schedules/all">
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="Cari kelas" name="search" value="{{ request('search') }}">
                     <button class="btn btn-outline-secondary" type="submit">Cari</button>

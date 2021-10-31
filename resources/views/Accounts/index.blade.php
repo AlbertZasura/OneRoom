@@ -17,13 +17,12 @@
             </td>
             
             <td>
-                <div class="input-group rounded" style="width:300px"> 
-                    <input type="text" id="myInput" class="form-control rounded" placeholder="Cari nama" aria-label="Search"
-                    aria-describedby="search-addon" />
-                    <span class="input-group-text border-0" id="search-addon">
-                        <i class="fas fa-search"></i>
-                    </span>
-                </div>
+                <form action="/accounts">
+                    <div class="input-group rounded" style="width:300px">
+                        <input type="text" id="myInput" class="form-control" name="search" placeholder="Cari nama" aria-label="Search" aria-describedby="search-addon" >
+                        <button class="btn btn-outline-secondary" type="submit"><i class="fas fa-search"></i></button>
+                    </div>
+                </form>
             </td>
             
         </tr>
@@ -109,20 +108,21 @@
                 @endforeach
             </tbody>   
         </table>
+            
         {{ $users->links() }}
         
 
        
 
 <script>
-    $(document).ready(function(){
-        $("#myInput").on("keyup", function() {
-            var value = $(this).val().toLowerCase();
-            $("#myTable tr").filter(function() {
-            $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
-            });
-        });
-    });
+    // $(document).ready(function(){
+    //     $("#myInput").on("keyup", function() {
+    //         var value = $(this).val().toLowerCase();
+    //         $("#myTable tr").filter(function() {
+    //         $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+    //         });
+    //     });
+    // });
 
     function selectTable() {
         let dropdown, filter;

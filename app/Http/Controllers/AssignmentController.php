@@ -107,7 +107,7 @@ class AssignmentController extends Controller
     public function show(Course $course, Assignment $assignment)
     {
         $this->authorize('view', $assignment);
-        $users= $assignment->users()->simplePaginate(20);
+        $users= $assignment->users()->paginate(20);
         return view('assignments.show', [
             'assignment' => $assignment,
             'course' => $course,

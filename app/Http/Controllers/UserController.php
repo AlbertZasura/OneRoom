@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Alert;
+use PhpOffice\PhpSpreadsheet\Calculation\LookupRef\Offset;
 
 class UserController extends Controller
 {
@@ -17,10 +18,15 @@ class UserController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', App\Models\User::class);
+        $users = User::where('status', 0);
 
-        $users = User::where('status', 0)->simplePaginate(10);
+        if(request('search')){
+            $users = User::latest()->where('name', 'like', '%' . request('search') .'%');
+        }
+
         return view('Accounts.index', [
-            'users' => $users
+            'users' => $users->paginate(10)
         ]);
     }
 
@@ -88,6 +94,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
+        $this->authorize('viewAny', App\Models\User::class);
         $user->update([
             'user_id' => Auth::user()->id,
             'status' => "1"

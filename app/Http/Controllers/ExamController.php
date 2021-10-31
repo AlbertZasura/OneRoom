@@ -21,6 +21,7 @@ class ExamController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', App\Models\Exam::class);
         $exam = Exam::all();
 
         $course = '';
@@ -48,6 +49,7 @@ class ExamController extends Controller
      */
     public function create()
     {
+        $this->authorize('create', App\Models\Exam::class);
         return view('messages.create');
     }
 
@@ -161,6 +163,7 @@ class ExamController extends Controller
     }
 
     public function assignExamScore(Request $request, $id){
+        $this->authorize('update', App\Models\Exam::class);
 
         // dd(request()->input('pivotId'));
         // $exam_id
@@ -196,7 +199,7 @@ class ExamController extends Controller
     }
 
     public function createExams(Request $request){
-
+        $this->authorize('create', App\Models\Exam::class);
 
         $request->validate([
             'title' => 'required',
@@ -268,7 +271,7 @@ class ExamController extends Controller
 
 
     public function listExam($type){
-
+        $this->authorize('viewAny', App\Models\Exam::class);
         if(request()->input('class_id')){
             $exam = Exam::where('type','like', $type)->where('class_id', 'like', request()->input('class_id'))->get();
         }else{
