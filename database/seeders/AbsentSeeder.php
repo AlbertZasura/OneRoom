@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Absent;
+use App\Models\Classes;
 use Illuminate\Database\Seeder;
 
 class AbsentSeeder extends Seeder
@@ -14,15 +15,16 @@ class AbsentSeeder extends Seeder
      */
     public function run()
     {
-        //
-        for ($i=0; $i < 5; $i++) { 
-            $absents = new Absent;
-            $absents->fill([
-                "status" => "Hadir",
-                "course_id" => $i + 1,
-                "user_id" => $i + 1
-            ]);
-            $absents->save();
-        }
+        // $classes=Classes::find(1)->users->role;
+        // $users=
+        // for ($i=0; $i < 5; $i++) { 
+        //     $absents = new Absent;
+        //     $absents->fill([
+        //         "status" => "Hadir",
+        //         "schedule_id" => $i + 1,
+        //         "user_id" => $i + 1
+        //     ]);
+        //     $absents->save();
+        // }
     }
 }

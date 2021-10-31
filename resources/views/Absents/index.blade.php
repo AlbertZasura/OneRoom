@@ -31,7 +31,16 @@
                         @if ($schedule->absents->where('user_id',Auth::user()->id)->first())
                             {{ $schedule->absents->where('user_id',Auth::user()->id)->first()->status }}
                         @else
-                            -
+                            @if (today()->toDateString() == $schedule->date && time() >= strtotime($schedule->start_time) && time() <= strtotime($schedule->end_time))
+                                <form action="{{ route('course.absents.store', $schedule->course) }}?schedule_id={{ $schedule->id }}" method="POST">
+                                    @csrf
+                                    <button class="btn btn-sm btn-primary" type="submit"><i class='fa fa-user-check'></i> Absent</button>
+                                </form>
+                            @elseif (today()->toDateString() > $schedule->date && time() >= strtotime($schedule->end_time))
+                                Tidak hadir
+                            @else
+                                -
+                            @endif
                         @endif
                     </td>
                 </tr>

@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 use Illuminate\Database\Seeder;
-use App\Models\Message;
+    use App\Models\Message;
 use Nette\Utils\Random;
 
 class MessageSeeder extends Seeder

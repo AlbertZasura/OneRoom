@@ -3,12 +3,12 @@
 namespace App\Http\Controllers;
 
 use App\Models\Absent;
-use App\Models\Classes;
 use App\Models\Course;
 use App\Models\Schedule;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Alert;
 
 class AbsentController extends Controller
 {
@@ -45,10 +45,9 @@ class AbsentController extends Controller
         $courses = Course::whereHas('classes.users',function(Builder $query) use ($user){
             $query->where('user_id',$user->id);
         })->get();
-        // $assignments = is_null($course->classes->first()) ? '': $course->classes->first()->assignments ;
         switch($user->role){
             case 'student':
-                $schedules = Schedule::where('course_id',$course->id)->where('class_id',$user->classes->first()->id)->latest();
+                $schedules = Schedule::where('course_id',$course->id)->where('class_id',$user->classes->first()->id)->orderBy('date');
                 break;
             case 'teacher':
                 // $classes = Classes::whereRelation('users','users.id',$user->id)->whereRelation('courses','courses.id',$course->id)->get();
@@ -92,29 +91,16 @@ class AbsentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Course $course, Request $request)
     {
-        // dd($request);
-        $request->validate([
-            'class_id' => 'required',
-            'course_id' => 'required'
-        ]);
-        $class=Classes::find($request->class_id);
-        $schedule = Schedule::where('class_id',$request->class_id)->where('course_id',$request->course_id)->whereDate('date',now())->first();
-        foreach ($class->students as $student) {
-            Absent::create([
-                'status' => 'alpha',
-                'user_id' => $student->id,
-                'schedule_id' => $schedule->id
-            ]);
-        }
-        $user = Auth::user();
+        $schedule=Schedule::find($request->schedule_id);
         Absent::create([
-            'status' => 'present',
-            'user_id' => $user->id,
+            'status' => 'Hadir',
+            'user_id' => Auth::user()->id,
             'schedule_id' => $schedule->id
         ]);
-        return redirect()->route('classes.chatRoom',$request->class_id)->with('success','Absent created successfully.');
+        Alert::success('Berhasil', 'Anda berhasil absent!');
+        return back();
     }
 
     /**
