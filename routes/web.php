@@ -55,7 +55,7 @@ Route::middleware('auth')->group(function () {
     
     Route::get('/classes/{class}/assign_user', [ClassController::class, 'user_list']);
     Route::post('/classes/{class}/assign_user/{user}', [ClassController::class, 'assign_user']);
-    Route::get('/classes/{class}/chatroom', [ClassController::class, 'chatRoom']);
+    Route::get('/{class}/{schedule}/chatroom', [ClassController::class, 'chatRoom'])->name('classes.chatRoom');
     Route::resource('classes', ClassController::class);
     
     Route::get('/assignments', [AssignmentController::class, 'course']);
@@ -76,8 +76,11 @@ Route::middleware('auth')->group(function () {
     Route::get('/schedules', [ScheduleController::class, 'schedulesChart']);
     Route::resource('classes.schedules', ScheduleController::class);
 
-    Route::resource('absents', AbsentController::class);
-    
+    Route::get('/absent', [AbsentController::class, 'course']);
+    Route::get('/absents', [AbsentController::class, 'absentGrid']);
+    Route::get('/absents/{schedule}/users', [AbsentController::class, 'listUser'])->name('absents.users');
+    Route::resource('course.absents', AbsentController::class);
+
     Route::get('/accounts', [UserController::class, 'index']);
     Route::post('/accounts', [UserController::class, 'store']);
     Route::get('/profiles', [UserController::class, 'edit']);

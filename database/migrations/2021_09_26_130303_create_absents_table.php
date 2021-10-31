@@ -16,8 +16,8 @@ class CreateAbsentsTable extends Migration
         Schema::create('absents', function (Blueprint $table) {
             $table->id();
             $table->string('status');
-            $table->unsignedBigInteger('course_id');
-            $table->foreign('course_id')->references('id')->on('courses');
+            $table->unsignedBigInteger('schedule_id')->nullable();
+            $table->foreign('schedule_id')->references('id')->on('schedules');
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');
             $table->timestamps();
