@@ -70,6 +70,7 @@ Route::middleware('auth')->group(function () {
     Route::get('courses/download/{id}', [CourseController::class, 'downloadFile'])->name('uploaded');
     Route::resource('courses', CourseController::class);
     Route::post('course/createCourse', [CourseController::class, 'createCourse']);
+    Route::get('course/assign', [CourseController::class, 'assignCourse']);
     
     Route::get('/schedules/all', [ScheduleController::class, 'listClass'])->name('admin.schedule');
     Route::get('/schedules', [ScheduleController::class, 'schedulesChart']);

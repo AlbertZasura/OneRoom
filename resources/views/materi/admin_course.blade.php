@@ -47,7 +47,11 @@
                 </div>
                 </div>
                 @foreach($course as $courses)
-                    <div class="option-course cursor-pointer text-center border-bottom-gray py-2 hover-gray" onclick="selectedCourse( {{$courses}} )">{{$courses->name}}</div>
+                <label onclick="selectedCourse()" class="radio-course cursor-pointer text-center border-bottom-gray hover-gray">
+                    <input type="radio" name="radiocourse" value="{{$courses->id}}"/>
+                    <div class="py-2">{{$courses->name}}</div>
+                </label>
+                    <!-- <div class="option-course cursor-pointer text-center border-bottom-gray py-2 hover-gray" onclick="selectedCourse( {{$courses}} )">{{$courses->name}}</div> -->
                 @endforeach
             </div>
         </div>
@@ -56,7 +60,11 @@
             <div class="text-center fw-bold fs-20 mb-3">Guru</div>
             <div class="box-course-create scroll-y custom-scroll-y" style="height: 600px;">
                 @foreach($teacher as $teachers)
-                    <div class="option-teacher cursor-pointer text-center border-bottom-gray py-2 hover-gray" onclick="selectedTeacher( {{$teachers}} )">{{$teachers->name}}</div>
+                    <label onclick="selectedTeacher()" class="radio-course cursor-pointer text-center border-bottom-gray hover-gray">
+                        <input type="radio" name="radioteacher" value="{{$teachers->id}}"/>
+                        <div class="py-2">{{$teachers->name}}</div>
+                    </label>
+                    <!-- <div class="option-teacher cursor-pointer text-center border-bottom-gray py-2 hover-gray" onclick="selectedTeacher( {{$teachers}} )">{{$teachers->name}}</div> -->
                 @endforeach
             </div>
         </div>
@@ -69,7 +77,11 @@
             @endisset
             @if($class)
                 @foreach($class as $classes)
-                    <div class="option-class cursor-pointer text-center border-bottom-gray py-2 hover-gray" onclick="selectedClass( {{$classes}} )">{{$classes->name}}</div>
+                    <label onclick="selectedClass()" class="radio-course cursor-pointer text-center border-bottom-gray hover-gray">
+                        <input type="radio" name="radioclass" value="{{$classes->id}}"/>
+                        <div class="py-2">{{$classes->name}}</div>
+                    </label>
+                    <!-- <div class="option-class cursor-pointer text-center border-bottom-gray py-2 hover-gray" onclick="selectedClass( {{$classes}} )">{{$classes->name}}</div> -->
                 @endforeach
             @else
                 <div>Kelas Tidak Tersedia atau guru belum ditentukan penempatan kelasnya</div>
@@ -79,6 +91,12 @@
     
     </div>
 
+    <div class="d-flex justify-content-end mt-20" onclick="save()">
+        <button class="btn save-btn-1"> Save </button>
+    </div>
+
+    
+
 </div>
 
 <script>
@@ -87,100 +105,73 @@
     var teacherValue = '';
     var classValue = '';
 
-$(document).ready(
-function()
-    {
-        $(".option-course").click(function(event)
-        {
-            // function selectedCourse(objCourse){
-            //     console.log(objCourse);
-            // }
-            console.log(courseValue)
-            $(this).addClass("active").siblings().removeClass("active");
-        }
-        );
+    function save(){
+        var url_str = document.URL;
+        let url = new URL(url_str);
+        let search_params = url.searchParams;
+        var teacherId = search_params.get('selectTeacherId');
+        var courseId = search_params.get('selectCourseId');
+        window.location = 'course/assign?selectTeacherId=' + teacherId + '&selectCourseId=' + courseId +'&selectedClass=' + classValue;
+    }
 
-        $(".option-teacher").click(function(event)
-        {
-            console.log(teacherValue)
-            $(this).addClass("active").siblings().removeClass("active");
-        }
-        );
 
-        $(".option-class").click(function(event)
-        {
-            console.log(classValue)
-            if($(this).hasClass("active")){
-                $(this).removeClass("active")
-            }else{
-                $(this).addClass("active")
+    function selectedCourse(){
+        var radiocourse = document.getElementsByName('radiocourse');
+
+        for (var i = 0, length = radiocourse.length; i < length; i++) {
+            if (radiocourse[i].checked) {
+                courseValue = radiocourse[i].value
+                console.log("teacherValue ", teacherValue)
+                console.log("courseValue ", courseValue)
+                break;
             }
         }
-        );
 
-        // if(courseValue && teacherValue){
-
-            // $.ajax({
-            //     url: 'courses?selectClass=1',
-            //     method: 'post',
-            //     success: function () {
-            //         console.log("done");
-            //         //do something
-            //     },error: function(xhr, ajaxOptions, thrownError){
-            //             console.log(xhr.status+" ,"+" "+ajaxOptions+", "+thrownError);
-            //         }
-            //     }
-            // }); 
-            
-        // }
-
-
-    });
-
-
-    function selectedCourse(objCourse){
-        courseValue = objCourse
+        
         if(courseValue && teacherValue){
 
-            window.location = 'courses?selectClass=1&selectTeacherId=' + teacherValue.id + '&selectCourseId=' + courseValue.id;
+            window.location = 'courses?selectClass=1&selectTeacherId=' + teacherValue + '&selectCourseId=' + courseValue;
+            // window.location = 'courses?selectClass=1&selectTeacherId=' + teacherValue.id + '&selectCourseId=' + courseValue.id;
             
 
         }
     }
 
-    function selectedTeacher(objTeacher){
-        teacherValue = objTeacher
-        if(courseValue && teacherValue){
+    function selectedTeacher(){
+        var radioteacher = document.getElementsByName('radioteacher');
 
-            window.location = 'courses?selectClass=1&selectTeacherId=' + teacherValue.id + '&selectCourseId=' + courseValue.id;
+        for (var i = 0, length = radioteacher.length; i < length; i++) {
+            if (radioteacher[i].checked) {
+                teacherValue = radioteacher[i].value
+                console.log("teacherValue ", teacherValue)
+                console.log("courseValue ", courseValue)
+                if(courseValue && teacherValue){
 
-            // $.ajax({
-            //     url: 'courses?selectClass=1',
-            //     method: 'get',
-            //     success: function (_response) {
-            //         $class = _response;
-            //         console.log("done ", _response);
-            //     }
-            // }); 
-            
+                    // window.location = 'courses?selectClass=1&selectTeacherId=' + teacherValue.id + '&selectCourseId=' + courseValue.id;
+                    window.location = 'courses?selectClass=1&selectTeacherId=' + teacherValue + '&selectCourseId=' + courseValue;
+
+
+                }
+                break;
+            }
         }
+        
     }
 
-    function selectedClass(objClass){
-        classValue = objClass
+    function selectedClass(){
+        var radioclass = document.getElementsByName('radioclass');
+        
+        for (var i = 0, length = radioclass.length; i < length; i++) {
+            if (radioclass[i].checked) {
+                classValue = radioclass[i].value
+                console.log("radioclass ", classValue)
+                break;
+            }
+        }
+       
     }
 
-    // $.ajax({
-    //         url: 'fetch-data',
-    //         method: 'post',
-    //         success: function () {
-    //             console.log("done");
-    //             //do something
-    //         },error: function(xhr, ajaxOptions, thrownError){
-    //                 console.log(xhr.status+" ,"+" "+ajaxOptions+", "+thrownError);
-    //             }
-    //         }
-    //     }); 
+
 
 
 </script>

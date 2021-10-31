@@ -46,6 +46,31 @@
     color: #1597E5;
 }
 
+.save-btn-1{
+    background: #6ECB63;
+    padding-top: 1px;
+    color: #fff;
+}
+
+/* ====== custome radio with div ========= */
+
+.radio-course {
+    display : block;
+}
+.radio-course > input{ /* HIDE RADIO */
+    visibility: hidden; /* Makes input not-clickable */
+    position: absolute; /* Remove input from document flow */
+}
+.radio-course > input + div{ /* DIV STYLES */
+    cursor:pointer;
+    border:2px solid transparent;
+}
+.radio-course > input:checked + div{ /* (RADIO CHECKED) DIV STYLES */
+    background-color: rgba(57, 189, 200, 0.2);
+}
+
+/* ====== custome radio with div ========= */
+
 .option-course.active{
     background: rgba(57, 189, 200, 0.2);
 }

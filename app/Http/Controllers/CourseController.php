@@ -173,5 +173,16 @@ class CourseController extends Controller
         return redirect()->route('courses.index')->with('success','Mata Pelajaran Berhasil Dibuat.');
 
     }
+    public function assignCourse(){
+
+        $course = Course::find(request()->input('selectCourseId'));
+        // $user = User::find(request()->input('selectTeacherId'));
+
+        $course->users()->attach(request()->input('selectTeacherId'), ['class_id' => request()->input('selectedClass')]);
+        // $user->classes()->attach(request()->input('selectedClass'));
+
+
+        return redirect()->route('courses.index')->with('success','Berhasil Mapping Guru dan pelajarannya.');
+    }
 
 }
