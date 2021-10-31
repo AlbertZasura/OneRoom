@@ -6,9 +6,8 @@
 
 <div class="container">
 
-    <h1>Materi</h1>
+    <h1>Mapping Mata Pelajaran</h1>
 
-    
     <div class="row">
         <div class="col">
             <div class="text-center fw-bold fs-20 mb-3">Mata Pelajaran</div>
@@ -47,7 +46,19 @@
                 </div>
                 </div>
                 @foreach($course as $courses)
-                    <div class="option-course cursor-pointer text-center border-bottom-gray py-2 hover-gray" onclick="selectedCourse( {{$courses}} )">{{$courses->name}}</div>
+                    <div class="d-flex a-center">
+                        <form action="{{ route('courses.destroy',[$courses]) }}" method="POST">   
+                            @csrf
+                            @method('DELETE')     
+                            <button class="btn show-alert" type="submit"><i class="far fa-trash-alt text-danger mr-10 cursor-pointer"></i></button>
+                        </form>
+                        <div class="w-100">
+                            <label onclick="selectedCourse()" class="radio-course cursor-pointer text-center border-bottom-gray hover-gray">
+                                <input type="radio" name="radiocourse" value="{{$courses->id}}" {{ isset($selectedCourse) ? $selectedCourse->id == $courses->id ? 'checked' : '' : ''}}/>
+                                <div class="py-2">{{$courses->name}}</div>
+                            </label>
+                        </div>
+                    </div>
                 @endforeach
             </div>
         </div>
@@ -56,7 +67,10 @@
             <div class="text-center fw-bold fs-20 mb-3">Guru</div>
             <div class="box-course-create scroll-y custom-scroll-y" style="height: 600px;">
                 @foreach($teacher as $teachers)
-                    <div class="option-teacher cursor-pointer text-center border-bottom-gray py-2 hover-gray" onclick="selectedTeacher( {{$teachers}} )">{{$teachers->name}}</div>
+                    <label onclick="selectedTeacher()" class="radio-course cursor-pointer text-center border-bottom-gray hover-gray">
+                        <input type="radio" name="radioteacher" value="{{$teachers->id}}" {{ isset($selectedTeacher) ? $selectedTeacher->id == $teachers->id ? 'checked' : '' : ''}} />
+                        <div class="py-2">{{$teachers->name}}</div>
+                    </label>
                 @endforeach
             </div>
         </div>
@@ -65,11 +79,14 @@
             <div class="text-center fw-bold fs-20 mb-3">Kelas</div>
             <div class="box-course-create scroll-y custom-scroll-y" style="height: 600px;">
             @isset($selectedTeacher)
-                <div>Pilih Kelas Yang akan di ajar oleh <strong>{{$selectedTeacher->name}}</strong> dengan mata pelajaran <strong>{{$selectedCourse->name}}</strong></div>
+                <div>Pilih Kelas Yang akan di ajar oleh <strong class="text-blue">{{$selectedTeacher->name}}</strong> dengan mata pelajaran <strong class="text-blue">{{$selectedCourse->name}}</strong></div>
             @endisset
             @if($class)
                 @foreach($class as $classes)
-                    <div class="option-class cursor-pointer text-center border-bottom-gray py-2 hover-gray" onclick="selectedClass( {{$classes}} )">{{$classes->name}}</div>
+                    <label onclick="selectedClass()" class="radio-course cursor-pointer text-center border-bottom-gray hover-gray">
+                        <input type="radio" name="radioclass" value="{{$classes->id}}"/>
+                        <div class="py-2">{{$classes->name}}</div>
+                    </label>
                 @endforeach
             @else
                 <div>Kelas Tidak Tersedia atau guru belum ditentukan penempatan kelasnya</div>
@@ -79,7 +96,15 @@
     
     </div>
 
+    <div class="d-flex justify-content-end mt-20" onclick="save()">
+        <button class="btn save-btn-1"> Save </button>
+    </div>
+
+    
+
 </div>
+
+
 
 <script>
 
@@ -87,100 +112,101 @@
     var teacherValue = '';
     var classValue = '';
 
-$(document).ready(
-function()
-    {
-        $(".option-course").click(function(event)
-        {
-            // function selectedCourse(objCourse){
-            //     console.log(objCourse);
-            // }
-            console.log(courseValue)
-            $(this).addClass("active").siblings().removeClass("active");
+    $(document).ready(function(){
+        var url_str = document.URL;
+        let url = new URL(url_str);
+        let search_params = url.searchParams;
+        if(search_params.get('selectTeacherId') && search_params.get('selectCourseId')){
+            teacherValue = search_params.get('selectTeacherId');
+            courseValue = search_params.get('selectCourseId');
+
         }
-        );
-
-        $(".option-teacher").click(function(event)
-        {
-            console.log(teacherValue)
-            $(this).addClass("active").siblings().removeClass("active");
-        }
-        );
-
-        $(".option-class").click(function(event)
-        {
-            console.log(classValue)
-            if($(this).hasClass("active")){
-                $(this).removeClass("active")
-            }else{
-                $(this).addClass("active")
-            }
-        }
-        );
-
-        // if(courseValue && teacherValue){
-
-            // $.ajax({
-            //     url: 'courses?selectClass=1',
-            //     method: 'post',
-            //     success: function () {
-            //         console.log("done");
-            //         //do something
-            //     },error: function(xhr, ajaxOptions, thrownError){
-            //             console.log(xhr.status+" ,"+" "+ajaxOptions+", "+thrownError);
-            //         }
-            //     }
-            // }); 
-            
-        // }
-
-
     });
 
 
-    function selectedCourse(objCourse){
-        courseValue = objCourse
+    $('.show-alert').click(function(event) {
+          var form =  $(this).closest("form");
+          var name = $(this).data("name");
+          event.preventDefault();
+          Swal.fire({
+                title: `Hapus Mata Pelajaran`,
+                text: "Apakah Anda Yakin ingin menghapus mata pelajaran ini?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: 'Ya',
+                cancelButtonText: 'Tidak',
+          })
+          .then((result) => {
+            if (result.isConfirmed) {
+              form.submit();
+            }
+          });
+      });
+    
+
+    function save(){
+        var url_str = document.URL;
+        let url = new URL(url_str);
+        let search_params = url.searchParams;
+        var teacherId = search_params.get('selectTeacherId');
+        var courseId = search_params.get('selectCourseId');
+        window.location = 'course/assign?selectTeacherId=' + teacherId + '&selectCourseId=' + courseId +'&selectedClass=' + classValue;
+    }
+
+
+    function selectedCourse(){
+        var radiocourse = document.getElementsByName('radiocourse');
+
+        for (var i = 0, length = radiocourse.length; i < length; i++) {
+            if (radiocourse[i].checked) {
+                courseValue = radiocourse[i].value
+                break;
+            }
+        }
+
+        
         if(courseValue && teacherValue){
 
-            window.location = 'courses?selectClass=1&selectTeacherId=' + teacherValue.id + '&selectCourseId=' + courseValue.id;
+            window.location = 'courses?selectClass=1&selectTeacherId=' + teacherValue + '&selectCourseId=' + courseValue;
+            // window.location = 'courses?selectClass=1&selectTeacherId=' + teacherValue.id + '&selectCourseId=' + courseValue.id;
             
 
         }
     }
 
-    function selectedTeacher(objTeacher){
-        teacherValue = objTeacher
-        if(courseValue && teacherValue){
+    function selectedTeacher(){
+        var radioteacher = document.getElementsByName('radioteacher');
 
-            window.location = 'courses?selectClass=1&selectTeacherId=' + teacherValue.id + '&selectCourseId=' + courseValue.id;
+        for (var i = 0, length = radioteacher.length; i < length; i++) {
+            if (radioteacher[i].checked) {
+                teacherValue = radioteacher[i].value
+                if(courseValue && teacherValue){
 
-            // $.ajax({
-            //     url: 'courses?selectClass=1',
-            //     method: 'get',
-            //     success: function (_response) {
-            //         $class = _response;
-            //         console.log("done ", _response);
-            //     }
-            // }); 
-            
+                    // window.location = 'courses?selectClass=1&selectTeacherId=' + teacherValue.id + '&selectCourseId=' + courseValue.id;
+                    window.location = 'courses?selectClass=1&selectTeacherId=' + teacherValue + '&selectCourseId=' + courseValue;
+
+
+                }
+                break;
+            }
         }
+        
     }
 
-    function selectedClass(objClass){
-        classValue = objClass
+    function selectedClass(){
+        var radioclass = document.getElementsByName('radioclass');
+        
+        for (var i = 0, length = radioclass.length; i < length; i++) {
+            if (radioclass[i].checked) {
+                classValue = radioclass[i].value
+                console.log("radioclass ", classValue)
+                break;
+            }
+        }
+       
     }
 
-    // $.ajax({
-    //         url: 'fetch-data',
-    //         method: 'post',
-    //         success: function () {
-    //             console.log("done");
-    //             //do something
-    //         },error: function(xhr, ajaxOptions, thrownError){
-    //                 console.log(xhr.status+" ,"+" "+ajaxOptions+", "+thrownError);
-    //             }
-    //         }
-    //     }); 
+
 
 
 </script>
