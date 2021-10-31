@@ -24,6 +24,10 @@ class Classes extends Model
         return $this->users()->where('role',2); 
     }
 
+    public function teachers(){
+        return $this->users()->where('role',1); 
+    }
+
     public function assignments(){
         return $this->hasMany(Assignment::class,'class_id');
     }

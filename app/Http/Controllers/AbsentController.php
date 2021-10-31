@@ -68,7 +68,14 @@ class AbsentController extends Controller
 
     public function listUser(Schedule $schedule)
     {
-        $users = $schedule->class->students()->filter(request(['search']));
+        switch(Auth::user()->role){
+            case 'teacher':
+                $users = $schedule->class->students()->filter(request(['search']));
+                break;
+            case 'admin':
+                $users = $schedule->class->teachers()->filter(request(['search']));
+                break;
+        }
         return view('absents.list_user', [
             'schedule' => $schedule,
             'users' => $users->get()

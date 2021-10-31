@@ -4,7 +4,7 @@
 @section('title', 'Daftar Siswa')
 
 @section('content')
-    <h1>Daftar Absen Siswa Kelas {{ $schedule->class->name }}</h1> 
+    <h1>{{ Auth::user()->role=="teacher" ? "Daftar Absen Siswa Kelas ".$schedule->class->name : "Daftar Absen Guru" }}</h1> 
     <h5>Hari {{ \Carbon\Carbon::parse($schedule->date)->isoFormat('dddd, D MMMM Y') }}</h5>
     <h5>Mata Pelajaran: {{ $schedule->course->name }}</h5>
     <br>
