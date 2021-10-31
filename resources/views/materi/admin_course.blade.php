@@ -6,9 +6,8 @@
 
 <div class="container">
 
-    <h1>Materi</h1>
+    <h1>Mapping Mata Pelajaran</h1>
 
-    
     <div class="row">
         <div class="col">
             <div class="text-center fw-bold fs-20 mb-3">Mata Pelajaran</div>
@@ -47,11 +46,19 @@
                 </div>
                 </div>
                 @foreach($course as $courses)
-                <label onclick="selectedCourse()" class="radio-course cursor-pointer text-center border-bottom-gray hover-gray">
-                    <input type="radio" name="radiocourse" value="{{$courses->id}}"/>
-                    <div class="py-2">{{$courses->name}}</div>
-                </label>
-                    <!-- <div class="option-course cursor-pointer text-center border-bottom-gray py-2 hover-gray" onclick="selectedCourse( {{$courses}} )">{{$courses->name}}</div> -->
+                    <div class="d-flex a-center">
+                        <form action="{{ route('courses.destroy',[$courses]) }}" method="POST">   
+                            @csrf
+                            @method('DELETE')     
+                            <button class="btn show-alert" type="submit"><i class="far fa-trash-alt text-danger mr-10 cursor-pointer"></i></button>
+                        </form>
+                        <div class="w-100">
+                            <label onclick="selectedCourse()" class="radio-course cursor-pointer text-center border-bottom-gray hover-gray">
+                                <input type="radio" name="radiocourse" value="{{$courses->id}}"/>
+                                <div class="py-2">{{$courses->name}}</div>
+                            </label>
+                        </div>
+                    </div>
                 @endforeach
             </div>
         </div>
@@ -64,7 +71,6 @@
                         <input type="radio" name="radioteacher" value="{{$teachers->id}}"/>
                         <div class="py-2">{{$teachers->name}}</div>
                     </label>
-                    <!-- <div class="option-teacher cursor-pointer text-center border-bottom-gray py-2 hover-gray" onclick="selectedTeacher( {{$teachers}} )">{{$teachers->name}}</div> -->
                 @endforeach
             </div>
         </div>
@@ -81,7 +87,6 @@
                         <input type="radio" name="radioclass" value="{{$classes->id}}"/>
                         <div class="py-2">{{$classes->name}}</div>
                     </label>
-                    <!-- <div class="option-class cursor-pointer text-center border-bottom-gray py-2 hover-gray" onclick="selectedClass( {{$classes}} )">{{$classes->name}}</div> -->
                 @endforeach
             @else
                 <div>Kelas Tidak Tersedia atau guru belum ditentukan penempatan kelasnya</div>
@@ -99,11 +104,34 @@
 
 </div>
 
+
+
 <script>
 
     var courseValue = '';
     var teacherValue = '';
     var classValue = '';
+
+
+    $('.show-alert').click(function(event) {
+          var form =  $(this).closest("form");
+          var name = $(this).data("name");
+          event.preventDefault();
+          Swal.fire({
+                title: `Hapus Mata Pelajaran`,
+                text: "Apakah Anda Yakin ingin menghapus mata pelajaran ini?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: 'Ya',
+                cancelButtonText: 'Tidak',
+          })
+          .then((result) => {
+            if (result.isConfirmed) {
+              form.submit();
+            }
+          });
+      });
+    
 
     function save(){
         var url_str = document.URL;
