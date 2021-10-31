@@ -39,4 +39,9 @@ class Classes extends Model
     public function schedules(){
         return $this->hasMany(Schedule::class,'class_id');
     }
+
+    public function usersCourse(){
+        return $this->belongsToMany(Classes::class,'courses_classes_users', 'class_id', 'user_id')->withPivot('course_id')->withTimestamps(); 
+    }
+
 }

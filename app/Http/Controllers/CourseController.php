@@ -28,12 +28,20 @@ class CourseController extends Controller
                 // $class = Classes::all();
                 // dd($teacher->find(request()->input("selectTeacherId"))->classes);
                 $class = $teacher->find(request()->input("selectTeacherId"))->classes;
+                $crs = Course::find(request()->input('selectCourseId'));
+                
+                $user_have_class = $teacher->find(request()->input("selectTeacherId"))->usersClasses;
+                // dd($usr->usersClasses);
+
+                // dd($crs->usersId(request()->input("selectTeacherId")));
+                // dd($course->users->first()->pivot);
                 return view('materi.admin_course',[
                     'selectedTeacher' => $teacher->find(request()->input("selectTeacherId")),
                     'selectedCourse' => $course->find(request()->input("selectCourseId")),
                     'teacher' => $teacher,
                     'course' => $course,
-                    'class' => $class
+                    'class' => $class,
+                    'exist_class' => $user_have_class,
                 ]);
 
             }else{
@@ -176,10 +184,8 @@ class CourseController extends Controller
     public function assignCourse(){
 
         $course = Course::find(request()->input('selectCourseId'));
-        // $user = User::find(request()->input('selectTeacherId'));
 
         $course->users()->attach(request()->input('selectTeacherId'), ['class_id' => request()->input('selectedClass')]);
-        // $user->classes()->attach(request()->input('selectedClass'));
 
 
         return redirect()->route('courses.index')->with('success','Berhasil Mapping Guru dan pelajarannya.');
