@@ -77,8 +77,9 @@ Route::middleware('auth')->group(function () {
     Route::resource('classes.schedules', ScheduleController::class);
 
     Route::get('/absent', [AbsentController::class, 'course']);
+    Route::post('/absent', [AbsentController::class, 'store'])->name('absents.store');
     Route::get('/absents', [AbsentController::class, 'absentGrid']);
-    Route::get('/absents/{schedule}/users', [AbsentController::class, 'listUser'])->name('absents.users');
+    Route::get('/absents/users', [AbsentController::class, 'listUser'])->name('absents.users');
     Route::resource('course.absents', AbsentController::class);
 
     Route::get('/accounts', [UserController::class, 'index']);

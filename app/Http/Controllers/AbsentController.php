@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Absent;
 use App\Models\Course;
 use App\Models\Schedule;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -66,19 +67,22 @@ class AbsentController extends Controller
         ]);
     }
 
-    public function listUser(Schedule $schedule)
+    public function listUser()
     {
-        switch(Auth::user()->role){
+        $schedule = request('schedule') ? Schedule::findOrFail(request('schedule')) : "";
+        $role = Auth::user()->role;
+        switch($role){
             case 'teacher':
                 $users = $schedule->class->students()->filter(request(['search']));
                 break;
             case 'admin':
-                $users = $schedule->class->teachers()->filter(request(['search']));
+                $users = User::where('role',1)->filter(request(['search']));
                 break;
         }
         return view('absents.list_user', [
             'schedule' => $schedule,
-            'users' => $users->get()
+            'users' => $users->paginate(20)->appends(['date' => request('date'), 'schedule' => request('schedule')]),
+            'role' => $role
         ]);
     }
 
@@ -100,12 +104,24 @@ class AbsentController extends Controller
      */
     public function store(Course $course, Request $request)
     {
-        $schedule=Schedule::find($request->schedule_id);
-        Absent::create([
-            'status' => 'Hadir',
-            'user_id' => Auth::user()->id,
-            'schedule_id' => $schedule->id
-        ]);
+        $role = Auth::user()->role;
+        switch($role){
+            case 'teacher':
+                Absent::create([
+                    'status' => 'Hadir',
+                    'user_id' => Auth::user()->id
+                ]);
+                break;
+            case 'student':
+                $schedule=Schedule::find($request->schedule_id);
+                Absent::create([
+                    'status' => 'Hadir',
+                    'user_id' => Auth::user()->id,
+                    'schedule_id' => $schedule->id
+                ]);
+                break;
+        }
+        
         Alert::success('Berhasil', 'Anda berhasil absent!');
         return back();
     }

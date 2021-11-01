@@ -29,7 +29,5 @@ class Absent extends Model
         return $this->belongsTo(User::class); 
     }
 
-    public function check_absent_today($user){
-        return $this->where('user_id', $user)->whereDate('created_at', now()->date)->get(); 
-    }
+    
 }

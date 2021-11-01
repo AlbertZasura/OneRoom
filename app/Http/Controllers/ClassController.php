@@ -73,6 +73,7 @@ class ClassController extends Controller
     {
         switch(Auth::user()->role){
             case 'teacher':
+            case 'student':
                 $classes = Auth::user()->classes;
                 break;
             case 'admin':
