@@ -90,11 +90,7 @@
                         @foreach($exist_class as $key => $ex_cls)
                             @if($ex_cls->id == $classes->id)
                                 <div class="d-flex a-center">
-                                    <form action="" method="POST">   
-                                        @csrf
-                                        @method('DELETE')     
-                                        <button class="btn show-alert" type="submit"><i class="far fa-trash-alt text-danger mr-10 cursor-pointer"></i></button>
-                                    </form>
+                                    <button class="btn" onclick="deleteClassBtn( {{$classes->id}}, {{$selectedTeacher->id}} )"><i class="far fa-trash-alt text-danger mr-10 cursor-pointer"></i></button>
                                     <div class="w-100">
                                         <label onclick="selectedClass()" class="radio-course cursor-pointer text-center border-bottom-gray hover-gray bg-success text-white">
                                             <input type="radio" name="radioclass" value="{{$classes->id}}"/>
@@ -179,8 +175,25 @@
             }
           });
       });
-    
 
+      function deleteClassBtn(id,user){
+        Swal.fire({
+                title: `Hapus Kelas`,
+                text: "Apakah Anda Yakin ingin menghapus Kelas ini?",
+                icon: "warning",
+                showCancelButton: true,
+                confirmButtonText: 'Ya',
+                cancelButtonText: 'Tidak',
+          })
+          .then((result) => {
+            if (result.isConfirmed) {
+                window.location = 'course/delete/teacherClass?class_id=' + id + '&user_id=' + user;
+            }
+          });
+        
+      }
+    
+      
     function save(){
         var url_str = document.URL;
         let url = new URL(url_str);

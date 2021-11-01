@@ -71,6 +71,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('courses', CourseController::class);
     Route::post('course/createCourse', [CourseController::class, 'createCourse']);
     Route::get('course/assign', [CourseController::class, 'assignCourse']);
+    Route::get('course/delete/teacherClass', [CourseController::class, 'teacherClassDelete']);
     
     Route::get('/schedules/all', [ScheduleController::class, 'listClass'])->name('admin.schedule');
     Route::get('/schedules', [ScheduleController::class, 'schedulesChart']);

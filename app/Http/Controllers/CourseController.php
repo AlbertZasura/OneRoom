@@ -191,4 +191,15 @@ class CourseController extends Controller
         return redirect()->route('courses.index')->with('success','Berhasil Mapping Guru dan pelajarannya.');
     }
 
+    public function teacherClassDelete(){
+
+        $teacher =  User::find(request()->input("user_id"));
+        
+        $user_have_class = $teacher->usersClasses->where("id","like",request()->input("class_id"))->first()->pivot->delete();
+        // $user_have_class = $teacher->usersClasses();
+        // dd($user_have_class);
+
+        return redirect()->route('courses.index')->with('success','Berhasil Menghapus Mapping Guru dengan kelas.');
+    }
+
 }
