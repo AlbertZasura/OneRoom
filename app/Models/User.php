@@ -107,4 +107,8 @@ class User extends Authenticatable
     public function check_absent_today(){
         return $this->absents()->whereDate('created_at', now())->first(); 
     }
+
+    public function check_absent($date){
+        return $this->absents()->whereDate('created_at', $date)->first(); 
+    }
 }

@@ -9,6 +9,8 @@ use App\Models\User;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Exports\AbsentsExport;
+use Maatwebsite\Excel\Facades\Excel;
 use Alert;
 
 class AbsentController extends Controller
@@ -173,6 +175,12 @@ class AbsentController extends Controller
         ]);
 
         return redirect()->route('absents.index')->with('success','Absent updated successfully.');
+    }
+
+    public function export(){
+        $role = Auth::user()->role ==='teacher'?'Siswa':'Guru';
+        $date = request('schedule') ? Schedule::findOrFail(request('schedule'))->created_at : request('date');
+        return Excel::download(new AbsentsExport(request(['search','schedule'])), "Daftar Absent {$role} Tanggal {$date}.xlsx");
     }
 
     /**
