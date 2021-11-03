@@ -20,7 +20,7 @@
                             @endif 
                             <div>
                                 <label for="profile_picture" class="btn"><b>Ubah Gambar Profil</b></label>
-                                <input name="profile_picture" id="profile_picture" style="visibility:hidden;" type="file">
+                                <input name="profile_picture" id="profile_picture" style="display:none;" type="file">
                                 <input type="hidden" name="user_id" id="user_id" value="{{ Auth::user()->id }}" >
                             </div>
                         </div>
@@ -46,12 +46,12 @@
                                 <div class="invalid-feedback">{{ $message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-12"><label class="labels">Password</label><input type="password" class="form-control @error('password')is-invalid @enderror" name="password" id="password" placeholder="Password" value="" required>
+                            <div class="col-md-12"><label class="labels">Password</label><input type="password" class="form-control @error('password')is-invalid @enderror" name="password" id="password" placeholder="Password" value="">
                                 @error('password')
                                 <div class="invalid-feedback">{{ $message}}</div>
                                 @enderror
                             </div>
-                            <div class="col-md-12"><label class="labels">Konfirmasi Password</label><input type="password" class="form-control @error('password_confirmation')is-invalid @enderror rounded-bottom" name="password_confirmation" id="password_confirmation" placeholder="Konfirmasi Password" value="" required>
+                            <div class="col-md-12"><label class="labels">Konfirmasi Password</label><input type="password" class="form-control @error('password_confirmation')is-invalid @enderror rounded-bottom" name="password_confirmation" id="password_confirmation" placeholder="Konfirmasi Password" value="">
                                 @error('password_confirmation')
                                 <div class="invalid-feedback">{{ $message}}</div>
                                 @enderror

@@ -22,41 +22,17 @@
             </div>
         </div>
     </div>
-    <table class="table table-hover table-responsive" id="tableSearch"  style="">
-    <thead>
-        <tr>
-            <td>
-                
-                <select class="form-select" id = "filterTable" oninput="selectTable()" aria-label="Default select example">
-                    <option value="">Semua Jabatan</option>
-                    <option value="teacher">teacher</option>
-                    <option value="student">student</option>
-                </select>
-            </td>
-            
-            <td>
-                <form action="/accounts">
-                    <div class="input-group rounded" style="width:300px">
-                        <input type="text" id="myInput" class="form-control" name="search" placeholder="Cari nama" aria-label="Search" aria-describedby="search-addon" >
-                        <button class="btn btn-outline-secondary" type="submit"><i class="fas fa-search"></i></button>
-                    </div>
-                </form>
-            </td>
-            
-        </tr>
-    </table>
     
-    
-        <table class="table table-hover table-responsive" id="tableSearch"  style="width:75%">
+    <table class="table table-hover table-responsive" id="tableSearch"  style="width:75%">
         <thead>
             <tr>
-            <th scope="col">No</th>
-            <th scope="col">Nama Akun</th>
-            <th scope="col">Tanggal Daftar</th> 
-            <th scope="col">Jabatan</th>
-            <th scope="col">Aksi</th>
-        </tr>
-    </thead>   
+                <th scope="col">No</th>
+                <th scope="col">Nama Akun</th>
+                <th scope="col">Tanggal Daftar</th> 
+                <th scope="col">Jabatan</th>
+                <th scope="col">Aksi</th>
+            </tr>
+        </thead>   
     
     <tbody id = "myTable">
     @foreach ($users as $key => $user )

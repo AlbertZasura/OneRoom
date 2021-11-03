@@ -155,7 +155,7 @@
                         <div class="fs-18 ml-20">
                             <form action="/logout" method="POST">   
                                 @csrf
-                                <button type="submit" class="btn text-white">keluar</button>
+                                <button type="submit" class="btn text-white">Keluar</button>
                             </form>
                         </div>
                     </div>
