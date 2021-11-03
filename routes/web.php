@@ -64,21 +64,24 @@ Route::middleware('auth')->group(function () {
     Route::post('assignments/{assignment}/scoring', [AssignmentController::class, 'scoring'])->name('assignments.scoring');
     Route::get('assignments/{assignment}/export', [AssignmentController::class, 'export'])->name('assignments.export');
     Route::resource('course.assignments', AssignmentController::class);
-
+    
     Route::resource('session', SessionController::class);
     
     Route::get('courses/download/{id}', [CourseController::class, 'downloadFile'])->name('uploaded');
     Route::resource('courses', CourseController::class);
     Route::post('course/createCourse', [CourseController::class, 'createCourse']);
     Route::get('course/assign', [CourseController::class, 'assignCourse']);
+    Route::get('course/delete/teacherClass', [CourseController::class, 'teacherClassDelete']);
     
     Route::get('/schedules/all', [ScheduleController::class, 'listClass'])->name('admin.schedule');
     Route::get('/schedules', [ScheduleController::class, 'schedulesChart']);
     Route::resource('classes.schedules', ScheduleController::class);
-
+    
     Route::get('/absent', [AbsentController::class, 'course']);
+    Route::post('/absent', [AbsentController::class, 'store'])->name('absents.store');
     Route::get('/absents', [AbsentController::class, 'absentGrid']);
-    Route::get('/absents/{schedule}/users', [AbsentController::class, 'listUser'])->name('absents.users');
+    Route::get('/absents/users', [AbsentController::class, 'listUser'])->name('absents.users');
+    Route::get('/absents/users/export', [AbsentController::class, 'export'])->name('absents.export');
     Route::resource('course.absents', AbsentController::class);
 
     Route::get('/accounts', [UserController::class, 'index']);

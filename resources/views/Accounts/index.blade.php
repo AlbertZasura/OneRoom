@@ -3,9 +3,27 @@
 @section('title', 'Accounts')
 
 @section('content')
-    <h1>Akun</h1>
-   
-    <table>
+    <h1>Daftar Akun</h1>
+    <div class="row mb-1">
+        <div class="col-md-2">
+            <select class="form-select" id = "filterTable" oninput="selectTable()" aria-label="Default select example">
+                <option value="">Semua Jabatan</option>
+                <option value="teacher">teacher</option>
+                <option value="student">student</option>
+            </select>
+        </div>
+        <div class="col-md-3">
+            <div class="input-group rounded" style="width:300px"> 
+                <input type="text" id="myInput" class="form-control rounded" placeholder="Cari nama" aria-label="Search"
+                aria-describedby="search-addon" />
+                <span class="input-group-text border-0" id="search-addon">
+                    <i class="fas fa-search"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+    <table class="table table-hover table-responsive" id="tableSearch"  style="">
+    <thead>
         <tr>
             <td>
                 
@@ -36,83 +54,78 @@
             <th scope="col">Nama Akun</th>
             <th scope="col">Tanggal Daftar</th> 
             <th scope="col">Jabatan</th>
-            <th></th>
-            <th></th>
-            </tr>
-        </thead>   
-        
-        <tbody id = "myTable">
-        @foreach ($users as $key => $user )
-                <tr class='clickable-row' data-bs-toggle="modal" data-bs-target="#modal{{$user->id}}" >
-                    <td>
-                        <a>{{ $key+1}}</a>
-                    </td>
-                    <td>
-                        <a>{{ $user->name }}</a>
-                    </td>
-                    <td>
-                        <a>{{ $user->created_at->format('d M Y') }}</a> 
-                    </td>
-                    <td>
-                        <a>{{ $user->role }}</a>
-                    </td>
-                    <td>
+            <th scope="col">Aksi</th>
+        </tr>
+    </thead>   
+    
+    <tbody id = "myTable">
+    @foreach ($users as $key => $user )
+            <tr class='clickable-row' data-bs-toggle="modal" data-bs-target="#modal{{$user->id}}" >
+                <td>
+                    <a>{{ $key+1}}</a>
+                </td>
+                <td>
+                    <a>{{ $user->name }}</a>
+                </td>
+                <td>
+                    <a>{{ $user->created_at->format('d M Y') }}</a> 
+                </td>
+                <td>
+                    <a>{{ $user->role }}</a>
+                </td>
+                <td>
+                    <div class="d-flex">
                         <form action="{{ route('users.update', $user->id) }}" method="POST">
                             @csrf
                             @method('PUT')
                             <button class="btn" type="submit" onclick="return confirm('Apakah Anda yakin untuk menerima {{ $user->name }}?')"><i class="fas fa-check fa-lg" style="color:green"></i></button>
                         </form>
-                    </td>
-                    <td>
                         <form action="{{  route('users.destroy',$user->id) }}" method="POST">
                             @csrf
                             @method('DELETE')      
                             <button class="btn" type="submit" onclick="return confirm('Apakah Anda yakin untuk menolak {{ $user->name }}?')"><i class="fas fa-times fa-lg" style="color:red"></i></button>
                         </form>
-                    </td>
-                </tr>
-
-                
-                <div class="modal fade" id="modal{{$user->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                    <div class="modal-dialog" >
-                        <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" >Detail Informasi</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <div class="mb-3">
-                                <label for="recipient-name" class="col-form-label"><b>Nama</b></label>
-                                <input type="text" name="name" class="form-control" id="name" value="{{ $user->name }}" readonly>
-                            </div>
-                            <div class="mb-3">
-                                <label for="message-text" class="col-form-label"><b>Nomor Induk</b></label>
-                                <input type="text" name="identification_number" class="form-control" id="identification_number" value="{{ $user->identification_number }}" readonly>
-                            </div>
-                            <div class="mb-3">
-                                <label for="message-text" class="col-form-label"><b>Nomor Handphone</b></label>
-                                <input type="text" name="phone" class="form-control" id="phone" value="{{ $user->phone }}" readonly>
-                            </div>
-                            <div class="mb-3">
-                                <label for="message-text" class="col-form-label"><b>Email</b></label>
-                                <input type="text" name="email" class="form-control" id="email" value="{{ $user->email }}" readonly>
-                            </div>
-                            <div class="mb-3">
-                                <label for="message-text" class="col-form-label"><b>Jabatan</b></label>
-                                <input type="text" name="role" class="form-control" id="role" value="{{ $user->role }}" readonly>
-                            </div>
-                            
                     </div>
-                </div>
-                
-                @endforeach
-            </tbody>   
-        </table>
-            
-        {{ $users->links() }}
-        
+                </td>
+            </tr>
 
-       
+            
+            <div class="modal fade" id="modal{{$user->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" >
+                    <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" >Detail Informasi</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="mb-3">
+                            <label for="recipient-name" class="col-form-label"><b>Nama</b></label>
+                            <input type="text" name="name" class="form-control" id="name" value="{{ $user->name }}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label"><b>Nomor Induk</b></label>
+                            <input type="text" name="identification_number" class="form-control" id="identification_number" value="{{ $user->identification_number }}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label"><b>Nomor Handphone</b></label>
+                            <input type="text" name="phone" class="form-control" id="phone" value="{{ $user->phone }}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label"><b>Email</b></label>
+                            <input type="text" name="email" class="form-control" id="email" value="{{ $user->email }}" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="message-text" class="col-form-label"><b>Jabatan</b></label>
+                            <input type="text" name="role" class="form-control" id="role" value="{{ $user->role }}" readonly>
+                        </div>
+                        
+                </div>
+            </div>
+            
+            @endforeach
+        </tbody>   
+    </table>
+    {{ $users->links() }}
 
 <script>
     // $(document).ready(function(){
@@ -134,4 +147,4 @@
     }
 
 </script>
-@stop
+@endsection

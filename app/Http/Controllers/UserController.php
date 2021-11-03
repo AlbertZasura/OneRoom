@@ -25,6 +25,7 @@ class UserController extends Controller
             $users = User::latest()->where('name', 'like', '%' . request('search') .'%');
         }
 
+        $users = User::where('status', 0)->whereIn('role',[1,2])->paginate(25);
         return view('Accounts.index', [
             'users' => $users->paginate(10)
         ]);

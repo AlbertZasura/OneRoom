@@ -32,6 +32,11 @@ class AbsentPolicy
         return $user->role === 'teacher' ? Response::allow() : Response::deny('Cannot Access');
     }
 
+    public function listUser(User $user)
+    {
+        return $user->role !== 'student' ? Response::allow() : Response::deny('Cannot Access');
+    }
+
     /**
      * Determine whether the user can view the model.
      *

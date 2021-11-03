@@ -24,6 +24,10 @@ class Classes extends Model
         return $this->users()->where('role',2); 
     }
 
+    public function teachers(){
+        return $this->users()->where('role',1); 
+    }
+
     public function assignments(){
         return $this->hasMany(Assignment::class,'class_id');
     }
@@ -35,4 +39,9 @@ class Classes extends Model
     public function schedules(){
         return $this->hasMany(Schedule::class,'class_id');
     }
+
+    public function usersCourse(){
+        return $this->belongsToMany(Classes::class,'courses_classes_users', 'class_id', 'user_id')->withPivot('course_id')->withTimestamps(); 
+    }
+
 }

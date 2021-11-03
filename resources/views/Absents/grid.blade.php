@@ -137,7 +137,7 @@
                         title: "{{ $s->course->name }}",
                         start: "{{ $start }}",
                         end: "{{ $end }}",
-                        url: "/absents/{{ $s->id }}/users",
+                        url: "/absents/users?schedule={{ $s->id }}",
                         className: 'chill'
                     },
                 @endforeach

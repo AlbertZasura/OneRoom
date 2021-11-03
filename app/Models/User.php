@@ -93,11 +93,23 @@ class User extends Authenticatable
         return $this->exams()->wherePivot('exam_id',$exam_id);
     }
 
+    public function usersClasses(){
+        return $this->belongsToMany(Classes::class,'courses_classes_users', 'user_id', 'class_id')->withPivot('course_id')->withTimestamps(); 
+    }
+
     public function absents(){
         return $this->hasMany(Absent::class);
     }
 
     public function absent_schedule($schedule_id){
         return $this->absents()->where('schedule_id',$schedule_id);
+    }
+
+    public function check_absent_today(){
+        return $this->absents()->whereDate('created_at', now())->first(); 
+    }
+
+    public function check_absent($date){
+        return $this->absents()->whereDate('created_at', $date)->first(); 
     }
 }

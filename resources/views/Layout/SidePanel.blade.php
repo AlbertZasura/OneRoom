@@ -102,22 +102,16 @@
                             
                         </div>
                     </div>
-                    <div class="d-flex a-center mb-10">
-                        <div class="fs-20 w-25px">
-                            <i class="fas fa-chalkboard"></i>
-                        </div>
-                        <div class="fs-18 ml-20">
-                            @can('viewAny', App\Models\Classes::class )
+                    @can('viewAny', App\Models\Classes::class )
+                        <div class="d-flex a-center mb-10">
+                            <div class="fs-20 w-25px">
+                                <i class="fas fa-chalkboard"></i>
+                            </div>
+                            <div class="fs-18 ml-20">
                                 <a href="{{route('classes.index')}}" class="btn text-white">Kelas</a>
-                            @else
-                                @if (!Auth::user()->classes->isEmpty())
-                                    <a href="#" class="btn text-white">Kelas</a>
-                                @else
-                                    <a href="#" class="btn text-white disabled"> Kelas</a>
-                                @endif
-                            @endcan
+                            </div>
                         </div>
-                    </div>
+                    @endcan
                     <div class="d-flex a-center mb-10">
                         <div class="fs-25 w-25px">
                             <i class="fas fa-clipboard-list"></i>
@@ -130,6 +124,9 @@
                             @can('absentGrid', App\Models\Absent::class )
                                 <a href="/absents" class="btn text-white">Absen</a>
                             @endcan
+                            @if (Auth::user()->role=="admin")
+                                <a href="/absents/users?date={{ now()->format('Y-m-d') }}" class="btn text-white">Absen</a>
+                            @endif
                         </div>
                     </div>
                     @can('viewAny', App\Models\User::class)
