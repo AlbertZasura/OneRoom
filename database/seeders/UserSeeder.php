@@ -46,6 +46,7 @@ class UserSeeder extends Seeder
             'email' => 'siswa@example.com',
             'phone' => '12345678901',
             'identification_number' => "12345678",
+            'status' => 1,
             'role' => 2,
             'email_verified_at' => now(),
             'password' => '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', // password

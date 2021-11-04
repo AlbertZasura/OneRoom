@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Alert;
 
 class RegisterController extends Controller
@@ -51,7 +50,9 @@ class RegisterController extends Controller
             "identification_number" => $request->role==="admin" ? "0":$request->identification_number,
             "password" => bcrypt($request->password)
         ]);
-        Alert::warning('Berhasil', 'Akun berhasil dibuat, Menunggu verifikasi dari admin!');
+
+        $messages= $request->role !='admin'? 'Akun berhasil dibuat, Menunggu verifikasi dari admin!':'Akun berhasil dibuat, Silahkan login kembali!';
+        Alert::warning('Berhasil', $messages);
         return redirect()->route('login');
     }
 }

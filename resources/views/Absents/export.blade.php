@@ -1,8 +1,10 @@
 <table>
-    <tr>
-        <th></th>
-        <th><strong>Mata Pelajaran: {{ $schedule->course->name }}</strong></th>
-    </tr>
+    @if ($role==="teacher")
+        <tr>
+            <th></th>
+            <th><strong>Mata Pelajaran: {{ $schedule->course->name }}</strong></th>
+        </tr>
+    @endif
     <thead>
         <tr>
             <th><strong>No</strong></th>

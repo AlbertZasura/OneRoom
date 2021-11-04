@@ -19,13 +19,20 @@ class LoginController extends Controller
             'email' => 'required|email',
             'password' => 'required'
         ]);
-
+        
         if (Auth::attempt($credentials)) {
-            $request->session()->regenerate();
-            return redirect()->route('home')->with('success','Berhasil masuk!');
+            if (Auth::user()->status==1){
+                $request->session()->regenerate();
+                return redirect()->route('home')->with('success','Berhasil masuk!');
+            }else{
+                Auth::logout();
+                $errors="Akun anda sedang menunggu verifikasi dari Admin";
+            }
+        }else{
+            $errors="Email dan Password salah!";
         }
 
-        return back()->with('loginError','Email dan Password salah!');
+        return back()->with('loginError',$errors);
     }
     
     public function logout(Request $request)

@@ -55,7 +55,7 @@
                 </table>
             </div>
         </div>
-        @can('listUser', App\Models\Absent::class )
+        @can('isTeacher')
             <div class="col-md-2">
                 <div class="card text-center">
                     <div class="card-header d-flex justify-content-center align-items-center ">
