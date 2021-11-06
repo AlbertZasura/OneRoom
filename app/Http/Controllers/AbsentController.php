@@ -72,6 +72,7 @@ class AbsentController extends Controller
 
     public function listUser()
     {
+        $this->authorize('listUser', Absent::class);
         $schedule = request('schedule') ? Schedule::findOrFail(request('schedule')) : "";
         $role = Auth::user()->role;
         switch($role){
@@ -107,6 +108,7 @@ class AbsentController extends Controller
      */
     public function store(Course $course, Request $request)
     {
+        $this->authorize('create', Absent::class);
         $role = Auth::user()->role;
         $max_absent= Content::where('name','=','Absent')->first()->value;
         switch($role){
@@ -161,6 +163,7 @@ class AbsentController extends Controller
      */
     public function update(Request $request, Absent $absent)
     {
+        $this->authorize('update', $absent);
         $request->validate([
             'created_at' => 'required',
             'status' => 'required',
@@ -180,6 +183,7 @@ class AbsentController extends Controller
     }
 
     public function export(){
+        $this->authorize('export', Absent::class);
         $role = Auth::user()->role ==='teacher'?'Siswa':'Guru';
         $date = request('schedule') ? Schedule::findOrFail(request('schedule'))->created_at : request('date');
         return Excel::download(new AbsentsExport(request(['search','schedule'])), "Daftar Absent {$role} Tanggal {$date}.xlsx");
@@ -191,10 +195,5 @@ class AbsentController extends Controller
      * @param  \App\Models\Absent  $absent
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Absent $absent)
-    {
-        $absent->delete();
-        return redirect()->route('absents.index')
-                        ->with('success','Absent deleted successfully');
-    }
+    
 }
