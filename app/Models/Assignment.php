@@ -10,7 +10,10 @@ class Assignment extends Model
     use HasFactory;
 
     protected $guarded = ['id'];
-    public $kkm=75;
+    
+    public function kkm(){
+        return Content::where('name','=','KKM')->first()->value;
+    }
     public function class(){
         return $this->belongsTo(Classes::class,'class_id');
     }
