@@ -73,6 +73,7 @@ class ClassController extends Controller
     public function show(Classes $class)
     {
         $this->authorize('view', $class);
+        $users= $class->users()->paginate(25);
         switch(Auth::user()->role){
             case 'teacher':
             case 'student':
@@ -82,7 +83,11 @@ class ClassController extends Controller
                 $classes = Classes::with('users')->latest()->get();
                 break;
         }
-        return view('classes.show', ['class' => $class, 'classes' => $classes]);
+        return view('classes.show', [
+            'class' => $class, 
+            'classes' => $classes,
+            'users' => $users
+        ]);
     }
 
     /**
@@ -124,7 +129,7 @@ class ClassController extends Controller
             });
         })->orWhere( function (Builder $query){
              $query->doesntHave('classes')->where('role',2);
-        })->filter(request(['search','role']))->get();
+        })->filter(request(['search','role']))->paginate(25);
         
 
         return view('classes.assign_user', [
