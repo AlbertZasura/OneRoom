@@ -19,7 +19,7 @@ class SchedulePolicy
      */
     
     public function schedulesChart(User $user){
-        return $user->role !== 'admin' ? Response::allow() : Response::deny('You Cannot access.');
+        return in_array($user->role,["teacher","student"]) ? Response::allow() : Response::deny('You Cannot access.');
     }
     
     public function listClass(User $user){
@@ -28,7 +28,7 @@ class SchedulePolicy
 
      public function viewAny(User $user)
     {
-        return $user->role === 'admin' ? Response::allow() : Response::deny('You are not an Admin.');
+        return in_array($user->role,["admin"]) ? Response::allow() : Response::deny('You Are not Admin.');
     }
 
     /**

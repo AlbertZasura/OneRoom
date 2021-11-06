@@ -54,6 +54,7 @@ class ClassController extends Controller
      */
     public function store(Request $request)
     {
+        $this->authorize('create', Classes::class);
         $request->validate([
             'name' => 'required'
         ]);
@@ -71,6 +72,7 @@ class ClassController extends Controller
      */
     public function show(Classes $class)
     {
+        $this->authorize('view', $class);
         $users= $class->users()->paginate(25);
         switch(Auth::user()->role){
             case 'teacher':
@@ -109,6 +111,7 @@ class ClassController extends Controller
      */
     public function update(Request $request, Classes $classes)
     {
+        $this->authorize('update', $classes);
         $request->validate([
             'name' => 'required'
         ]);
@@ -137,6 +140,7 @@ class ClassController extends Controller
 
     public function assign_user(Request $request,Classes $class,User $user )
     {
+        $this->authorize('assign_user', Classes::class);
         $type=$request->input('type');
         if ($type==='attach') {
             $class->users()->attach($user);
@@ -156,6 +160,7 @@ class ClassController extends Controller
      */
     public function destroy(Classes $class)
     {
+        $this->authorize('delete', $class);
         $class->delete();
         return redirect()->route('classes.index')->with('success','Kelas berhasil dihapus!');
     }
