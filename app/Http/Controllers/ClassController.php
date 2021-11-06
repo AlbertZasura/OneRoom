@@ -121,7 +121,7 @@ class ClassController extends Controller
             });
         })->orWhere( function (Builder $query){
              $query->doesntHave('classes')->where('role',2);
-        })->filter(request(['search','role']))->get();
+        })->filter(request(['search','role']))->paginate(25);
         
 
         return view('classes.assign_user', [
