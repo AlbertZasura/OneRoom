@@ -35,6 +35,10 @@ class Classes extends Model
     public function courses(){
         return $this->belongsToMany(Course::class,'classes_courses','class_id','course_id')->withTimestamps(); 
     }
+
+    public function classesCourse(){
+        return $this->belongsToMany(Course::class,'courses_classes_users','class_id','course_id')->withPivot('user_id')->withTimestamps(); 
+    }
     
     public function schedules(){
         return $this->hasMany(Schedule::class,'class_id');
