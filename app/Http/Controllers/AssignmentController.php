@@ -19,8 +19,9 @@ class AssignmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function course()
+    public function course(Course $course)
     {
+        $this->authorize('viewAny', App\Models\Assignment::class);
         $courses = Course::whereHas('classes.users',function(Builder $query){
             $query->where('user_id',Auth::user()->id);
         })->get();
@@ -31,6 +32,7 @@ class AssignmentController extends Controller
 
     public function index(Course $course)
     {
+        $this->authorize('viewAny', App\Models\Assignment::class);
         $user = Auth::user();
         $courses = Course::whereHas('classes.users',function(Builder $query) use ($user){
             $query->where('user_id',$user->id);
@@ -78,6 +80,7 @@ class AssignmentController extends Controller
      */
     public function store(Request $request, Course $course)
     {
+        $this->authorize('create', App\Models\Assignment::class);
         $request->validate([
             'title' => 'required',
             'deadline' => 'required',
@@ -153,6 +156,7 @@ class AssignmentController extends Controller
 
     public function download(Assignment $assignment)
     {
+        $this->authorize('download', $assignment);
         $type=request()->input('type');
         $user=request()->input('u');
         $time=request()->input('t');
@@ -166,6 +170,7 @@ class AssignmentController extends Controller
 
     public function upload(Request $request,Assignment $assignment)
     {
+        $this->authorize('upload',  App\Models\Assignment::class);
         $request->validate([
             'notes' => 'required',
             'file' => 'required|file|max:10000' // max 10MB
@@ -183,6 +188,7 @@ class AssignmentController extends Controller
 
     public function scoring(Request $request,Assignment $assignment)
     {
+        $this->authorize('scoring', $assignment);
         $request->validate([
             'score' => 'required'
         ]);
@@ -194,6 +200,7 @@ class AssignmentController extends Controller
     }
 
     public function export(Assignment $assignment){
+        $this->authorize('export', $assignment);
         return Excel::download(new AssignmentExport($assignment->id), "Daftar Siswa kelas {$assignment->class->name} - Tugas {$assignment->title}.xlsx");
     }
 }

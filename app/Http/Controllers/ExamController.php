@@ -59,6 +59,7 @@ class ExamController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    //ga kepake
     public function store(Request $request)
     {
         $request->validate([
@@ -93,7 +94,9 @@ class ExamController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function downloadExamsUser($id){
+     //download soal
+    public function downloadExamsUser($id, Exam $exam){
+        $this->authorize('downloadExamQuestions', $exam);
 
         $user = User::find(Auth::id());
 
@@ -112,7 +115,9 @@ class ExamController extends Controller
 
     }
 
-    public function downloadExamStudent(){
+    //download jawaban 
+    public function downloadExamStudent(Exam $exam){
+        $this->authorize('downloadExamAnswer', $exam);
        
         $user = User::find(request()->input('user_id'));
 
@@ -127,8 +132,9 @@ class ExamController extends Controller
         return response()->download($file_path);
     }
 
+    //siswa
     public function submitExams(Request $request){
-     
+        $this->authorize('submitExam', App\Models\Exam::class);
 
         $request->validate([
             'file_upload' => 'required|file|max:10000', // max 10MB
@@ -162,8 +168,9 @@ class ExamController extends Controller
 
     }
 
-    public function assignExamScore(Request $request, $id){
-        $this->authorize('update', App\Models\Exam::class);
+    //guru
+    public function assignExamScore(Request $request, $id, Exam $exam){
+        $this->authorize('update', $exam);
 
         // dd(request()->input('pivotId'));
         // $exam_id
@@ -186,8 +193,9 @@ class ExamController extends Controller
         
     }
 
+    //list yg udah submit
     public function userSubmitList($exam_id){
-
+        $this->authorize('viewListSubmit', App\Models\Exam::class);
         $exam_user = Exam::find($exam_id);
 
         $t = $exam_user->users;
@@ -198,6 +206,7 @@ class ExamController extends Controller
         ]);
     }
 
+    //GURU
     public function createExams(Request $request){
         $this->authorize('create', App\Models\Exam::class);
 
@@ -245,7 +254,9 @@ class ExamController extends Controller
         
     }
 
+    //guru siswa
     public function filterExam($type, $course_id){
+        $this->authorize('view', App\Models\Exam::class);
 
         $ex = Exam::where('type','like', $type)->first();
 
@@ -269,7 +280,7 @@ class ExamController extends Controller
         ]);
     }
 
-
+    //keseluruhan
     public function listExam($type){
         $this->authorize('viewAny', App\Models\Exam::class);
         if(request()->input('class_id')){
@@ -317,9 +328,10 @@ class ExamController extends Controller
         ]);
     }
 
+    //guru siswa
     public function show(Exam $exam)
     {
-       
+        $this->authorize('view', $exam);
         $exam = Exam::all();
 
         $exam_type = DB::table('exams')
@@ -341,6 +353,7 @@ class ExamController extends Controller
      * @param  \App\Models\Exam  $exam
      * @return \Illuminate\Http\Response
      */
+    //ga kepake
     public function edit(Exam $exam)
     {
         return view('messages.edit', ['exam' => $exam]);
@@ -353,6 +366,8 @@ class ExamController extends Controller
      * @param  \App\Models\Exam  $exam
      * @return \Illuminate\Http\Response
      */
+
+     //ga kepake
     public function update(Request $request, Exam $exam)
     {
         $request->validate([
@@ -380,7 +395,9 @@ class ExamController extends Controller
         return redirect()->route('exams.index')->with('success','Exam updated successfully.');
     }
 
+    //guru
     public function export(Exam $exam){
+        $this->authorize('exportScore', $exam);
         return Excel::download(new ExamsExport($exam->id), "Daftar Siswa kelas {$exam->class->name} - Ujian {$exam->title}.xlsx");
     }
 
@@ -390,8 +407,10 @@ class ExamController extends Controller
      * @param  \App\Models\Exam  $exam
      * @return \Illuminate\Http\Response
      */
+    //guru
     public function destroy(Exam $exam)
     {
+        $this->authorize('delete', $exam);
         $exam->delete();
         return redirect()->route('exams.index')
                         ->with('success','Exam deleted successfully');
