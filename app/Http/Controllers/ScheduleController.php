@@ -15,6 +15,7 @@ class ScheduleController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function schedulesChart(){
+        $this->authorize('schedulesChart', App\Models\Schedule::class);
         $schedules = Schedule::whereIn('class_id',Auth::user()->classes->pluck('id'));
         return view('schedules.chart', [
             'schedules' => $schedules->get(),
@@ -24,6 +25,7 @@ class ScheduleController extends Controller
     }
     
      public function listClass(){
+        $this->authorize('listClass', App\Models\Schedule::class);
         return view('schedules.list_class', [
             'classes' => Classes::latest()->filter(request(['search']))->get()
         ]);
@@ -31,6 +33,7 @@ class ScheduleController extends Controller
 
      public function index(Classes $class)
     {
+        $this->authorize('viewAny', App\Models\Schedule::class);
         $schedules = Schedule::where('class_id',$class->id)->filter(request(['course','weekday']))->orderBy('date')->get();
         return view('schedules.index', [
             'schedules' => $schedules,
@@ -56,6 +59,7 @@ class ScheduleController extends Controller
      */
     public function store( Classes $class,Request $request)
     {
+        $this->authorize('create', App\Models\Schedule::class);
         $request->validate([
             'course' => 'required',
             'date' => 'required',
@@ -105,6 +109,7 @@ class ScheduleController extends Controller
      */
     public function update(Classes $class, Schedule $schedule,Request $request)
     {
+        $this->authorize('update', $schedule);
         $request->validate([
             'date' => 'required',
             'start_time' => 'required',
@@ -128,6 +133,7 @@ class ScheduleController extends Controller
      */
     public function destroy(Classes $class, Schedule $schedule)
     {
+        $this->authorize('delete', $schedule);
         $schedule->delete();
         return redirect()->route('classes.schedules.index', $class)->with('success',"Jadwal kelas {$class->name} berhasil dihapus!");
     }
