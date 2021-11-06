@@ -56,7 +56,7 @@
                         <div class="align-item-center">
                             <a href="{{ route('assignments.download',$assignment->id) }}?type=answer&u={{$user->id}}&t={{$user->pivot->created_at}}" class="btn"><i class='fs-25 fa fa-download'></i></a>
                             @if ($user->pivot->score)
-                                <h4 class="d-inline-block {{($assignment->kkm > $user->pivot->score) ? 'text-danger' : 'text-success'}}">{{ $user->pivot->score }}</h4> 
+                                <h4 class="d-inline-block {{($assignment->kkm() > $user->pivot->score) ? 'text-danger' : 'text-success'}}">{{ $user->pivot->score }}</h4> 
                             @else
                                 @if(now()->gte($assignment->deadline))
                                     <a data-bs-toggle="modal" data-bs-target="#scoringAssignments{{$user->id}}" class="btn"><i class='fs-25 fa fa-plus '></i></a>

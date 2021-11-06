@@ -8,12 +8,11 @@ use App\Http\Controllers\SessionController;
 use App\Http\Controllers\ClassController;
 use App\Http\Controllers\ExamController;
 use App\Http\Controllers\AssignmentController;
+use App\Http\Controllers\ContentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
-use App\Exports\AssignmentExport;
-use App\Models\User;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -38,7 +37,7 @@ Route::post('/login', [LoginController::class, 'store']);
 Route::middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('home');
     Route::post('/logout', [LoginController::class, 'logout']);
-
+    Route::resource('contents', ContentController::class);
     Route::resource('messages', MessageController::class);
     
     Route::get('/exams/list/{type}', [ExamController::class, 'listExam'])->name('exlist');
@@ -50,7 +49,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/exams/createExam', [ExamController::class, 'createExams']);
     Route::get('/exams/downloadexamstudent/download', [ExamController::class, 'downloadExamStudent'])->name('examstudent');
     Route::get('exams/{exam}/export', [ExamController::class, 'export'])->name('exams.export');
-    
     Route::resource('exams', ExamController::class);
     
     Route::get('/classes/{class}/assign_user', [ClassController::class, 'user_list']);
