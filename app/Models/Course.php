@@ -25,8 +25,11 @@ class Course extends Model
         return $this->users()->wherePivot('user_id',$user_id);
     }
 
+    // public function classes(){
+    //     return $this->belongsToMany(Classes::class,'classes_courses','course_id','class_id')->withTimestamps(); 
+    // }
     public function classes(){
-        return $this->belongsToMany(Classes::class,'classes_courses','course_id','class_id')->withTimestamps(); 
+        return $this->belongsToMany(Classes::class,'courses_classes_users','course_id','class_id')->withTimestamps(); 
     }
 
     public function userClasses($user){

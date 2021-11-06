@@ -37,6 +37,10 @@
     @endcan
 
     @if (!$assignments->isEmpty())
+        <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
+            <strong>Note!</strong>  Setelah melewati deadline sudah tidak bisa upload file!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
         @foreach ($assignments as $assignment)
             <div class="card p-3">
                 <div class="d-grid d-md-flex align-items-center">

@@ -71,6 +71,7 @@ class ClassController extends Controller
      */
     public function show(Classes $class)
     {
+        $users= $class->users()->paginate(25);
         switch(Auth::user()->role){
             case 'teacher':
             case 'student':
@@ -80,7 +81,11 @@ class ClassController extends Controller
                 $classes = Classes::with('users')->latest()->get();
                 break;
         }
-        return view('classes.show', ['class' => $class, 'classes' => $classes]);
+        return view('classes.show', [
+            'class' => $class, 
+            'classes' => $classes,
+            'users' => $users
+        ]);
     }
 
     /**

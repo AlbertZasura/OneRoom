@@ -6,6 +6,13 @@
 @section('content')
     
     <h1>Tugas</h1>
+    @if (now()->lt($assignment->deadline))
+        <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
+            <strong>Note!</strong>  Setelah deadline baru bisa input nilai tugas
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
+   
     <div class="d-grid d-md-flex align-items-center p-3">
         <i class='fs-25 fa fa-file-signature me-2'></i>
         <nav style="--bs-breadcrumb-divider: '>';" class="me-auto" aria-label="breadcrumb">
