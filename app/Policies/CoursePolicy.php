@@ -35,6 +35,14 @@ class CoursePolicy
         return $user->role === 'teacher' ? Response::allow() : Response::deny('You are not an teacher.');
     }
 
+    public function viewTeacher(User $user){
+        return $user->role === 'teacher' ? Response::allow() : Response::deny('You are not an admin.');
+    }
+
+    public function viewStudent(User $user){
+        return $user->role === 'student' ? Response::allow() : Response::deny('You are not an admin.');
+    }
+
     public function viewAdmin(User $user){
         return $user->role === 'admin' ? Response::allow() : Response::deny('You are not an admin.');
     }

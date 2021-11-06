@@ -22,6 +22,7 @@ class SessionSeeder extends Seeder
                 'file' => 'materi_mtk.pdf',
                 "user_id" => $i+1,
                 "course_id" => $i+1,
+                "class_id" => $i+1,
             ]);
             $sessions->save();
         }

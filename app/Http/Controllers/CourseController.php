@@ -8,6 +8,7 @@ use App\Models\User;
 use App\Models\Classes;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class CourseController extends Controller
 {
@@ -31,7 +32,7 @@ class CourseController extends Controller
                 $crs = Course::find(request()->input('selectCourseId'));
                 
                 $user_have_class = $teacher->find(request()->input("selectTeacherId"))->usersClasses;
-                // dd($usr->usersClasses);
+                // dd($user_have_class->first()->pivot);
 
                 // dd($crs->usersId(request()->input("selectTeacherId")));
                 // dd($course->users->first()->pivot);
@@ -55,13 +56,17 @@ class CourseController extends Controller
 
             
         }else{
-            $cls = Auth::user()->classes->first();
             
-            $course = Course::all();
+            $cls = Auth::user()->classes->first();
+            $course = $cls->courses;
+            // $course = Auth::user()->usersCorses;
+            $userClass = Auth::user()->usersClasses;
+            
             
             return view('materi.index', [
                 'course' => $course,
-                'cls' => $cls
+                'cls' => $cls,
+                'user_class' => $userClass->unique()
             ]);
 
         }
@@ -107,10 +112,88 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
+        $user = User::find(Auth::id());
         $c = Course::all();
         $ses = $course->sessions;
-        $cls = Auth::user()->classes->first();
-        return view('materi.show', ['ses' => $ses, 'course' => $c, 'courseId' => $course->id, 'cls' => $cls]);
+        $cls = $user->classes;
+        $userClass = $user->usersClasses;
+        return view('materi.show', ['ses' => $ses, 'course' => $c, 'courseId' => $course->id, 'cls' => $cls, 'user_class' => $userClass]);
+    }
+
+    public function showTeacherCourse(){
+
+        $user = User::find(Auth::id());
+        $class = Classes::find(request()->input('class_id'));
+        $courseTeacher = $class->classesCourse;
+        $cls = $user->classes;
+        $userClass = $user->usersClasses->unique();
+        $course = $courseTeacher->first();
+        $session = $course->sessionClasses(request()->input('class_id'))->get();
+        return view('materi.show', [
+            'ses' => $session, 
+            'user_class' => $userClass, 
+            'course_teacher' => $courseTeacher->unique(),
+            'seletedClass' => $class
+        ]);
+    }
+
+    public function filterTeacherSession(){
+
+        
+        $user = User::find(Auth::id());
+        $class = Classes::find(request()->input('class_id'));
+        $courseTeacher = $class->classesCourse;
+        $cls = $user->classes;
+        $userClass = $user->usersClasses->unique();
+        $course = $courseTeacher->find(request()->input('course_id'));
+        // $session = $course->sessions->where('class_id','like', request()->input('class_id'))->get();
+        $session = $course->sessionClasses(request()->input('class_id'))->get();
+
+        // dd($session);
+        // if($session != null){
+        //     $session = $session->sessions;
+        // }
+        // dd($courseTeacher);
+        return view('materi.show', [
+            'ses' => $session, 
+            'user_class' => $userClass, 
+            'course_teacher' => $courseTeacher->unique(), 
+            'selected_course' => Course::find(request()->input('course_id')),
+            'seletedClass' => $class
+        ]);
+    }
+
+    public function insertSession(Request $request){
+
+        
+        $request->validate([
+            'title' => 'required',
+            'description' => 'required',
+            'file_upload' => 'required|file|max:10000', // max 10MB
+        ]);
+
+        $todayDate = Carbon::now();
+        $DateFormat = Carbon::parse($todayDate)->format('Y-m-d');
+        $TimeFormat = Carbon::parse($todayDate)->format('H-i-s');
+
+        $file = $request->file('file_upload');
+        $fileName =  Auth::id()."_".$DateFormat."_".$TimeFormat."_".$file->getClientOriginalName();
+        if($request->file('file_upload')){
+            $file->storeAs('public/file', $fileName);
+            Session::create([
+                'title' => $request->title,
+                'description' => $request->description,
+                'file' => $fileName,
+                'user_id' =>Auth::id(),
+                'course_id' => request()->input('course_id'),
+                'class_id' => request()->input('class_id')
+            ]);
+    
+            return redirect()->route('courses.index')->with('success','Message created successfully.');
+
+        }else{
+            abort("no file upload");
+        }
     }
 
     /**
