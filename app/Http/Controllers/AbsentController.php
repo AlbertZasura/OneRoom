@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Exports\AbsentsExport;
 use Maatwebsite\Excel\Facades\Excel;
 use Alert;
+use App\Models\Content;
 
 class AbsentController extends Controller
 {
@@ -107,10 +108,11 @@ class AbsentController extends Controller
     public function store(Course $course, Request $request)
     {
         $role = Auth::user()->role;
+        $max_absent= Content::where('name','=','Absent')->first()->value;
         switch($role){
             case 'teacher':
                 Absent::create([
-                    'status' => 'Hadir',
+                    'status' => time()>strtotime($max_absent)? 'Telat':'Hadir',
                     'user_id' => Auth::user()->id
                 ]);
                 break;

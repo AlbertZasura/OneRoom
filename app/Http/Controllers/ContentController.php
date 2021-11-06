@@ -10,6 +10,7 @@ class ContentController extends Controller
 {
     public function index()
     {
+        $this->authorize('viewAny', Content::class);
         $contents = Content::all();
         return view('contents.index', [
             'contents' => $contents
@@ -18,6 +19,7 @@ class ContentController extends Controller
 
     public function update(Request $request, Content $content)
     {
+        $this->authorize('update',$content);
         $request->validate([
             'value' => 'required'
         ]);

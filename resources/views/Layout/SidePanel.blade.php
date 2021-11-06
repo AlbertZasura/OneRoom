@@ -147,6 +147,16 @@
                             <a href="{{route('messages.index')}}" class="btn text-white">Pengumuman</a>
                         </div>
                     </div>
+                    @can('viewAny', App\Models\User::class)
+                        <div class="d-flex a-center mb-10">
+                            <div class="fs-20 w-25px">
+                                <i class="fas fa-tools"></i>
+                            </div>
+                            <div class="fs-18 ml-20">
+                                <a href="{{route('contents.index')}}" class="btn text-white">Konten</a>
+                            </div>
+                        </div>
+                    @endcan
                     @if (Auth::user())
                     <div class="d-flex a-center mb-10">
                         <div class="fs-20 w-25px">
