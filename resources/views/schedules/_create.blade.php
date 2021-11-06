@@ -16,7 +16,7 @@
                         @enderror
                     </div>
                     <div class="form-group mb-3">
-                        <label for="course" class="col-form-label"><b>Mate Pelajaran</b></label>
+                        <label for="course" class="col-form-label"><b>Mata Pelajaran</b></label>
                         <select class="form-select" name="course" aria-label="Default select example">
                             @foreach ($class->courses as $course)
                                 <option value="{{ $course->id }}">{{ $course->name }}</option>

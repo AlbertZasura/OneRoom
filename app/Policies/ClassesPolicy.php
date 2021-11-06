@@ -19,7 +19,7 @@ class ClassesPolicy
      */
     public function viewAny(User $user)
     {
-        return ($user->role==="admin" || !$user->classes->isEmpty()) ? Response::allow() : Response::deny('You cannot access!');
+        return (in_array($user->role,["teacher","student","admin"]) || !$user->classes->isEmpty()) ? Response::allow() : Response::deny('You cannot access!');
     }
 
     /**
@@ -31,7 +31,7 @@ class ClassesPolicy
      */
     public function view(User $user, Classes $classes)
     {
-        //
+        return (in_array($user->role,["teacher","student","admin"]) || !$user->classes->isEmpty()) ? Response::allow() : Response::deny('You cannot access!');
     }
 
     /**

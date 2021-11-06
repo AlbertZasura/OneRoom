@@ -34,7 +34,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach ($class->users as $key => $user )
+            @foreach ($users as $key => $user )
                 <tr>
                     <th>
                         <p>{{ $key+1 }}.</p> 
@@ -57,5 +57,5 @@
             @endforeach
         </tbody>
     </table>
-
+    {{ $users->links() }}
 @endsection
