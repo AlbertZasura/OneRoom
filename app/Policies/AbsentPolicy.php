@@ -57,7 +57,7 @@ class AbsentPolicy
      */
     public function create(User $user)
     {
-        //
+        return in_array($user->role,["teacher","student"]) ? Response::allow() : Response::deny('Cannot Access');
     }
 
     /**
@@ -69,7 +69,7 @@ class AbsentPolicy
      */
     public function update(User $user, Absent $absent)
     {
-        //
+        return in_array($user->role,["teacher","student"]) ? Response::allow() : Response::deny('Cannot Access');
     }
 
     /**
@@ -106,5 +106,10 @@ class AbsentPolicy
     public function forceDelete(User $user, Absent $absent)
     {
         //
+    }
+
+    public function export(User $user)
+    {
+        return in_array($user->role,["teacher","admin"]) ? Response::allow() : Response::deny('Cannot Access');
     }
 }
