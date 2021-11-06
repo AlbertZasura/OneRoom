@@ -32,7 +32,7 @@ class ExamPolicy
      */
     public function view(User $user, Exam $exam)
     {
-        return $user->role === 'teacher' ? Response::allow() : Response::deny('You are not an teacher.');
+        return in_array($user->role,["teacher","student"]) ? Response::allow() : Response::deny('You cannot access.');
     }
 
     public function viewTeacher(User $user){
@@ -76,7 +76,7 @@ class ExamPolicy
      */
     public function delete(User $user, Exam $exam)
     {
-        //
+        return $user->role === 'teacher' ? Response::allow() : Response::deny('You are not an teacher.');
     }
 
     /**
@@ -101,5 +101,30 @@ class ExamPolicy
     public function forceDelete(User $user, Exam $exam)
     {
         //
+    }
+
+    public function downloadExamQuestions(User $user, Exam $exam)
+    {
+        return in_array($user->role,["teacher","student"]) ? Response::allow() : Response::deny('You cannot access.');
+    }
+
+    public function downloadExamAnswer(User $user, Exam $exam)
+    {
+        return $user->role === 'teacher' ? Response::allow() : Response::deny('You are not an teacher.');
+    }
+
+    public function submitExam(User $user)
+    {
+        return $user->role === 'student' ? Response::allow() : Response::deny('You are not an student.');
+    }
+
+    public function exportScore(User $user)
+    {
+        return $user->role === 'teacher' ? Response::allow() : Response::deny('You are not an teacher.');
+    }
+
+    public function viewListSubmit(User $user)
+    {
+        return $user->role === 'teacher' ? Response::allow() : Response::deny('You are not an teacher.');
     }
 }

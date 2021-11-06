@@ -124,11 +124,13 @@
                     </div>
                 </div>
             </td>
-            @can('view', $i)
+            
                 <td>
+                    @can('viewTeacher', $i)
                     {{$i->users->count()}}
+                    @endcan
                 </td>
-            @endcan
+           
             @can('viewStudent', App\Models\Exam::class)
                 <td>
                     @if($i->usersExams(Auth::id())->first())

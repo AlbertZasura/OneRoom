@@ -31,7 +31,7 @@ class AssignmentPolicy
      */
     public function view(User $user, Assignment $assignment)
     {
-        return in_array($user->role,["teacher","admin"]) ? Response::allow() : Response::deny('You cannot access.');
+        return in_array($user->role,["teacher"]) ? Response::allow() : Response::deny('You cannot access.');
     }
 
     /**
@@ -66,7 +66,7 @@ class AssignmentPolicy
      */
     public function delete(User $user, Assignment $assignment)
     {
-        return in_array($user->role,["teacher","admin"]) ? Response::allow() : Response::deny('You cannot access.');
+        return in_array($user->role,["teacher"]) ? Response::allow() : Response::deny('You cannot access.');
     }
 
     /**
@@ -96,5 +96,20 @@ class AssignmentPolicy
     public function upload(User $user)
     {
         return in_array($user->role,["student"]) ? Response::allow() : Response::deny('You cannot access.');
+    }
+
+    public function download(User $user, Assignment $assignment)
+    {
+        return in_array($user->role,["teacher", "student"]) ? Response::allow() : Response::deny('You cannot access.');
+    }
+
+    public function scoring(User $user, Assignment $assignment)
+    {
+        return in_array($user->role,["teacher"]) ? Response::allow() : Response::deny('You cannot access.');
+    }
+
+    public function export(User $user, Assignment $assignment)
+    {
+        return in_array($user->role,["teacher"]) ? Response::allow() : Response::deny('You cannot access.');
     }
 }

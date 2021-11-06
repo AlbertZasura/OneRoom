@@ -12,14 +12,14 @@
                 <option value="student">student</option>
             </select>
         </div>
+        
         <div class="col-md-3">
-            <div class="input-group rounded" style="width:300px"> 
-                <input type="text" id="myInput" class="form-control rounded" placeholder="Cari nama" aria-label="Search"
-                aria-describedby="search-addon" />
-                <span class="input-group-text border-0" id="search-addon">
-                    <i class="fas fa-search"></i>
-                </span>
-            </div>
+            <form action="/accounts">
+                <div class="input-group" style="width:300px">
+                    <input type="text" id="myInput" class="form-control" placeholder="Cari nama" name="search">
+                    <button class="btn btn-outline-secondary" type="submit"><i class='fa fa-search'></i></button>
+                </div>
+            </form>
         </div>
     </div>
     

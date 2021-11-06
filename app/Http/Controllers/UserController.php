@@ -22,10 +22,13 @@ class UserController extends Controller
         $users = User::where('status', 0);
 
         if(request('search')){
-            $users = User::latest()->where('name', 'like', '%' . request('search') .'%');
+            $users = User::latest()->where('name', 'like', '%' . request('search') .'%')->paginate(25);
+        }
+        else{
+            $users = User::where('status', 0)->whereIn('role',[1,2])->paginate(25);
         }
 
-        $users = User::where('status', 0)->whereIn('role',[1,2])->paginate(25);
+       
         return view('Accounts.index', [
             'users' => $users
         ]);
@@ -95,7 +98,7 @@ class UserController extends Controller
      */
     public function update(Request $request, User $user)
     {
-        $this->authorize('viewAny', App\Models\User::class);
+        $this->authorize('update', $user);
         $user->update([
             'user_id' => Auth::user()->id,
             'status' => "1"
@@ -137,6 +140,7 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        $this->authorize('update', $user);
         $user->update([
             'user_id' => Auth::user()->id,
             'status' => "2"
