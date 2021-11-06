@@ -87,25 +87,31 @@
             @if($class)
                 @foreach($class as $classes)
                     @if(count($exist_class) > 0)
-                        @foreach($exist_class as $key => $ex_cls)
-                            @if($ex_cls->id == $classes->id)
-                                <div class="d-flex a-center">
-                                    <button class="btn" onclick="deleteClassBtn( {{$classes->id}}, {{$selectedTeacher->id}} )"><i class="far fa-trash-alt text-danger mr-10 cursor-pointer"></i></button>
-                                    <div class="w-100">
-                                        <label onclick="selectedClass()" class="radio-course cursor-pointer text-center border-bottom-gray hover-gray bg-success text-white">
-                                            <input type="radio" name="radioclass" value="{{$classes->id}}"/>
-                                            <div class="py-2">{{$classes->name}}</div>
-                                        </label>
-                                        
+                        @if($exist_class->first()->pivot->course_id == $selectedCourse->id)
+                            @foreach($exist_class as $key => $ex_cls)
+                                @if($ex_cls->id == $classes->id)
+                                    <div class="d-flex a-center">
+                                        <button class="btn" onclick="deleteClassBtn( {{$classes->id}}, {{$selectedTeacher->id}} )"><i class="far fa-trash-alt text-danger mr-10 cursor-pointer"></i></button>
+                                        <div class="w-100">
+                                            <label onclick="selectedClass()" class="radio-course cursor-pointer text-center border-bottom-gray hover-gray bg-success text-white">
+                                                <input type="radio" name="radioclass" value="{{$classes->id}}"/>
+                                                <div class="py-2">{{$classes->name}}</div>
+                                            </label>
+                                            
+                                        </div>
                                     </div>
-                                </div>
-                                @php ($flag = 0)
-                                @break
-                            @else
-                                @php ($flag = 1)
-                            
-                            @endif
-                        @endforeach
+                                    @php ($flag = 0)
+                                    @break
+                                @else
+                                    @php ($flag = 1)
+                                
+                                @endif
+                            @endforeach
+
+                        @else
+                            @php ($flag = 1)
+                        @endif
+                        
                         @if($flag == 1)
                             <label onclick="selectedClass()" class="radio-course cursor-pointer text-center border-bottom-gray hover-gray">
                                 <input type="radio" name="radioclass" value="{{$classes->id}}"/>
