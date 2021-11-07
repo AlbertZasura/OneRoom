@@ -17,4 +17,8 @@ class Session extends Model
         return $this->belongsTo(Course::class);
     }
 
+    public function class(){
+        return $this->hasMany(Classes::class);
+    }
+
 }

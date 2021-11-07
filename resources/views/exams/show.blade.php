@@ -143,8 +143,9 @@
             </td>
             
                 <td>
+                    
                     @can('viewTeacher', $i)
-                    {{$i->users->count()}}
+                    {{$i->users->count()}} / {{count($i->class->first()->users->where('role','like','student'))}}
                     @endcan
                 </td>
            
