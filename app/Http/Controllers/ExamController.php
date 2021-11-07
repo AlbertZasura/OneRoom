@@ -300,16 +300,12 @@ class ExamController extends Controller
             $exam = $c->exams->where('type','like', $type)->where('class_id', 'like', request()->input('class_id'));
         }
         
-        // $user = Auth::user();
-
-        // dd(Auth::user()->exams->first()->pivot);
-
-        // dd($ex->usersExams(Auth::id())->first()->pivot);
         
+        // $course = Course::all();
+        $course = Auth::user()->usersCorses->unique();
 
-        $course = Course::all();
-
-        $class = Classes::all();
+        // $class = Classes::all();
+        $class = Auth::user()->usersClasses->unique();
 
         $exType = $type;
 
