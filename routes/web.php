@@ -70,6 +70,7 @@ Route::middleware('auth')->group(function () {
     Route::post('course/createCourse', [CourseController::class, 'createCourse']);
     Route::get('course/assign', [CourseController::class, 'assignCourse']);
     Route::get('/teacherCourse', [CourseController::class, 'showTeacherCourse']);
+    Route::get('/adminCourse', [CourseController::class, 'showAdminCourse']);
     Route::get('/teacherFilterCourse', [CourseController::class, 'filterTeacherSession']);
     Route::post('/session/insert', [CourseController::class, 'insertSession']);
     Route::get('/session/delete/{id}', [CourseController::class, 'deleteSession']);

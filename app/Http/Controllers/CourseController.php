@@ -23,19 +23,12 @@ class CourseController extends Controller
 
             $teacher =  User::where('role', 'like', 1)->get();
             $course = Course::all();
-            // $class = Classes::all();
 
             if(request()->input("selectClass")){
-                // $class = Classes::all();
-                // dd($teacher->find(request()->input("selectTeacherId"))->classes);
                 $class = $teacher->find(request()->input("selectTeacherId"))->classes;
                 $crs = Course::find(request()->input('selectCourseId'));
                 
                 $user_have_class = $teacher->find(request()->input("selectTeacherId"))->usersClasses;
-                // dd($user_have_class->first()->pivot);
-
-                // dd($crs->usersId(request()->input("selectTeacherId")));
-                // dd($course->users->first()->pivot);
                 return view('materi.admin_course',[
                     'selectedTeacher' => $teacher->find(request()->input("selectTeacherId")),
                     'selectedCourse' => $course->find(request()->input("selectCourseId")),
@@ -59,10 +52,7 @@ class CourseController extends Controller
             
             $cls = Auth::user()->classes->first();
             $course = $cls->courses;
-            // $course = Auth::user()->usersCorses;
             $userClass = Auth::user()->usersClasses;
-            
-            // dd($course);
 
             return view('materi.index', [
                 'course' => $course->unique(),
@@ -144,6 +134,54 @@ class CourseController extends Controller
             'course_teacher' => $courseTeacher->unique(),
             'seletedClass' => $class
         ]);
+    }
+
+    public function showAdminCourse(){
+
+
+
+        // $user = User::find(Auth::id());
+        // $class = Classes::find(request()->input('class_id'));
+        // $courseTeacher = $class->classesCourse;
+        // $cls = $user->classes;
+        // $userClass = $user->usersClasses->unique();
+        // $course = $courseTeacher->first();
+        // $session = $course->sessionClasses(request()->input('class_id'))->get();
+        // return view('materi.show', [
+        //     'ses' => $session, 
+        //     'user_class' => $userClass, 
+        //     'course_teacher' => $courseTeacher->unique(),
+        //     'seletedClass' => $class
+        // ]);
+
+    }
+
+    public function mappingTeacher(){
+        $teacher =  User::where('role', 'like', 1)->get();
+            $course = Course::all();
+
+            if(request()->input("selectClass")){
+                $class = $teacher->find(request()->input("selectTeacherId"))->classes;
+                $crs = Course::find(request()->input('selectCourseId'));
+                
+                $user_have_class = $teacher->find(request()->input("selectTeacherId"))->usersClasses;
+                return view('materi.admin_course',[
+                    'selectedTeacher' => $teacher->find(request()->input("selectTeacherId")),
+                    'selectedCourse' => $course->find(request()->input("selectCourseId")),
+                    'teacher' => $teacher,
+                    'course' => $course,
+                    'class' => $class,
+                    'exist_class' => $user_have_class,
+                ]);
+
+            }else{
+                $class = "";
+                return view('materi.admin_course',[
+                    'teacher' => $teacher,
+                    'course' => $course,
+                    'class' => $class
+                ]);
+            }
     }
 
     public function filterTeacherSession(){

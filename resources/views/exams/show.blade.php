@@ -13,27 +13,42 @@
                 @endforeach
             </select>
 
-            @can('viewTeacher', App\Models\Exam::class )
-            <select class="form-select form-select-lg mb-3" id="classFilter" onchange="getClass()" aria-label=".form-select-lg example">
-                <option selected>Pilih Kelas</option>
-                @foreach($class as $item)
-                    <option value="{{$item->id}}">{{$item->name}}</option>
-                @endforeach
-            </select>
+            @can('viewTeacher', App\Models\Exam::class)
+                <select class="form-select form-select-lg mb-3" id="classFilter" onchange="getClass()" aria-label=".form-select-lg example">
+                    <option selected>Pilih Kelas</option>
+                    @foreach($class as $item)
+                        <option value="{{$item->id}}">{{$item->name}}</option>
+                    @endforeach
+                </select>
             @endcan
+           
 
         </div>
-        @if(request()->input('class_id'))
-            <h2>{{$class->find(request()->input('class_id'))->name}}</h2>
-        @else    
-            <h2>Semua Kelas</h2>
-        @endif
 
-        @if(request()->input('course_id'))
-            <h2>{{$course->find(request()->input('course_id'))->name}}</h2>
-        @else    
-            <h2>Semua Pelajaran</h2>
-        @endif
+        
+
+        @can('viewStudent', App\Models\Exam::class)
+            <h2>{{Auth::user()->classes->first()->name}}</h2>
+            @if(request()->input('course_id'))
+                <h2>{{$course->find(request()->input('course_id'))->name}}</h2>
+            @else    
+                <h2>Semua Pelajaran</h2>
+            @endif
+        @endcan
+
+        @can('viewTeacher', App\Models\Exam::class )
+            @if(request()->input('class_id'))
+                <h2>{{$class->find(request()->input('class_id'))->name}}</h2>
+            @else    
+                <h2>Semua Kelas</h2>
+            @endif
+
+            @if(request()->input('course_id'))
+                <h2>{{$course->find(request()->input('course_id'))->name}}</h2>
+            @else    
+                <h2>Semua Pelajaran</h2>
+            @endif
+        @endcan
    
 </div>
 

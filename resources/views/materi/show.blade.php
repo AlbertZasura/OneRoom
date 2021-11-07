@@ -126,6 +126,32 @@
 @endcan
 
 
+@can('viewAdmin', App\Models\Course::class)
+
+    @foreach($ses as $item)
+            
+        <div class="mb-10">
+            <div class="accordion-item">
+                <h2 class="accordion-header d-flex a-center" id="heading{{$item->id}}">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{$item->id}}" aria-expanded="false" aria-controls="collapseTwo">
+                        <span class="text-navi fw-bolder">{{$item->title}}</span>
+                    </button>
+                </h2>
+                <div id="collapse{{$item->id}}" class="accordion-collapse collapse" aria-labelledby="heading{{$item->id}}" data-bs-parent="#accordionExample">
+                    <div class="accordion-body">
+                        <div>{{$item->description}}</div>
+                        <div onclick="window.location='{{route('uploaded',$item->id)}}'" class="cursor-pointer d-flex a-center text-navi view-session">
+                            <i class="fas fa-scroll mr-10"></i> <span>Lihat Materi</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endforeach
+
+@endcan
+
+
     <script>
 
         function chooseSession(){

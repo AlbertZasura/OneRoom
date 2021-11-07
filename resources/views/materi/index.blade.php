@@ -33,6 +33,17 @@
                 @endforeach
 
             @endcan
+
+            @can('viewAdmin', App\Models\Course::class)
+
+                @foreach($user_class as $user_classes)
+                    <div class="cursor-pointer card-box mb-2" onclick="window.location='/teacherCourse?class_id={{$user_classes->id}}'">
+                        <div>{{$user_classes->name}}</div>
+                        <div class="text-right">{{$user_classes->classesCourse->unique()->count()}} Pelajaran</div>
+                    </div>
+                @endforeach
+
+            @endcan
         </div>
         <div class="ml-20 w-85">
             

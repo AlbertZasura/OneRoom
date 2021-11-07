@@ -283,45 +283,90 @@ class ExamController extends Controller
     //keseluruhan
     public function listExam($type){
         $this->authorize('viewAny', App\Models\Exam::class);
-        if(request()->input('class_id')){
-            $exam = Exam::where('type','like', $type)->where('class_id', 'like', request()->input('class_id'))->get();
+
+        if(Auth::user()->role == 'teacher'){
+
+            if(request()->input('class_id')){
+                $exam = Exam::where('type','like', $type)->where('class_id', 'like', request()->input('class_id'))->get();
+            }else{
+                $exam = Exam::where('type','like', $type)->get();
+            }
+    
+            $ex = Exam::where('type','like', $type)->first();
+            $c = Course::find(request()->input('course_id'));
+            
+            if(request()->input('course_id')){
+                $exam = $c->exams->where('type','like', $type);
+            }
+            
+            if(request()->input('course_id') && request()->input('class_id')){
+                $exam = $c->exams->where('type','like', $type)->where('class_id', 'like', request()->input('class_id'));
+            }
+            
+            
+            // $course = Course::all();
+            $course = Auth::user()->usersCorses->unique();
+    
+            // $class = Classes::all();
+            $class = Auth::user()->usersClasses->unique();
+    
+            $exType = $type;
+    
+            $exam_type = DB::table('exams')
+                            ->select('type', DB::raw('count(*) as total'))
+                            ->groupBy('type')
+                            ->get();
+    
+            
+            return view('exams.show', [
+                'exam' => $exam,
+                'examType' => $exam_type,
+                'course' => $course,
+                'exType'  => $exType,
+                'class' => $class
+            ]);
+
         }else{
-            $exam = Exam::where('type','like', $type)->get();
+
+            // dd(Auth::user()->classes->first()->id);
+            $exam = Exam::where('type','like', $type)->where('class_id', 'like', Auth::user()->classes->first()->id)->get();
+    
+            $ex = Exam::where('type','like', $type)->first();
+            $c = Course::find(request()->input('course_id'));
+            
+            if(request()->input('course_id')){
+                $exam = $c->exams->where('type','like', $type);
+            }
+            
+            // if(request()->input('course_id') && request()->input('class_id')){
+            //     $exam = $c->exams->where('type','like', $type)->where('class_id', 'like', request()->input('class_id'));
+            // }
+            
+            
+            // $course = Course::all();
+            $course = Auth::user()->classes->first()->courses->unique();
+    
+            $class = Classes::all();
+            // $class = Auth::user()->usersClasses->unique();
+    
+            $exType = $type;
+    
+            $exam_type = DB::table('exams')
+                            ->select('type', DB::raw('count(*) as total'))
+                            ->groupBy('type')
+                            ->get();
+    
+            
+            return view('exams.show', [
+                'exam' => $exam,
+                'examType' => $exam_type,
+                'course' => $course,
+                'exType'  => $exType,
+                'class' => $class
+            ]);
+
         }
 
-        $ex = Exam::where('type','like', $type)->first();
-        $c = Course::find(request()->input('course_id'));
-        
-        if(request()->input('course_id')){
-            $exam = $c->exams->where('type','like', $type);
-        }
-        
-        if(request()->input('course_id') && request()->input('class_id')){
-            $exam = $c->exams->where('type','like', $type)->where('class_id', 'like', request()->input('class_id'));
-        }
-        
-        
-        // $course = Course::all();
-        $course = Auth::user()->usersCorses->unique();
-
-        // $class = Classes::all();
-        $class = Auth::user()->usersClasses->unique();
-
-        $exType = $type;
-
-        $exam_type = DB::table('exams')
-                        ->select('type', DB::raw('count(*) as total'))
-                        ->groupBy('type')
-                        ->get();
-
-        
-        return view('exams.show', [
-            'exam' => $exam,
-            'examType' => $exam_type,
-            'course' => $course,
-            'exType'  => $exType,
-            'class' => $class
-        ]);
     }
 
     //guru siswa
