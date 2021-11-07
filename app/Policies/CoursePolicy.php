@@ -19,7 +19,7 @@ class CoursePolicy
      */
     public function viewAny(User $user)
     {
-        //
+        return in_array($user->role,["teacher","student", "admin"]) ? Response::allow() : Response::deny('You cannot access.');
     }
 
     /**
@@ -48,7 +48,7 @@ class CoursePolicy
     }
 
     public function elseAdmin(User $user){
-        return $user->role != 'admin' ? Response::allow() : Response::deny('You are not an admin.');
+        return $user->role != 'admin' ? Response::allow() : Response::deny('You are not authorize.');
     }
 
 

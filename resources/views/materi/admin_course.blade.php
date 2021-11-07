@@ -15,7 +15,7 @@
             <div class="box-course-create scroll-y custom-scroll-y" style="height: 600px;">
                 <div>
                 <button type="button" class="btn w-100 border-2px btn-add-course" data-bs-toggle="modal" data-bs-target="#exampleModal">
-                    <i class="fas fa-plus mr-10"></i> <span>Tambah Mata Palajaran</span>
+                    <i class="fas fa-plus mr-10"></i> <span>Tambah Mata Pelajaran</span>
                 </button>
 
                 <!-- Modal -->

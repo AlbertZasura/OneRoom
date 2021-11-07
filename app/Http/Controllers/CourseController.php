@@ -19,6 +19,7 @@ class CourseController extends Controller
      */
     public function index()
     {
+        $this->authorize('viewAny', App\Models\Course::class);
         if(Auth::user()->role == 'admin'){
 
             $teacher =  User::where('role', 'like', 1)->get();
@@ -101,8 +102,10 @@ class CourseController extends Controller
      * @param  \App\Models\Course  $course
      * @return \Illuminate\Http\Response
      */
+    //show siswa
     public function show(Course $course)
     {
+        $this->authorize('viewStudent', App\Models\Course::class);
         $cls = Auth::user()->classes->first();
         $user = User::find(Auth::id());
         $c = $cls->courses;
@@ -119,8 +122,9 @@ class CourseController extends Controller
         ]);
     }
 
+    //show teacher
     public function showTeacherCourse(){
-
+        $this->authorize('viewTeacher', App\Models\Course::class);
         $user = User::find(Auth::id());
         $class = Classes::find(request()->input('class_id'));
         $courseTeacher = $class->classesCourse;
@@ -156,7 +160,9 @@ class CourseController extends Controller
 
     }
 
+    //admin
     public function mappingTeacher(){
+        $this->authorize('viewAdmin', App\Models\Course::class);
         $teacher =  User::where('role', 'like', 1)->get();
             $course = Course::all();
 
@@ -184,9 +190,10 @@ class CourseController extends Controller
             }
     }
 
+    //teacher
     public function filterTeacherSession(){
 
-        
+        $this->authorize('viewTeacher', App\Models\Course::class);
         $user = User::find(Auth::id());
         $class = Classes::find(request()->input('class_id'));
         $courseTeacher = $class->classesCourse;
@@ -210,9 +217,10 @@ class CourseController extends Controller
         ]);
     }
 
+    //teacher
     public function insertSession(Request $request){
 
-        
+        $this->authorize('viewTeacher', App\Models\Course::class);
         $request->validate([
             'title' => 'required',
             'description' => 'required',
@@ -289,16 +297,18 @@ class CourseController extends Controller
                         ->with('success','Course deleted successfully');
     }
 
+    //teacher
     public function deleteSession($id){
-
+        $this->authorize('viewTeacher', App\Models\Course::class);
         $session = Session::find($id);
         $session->delete();
         return redirect()->route('courses.index')->with('success','Berhasil Menghapus Materi Pelajaran');
 
     }
 
+    //teacher student
     public function downloadFile($id){
-       
+        $this->authorize('elseAdmin', App\Models\Course::class);
         $fl = Session::find($id);
        
         $file_path = public_path('storage/file/'.$fl->file);
@@ -306,8 +316,9 @@ class CourseController extends Controller
 
     }
 
+    //admin
     public function createCourse(Request $request){
-
+        $this->authorize('viewAdmin', App\Models\Course::class);
         $request->validate([
             'name' => 'required'
         ]);
@@ -319,8 +330,10 @@ class CourseController extends Controller
         return redirect()->route('courses.index')->with('success','Mata Pelajaran Berhasil Dibuat.');
 
     }
-    public function assignCourse(){
 
+    //admin
+    public function assignCourse(){
+        $this->authorize('viewAdmin', App\Models\Course::class);
         $course = Course::find(request()->input('selectCourseId'));
 
         $course->users()->attach(request()->input('selectTeacherId'), ['class_id' => request()->input('selectedClass')]);
@@ -329,8 +342,9 @@ class CourseController extends Controller
         return redirect()->route('courses.index')->with('success','Berhasil Mapping Guru dan pelajarannya.');
     }
 
+    //admin
     public function teacherClassDelete(){
-
+        $this->authorize('viewAdmin', App\Models\Course::class);
         $teacher =  User::find(request()->input("user_id"));
         
         $user_have_class = $teacher->usersClasses->where("id","like",request()->input("class_id"))->first()->pivot->delete();
