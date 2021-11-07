@@ -50,10 +50,10 @@ class CourseSeeder extends Seeder
         ]);
 
         //integration course with class
-        for ($i=1; $i < 6 ; $i++) { 
-            $course=Course::find($i);
-            $course->classes()->attach($i);
-        }
+        // for ($i=1; $i < 6 ; $i++) { 
+        //     $course=Course::find($i);
+        //     $course->classes()->attach($i);
+        // }
 
     }
 }

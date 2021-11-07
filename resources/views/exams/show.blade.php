@@ -5,20 +5,22 @@
 
 <div class="w-25">
   
-        <div class="d-flex">
+        <div class="d-flex" style="width:500px">
             <select class="form-select form-select-lg mb-3" id="courseFilter" onchange="getCourse()" aria-label=".form-select-lg example">
                 <option selected>Pilih Pelajaran</option>
                 @foreach($course as $it)
                     <option value="{{$it->id}}">{{$it->name}}</option>
                 @endforeach
             </select>
-    
+
+            @can('viewTeacher', App\Models\Exam::class )
             <select class="form-select form-select-lg mb-3" id="classFilter" onchange="getClass()" aria-label=".form-select-lg example">
-                <option selected>pilih kelas</option>
+                <option selected>Pilih Kelas</option>
                 @foreach($class as $item)
                     <option value="{{$item->id}}">{{$item->name}}</option>
                 @endforeach
             </select>
+            @endcan
 
         </div>
         @if(request()->input('class_id'))
@@ -39,15 +41,15 @@
 <table class="table table-hover">
     <thead>
         <tr>
-            <th scope="col">nama ujian</th>
-            <th scope="col">waktu ujian</th>
-            <th scope="col">action</th>
+            <th scope="col">Nama Ujian</th>
+            <th scope="col">Waktu Ujian</th>
+            <th scope="col">Action</th>
             <th scope="col"></th>
             @can('viewTeacher', App\Models\Exam::class )
-                <th scope="col">jumlah pengumpulan</th>
+                <th scope="col">Jumlah Pengumpulan</th>
             @endcan
             @can('viewStudent', App\Models\Exam::class)
-                <th scope="col">score</td>
+                <th scope="col">Score</td>
             @endcan
             
         </tr>
@@ -116,8 +118,8 @@
                                     </div>
                                 </div>
                                 <div class="modal-footer">
-                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                    <button type="submit" class="btn btn-primary">Save changes</button>
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                    <button type="submit" class="btn btn-primary">Submit</button>
                                 </div>
                             </form>
                         </div>
