@@ -64,7 +64,10 @@
 
 @can ('viewStudent', App\Models\Course::class)
 
-    <h2>{{$cls->first()->name}}</h2>
+    <div class="d-flex">
+        <h2>{{$cls->first()->name}}</h2>
+        <h2 class="mx-3">{{$selectedCourse->name}}</h2>
+    </div>
 
     @if(isset($ses))
 

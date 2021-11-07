@@ -119,7 +119,14 @@ class CourseController extends Controller
         $ses = $course->sessionClasses($cls->id)->get();
         $cls = $user->classes;
         $userClass = $user->usersClasses;
-        return view('materi.show', ['ses' => $ses, 'course' => $c->unique(), 'courseId' => $course->id, 'cls' => $cls, 'user_class' => $userClass]);
+        return view('materi.show', [
+            'ses' => $ses, 
+            'course' => $c->unique(), 
+            'courseId' => $course->id, 
+            'cls' => $cls, 
+            'user_class' => $userClass, 
+            'selectedCourse' => $course
+        ]);
     }
 
     public function showTeacherCourse(){
