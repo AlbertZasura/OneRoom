@@ -62,9 +62,10 @@ class CourseController extends Controller
             // $course = Auth::user()->usersCorses;
             $userClass = Auth::user()->usersClasses;
             
-            
+            // dd($course);
+
             return view('materi.index', [
-                'course' => $course,
+                'course' => $course->unique(),
                 'cls' => $cls,
                 'user_class' => $userClass->unique()
             ]);
@@ -112,12 +113,13 @@ class CourseController extends Controller
      */
     public function show(Course $course)
     {
+        $cls = Auth::user()->classes->first();
         $user = User::find(Auth::id());
-        $c = Course::all();
-        $ses = $course->sessions;
+        $c = $cls->courses;
+        $ses = $course->sessionClasses($cls->id)->get();
         $cls = $user->classes;
         $userClass = $user->usersClasses;
-        return view('materi.show', ['ses' => $ses, 'course' => $c, 'courseId' => $course->id, 'cls' => $cls, 'user_class' => $userClass]);
+        return view('materi.show', ['ses' => $ses, 'course' => $c->unique(), 'courseId' => $course->id, 'cls' => $cls, 'user_class' => $userClass]);
     }
 
     public function showTeacherCourse(){

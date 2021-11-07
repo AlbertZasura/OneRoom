@@ -64,6 +64,8 @@
 
 @can ('viewStudent', App\Models\Course::class)
 
+    <h2>{{$cls->first()->name}}</h2>
+
     @if(isset($ses))
 
         @foreach($ses as $item)
