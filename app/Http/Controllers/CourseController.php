@@ -251,6 +251,14 @@ class CourseController extends Controller
                         ->with('success','Course deleted successfully');
     }
 
+    public function deleteSession($id){
+
+        $session = Session::find($id);
+        $session->delete();
+        return redirect()->route('courses.index')->with('success','Berhasil Menghapus Materi Pelajaran');
+
+    }
+
     public function downloadFile($id){
        
         $fl = Session::find($id);
