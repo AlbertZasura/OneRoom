@@ -52,4 +52,8 @@ class Course extends Model
         return $this->hasMany(Schedule::class);
     }
 
+    public function sessionClasses($id){
+        return $this->sessions()->where('class_id',$id);
+    }
+
 }

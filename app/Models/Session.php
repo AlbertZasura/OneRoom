@@ -10,7 +10,7 @@ class Session extends Model
     use HasFactory;
 
     protected $fillable = [
-        'title', 'description', 'file' , 'user_id' , 'course_id'
+        'title', 'description', 'file' , 'user_id' , 'course_id', 'class_id'
     ];
 
     public function course(){
