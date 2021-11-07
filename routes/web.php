@@ -40,6 +40,7 @@ Route::middleware('auth')->group(function () {
     Route::resource('contents', ContentController::class);
     Route::resource('messages', MessageController::class);
     
+    Route::resource('exams', ExamController::class);
     Route::get('/exams/list/{type}', [ExamController::class, 'listExam'])->name('exlist');
     Route::get('/exams/list/filter/{type}/{course_id}', [ExamController::class, 'filterExam'])->name('filterlist');
     Route::get('/exams/submit/list/{exam_id}', [ExamController::class, 'userSubmitList'])->name('examsubmitlist');
@@ -49,7 +50,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/exams/createExam', [ExamController::class, 'createExams']);
     Route::get('/exams/downloadexamstudent/download', [ExamController::class, 'downloadExamStudent'])->name('examstudent');
     Route::get('exams/{exam}/export', [ExamController::class, 'export'])->name('exams.export');
-    Route::resource('exams', ExamController::class);
     
     Route::get('/classes/{class}/assign_user', [ClassController::class, 'user_list']);
     Route::post('/classes/{class}/assign_user/{user}', [ClassController::class, 'assign_user']);
@@ -73,6 +73,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/adminCourse', [CourseController::class, 'showAdminCourse']);
     Route::get('/teacherFilterCourse', [CourseController::class, 'filterTeacherSession']);
     Route::post('/session/insert', [CourseController::class, 'insertSession']);
+    Route::get('course/delete/teacherClass', [CourseController::class, 'teacherClassDelete']);
     Route::get('/session/delete/{id}', [CourseController::class, 'deleteSession']);
     
     Route::get('/schedules/all', [ScheduleController::class, 'listClass'])->name('admin.schedule');
