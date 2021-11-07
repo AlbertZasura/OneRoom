@@ -56,7 +56,7 @@
                             <i class="fas fa-chart-line"></i>
                         </div>
                         <div class="fs-18 ml-20">
-                            <a href="{{route('home')}}" class="btn text-white">Halaman Utama</a>
+                            <a href="{{route('home')}}" class="btn text-white" style="width: 140px;">Halaman Utama</a>
                         </div>
                     </div>
                     <div class="d-flex a-center mb-10">
