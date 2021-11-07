@@ -72,6 +72,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/teacherCourse', [CourseController::class, 'showTeacherCourse']);
     Route::get('/teacherFilterCourse', [CourseController::class, 'filterTeacherSession']);
     Route::post('/session/insert', [CourseController::class, 'insertSession']);
+    Route::get('/session/delete/{id}', [CourseController::class, 'deleteSession']);
     
     Route::get('/schedules/all', [ScheduleController::class, 'listClass'])->name('admin.schedule');
     Route::get('/schedules', [ScheduleController::class, 'schedulesChart']);

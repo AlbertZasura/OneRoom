@@ -18,7 +18,7 @@
                 @foreach($course as $i)
                     <div class="cursor-pointer card-box mb-2" onclick="window.location='{{route('courses.show',$i->id)}}'">
                         <div>{{$i->name}}</div>
-                        <div class="text-right">{{$i->sessions->count()}} Materi</div>
+                        <div class="text-right">{{$i->sessionClasses(Auth::user()->classes->first()->id)->count()}} Materi</div>
                     </div>
                 @endforeach
             @endcan

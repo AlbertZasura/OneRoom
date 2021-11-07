@@ -16,7 +16,8 @@
             
             <div class="mb-10">
                 <div class="accordion-item">
-                    <h2 class="accordion-header" id="heading{{$item->id}}">
+                    <h2 class="accordion-header d-flex a-center" id="heading{{$item->id}}">
+                        <i onclick="window.location='/session/delete/{{$item->id}}'" class="ml-20 fs-20 far fa-trash-alt text-danger mr-10 cursor-pointer"></i>
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{$item->id}}" aria-expanded="false" aria-controls="collapseTwo">
                             <span class="text-navi fw-bolder">{{$item->title}}</span>
                         </button>
@@ -63,6 +64,11 @@
 @endcan
 
 @can ('viewStudent', App\Models\Course::class)
+
+    <div class="d-flex">
+        <h2>{{$cls->first()->name}}</h2>
+        <h2 class="mx-3">{{$selectedCourse->name}}</h2>
+    </div>
 
     @if(isset($ses))
 
