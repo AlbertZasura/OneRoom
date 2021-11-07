@@ -214,6 +214,7 @@ class ExamController extends Controller
             'title' => 'required',
             'startDate' => 'required',
             'deadline' => 'required',
+            'file_upload' => 'required|file|max:10000', // max 10MB
         ]);
 
         $todayDate = Carbon::now();
