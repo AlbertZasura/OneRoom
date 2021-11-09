@@ -33,7 +33,7 @@
                 <div class="profile-wrapper">
                     <div class="profile-picture">
                         @if(Auth::user()->profile_picture) 
-                            <img class="img-responsive" src="storage/images/{{ Auth::user()->profile_picture }}" alt="">
+                            <img class="img-responsive" src="{{ asset('storage/images/'.Auth::user()->profile_picture) }}" alt="">
                         @else
                             <img class="img-responsive" src="{{ asset('img/profile.png') }}" alt="">
                         @endif

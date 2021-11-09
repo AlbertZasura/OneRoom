@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-md-2">
                 <select class="form-select" name="weekday">
-                    <option selected value="">Semua Hari</option>
+                    <option value="">Semua Hari</option>
                     <option value="1">Minggu</option>
                     <option value="2">Senin</option>
                     <option value="3">Selasa</option>
@@ -22,9 +22,9 @@
             <div class="col-md-4">
                 <div class="input-group mb-3">
                     <select class="form-select" name="course">
-                        <option selected value="">Semua Mata Pelajaran</option>
+                        <option {{ request('course') ? "" : "selected" }} value="">Semua Mata Pelajaran</option>
                         @foreach ($class->courses as $c)
-                            <option value="{{ $c->id }}">{{ $c->name }}</option>
+                            <option {{ request('course')==$c->id ? "selected":"" }} value="{{ $c->id }}">{{ $c->name }}</option>
                         @endforeach
                     </select>
                     <button class="btn btn-outline-secondary" type="submit">Cari</button>

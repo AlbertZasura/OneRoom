@@ -38,4 +38,4 @@
             <a> {{ $message->content }}</a>
         </div>
     </div>
-@stop
+@endsection

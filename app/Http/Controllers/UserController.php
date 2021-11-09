@@ -104,7 +104,7 @@ class UserController extends Controller
             'status' => "1"
         ]);
 
-        Alert::warning('Berhasil', 'Pengguna berhasil diterima!');
+        Alert::success('Berhasil', 'Pengguna berhasil diterima!');
         return redirect()->route('users.index');
     }
 
@@ -115,18 +115,23 @@ class UserController extends Controller
             'identification_number' => $request->role==="admin" ? '':'required|numeric',
             'phone' => "required|numeric|unique:users,phone,$user->id",
             'email' => "required|email|unique:users,email,$user->id",
-            'password' => 'required|min:6|confirmed',
-            'password_confirmation' => 'required| min:6'
+            'password' => $request->password ? 'required|min:6|confirmed' : '',
+            'password_confirmation' => $request->password ? 'required|min:6' : ''
         ]);
+
+        if ($request->password) {
+            $user->update([
+                'password' => bcrypt($request->password)
+            ]);
+        }
 
         $user->update([
             'name' => $request->name,
             'identification_number' => $request->role==="admin" ? "0":$request->identification_number,
             'phone' => $request->phone,
-            'email' => $request->email,
-            'password' => bcrypt($request->password)
+            'email' => $request->email
         ]);
-
+        
         Alert::warning('Berhasil', 'Profil berhasil diubah!');
         return redirect('/');
     }

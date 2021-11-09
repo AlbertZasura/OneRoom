@@ -52,7 +52,7 @@ class MessageController extends Controller
             'content' => $request->content
         ]);
 
-        Alert::warning('Berhasil', 'Pengumuman berhasil dibuat!');
+        Alert::success('Berhasil', 'Pengumuman berhasil dibuat!');
         return redirect()->route('messages.index');
     }
 
@@ -99,7 +99,7 @@ class MessageController extends Controller
     public function destroy(Message $message)
     {
         $message->delete();
-        Alert::warning('Berhasil', 'Pengumuman berhasil dihapus!');
+        Alert::success('Berhasil', 'Pengumuman berhasil dihapus!');
         return redirect()->route('messages.index');
     }
 }

@@ -124,11 +124,11 @@ class ClassController extends Controller
     {
         $this->authorize('user_list', Classes::class);
         $users = User::where( function (Builder $query) use ($class){
-            $query->where('role',1)->where( function (Builder $q) use ($class){
+            $query->where('role',1)->where('status',1)->where( function (Builder $q) use ($class){
                 $q->whereRelation('classes','classes.id','!=',$class->id)->orDoesntHave('classes');
             });
         })->orWhere( function (Builder $query){
-             $query->doesntHave('classes')->where('role',2);
+             $query->doesntHave('classes')->where('role',2)->where('status',1);
         })->filter(request(['search','role']))->paginate(25);
         
 

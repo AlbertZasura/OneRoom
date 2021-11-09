@@ -8,7 +8,7 @@
     <h1>Tugas</h1>
     @if (now()->lt($assignment->deadline))
         <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
-            <strong>Note!</strong>  Setelah deadline baru bisa input nilai tugas
+            <strong>Note!</strong>  Setelah melewati batas waktu, Anda dapat memberikan nilai tugas !
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endif

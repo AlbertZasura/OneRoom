@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
+use Alert;
 
 class AssignmentController extends Controller
 {
@@ -98,7 +99,8 @@ class AssignmentController extends Controller
                 'course_id' => $course->id,
                 'class_id' => $request->class
             ]);
-        return back()->with('success','Tugas berhasil ditambahkan!');
+        Alert::success('Berhasil', "Tugas berhasil ditambahkan!");
+        return back();
     }
 
     /**
@@ -151,7 +153,8 @@ class AssignmentController extends Controller
     {
         $this->authorize('delete', $assignment);
         $assignment->delete();
-        return redirect()->route('course.assignments.index',$course)->with('success','Tugas berhasil dihapus!');
+        Alert::success('Berhasil', "Tugas berhasil dihapus!");
+        return redirect()->route('course.assignments.index',$course);
     }
 
     public function download(Assignment $assignment)
@@ -183,7 +186,8 @@ class AssignmentController extends Controller
             'file' => 'app/public/file/'.$fileName,
             'notes' => $request->notes
         ]);
-        return back()->with('success','Tugas berhasil dikumpulkan!');
+        Alert::success('Berhasil', "Tugas berhasil dikumpulkan!");
+        return back();
     }
 
     public function scoring(Request $request,Assignment $assignment)

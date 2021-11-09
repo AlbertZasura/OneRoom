@@ -63,14 +63,14 @@
                         <h4 class="ms-3 mb-0 card-title">Absent Hari ini</h4>
                     </div>
                     <div class="card-body">
-                        @if (Auth::user()->check_absent_today())
-                            <div class="row text-success">
+                        @if ($absent=Auth::user()->check_absent_today())
+                            <div class="row {{ $absent->status=="Telat" ? "text-danger" :"text-success" }}">
                                 <div class="col-md-6">
                                     <h1><i class="fa fa-user-check"></i></h1>
                                 </div>
                                 <div class="col-md-6 text-start">
-                                    <h5>{{ Auth::user()->check_absent_today()->status }}</h5>
-                                    <h5>{{ Auth::user()->check_absent_today()->created_at->format('H:i:s') }}</h5>
+                                    <h5>{{ $absent->status }}</h5>
+                                    <h5>{{ $absent->created_at->format('H:i:s') }}</h5>
                                 </div>
                             </div>
                             

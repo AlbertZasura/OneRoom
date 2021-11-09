@@ -6,6 +6,7 @@ use App\Models\Classes;
 use App\Models\Schedule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Alert;
 
 class ScheduleController extends Controller
 {
@@ -74,8 +75,8 @@ class ScheduleController extends Controller
             'start_time' => $request->start_time,
             'end_time' => $request->end_time
         ]);
-
-        return redirect()->route('classes.schedules.index', $class)->with('success',"Jadwal kelas {$class->name} berhasil dibuat!");
+        Alert::success('Berhasil', 'Jadwal berhasil dibuat!');
+        return redirect()->route('classes.schedules.index', $class);
     }
 
     /**
@@ -121,8 +122,8 @@ class ScheduleController extends Controller
             'start_time' => $request->start_time,
             'end_time' => $request->end_time
         ]);
-
-        return redirect()->route('classes.schedules.index', $class)->with('success',"Jadwal kelas {$class->name} untuk Mata Pelajaran {$schedule->course->name} berhasil dirubah!");
+        Alert::success('Berhasil', "Jadwal kelas {$class->name} untuk Mata Pelajaran {$schedule->course->name} berhasil dirubah!");
+        return redirect()->route('classes.schedules.index', $class);
     }
     
     /**
@@ -135,6 +136,7 @@ class ScheduleController extends Controller
     {
         $this->authorize('delete', $schedule);
         $schedule->delete();
-        return redirect()->route('classes.schedules.index', $class)->with('success',"Jadwal kelas {$class->name} berhasil dihapus!");
+        Alert::success('Berhasil', "Jadwal kelas {$class->name} berhasil dihapus!");
+        return redirect()->route('classes.schedules.index', $class);
     }
 }

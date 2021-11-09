@@ -37,10 +37,12 @@
     @endcan
 
     @if (!$assignments->isEmpty())
-        <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
-            <strong>Note!</strong>  Setelah melewati batas waktu, Anda tidak dapat mengumpulkan file tugas !
-            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-        </div>
+        @can('upload', App\Models\Assignment::class)
+            <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
+                <strong>Note!</strong>  Setelah melewati batas waktu, Anda tidak dapat mengumpulkan file tugas !
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        @endcan
         @foreach ($assignments as $assignment)
             <div class="card p-3">
                 <div class="d-grid d-md-flex align-items-center">
