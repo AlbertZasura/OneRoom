@@ -1,7 +1,7 @@
 
 @extends('Layout.SidePanel')
 
-@section('title', "$assignment->title")
+@section('title', "Tugas {$assignment->title} | OneRoom")
 
 @section('content')
     

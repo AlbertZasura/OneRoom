@@ -1,5 +1,5 @@
 @extends('Layout.SidePanel')
-
+@section('title', 'Daftar | OneRoom')
 @section('contentGuest')
     <div class="register text-center">
         <main class="form-signin rounded">

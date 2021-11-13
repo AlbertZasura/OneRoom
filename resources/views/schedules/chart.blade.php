@@ -1,6 +1,6 @@
 @extends('Layout.SidePanel')
 
-@section('title', 'Schedules Center')
+@section('title', 'Jadwal | OneRoom')
 
 @section('content')
     {{-- <h1>{{ now()->isoFormat('MMMM Y') }}</h1> --}}

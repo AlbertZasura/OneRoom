@@ -1,7 +1,7 @@
 
 @extends('Layout.SidePanel')
 
-@section('title', 'Messages Center')
+@section('title', 'Pengumuman | OneRoom')
 
 @section('content')
     <h1>Pengumuman</h1>
@@ -42,7 +42,7 @@
     </table>
     {{ $messages->links() }}
 
-<form action="{{ route('messages.store') }}" method="POST">
+<form action="{{ route('messages.store') }}" method="POST" enctype="multipart/form-data">
 @csrf
    <x-pop-up>
    <div>

@@ -1,6 +1,6 @@
 @extends('Assignments.course')
 
-@section('title', 'Assignment Center')
+@section('title', 'Tugas | OneRoom')
 
 @section('show')
     

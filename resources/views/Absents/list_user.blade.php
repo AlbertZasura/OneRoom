@@ -1,7 +1,7 @@
 
 @extends('Layout.SidePanel')
 
-@section('title', 'Daftar Siswa')
+@section('title', 'Absen | OneRoom')
 
 @section('content')
     @can('isTeacher')

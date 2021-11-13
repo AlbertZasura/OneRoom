@@ -1,5 +1,5 @@
 @extends('Layout.SidePanel')
-@section('title', "$class->name")
+@section('title', " Kelas | OneRoom")
 
 @section('content')
     <div class="d-flex align-items-center">

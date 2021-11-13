@@ -39,6 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/logout', [LoginController::class, 'logout']);
     Route::resource('contents', ContentController::class);
     Route::resource('messages', MessageController::class);
+    Route::get('messages/download/{id}', [MessageController::class, 'downloadFile'])->name('downloadMessage');
     
     Route::resource('exams', ExamController::class);
     Route::get('/exams/list/{type}', [ExamController::class, 'listExam'])->name('exlist');

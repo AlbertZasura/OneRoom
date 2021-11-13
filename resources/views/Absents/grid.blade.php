@@ -1,6 +1,6 @@
 @extends('Layout.SidePanel')
 
-@section('title', 'Absent Center')
+@section('title', 'Absen | OneRoom')
 
 @section('content')
     <div class="d-flex">

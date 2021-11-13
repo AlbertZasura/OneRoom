@@ -1,6 +1,6 @@
 @extends('Layout.SidePanel')
 
-@section('title', 'Accounts')
+@section('title', 'Akun | OneRoom')
 
 @section('content')
     <h1>Daftar Akun</h1>
