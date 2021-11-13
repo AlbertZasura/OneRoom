@@ -17,6 +17,10 @@ class Exam extends Model
         return $this->belongsTo(Classes::class,'class_id');
     }
 
+    public function kkm(){
+        return Content::where('name','=','KKM')->first()->value;
+    }
+
     public function courses(){
         return $this->hasMany(Course::class, 'course_id');
     }

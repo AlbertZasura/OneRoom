@@ -346,10 +346,14 @@ class ExamController extends Controller
     
             $ex = Exam::where('type','like', $type)->first();
             $c = Course::find(request()->input('course_id'));
+
+            $student_class = Auth::user()->classes->first();
             
             if(request()->input('course_id')){
                 // $exam = $c->exams->where('type','like', $type);
-                $exam = Exam::where('type','like', $type)->where('course_id', 'like', request()->input('course_id'))->get();
+                $exam = Exam::where('type','like', $type)
+                ->where('class_id', 'like', $student_class->id)
+                ->where('course_id', 'like', request()->input('course_id'))->get();
             }
             
             // if(request()->input('course_id') && request()->input('class_id')){
@@ -359,7 +363,7 @@ class ExamController extends Controller
             
             // $course = Course::all();
             $course = Auth::user()->classes->first()->courses->unique();
-            $student_class = Auth::user()->classes->first();
+            
             $class = Classes::all();
             // $class = Auth::user()->usersClasses->unique();
             $student_exam = Exam::where('class_id','like',$student_class->id)->get();
