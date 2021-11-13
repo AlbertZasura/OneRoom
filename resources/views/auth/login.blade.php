@@ -44,27 +44,18 @@
                                 </label>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="form-group row mb-0">
-                        <div class="col-md-8 offset-md-4">
-                            <button type="submit" class="btn btn-primary">
-                                {{ __('Login') }}
-                            </button>
-
-                            @if (Route::has('password.request'))
-                                <a class="btn btn-link" href="{{ route('password.request') }}">
-                                    {{ __('Forgot Your Password?') }}
-                                </a>
-                            @endif
-                        </div>
                     </div>--}}
-                    <button class="mt-4 w-100 btn btn-lg btn-primary" type="submit">Login</button>
-                    <p class="mt-3 mb-3 text-muted">Belum punya akun?
+                    <button class="my-4 w-100 btn btn-lg btn-primary" type="submit">Login</button>
+                    <p class="text-muted m-0">Belum punya akun?
                         <a class="text-decoration-none cursor-pointer" data-bs-toggle="modal" data-bs-target="#registerModal">
                             Daftar disini
                         </a>
                     </p>
+                    @if (Route::has('password.request'))
+                        <a class="mb-3 text-decoration-none cursor-pointer" href="{{ route('password.request') }}">
+                            Lupa password?
+                        </a>
+                    @endif
                 </form>
             </div> 
         </main>
