@@ -243,7 +243,37 @@
     height: 100%;
 }
 
+.card-shadow{
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.25);
+}
 
+.border-radius-5px{
+    border-radius: 5px;
+}
+
+.bg-hijau-tua{
+    background: #09565d;
+}
+
+.color-hijau-tua{
+    color: #09565d;
+}
+
+.bg-biru-muda{
+    background: #b2dad9;
+}
+
+.color-biru-muda{
+    color: #b2dad9;
+}
+
+.bg-hijau-muda{
+    background: #96b0b0;
+}
+
+.color-hijau-muda{
+    color: #96b0b0;
+}
 
 /* ======= effect side panel resize ========== */
 
