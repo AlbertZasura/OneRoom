@@ -1,6 +1,6 @@
 @extends('Layout.SidePanel')
 
-@section('title', "Jadwal Kelas {$class->name}")
+@section('title', "Jadwal Kelas {$class->name} | OneRoom")
 
 @section('content')
     <h1>Jadwal kelas {{ $class->name }}</h1>

@@ -1,6 +1,6 @@
 @extends('Layout.SidePanel')
 
-@section('title', 'Dashboard')
+@section('title', 'Halaman utama | OneRoom')
 
 @section('content')
 

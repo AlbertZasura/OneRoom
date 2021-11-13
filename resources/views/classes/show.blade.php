@@ -1,7 +1,7 @@
 
 @extends('classes.index')
 
-@section('title', "$class->name")
+@section('title', "Kelas {$class->name} | OneRoom")
 
 @section('show')
     <div class="d-flex align-items-center">

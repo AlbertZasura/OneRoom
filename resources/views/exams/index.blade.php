@@ -1,6 +1,6 @@
 @extends('Layout.SidePanel')
 
-@section('title', 'Ujian')
+@section('title', 'Ujian | OneRoom')
 
 @section('content')
 

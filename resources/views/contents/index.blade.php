@@ -1,7 +1,7 @@
 
 @extends('Layout.SidePanel')
 
-@section('title', 'Contents Center')
+@section('title', 'Konten | OneRoom')
 
 @section('content')
     <h1>Konten</h1>

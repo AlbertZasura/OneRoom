@@ -1,6 +1,5 @@
 @extends('materi.index')
-
-
+@section('title', 'Materi | OneRoom')
 @section('mainContent')
 <h1>Materi</h1>
 <br>

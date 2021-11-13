@@ -1,5 +1,5 @@
 @extends('Layout.SidePanel')
-
+@section('title', 'Pengumuman  | OneRoom')
 @section('content')
     <h1>Pengumuman</h1>
     <table style="width:35%">
@@ -32,7 +32,15 @@
             </td>
         </tr>
     </table>
+    <table>
+    <tr>
+            <div onclick="window.location='{{route('downloadMessage',$message->id)}}'" class="">
+                <i class="fas fa-paperclip"></i> 
+            </div>
+        </tr>
+    </table>
     <br>
+    
     <div class="card" style="width: 80%; height: 50%;">
         <div class="card-body">
             <a> {{ $message->content }}</a>

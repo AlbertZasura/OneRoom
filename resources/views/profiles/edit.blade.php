@@ -1,6 +1,6 @@
 @extends('Layout.SidePanel')
 
-@section('title', 'Profile')
+@section('title', 'Sunting Profil | OneRoom')
 
 @section('content')
 

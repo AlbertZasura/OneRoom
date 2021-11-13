@@ -1,18 +1,18 @@
 @extends('Layout.SidePanel')
-
+@section('title', 'Daftar | OneRoom')
 @section('contentGuest')
     <div class="register text-center">
         <main class="form-signin rounded">
-            <form action="/register" method="POST">
+            <form action="{{ route('register') }}?role={{ $role }}" method="POST">
                 @csrf
                 @include('components.notifications')
                 <h1 class="fw-normal"><strong>Daftar</strong></h1>
                 <h5 class="mb-4 fw-normal">Sebagai {{$role}}</h5>
                 <div class="form-floating">
-                    <input type="text"  name="name" class="form-control rounded-top @error('name')is-invalid @enderror" value="{{old('name')}}" id="name" placeholder="ex: John Doe..." required autofocus>
+                    <input type="text"  name="name" class="form-control rounded-top @error('name')is-invalid @enderror" value="{{old('name')}}" id="name" placeholder="ex: John Doe..." required autocomplete="name" autofocus>
                     <label for="name">Nama</label>
                     @error('name')
-                    <div class="invalid-feedback">{{ $message}}</div>
+                    <div class="invalid-feedback"><strong>{{ $message}}</strong></div>
                     @enderror
                 </div>
                 @if ($role !="admin")
@@ -52,14 +52,7 @@
                     <div class="invalid-feedback">{{ $message}}</div>
                     @enderror
                 </div>
-                <input type="number" name="status" value="{{$role==="admin" ? 1 : 0}}" hidden>
                 <input type="text" name="role" value="{{$role}}" hidden>
-            
-                {{-- <div class="checkbox mb-3">
-                    <label>
-                        <input type="checkbox" value="remember-me"> Remember me
-                    </label>
-                </div> --}}
                 <button class="mt-4 w-100 btn btn-lg btn-primary" type="submit">Submit</button>
                 <p class="mt-3 mb-3 text-muted">Sudah punya akun? <a href="/login">Login disini</a></p>
             </form>

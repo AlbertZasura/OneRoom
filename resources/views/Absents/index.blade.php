@@ -1,6 +1,6 @@
 @extends('Absents.course')
 
-@section('title', 'Absent Center')
+@section('title', 'Absen | OneRoom')
 
 @section('show')
     <h3>Daftar Pertemuan</h3>

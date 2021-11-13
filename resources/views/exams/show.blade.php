@@ -1,6 +1,6 @@
 @extends('exams.index')
 
-
+@section('title', 'Ujian | OneRoom')
 @section('mainContent')
 
 <div class="w-25">

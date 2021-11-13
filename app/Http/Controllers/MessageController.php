@@ -42,12 +42,13 @@ class MessageController extends Controller
      */
     public function store(Request $request)
     {
+        
         $request->validate([
             'title' => 'required',
             'content' => 'required',
             'file' => 'required|file|max:10000' // max 10MB
         ]);
-        dd("test");
+        
         $todayDate = Carbon::now();
         $DateFormat = Carbon::parse($todayDate)->format('Y-m-d');
         $TimeFormat = Carbon::parse($todayDate)->format('H-i-s');
@@ -60,7 +61,7 @@ class MessageController extends Controller
             'user_id' => Auth::user()->id,
             'title' => $request->title,
             'content' => $request->content,
-            'file' => 'app/public/file/'.$fileName
+            'file' => $fileName
         ]);    
         Alert::success('Berhasil', 'Pengumuman berhasil dibuat!');
         return redirect()->route('messages.index');
@@ -112,5 +113,13 @@ class MessageController extends Controller
         $message->delete();
         Alert::success('Berhasil', 'Pengumuman berhasil dihapus!');
         return redirect()->route('messages.index');
+    }
+
+    public function downloadFile($id){
+        $fl = Message::find($id);
+       
+        $file_path = public_path('storage/file/'.$fl->file);
+        return response()->download($file_path);
+
     }
 }
