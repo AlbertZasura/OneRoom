@@ -9,7 +9,7 @@
     <br>
     @can('create', App\Models\Message::class )
         <button class="btn btn-outline-dark" id="open-popup" ><i class="fas fa-plus-circle"></i>&nbspTambah Pengumuman</button>
-        @endcan
+    @endcan
     
     <table class="table table-hover" style="width:75%">
         <tbody>
@@ -64,7 +64,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="message-text" class="col-form-label"><b>File</b></label>
-                    <input class="form-control" name="files" type="file" id="files" value="{{old('files')}}" >
+                    <input class="form-control" name="file" type="file" id="file" >
                 </div>
                 </form>
             </div>
@@ -76,7 +76,7 @@
         </div>
     </div>
    </x-pop-up>
-    
+</form>
 
 <script>
     jQuery(document).ready(function($) {

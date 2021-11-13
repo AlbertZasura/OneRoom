@@ -20,7 +20,8 @@ class MessageSeeder extends Seeder
             $messages->fill([
                 "user_id" => rand(1,10),
                 'title' => "PENGUMUMAN",
-                'content' => $faker->text
+                'content' => $faker->text,
+                'file' => 'soal_mtk.pdf'
             ]);
             $messages->save();
         }

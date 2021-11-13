@@ -26,6 +26,7 @@ class ExamSeeder extends Seeder
                         'file' => 'soal_mtk.pdf',
                         "user_id" => 1,
                         "class_id" => 1,
+                        "course_id" => 2,
                         "created_at" =>  now()->toDateTimeString(),
                         "updated_at" => now()->toDateTimeString(),
                     ],
@@ -37,6 +38,7 @@ class ExamSeeder extends Seeder
                         'file' => 'soal_ipa.pdf',
                         "user_id" => 1,
                         "class_id" => 2,
+                        "course_id" => 2,
                         "created_at" =>  now()->toDateTimeString(),
                         "updated_at" => now()->toDateTimeString(),
                     ],
@@ -48,17 +50,13 @@ class ExamSeeder extends Seeder
                         'file' => 'soal_ips.pdf',
                         "user_id" => 1,
                         "class_id" => 3,
+                        "course_id" => 3,
                         "created_at" =>  now()->toDateTimeString(),
                         "updated_at" => now()->toDateTimeString(),
                     ]
                 ]);
                 
-                for ($i=0; $i < 3 ; $i++) { 
-                    for ($j=5; $j>$i+1 ; $j--) { 
-                        $class=Exam::find($i+1);
-                        $class->courses()->attach($j);
-                    }
-                }
+                
 
                 for ($i=0; $i < 3 ; $i++) { 
                     for ($j=30; $j>$i+1 ; $j--) { 

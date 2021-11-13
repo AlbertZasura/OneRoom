@@ -45,7 +45,8 @@ class Course extends Model
     }
 
     public function exams(){
-        return $this->belongsToMany(Exam::class,'courses_exams','course_id', 'exam_id');
+        return $this->belongsTo(Exam::class);
+        // return $this->belongsToMany(Exam::class,'courses_exams','course_id', 'exam_id');
     }
 
     public function schedules(){

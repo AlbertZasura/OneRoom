@@ -3,6 +3,9 @@
 @section('title', 'Materi')
 
 @section('content')
+<h1>Materi</h1>
+<br>
+<br>
 
 <div class="container">
 
