@@ -243,8 +243,8 @@ class CourseController extends Controller
                 'course_id' => request()->input('course_id'),
                 'class_id' => request()->input('class_id')
             ]);
-    
-            return redirect()->route('courses.index')->with('success','Message created successfully.');
+            alert()->success('Tersimpan','Berhasil Membuat Materi Pelajaran');
+            return redirect()->route('courses.index');
 
         }else{
             abort("no file upload");
@@ -302,7 +302,8 @@ class CourseController extends Controller
         $this->authorize('viewTeacher', App\Models\Course::class);
         $session = Session::find($id);
         $session->delete();
-        return redirect()->route('courses.index')->with('success','Berhasil Menghapus Materi Pelajaran');
+        alert()->success('Materi Dihapus','Berhasil menghapus Materi Pelajaran');
+        return redirect()->route('courses.index');
 
     }
 

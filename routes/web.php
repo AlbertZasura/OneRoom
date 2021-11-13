@@ -10,8 +10,6 @@ use App\Http\Controllers\ExamController;
 use App\Http\Controllers\AssignmentController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\LoginController;
-use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -26,17 +24,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/session', [SessionController::class, 'index']);
-// Route::post('/session/store', [SessionController::class, 'store']);
 
-Route::get('/register/{role?}', [RegisterController::class, 'register'])->middleware('guest');
-Route::post('/register', [RegisterController::class, 'store']);
-Route::get('/login', [LoginController::class, 'login'])->name('login')->middleware('guest');
-Route::post('/login', [LoginController::class, 'store']);
+Auth::routes();
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
 
 Route::middleware('auth')->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('home');
-    Route::post('/logout', [LoginController::class, 'logout']);
     Route::resource('contents', ContentController::class);
     Route::resource('messages', MessageController::class);
     Route::get('messages/download/{id}', [MessageController::class, 'downloadFile'])->name('downloadMessage');
