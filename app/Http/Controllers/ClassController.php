@@ -123,14 +123,12 @@ class ClassController extends Controller
     public function user_list(Classes $class)
     {
         $this->authorize('user_list', Classes::class);
-        $users = User::where( function (Builder $query) use ($class){
-            $query->where('role',1)->where('status',1)->where( function (Builder $q) use ($class){
-                $q->whereRelation('classes','classes.id','!=',$class->id)->orDoesntHave('classes');
-            });
-        })->orWhere( function (Builder $query){
-             $query->doesntHave('classes')->where('role',2)->where('status',1);
-        })->filter(request(['search','role']))->paginate(25);
-        
+        $users = User::where([['role',1],['status',1]])
+            ->whereDoesntHave('classes', function (Builder $query) use ($class) {
+                $query->where('class_id', $class->id);
+            })->orWhere( function (Builder $query){
+                $query->doesntHave('classes')->where([['role',2],['status',1]]);
+            })->filter(request(['search','role']))->paginate(25);
 
         return view('classes.assign_user', [
             'class' => $class,
