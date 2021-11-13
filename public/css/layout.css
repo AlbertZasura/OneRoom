@@ -1,27 +1,33 @@
-.w-50{
+.w-50 {
     width: 50%;
 }
-.d-flex{
+
+.d-flex {
     display: flex;
 }
-.a-center{
+
+.a-center {
     align-items: center;
 }
-.bg-dark-toska{
+
+.bg-dark-toska {
     background: #278EA5;
 }
-.side-panel-menu{
+
+.side-panel-menu {
     /* width: 254px; */
     padding: 20px 20px;
     color: #fff;
     height: 100%;
     z-index: 10;
 }
-.img-responsive{
+
+.img-responsive {
     width: 100%;
     height: auto;
 }
-.profile-picture{
+
+.profile-picture {
     width: 150px;
     height: 150px;
     margin: 0 auto;
@@ -30,23 +36,23 @@
     transition: all .5s;
 }
 
-.w-85{
+.w-85 {
     width: 85%;
 }
 
-.border-2px{
+.border-2px {
     border: 2px solid;
 }
 
-.border-color-blue{
+.border-color-blue {
     border-color: #1597E5;
 }
 
-.text-blue{
+.text-blue {
     color: #1597E5;
 }
 
-.save-btn-1{
+.save-btn-1 {
     background: #6ECB63;
     padding-top: 1px;
     color: #fff;
@@ -55,42 +61,50 @@
 /* ====== custome radio with div ========= */
 
 .radio-course {
-    display : block;
+    display: block;
 }
-.radio-course > input{ /* HIDE RADIO */
-    visibility: hidden; /* Makes input not-clickable */
-    position: absolute; /* Remove input from document flow */
+
+.radio-course>input {
+    /* HIDE RADIO */
+    visibility: hidden;
+    /* Makes input not-clickable */
+    position: absolute;
+    /* Remove input from document flow */
 }
-.radio-course > input + div{ /* DIV STYLES */
-    cursor:pointer;
-    border:2px solid transparent;
+
+.radio-course>input+div {
+    /* DIV STYLES */
+    cursor: pointer;
+    border: 2px solid transparent;
 }
-.radio-course > input:checked + div{ /* (RADIO CHECKED) DIV STYLES */
+
+.radio-course>input:checked+div {
+    /* (RADIO CHECKED) DIV STYLES */
     background-color: rgba(57, 189, 200, 0.2);
 }
 
 /* ====== custome radio with div ========= */
 
-.option-course.active{
+.option-course.active {
     background: rgba(57, 189, 200, 0.2);
 }
 
-.option-teacher.active{
+.option-teacher.active {
     background: rgba(57, 189, 200, 0.2);
 }
 
-.option-class.active{
+.option-class.active {
     background: rgba(57, 189, 200, 0.2);
 }
 
-.btn-add-course{
+.btn-add-course {
     border-color: #1597E5;
     color: #1597E5;
     background: #fff;
     transition: all .2s;
 }
 
-.btn-add-course:hover{
+.btn-add-course:hover {
     border-color: #fff;
     color: #fff;
     background: #1597E5;
@@ -99,123 +113,133 @@
 
 .custom-scroll-y::-webkit-scrollbar {
     width: 10px;
-  }
-  
-  .custom-scroll-y::-webkit-scrollbar-track {
-    background: #fff; 
-  }
-   
-  .custom-scroll-y::-webkit-scrollbar-thumb {
-    background: #d5d4d4; 
-    border-radius: 5px;
-  }
-  
-  .custom-scroll-y::-webkit-scrollbar-thumb:hover {
-    background: #555; 
-  }
+}
 
-.text-navi{
+.custom-scroll-y::-webkit-scrollbar-track {
+    background: #fff;
+}
+
+.custom-scroll-y::-webkit-scrollbar-thumb {
+    background: #d5d4d4;
+    border-radius: 5px;
+}
+
+.custom-scroll-y::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.text-navi {
     color: #3D6CB9;
 }
 
-.hover-gray:hover{
+.hover-gray:hover {
     background: #e5e5e5;
 }
 
-.scroll-y{
+.scroll-y {
     overflow-y: scroll;
 }
 
-.border-bottom-gray{
+.border-bottom-gray {
     border-bottom: 1px solid #e5e5e5;
 }
 
-.box-course-create{
+.box-course-create {
     border: 2px solid black;
     border-radius: 5px;
     padding: 21px;
     height: 100%;
 }
 
-.mr-10{
+.mr-10 {
     margin-right: 10px;
 }
 
-.view-session{
+.view-session {
     border: 1px solid #3D6CB9;
     width: 169px;
     border-radius: 5px;
     padding: 7px 10px;
 }
 
-.accordion-button-none::after{
-    background-image:none;
+.accordion-button-none::after {
+    background-image: none;
 
 }
 
-.text-center{
+.text-center {
     text-align: center;
 
 }
-.text-white{
+
+.text-white {
     color: #fff;
 }
-.text-decoration-none{
+
+.text-decoration-none {
     text-decoration: none;
 }
-.fs-25{
+
+.fs-25 {
     font-size: 25px;
 }
-.fs-20{
+
+.fs-20 {
     font-size: 20px;
 }
-.fs-18{
+
+.fs-18 {
     font-size: 18px;
 }
-.ml-20{
+
+.ml-20 {
     margin-left: 20px;
 }
-.mt-20{
+
+.mt-20 {
     margin-top: 20px;
 }
-.w-25px{
+
+.w-25px {
     width: 25px;
 }
-.mb-10{
+
+.mb-10 {
     margin-bottom: 10px;
 }
-.overflow-hidden{
+
+.overflow-hidden {
     overflow: hidden;
 }
 
-.ml-70{
+.ml-70 {
     margin-left: 70px;
 }
 
-.cursor-pointer{
+.cursor-pointer {
     cursor: pointer;
 }
 
-.text-right{
+.text-right {
     text-align: right;
 }
 
-.w-200px{
+.w-200px {
     width: 200px;
 }
 
-.card-box{
+.card-box {
     background: #39BDC8;
     border-radius: 5px;
     padding: 4px 8px;
     color: #fff;
 }
 
-.w-auto{
+.w-auto {
     width: auto;
 }
 
-.h-100{
+.h-100 {
     height: 100%;
 }
 
@@ -223,74 +247,74 @@
 
 /* ======= effect side panel resize ========== */
 
-    .resize-side-panel{
-        overflow: hidden;
-        width: 60px;
-        transition: width .5s;
-        position: fixed;
-    }
-    
-    .resize-side-panel:hover {
-        width: 254px;
-    }
+.resize-side-panel {
+    overflow: hidden;
+    width: 60px;
+    transition: width .5s;
+    position: fixed;
+}
 
-    .resize-side-panel .profile-picture{
-        width: 40px;
-        height: 40px;
-    }
+.resize-side-panel:hover {
+    width: 254px;
+}
 
-    .resize-side-panel .profile-wrapper{
-        margin-left: -10px;
-        transition: all .5s;
-    }
+.resize-side-panel .profile-picture {
+    width: 40px;
+    height: 40px;
+}
 
-    .resize-side-panel:hover .profile-wrapper{
-        margin-left: 0px;
-    }
+.resize-side-panel .profile-wrapper {
+    margin-left: -10px;
+    transition: all .5s;
+}
 
-    .resize-side-panel:hover .profile-picture{
-        width: 150px;
-        height: 150px;
-    }
+.resize-side-panel:hover .profile-wrapper {
+    margin-left: 0px;
+}
 
-    .resize-side-panel .text-profile{
-        position: relative;
-        top: -80px;
-        transition: all .5s;
-        
-    }
+.resize-side-panel:hover .profile-picture {
+    width: 150px;
+    height: 150px;
+}
 
-    .resize-side-panel:hover .text-profile{
-        top: 0;
-    }
+.resize-side-panel .text-profile {
+    position: relative;
+    top: -80px;
+    transition: all .5s;
 
-    .edit-prof-wrap{
-        height: 21px;
-        overflow: hidden;
-    }
+}
+
+.resize-side-panel:hover .text-profile {
+    top: 0;
+}
+
+.edit-prof-wrap {
+    height: 21px;
+    overflow: hidden;
+}
 
 
 /* ======= end effect side panel resize ========== */
 
-.pos-relative{
+.pos-relative {
     position: relative;
 }
 
-.pos-absolute{
+.pos-absolute {
     position: absolute;
 }
 
-.visible-password{
+.visible-password {
     position: absolute;
     right: 15px;
     top: 35px;
 }
 
-.d-none{
+.d-none {
     display: none;
 }
 
-.d-block{
+.d-block {
     display: block;
 }
 
@@ -301,32 +325,33 @@
     padding-top: 40px;
     padding-bottom: 40px;
     /* background-color: #f5f5f5; */
-  }
-  
+}
+
 .form-signin {
     width: 100%;
     max-width: 330px;
     padding: 15px;
     margin: auto;
-  }
-  .form-signin input{
+}
+
+.form-signin input {
     border-radius: 0;
-  }
-  
-  .form-signin .checkbox {
+}
+
+.form-signin .checkbox {
     font-weight: 400;
-  }
-  
-  .form-signin .form-floating:focus-within {
+}
+
+.form-signin .form-floating:focus-within {
     z-index: 2;
 }
 
 .form-signin input[type="email"] {
     margin-bottom: -1px;
-  }
-  
-  .form-signin input[type="password"] {
+}
+
+.form-signin input[type="password"] {
     margin-bottom: -1px;
-  }
+}
 
 /* ======= end effect register and login ========== */
