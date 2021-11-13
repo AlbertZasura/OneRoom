@@ -303,7 +303,15 @@ class ExamController extends Controller
 
         if(Auth::user()->role == 'teacher'){
 
+            // $course = Course::all();
+            $course = Auth::user()->usersCorses->unique();
+            
+            // $class = Classes::all();
+            $class = Auth::user()->usersClasses->unique();
+    
+
             if(request()->input('class_id')){
+                $course = $class->find(request()->input('class_id'))->courses;
                 $exam = Exam::where('type','like', $type)->where('class_id', 'like', request()->input('class_id'))->get();
             }else{
                 $exam = Exam::where('type','like', $type)->get();
@@ -313,7 +321,8 @@ class ExamController extends Controller
             $c = Course::find(request()->input('course_id'));
             
             if(request()->input('course_id')){
-                // dd($exam);
+                $class = $course->find(request()->input('course_id'))->classes;
+                // dd($class);
                 // if($c->exams != null){
                     $exam = Exam::where('type','like', $type)->where('course_id', 'like', request()->input('course_id'))->get();
                 // }else{
@@ -332,12 +341,7 @@ class ExamController extends Controller
             }
             
             
-            // $course = Course::all();
-            $course = Auth::user()->usersCorses->unique();
-    
-            // $class = Classes::all();
-            $class = Auth::user()->usersClasses->unique();
-    
+            
             $exType = $type;
     
             $exam_type = DB::table('exams')
