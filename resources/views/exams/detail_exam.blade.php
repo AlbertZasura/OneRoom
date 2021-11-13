@@ -31,7 +31,7 @@
                     <i class="fas fa-download mr-10 cursor-pointer" onclick="window.location='/exams/downloadexamstudent/download?user_id={{$item->id}}&pivotId={{$item->pivot->id}}&e={{$exam_id}}'" ></i>
                     <i class="fas fa-plus cursor-pointer" data-bs-toggle="modal" data-bs-target="#exampleModal{{$item->id}}"></i>
                 </td>
-                <td>
+                <td class="fw-bolder {{(App\Models\Exam::first()->kkm() > $item->pivot->score) ? 'text-danger' : 'text-success'}}">
                     {{$item->pivot->score}}
                 </td>
             </tr>

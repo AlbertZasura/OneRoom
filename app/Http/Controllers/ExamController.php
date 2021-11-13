@@ -473,7 +473,7 @@ class ExamController extends Controller
     //guru
     public function export(Exam $exam){
         $this->authorize('exportScore', $exam);
-        return Excel::download(new ExamsExport($exam->id), "Daftar Siswa kelas {$exam->class->name} - Ujian {$exam->title}.xlsx");
+        return Excel::download(new ExamsExport($exam->id), "Daftar Siswa kelas {$exam->class->name} - {$exam->title}.xlsx");
     }
 
     /**

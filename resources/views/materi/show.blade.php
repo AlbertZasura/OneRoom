@@ -19,7 +19,7 @@
             <div class="mb-10">
                 <div class="accordion-item">
                     <h2 class="accordion-header d-flex a-center" id="heading{{$item->id}}">
-                        <i onclick="window.location='/session/delete/{{$item->id}}'" class="ml-20 fs-20 far fa-trash-alt text-danger mr-10 cursor-pointer"></i>
+                        <i onclick="deleteSessionBtn( {{$item->id}} ) " class="ml-20 fs-20 far fa-trash-alt text-danger mr-10 cursor-pointer"></i>
                         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{$item->id}}" aria-expanded="false" aria-controls="collapseTwo">
                             <span class="text-navi fw-bolder">{{$item->title}}</span>
                         </button>
@@ -52,16 +52,35 @@
                 <form action="/session/insert?class_id={{$seletedClass->id}}&course_id={{isset($selected_course) ? $selected_course->id : $course_teacher->first()->id}}" method="post" enctype="multipart/form-data">
                     @csrf
                     <label for="exampleInputEmail1" class="form-label">title</label>
-                    <input type="text" name="title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <input type="text" name="title" value="{{ old('title') }}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
                     <br>
                     <label for="exampleInputEmail1" class="form-label">description</label>
-                    <input type="text" name="description" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <input type="text" name="description" value="{{ old('description') }}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
                     <br>
-                    <input type="file" name="file_upload" id="" class="form-control"><br>
+                    <input type="file" name="file_upload" id="" class="form-control" required><br>
                     <button type="submit" class="btn btn-dark form-control">Upload Now</button>
                 </form>
 
             </div>
+
+            <script>
+                function deleteSessionBtn(id,user){
+                    Swal.fire({
+                            title: `Hapus Materi`,
+                            text: "Apakah Anda Yakin ingin menghapus Materi Pelajarn ini?",
+                            icon: "warning",
+                            showCancelButton: true,
+                            confirmButtonText: 'Ya',
+                            cancelButtonText: 'Tidak',
+                    })
+                    .then((result) => {
+                        if (result.isConfirmed) {
+                            window.location = '/session/delete/' + id ;
+                        }
+                    });
+                
+            }
+            </script>
     
 @endcan
 
@@ -109,12 +128,12 @@
                 <form action="/session" method="post" enctype="multipart/form-data">
                     @csrf
                     <label for="exampleInputEmail1" class="form-label">title</label>
-                    <input type="text" name="title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <input type="text" name="title" value="{{ old('title') }}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
                     <br>
-                    <label for="exampleInputEmail1" class="form-label">description</label>
-                    <input type="text" name="description" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                    <label for="exampleInputEmail1"  class="form-label">description</label>
+                    <input type="text" name="description" value="{{ old('description') }}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
                     <br>
-                    <input type="file" name="file_upload" id="" class="form-control"><br>
+                    <input type="file" name="file_upload" id="" class="form-control" required><br>
                     <input type="text" name="coId" value="{{$courseId}}" class="d-none">
                     <button type="submit" class="btn btn-dark form-control">Upload Now</button>
                 </form>
