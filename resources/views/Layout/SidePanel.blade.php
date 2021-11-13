@@ -33,9 +33,9 @@
                 <div class="profile-wrapper">
                     <div class="profile-picture">
                         @if(Auth::user()->profile_picture) 
-                            <img class="img-responsive" src="{{ asset('storage/images/'.Auth::user()->profile_picture) }}" alt="">
+                            <img class="w-auto h-100" src="{{ asset('storage/images/'.Auth::user()->profile_picture) }}" alt="">
                         @else
-                            <img class="img-responsive" src="{{ asset('img/profile.png') }}" alt="">
+                            <img class="w-auto h-100" src="{{ asset('img/profile.png') }}" alt="">
                         @endif
                     </div>
 
