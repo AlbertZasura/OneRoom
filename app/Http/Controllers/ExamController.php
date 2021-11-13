@@ -27,12 +27,24 @@ class ExamController extends Controller
         $course = '';
         $exType = '';
         $class = '';
+        
+        if(Auth::user()->role == 'student'){
+            $student_class = Auth::user()->classes->first();
+            
 
-        $exam_type = DB::table('exams')
-                        ->select('type', DB::raw('count(*) as total'))
-                        ->groupBy('type')
-                        ->get();
-
+            $exam_type = DB::table('exams')
+                            ->select('type', DB::raw('count(*) as total'))
+                            ->where('class_id','like',$student_class->id)
+                            ->groupBy('type')
+                            ->get();
+        }else{
+            $exam_type = DB::table('exams')
+                            ->select('type', DB::raw('count(*) as total'))
+                            ->groupBy('type')
+                            ->get();
+    
+                            
+        }
         return view('exams.index', [
             'exam' => $exam,
             'examType' => $exam_type,
@@ -40,6 +52,9 @@ class ExamController extends Controller
             'exType'  => $exType,
             'class' => $class
         ]);
+
+
+        
     }
 
     /**
