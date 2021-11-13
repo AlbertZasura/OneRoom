@@ -7,9 +7,9 @@
   
         <div class="d-flex" style="width:500px">
             <select class="form-select form-select-lg mb-3" id="courseFilter" onchange="getCourse()" aria-label=".form-select-lg example">
-                <option selected>Pilih Pelajaran</option>
+                <option value="all" {{ request()->input('course_id') ? '' : 'selected' }} >Pilih Pelajaran</option>
                 @foreach($course as $it)
-                    <option value="{{$it->id}}">{{$it->name}}</option>
+                    <option value="{{$it->id}}" {{ request()->input('course_id') ? request()->input('course_id') == $it->id ? 'selected' : '' : '' }}>{{$it->name}}</option>
                 @endforeach
             </select>
 
@@ -234,13 +234,19 @@
 
     function getCourse(){
         var e = document.getElementById("courseFilter");
-        var url_str = document.URL;
-        let url = new URL(url_str);
-        let search_params = url.searchParams;
-        if(search_params.get('class_id')){
-            window.location='/exams/list/{{$exType}}?course_id=' + e.value + '&class_id=' + search_params.get('class_id');
+        console.log(e.value == "all");
+        if(e.value == "all"){
+            window.location='/exams/list/{{$exType}}'
         }else{
-            window.location='/exams/list/{{$exType}}?course_id=' + e.value
+            var url_str = document.URL;
+            let url = new URL(url_str);
+            let search_params = url.searchParams;
+            if(search_params.get('class_id')){
+                window.location='/exams/list/{{$exType}}?course_id=' + e.value + '&class_id=' + search_params.get('class_id');
+            }else{
+                window.location='/exams/list/{{$exType}}?course_id=' + e.value
+            }
+
         }
     }
 
