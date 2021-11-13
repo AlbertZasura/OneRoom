@@ -5,6 +5,8 @@
 @section('content')
 
     <h1>Materi</h1>
+    <br>
+    <br>
 
     <div class="d-flex">
         <div class="w-200px">

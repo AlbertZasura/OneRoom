@@ -2,7 +2,9 @@
 
 
 @section('mainContent')
-
+<h1>Materi</h1>
+<br>
+<br>
 
 @can('viewTeacher', App\Models\Course::class)
     <select id="courseSelect" class="form-select" aria-label="Default select example" onchange="chooseSession()">
