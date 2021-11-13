@@ -1,5 +1,5 @@
 @extends('Layout.SidePanel')
-
+@section('title', 'Masuk | OneRoom')
 @section('contentGuest')
     <div class="mt-5 border border-dark border-1 rounded-3 p-5">
         <main class="row">
