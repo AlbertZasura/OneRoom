@@ -7,11 +7,11 @@
             </div>
             <div class="modal-body text-center">
                 <h3 class="modal-title mb-3">Daftar Sebagai</h3>
-                <a href="/register/teacher" class="btn btn-warning">Guru</a>
+                <a href="/register?role=teacher" class="btn btn-warning">Guru</a>
                 <p class="my-1 m-0">Atau</p>
                 <a href="/register" class="btn btn-warning">Siswa</a>
                 <p class="my-1 m-0">Atau</p>
-                <a href="/register/admin" class="btn btn-warning">Admin</a>
+                <a href="/register?role=admin" class="btn btn-warning">Admin</a>
                 </div>
             </div>
         </div>
