@@ -131,7 +131,7 @@
                                 <div class="text-center justify-content-center">
                                     <form action="{{ route('absents.store') }}" method="POST">
                                         @csrf
-                                        <button class="btn btn-sm btn-primary" type="submit"><i class='fa fa-user-check'></i> Absent Sekarang</button>
+                                        <button class="btn btn-sm btn-primary btn-fill-green rounded-pill py-2 px-5" type="submit"><i class='fa fa-user-check'></i> Absent Sekarang</button>
                                     </form>
                                 </div>
                             </div>
