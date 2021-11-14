@@ -7,7 +7,7 @@
   
         <div class="d-flex" style="width:500px">
             <select class="form-select form-select-lg mb-3" id="courseFilter" onchange="getCourse()" aria-label=".form-select-lg example">
-                <option value="all" {{ request()->input('course_id') ? '' : 'selected' }} >Pilih Pelajaran</option>
+                <option value="all" {{ request()->input('course_id') ? '' : 'selected' }} >Pilih Semua</option>
                 @foreach($course as $it)
                     <option value="{{$it->id}}" {{ request()->input('course_id') ? request()->input('course_id') == $it->id ? 'selected' : '' : '' }}>{{$it->name}}</option>
                 @endforeach
