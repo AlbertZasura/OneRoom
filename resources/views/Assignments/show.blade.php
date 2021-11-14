@@ -32,7 +32,7 @@
         <p class="m-1">{{$assignment->users->count()}} / {{$assignment->class->students->count()}}</p>
     </div>
     <div class="d-grid d-md-flex align-items-center p-3">
-        <a href="{{ route('assignments.export',$assignment->id) }}" class="ms-auto btn btn-primary rounded-pill">Export Excel</a>
+        <a href="{{ route('assignments.export',$assignment->id) }}" class="ms-auto btn btn-fill-green rounded-pill">Export Excel</a>
     </div>
     <table class="table table-hover">
         <thead>

@@ -28,12 +28,12 @@
             <div class="col-md-3">
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="Cari Nama {{ $role==="teacher" ? "Siswa" : "Guru" }}" name="search" value="{{ request('search') }}">
-                    <button class="btn btn-outline-secondary" type="submit">Cari</button>
+                    <button class="btn btn-fill-green" type="submit">Cari</button>
                 </div>
             </div>
             <div class="col-md-1">
                 <div class="input-group mb-3">
-                    <a href="{{ route('absents.export') }}?date={{ request('date') }}&search={{ request('search') }}&schedule={{ request('schedule') }}" class="btn btn-primary rounded-pill">Export Excel</a>
+                    <a href="{{ route('absents.export') }}?date={{ request('date') }}&search={{ request('search') }}&schedule={{ request('schedule') }}" class="btn btn-fill-green rounded-pill">Export Excel</a>
                 </div>
             </div>
         </div>

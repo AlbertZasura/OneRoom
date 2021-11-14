@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header border-bottom-0">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Jadwal {{ $s->course->name }}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Ubah Jadwal {{ $s->course->name }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -37,9 +37,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="modal-footer border-top-0">
+                    <button type="button" class="btn btn-outline-green rounded-pill" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-fill-green rounded-pill">Simpan</button>
                 </form>
             </div>
         </div>

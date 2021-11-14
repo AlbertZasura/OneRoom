@@ -10,7 +10,7 @@
             <form action="/schedules/all">
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="Cari kelas" name="search" value="{{ request('search') }}">
-                    <button class="btn btn-outline-secondary" type="submit">Cari</button>
+                    <button class="btn btn-fill-green" type="submit">Cari</button>
                 </div>
             </form>
         </div>
@@ -27,7 +27,7 @@
                     <th>{{ $key+1 }}</th>
                     <td>{{ $c->name }}</td>
                     <td>
-                        <a class="btn btn-sm btn-primary" href={{ route('classes.schedules.index',$c) }}>Lihat Jadwal</a>
+                        <a class="btn btn-fill-green rounded-pill" href={{ route('classes.schedules.index',$c) }}>Lihat Jadwal</a>
                     </td>
                 </tr>
             @endforeach

@@ -13,13 +13,13 @@
         <div class="d-flex">
             <div class="w-200px">
                 @can('viewAny', App\Models\Absent::class )
-                    @foreach ($courses as $course )
-                    <div class="card text-white bg-primary mb-3">
+                    @foreach ($courses as $c )
+                    <div class="card {{ ($c->id===request('course_id')) ? "bg-biru-muda color-hijau-tua"  : "bg-hijau-tua text-white" }} mb-3">
                         <div class="card-body">
-                            <h5 class="card-title">{{$course->name}}</h5>
-                            <a href="{{route('course.absents.index',$course)}}" class="stretched-link"></a>
+                            <h5 class="card-title">{{$c->name}}</h5>
+                            <a href="{{route('course.absents.index',$c)}}" class="stretched-link"></a>
                             <p class="card-text text-end">
-                                {{ App\Models\Schedule::where('course_id',$course->id)->where('class_id',Auth::user()->classes->first()->id)->count() }} Pertemuan
+                                {{ App\Models\Schedule::where('course_id',$c->id)->where('class_id',Auth::user()->classes->first()->id)->count() }} Pertemuan
                             </p>
                         </div>
                     </div>

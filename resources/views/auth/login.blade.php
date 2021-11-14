@@ -5,7 +5,12 @@
         <main class="row">
             <div class="col-md-8 p-5">
                 <div class="img-thumbnail">
-                    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                    <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
+                        <div class="carousel-indicators">
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                            <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                          </div>
                         <div class="carousel-inner">
                           <div class="carousel-item active">
                             <img src="https://source.unsplash.com/random/1000×700/?programming" class="d-block w-100" alt="...">
@@ -17,11 +22,11 @@
                             <img src="https://source.unsplash.com/random/1000×700/?education" class="d-block w-100" alt="...">
                           </div>
                         </div>
-                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
                           <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                           <span class="visually-hidden">Previous</span>
                         </button>
-                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
                           <span class="carousel-control-next-icon" aria-hidden="true"></span>
                           <span class="visually-hidden">Next</span>
                         </button>
@@ -35,15 +40,15 @@
                     @include('components.notifications')
                     <h1 class="my-5 fw-normal"><strong>Login</strong></h1>
                     
-                    <div class="form-floating">
-                        <input type="email"  name="email" class="form-control rounded-top @error('email')is-invalid @enderror" value="{{old('email')}}" id="email" placeholder="ex: johndoe@gmail.com..." required autocomplete="email" autofocus>
+                    <div class="form-floating mb-2">
+                        <input type="email"  name="email" class="form-control form-input-color rounded-top @error('email')is-invalid @enderror" value="{{old('email')}}" id="email" placeholder="ex: johndoe@gmail.com..." required autocomplete="email" autofocus>
                         <label for="email">Email</label>
                         @error('email')
                         <div class="invalid-feedback"><strong>{{ $message}}</strong></div>
                         @enderror
                     </div>
                     <div class="form-floating">
-                        <input type="password" name="password" class="form-control rounded-bottom @error('password')is-invalid @enderror" id="passwordLogin" required autocomplete="current-password">
+                        <input type="password" name="password" class="form-control form-input-color rounded-bottom @error('password')is-invalid @enderror" id="passwordLogin" required autocomplete="current-password">
                         <label for="password">Password</label>
                         <i class="far fa-eye visible-password" id="openEye" onclick="showPassword()"></i>
                         <i class="far fa-eye-slash visible-password d-none" id="closeEye" onclick="hidePassword()"></i>

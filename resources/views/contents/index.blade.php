@@ -8,7 +8,7 @@
     <table class="table">
         <thead>
           <tr>
-            <th scope="col">#</th>
+            <th scope="col">No</th>
             <th scope="col">Nama</th>
             <th scope="col">Isi</th>
             <th scope="col">Perubahan Terakhir</th>
@@ -23,8 +23,8 @@
                     <td>{{ $content->value }}</td>
                     <td>{{ $content->updated_at }}</td>
                     <td>
-                        <a data-bs-toggle="modal" data-bs-target="#editContents{{ $content->id }}" class="btn btn-sm btn-primary">
-                            <i class='fa fa-pen'></i> Edit
+                        <a data-bs-toggle="modal" data-bs-target="#editContents{{ $content->id }}" class="btn btn-fill-green rounded-pill">
+                            <i class='fa fa-pen'></i> Ubah
                         </a>
                         @include('contents._edit')
                     </td>

@@ -27,14 +27,14 @@
                             <option {{ request('course')==$c->id ? "selected":"" }} value="{{ $c->id }}">{{ $c->name }}</option>
                         @endforeach
                     </select>
-                    <button class="btn btn-outline-secondary" type="submit">Cari</button>
+                    <button class="btn btn-fill-green" type="submit">Cari</button>
                 </div>
             </div>
         </div>
     </form>
     <div class="row mb-2">
         <div class="col-md-6">
-            <a data-bs-toggle="modal" data-bs-target="#createSchedules" class="btn btn-outline-dark">
+            <a data-bs-toggle="modal" data-bs-target="#createSchedules" class="btn btn-outline-green">
                 <i class='fa fa-plus '></i> Buat Jadwal Baru
             </a>
         </div>
@@ -67,7 +67,7 @@
                     </td>
                     <td>
                         <div class="d-flex align-items-center">
-                            <a data-bs-toggle="modal" data-bs-target="#editSchedules{{ $s->id }}" class="btn btn-sm btn-primary">Edit Jadwal</a>
+                            <a data-bs-toggle="modal" data-bs-target="#editSchedules{{ $s->id }}" class="btn btn-sm btn-fill-green rounded-pill">Ubah Jadwal</a>
                             <form action="{{ route('classes.schedules.destroy',[$class,$s]) }}" method="POST">   
                                 @csrf
                                 @method('DELETE')      

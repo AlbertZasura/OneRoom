@@ -44,9 +44,9 @@
                         </div>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="modal-footer border-top-0">
+                    <button type="button" class="btn btn-outline-green rounded-pill" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-fill-green rounded-pill">Simpan</button>
                 </div>
             </form>
         </div>

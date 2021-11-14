@@ -1,7 +1,7 @@
 <div class="modal fade" id="createAssignments" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
+            <div class="modal-header border-bottom-0">
                 <h5 class="modal-title" id="exampleModalLabel">Tambah Tugas</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
@@ -37,9 +37,9 @@
                         <input type="text" name="class" value="{{$selectedClasses->id}}" placeholder="test" class="form-control" id="class" hidden>
                     </div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="modal-footer border-top-0">
+                    <button type="button" class="btn btn-outline-green rounded-pill" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-fill-green rounded-pill">Simpan</button>
                 </div>
             </form>
         </div>
