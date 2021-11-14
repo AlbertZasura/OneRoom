@@ -96,6 +96,10 @@ class User extends Authenticatable
     public function usersCorses(){
         return $this->belongsToMany(Course::class,'courses_classes_users', 'user_id', 'course_id')->withPivot('class_id')->withTimestamps(); 
     }
+    
+    public function course($class){
+        return $this->usersCorses()->wherePivot('class_id',$class); 
+    }
 
     public function usersClasses(){
         return $this->belongsToMany(Classes::class,'courses_classes_users', 'user_id', 'class_id')->withPivot('course_id')->withTimestamps(); 

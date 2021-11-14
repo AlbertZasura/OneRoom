@@ -1,10 +1,32 @@
 @extends('Layout.SidePanel')
 @section('title', 'Masuk | OneRoom')
 @section('contentGuest')
-    <div class="mt-5 border border-dark border-1 rounded-3 p-5">
+    <div class="mt-5 bg-white border shadow rounded-3 p-5">
         <main class="row">
-            <div class="col-md-8">
-                <h1>Images</h1>
+            <div class="col-md-8 p-5">
+                <div class="img-thumbnail">
+                    <div id="carouselExampleFade" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                        <div class="carousel-inner">
+                          <div class="carousel-item active">
+                            <img src="https://source.unsplash.com/random/1000×700/?programming" class="d-block w-100" alt="...">
+                          </div>
+                          <div class="carousel-item">
+                            <img src="https://source.unsplash.com/random/1000×700/?code" class="d-block w-100" alt="...">
+                          </div>
+                          <div class="carousel-item">
+                            <img src="https://source.unsplash.com/random/1000×700/?education" class="d-block w-100" alt="...">
+                          </div>
+                        </div>
+                        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="prev">
+                          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Previous</span>
+                        </button>
+                        <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleFade" data-bs-slide="next">
+                          <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                          <span class="visually-hidden">Next</span>
+                        </button>
+                      </div>
+                </div>
             </div>
             <div class="col-md-4">
                 <form action="{{ route('login') }}" method="POST">
@@ -45,17 +67,19 @@
                             </div>
                         </div>
                     </div>--}}
-                    <button class="my-4 w-100 btn btn-lg btn-primary" type="submit">Login</button>
-                    <p class="text-muted m-0">Belum punya akun?
-                        <a class="text-decoration-none cursor-pointer" data-bs-toggle="modal" data-bs-target="#registerModal">
-                            Daftar disini
-                        </a>
-                    </p>
-                    @if (Route::has('password.request'))
-                        <a class="mb-3 text-decoration-none cursor-pointer" href="{{ route('password.request') }}">
-                            Lupa password?
-                        </a>
-                    @endif
+                    <button class="my-4 w-100 btn btn-lg btn-fill-green rounded-pill" type="submit">Login</button>
+                    <div class="text-md-start text-center">
+                        <p class="text-muted m-0">Belum punya akun?
+                            <a class="cursor-pointer" data-bs-toggle="modal" data-bs-target="#registerModal">
+                                Daftar disini
+                            </a>
+                        </p>
+                        @if (Route::has('password.request'))
+                            <a class="mb-3 cursor-pointer" href="{{ route('password.request') }}">
+                                Lupa password?
+                            </a>
+                        @endif
+                    </div>
                 </form>
             </div> 
         </main>

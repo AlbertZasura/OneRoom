@@ -263,6 +263,10 @@
     color: #09565d;
 }
 
+body{
+    background-color: #e6f3f3;
+}
+
 .bg-biru-muda{
     background: #b2dad9;
 }
@@ -277,6 +281,18 @@
 
 .color-hijau-muda{
     color: #96b0b0;
+}
+
+.side-panel-active{
+    background: #b2dad9;
+    color: #09565d;
+    width: 308%;
+    margin-left: -20px;
+    padding-left: 20px;
+}
+
+.side-panel-active a{
+    color: #09565d !important;
 }
 
 /* ======= effect side panel resize ========== */
