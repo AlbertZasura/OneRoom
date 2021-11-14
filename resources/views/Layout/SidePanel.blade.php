@@ -180,7 +180,7 @@
                 </div>
             </div>
 
-            <div class="{{ str_contains(url()->current(), '/dashboard') ?  'w-100' : 'ml-70 w-100'  }}">
+            <div class="container {{ str_contains(url()->current(), '/dashboard') ?  'w-100' : 'ml-70 w-100'  }}">
                 @include('components.notifications')
                 @include('sweetalert::alert')
                 @yield('content')
