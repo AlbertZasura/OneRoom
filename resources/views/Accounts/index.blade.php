@@ -25,7 +25,7 @@
         </div>
     </div>
     
-    <table class="table table-hover table-responsive" id="tableSearch"  style="width:75%">
+    <table class="table table-hover table-responsive" id="tableSearch">
         <thead>
             <tr>
                 <th scope="col">No</th>
