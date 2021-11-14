@@ -3,6 +3,8 @@
 @section('title', 'Akun | OneRoom')
 
 @section('content')
+<div class="card-shadow bg-white m-5 border-radius-8px" style="width: auto; height: auto;">
+    <div class="card-body p-5">
     <h1>Daftar Akun</h1>
     <div class="row mb-1">
         <div class="col-md-2">
@@ -105,6 +107,8 @@
         </tbody>   
     </table>
     {{ $users->links() }}
+    </div>
+</div> 
 
 <script>
     // $(document).ready(function(){

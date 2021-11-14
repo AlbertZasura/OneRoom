@@ -5,7 +5,7 @@
 
 @section('content')
 <div class="card-shadow bg-white m-5 border-radius-8px" style="width: auto; height: auto;">
-    <div class="card-body">
+    <div class="card-body p-5">
     <h1>Pengumuman</h1>
     <br>
     <br>
@@ -71,11 +71,11 @@
                 <form>
                 <div class="mb-3">
                     <label for="recipient-name" class="col-form-label"><b>Judul</b></label>
-                    <input type="text" name="title" class="form-control" id="title" value="{{old('title')}}" required>
+                    <input type="text" name="title" class="form-control form-input-color" id="title" value="{{old('title')}}" required>
                 </div>
                 <div class="mb-3">
                     <label for="message-text" class="col-form-label"><b>Isi</b></label>
-                    <textarea class="form-control" name="content" id="content" value="{{old('content')}}"  required></textarea>
+                    <textarea class="form-control form-input-color" name="content" id="content" value="{{old('content')}}"  required></textarea>
                 </div>
                 <div class="mb-3">
                     <label for="message-text" class="col-form-label"><b>File</b></label>
