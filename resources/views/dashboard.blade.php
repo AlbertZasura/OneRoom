@@ -62,7 +62,7 @@
             </div>
         @endcan
         <div class="col-md-6">
-            <div class="card-shadow h-100 p-4 border-radius-5px bg-white">
+            <div class=" card-shadow h-100 p-4 border-radius-5px bg-white">
                 <div class="d-flex justify-content-between align-items-center monserrta-font">
                     <i class="color-hijau-tua fas fa-bullhorn"></i>
                     <h4 class="ms-3 mb-0 fw-bold">Pengumuman</h4>
@@ -105,32 +105,36 @@
         </div>
         @can('isTeacher')
             <div class="col-md-2">
-                <div class="card text-center">
-                    <div class="card-header d-flex justify-content-center align-items-center ">
-                        <i class="fas fa-calendar-check"></i>
-                        <h4 class="ms-3 mb-0 card-title">Absent Hari ini</h4>
+                <div class="card-shadow h-100 p-4 border-radius-5px bg-white" style="width: 300px;">
+                    <div class="d-flex justify-content-center align-items-center monserrta-font">
+                        <!-- <i class="fas fa-calendar-check"></i> -->
+                        <h4 class="ms-3 mb-0 card-title fw-bold">Absent Hari ini</h4>
                     </div>
-                    <div class="card-body">
+                    <div class="mt-20">
                         @if ($absent=Auth::user()->check_absent_today())
-                            <div class="row {{ $absent->status=="Telat" ? "text-danger" :"text-success" }}">
-                                <div class="col-md-6">
-                                    <h1><i class="fa fa-user-check"></i></h1>
+                            <div class=" {{ $absent->status=="Telat" ? "text-danger" :"text-success" }}">
+                                <div class="">
+                                    <h1 class="text-center"><i class="fa fa-user-check"></i></h1>
                                 </div>
-                                <div class="col-md-6 text-start">
+                                <div class="text-center">
                                     <h5>{{ $absent->status }}</h5>
                                     <h5>{{ $absent->created_at->format('H:i:s') }}</h5>
                                 </div>
                             </div>
                             
                         @else
-                            <div class="text-danger mb-3">
-                                <h1><i class="fa fa-user-times"></i></h1>
-                                <h5>Anda Belum Absen</h5>
+                            <div class="">
+                                <div class="text-danger mb-3">
+                                    <h1 class="text-center"><i class="fa fa-user-times"></i></h1>
+                                    <h5 class="text-center">Anda Belum Absen</h5>
+                                </div>
+                                <div class="text-center justify-content-center">
+                                    <form action="{{ route('absents.store') }}" method="POST">
+                                        @csrf
+                                        <button class="btn btn-sm btn-primary" type="submit"><i class='fa fa-user-check'></i> Absent Sekarang</button>
+                                    </form>
+                                </div>
                             </div>
-                            <form action="{{ route('absents.store') }}" method="POST">
-                            @csrf
-                            <button class="btn btn-sm btn-primary" type="submit"><i class='fa fa-user-check'></i> Absent Sekarang</button>
-                        </form>
                         @endif
                     </div>
                 </div>
