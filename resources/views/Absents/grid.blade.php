@@ -3,9 +3,9 @@
 @section('title', 'Absen | OneRoom')
 
 @section('content')
+<h1>Absent</h1><br>
     <div class="d-flex">
         <div class="w-200px">
-            <h1>Absent</h1><br>
             <form action="/absents" class="row mb-3">
                 <div class="col-md-12 mb-2">
                     <select class="form-select" name="class">
@@ -21,16 +21,20 @@
                     </select>
                 </div>
                 <div class="col-md-12 text-center">
-                    <button type="submit" class="btn btn-outline-dark">
+                    <button type="submit" class="btn btn-fill-green rounded-pill">
                         <i class='fa fa-search'></i> Cari
                     </button>
                 </div>
             </form>
         </div>
         <div class="ml-20 w-85">
-            <div id='wrap' class="container">
-                <div id='calendar'></div>
-                <div style='clear:both'></div>
+            <div class="card-shadow bg-white rounded-3">
+                <div class="card-body">
+                    <div id='wrap' class="container">
+                        <div id='calendar'></div>
+                        <div style='clear:both'></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
