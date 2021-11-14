@@ -32,7 +32,7 @@
         </div>
     @else
         <div class="d-flex">
-            <div class="{{ str_contains(url()->current(), '/dashboard') ?  'side-panel-menu bg-dark-toska' : 'resize-side-panel side-panel-menu bg-dark-toska'  }}">
+            <div class="{{ str_contains(url()->current(), '/dashboard') ?  'side-panel-menu bg-hijau-tua' : 'resize-side-panel side-panel-menu bg-hijau-tua'  }}">
                 <div class="profile-wrapper">
                     <div class="profile-picture">
                         @if(Auth::user()->profile_picture) 
