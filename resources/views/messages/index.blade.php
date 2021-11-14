@@ -8,10 +8,19 @@
     <br>
     <br>
     @can('create', App\Models\Message::class )
-        <button class="btn btn-outline-dark" id="open-popup" ><i class="fas fa-plus-circle"></i>&nbspTambah Pengumuman</button>
+        <button class="btn btn-outline-secondary" id="open-popup" ><i class="fas fa-plus"></i></i>&nbsp Tambah Pengumuman</button>
     @endcan
     
     <table class="table table-hover" style="width:75%">
+        <thead>
+        <tr>
+                <th scope="col">Waktu</th>
+                <th scope="col">Judul</th>
+                <th scope="col">Pengirim</th> 
+                <th scope="col">Tanggal</th>
+                <th scope="col">Aksi</th>
+            </tr>
+        </thead>
         <tbody>
             @foreach ($messages as $key => $message )
                 <tr class='clickable-row' data-href="{{ route('messages.show',$message->id) }}">
@@ -69,8 +78,8 @@
                 </form>
             </div>
             <div class="d-flex justify-content-end">
-            <button id="action-closes-popup">Cancel</button>
-            <button type="submit"  id="action-submit-popup">Submit</button>
+            <button id="action-closes-popup" class="btn btn-outline-green rounded-pill">Batal</button>
+            <button class="btn btn-fill-green rounded-pill" type="submit" id="action-submit-popup">Simpan</button>
             </div>
             </div>
         </div>

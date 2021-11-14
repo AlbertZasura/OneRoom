@@ -17,7 +17,7 @@
             <form action="/accounts">
                 <div class="input-group" style="width:300px">
                     <input type="text" id="myInput" class="form-control" placeholder="Cari nama" name="search">
-                    <button class="btn btn-outline-secondary" type="submit"><i class='fa fa-search'></i></button>
+                    <button class="btn btn-outline-secondary" type="submit"><i class='fa fa-search '></i></button>
                 </div>
             </form>
         </div>
@@ -62,6 +62,9 @@
                             <button class="btn" type="submit" onclick="return confirm('Apakah Anda yakin untuk menolak {{ $user->name }}?')"><i class="fas fa-times fa-lg" style="color:red"></i></button>
                         </form>
                     </div>
+                </td>
+                <td>
+                    
                 </td>
             </tr>
 

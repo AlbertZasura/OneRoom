@@ -2,48 +2,60 @@
 @section('title', 'Pengumuman  | OneRoom')
 @section('content')
     <h1>Pengumuman</h1>
-    <table style="width:35%">
+    <br>
+    <table style="width:18%">
         <tr>
             <td>
-                <a>Pengirim</a> 
+                <h5>Pengirim</h5>
+                
             </td>
             <td>
-                <a>{{ $message->user->name  }}</a>
+                <h5>:</h5>
+            </td>
+            <td>
+                <a>&nbsp;  {{ $message->user->name  }}</a>
                 <br>
             </td>
         </tr>
         <tr>
             <td>
-                <a>Tanggal</a>
+                <h5>Tanggal</h5>   
             </td>
             <td>
-                <a>{{ $message->created_at->format('d M Y') }}</a>
+                <h5>:</h5>
+            </td>
+            <td>
+                <a>&nbsp;  {{ $message->created_at->format('d M Y') }}</a>
                 <br>
             </td>
             
         </tr>
         <tr>
             <td>
-                <a>Judul</a>
+                <h5>Judul</h5>
             </td>
             <td>
-                <a>{{ $message->title }}</a>
+                <h5>:</h5>
+            </td>
+            <td>
+                <a>&nbsp;   {{ $message->title }}</a>
                 <br>
             </td>
         </tr>
     </table>
-    <table>
-    <tr>
+
+    <br>
+    
+    <div class="card" style="width: 60%; height: 50%;">
+        <div class="card-body">
+            <h6>Isi :</h6>
+            <a> {{ $message->content }}</a>
+            <br>
+            <br>
+            <h6>File Attachments :</h6>
             <div onclick="window.location='{{route('downloadMessage',$message->id)}}'" class="">
                 <i class="fas fa-paperclip"></i> 
             </div>
-        </tr>
-    </table>
-    <br>
-    
-    <div class="card" style="width: 80%; height: 50%;">
-        <div class="card-body">
-            <a> {{ $message->content }}</a>
         </div>
     </div>
 @endsection
