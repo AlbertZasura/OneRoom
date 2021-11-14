@@ -43,7 +43,10 @@
                         <p>{{ $user->name }}</p> 
                     </td>
                     <td>
-                        <p>{{ $user->role }}</p> 
+                        <p>
+                            {{ $user->role }} <br>
+                            {{ $user->course($class->id)->pluck('name')->implode(', ') }}
+                        </p> 
                     </td>
                     @can('assign_user', App\Models\Classes::class )
                         <td>
