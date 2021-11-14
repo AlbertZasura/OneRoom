@@ -255,6 +255,10 @@
     border-radius: 5px;
 }
 
+.border-radius-8px{
+    border-radius: 8px;
+}
+
 .bg-hijau-tua{
     background: #09565d;
 }
