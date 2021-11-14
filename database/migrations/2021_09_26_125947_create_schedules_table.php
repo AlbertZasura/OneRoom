@@ -19,7 +19,7 @@ class CreateSchedulesTable extends Migration
             $table->timeTz('start_time', $precision = 0);
             $table->timeTz('end_time', $precision = 0);
             $table->unsignedBigInteger('course_id');
-            $table->foreign('course_id')->references('id')->on('courses');
+            $table->foreign('course_id')->references('id')->on('courses')->onDelete('cascade');
             $table->unsignedBigInteger('class_id');
             $table->foreign('class_id')->references('id')->on('classes');
             $table->timestamps();
