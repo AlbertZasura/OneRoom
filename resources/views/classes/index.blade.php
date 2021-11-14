@@ -16,7 +16,7 @@
                 @include('classes._create')
             @endcan
             @foreach ($classes as $key => $c )
-                <div class="card text-white bg-hijau-tua mb-3">
+                <div class="card text-white {{ (isset($class) && $class->id===$c->id) ? "bg-biru-muda"  : "bg-hijau-tua" }} mb-3">
                     <div class="card-body">
                         <h5 class="card-title">{{$c->name}}</h5>
                         <a href="{{route('classes.show',$c->id)}}" class="stretched-link"></a>
