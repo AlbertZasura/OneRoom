@@ -13,7 +13,7 @@
         <button class="btn btn-outline-secondary" id="open-popup" ><i class="fas fa-plus"></i></i>&nbsp Tambah Pengumuman</button>
     @endcan
     
-    <table class="table table-hover" style="width:75%">
+    <table class="table table-hover" style="">
         <thead>
         <tr>
                 <th scope="col">Waktu</th>
