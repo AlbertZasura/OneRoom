@@ -18,7 +18,7 @@
             <div class="col-md-4">
                 <div class="input-group mb-3">
                     <input type="text" class="form-control" placeholder="Cari Nama" name="search" value="{{ request('search') }}">
-                    <button class="btn btn-outline-secondary" type="submit">Cari</button>
+                    <button class="btn btn-outline-green" type="submit">Cari</button>
                 </div>
             </div>
         </div>
@@ -47,7 +47,7 @@
                     <td>
                         <form action="/classes/{{$class->id}}/assign_user/{{$user->id}}?type=attach" method="POST">
                             @csrf
-                            <button type="submit" class="btn btn-primary" onclick="return confirm('Apakah Anda yakin untuk menambahkan {{ $user->name }} ke dalam kelas?')">Tambahkan</button>
+                            <button type="submit" class="btn btn-outline-green rounded-pill" onclick="return confirm('Apakah Anda yakin untuk menambahkan {{ $user->name }} ke dalam kelas?')">Tambahkan</button>
                         </form>
                     </td>
                 </tr>

@@ -5,10 +5,6 @@
 
 @section('show')
     <div class="d-flex align-items-center">
-        <h1 class="text-uppercase">{{$class->name}}</h1>
-        {{-- @can('update',$class )
-            <a href="{{ route('classes.edit',$class->id) }}" class="btn"><i class='fs-25 fa fa-pencil text-primary'></i></a>
-        @endcan --}}
         @can('delete', $class )
             <form action="{{ route('classes.destroy',$class) }}" method="POST">   
                 @csrf
@@ -16,16 +12,20 @@
                 <button class="btn" type="submit" onclick="return confirm('Apakah Anda yakin untuk menghapus kelas ini?')"><i class='fs-25 fa fa-trash text-danger'></i></button>
             </form>
         @endcan
+        <h1 class="text-uppercase">{{$class->name}}</h1>
+        {{-- @can('update',$class )
+            <a href="{{ route('classes.edit',$class->id) }}" class="btn"><i class='fs-25 fa fa-pencil text-primary'></i></a>
+        @endcan --}}
     </div>
     @can('user_list', App\Models\Classes::class )
-        <a href="/classes/{{$class->id}}/assign_user" class="card-body btn btn-outline-dark">
+        <a href="/classes/{{$class->id}}/assign_user" class="btn btn-outline-green float-end">
             <i class='fa fa-plus '></i> Tambah Anggota
         </a>
     @endcan
     <table class="table table-hover">
         <thead>
             <tr>
-                <th>#</th>
+                <th>No</th>
                 <th>Nama</th>
                 <th>Jabatan</th>
                 @can('assign_user', App\Models\Classes::class )
@@ -49,7 +49,7 @@
                         <td>
                             <form action="/classes/{{$class->id}}/assign_user/{{$user->id}}?type=detach" method="POST">
                                 @csrf
-                                <button type="submit" class="btn btn-danger" onclick="return confirm('Apakah Anda yakin untuk mengeluarkan {{ $user->name }} dari kelas?')">Keluarkan</button>
+                                <button type="submit" class="btn btn-outline-green rounded-pill" onclick="return confirm('Apakah Anda yakin untuk mengeluarkan {{ $user->name }} dari kelas?')">Keluarkan</button>
                             </form>
                         </td>
                     @endcan
