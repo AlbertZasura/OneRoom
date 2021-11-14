@@ -8,7 +8,7 @@
     <div class="d-flex">
         <div class="w-200px">
             @can('create', App\Models\Classes::class )
-                <div class="card mb-3">
+                <div class="card mb-3 border-0">
                     <a data-bs-toggle="modal" data-bs-target="#createClasses" class="card-body btn btn-outline-green">
                         <i class='fa fa-plus '></i> Tambah Kelas
                     </a>

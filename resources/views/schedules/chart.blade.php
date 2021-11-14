@@ -3,29 +3,31 @@
 @section('title', 'Jadwal | OneRoom')
 
 @section('content')
-    {{-- <h1>{{ now()->isoFormat('MMMM Y') }}</h1> --}}
+    <h1>Jadwal</h1><br>
     <div class="d-flex">
         <div class="w-200px">
-            <h1>Jadwal</h1><br>
             <h5>Jadwal Selanjutnya</h5>
             @foreach ($current as $s )
-                <div class="card-box mb-2">
+                <div class="card-box bg-hijau-tua mb-2">
                     <div class="card-body">
                         <div>{{$s->course->name}} <strong>{{$s->class->name}}</strong></div>
-                        <div></div>
-                        <div class="text-right">{{ $s->start_time }} - {{ $s->end_time }}</div>
+                        <div class="text-right"><small>{{ $s->start_time }} - {{ $s->end_time }}</small></div>
                     </div>
                 </div>
             @endforeach
         </div>
         <div class="ml-20 w-85">
-            @foreach ($schedules_group as $sch)
-                @include('schedules._show')
-            @endforeach
-            <div id='wrap' class="container">
-                <div id='calendar'></div>
-                <div style='clear:both'></div>
-            </div>
+           <div class="card-shadow bg-white rounded-3">
+               <div class="card-body">
+                @foreach ($schedules_group as $sch)
+                    @include('schedules._show')
+                @endforeach
+                <div id='wrap' class="container">
+                    <div id='calendar'></div>
+                    <div style='clear:both'></div>
+                </div>
+               </div>
+           </div>
         </div>
     </div>
 
