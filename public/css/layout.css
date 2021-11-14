@@ -16,10 +16,23 @@
 
 .side-panel-menu {
     /* width: 254px; */
-    padding: 20px 20px;
+    /* padding: 20px 20px; */
     color: #fff;
     height: 100%;
     z-index: 10;
+}
+
+.px-20px{
+    padding-left: 20px;
+    padding-right: 20px;;
+}
+
+.pt-20{
+    padding-top: 20px;
+}
+
+.pb-20{
+    padding-bottom: 20px;
 }
 
 .img-responsive {
@@ -286,13 +299,22 @@ body{
 .side-panel-active{
     background: #b2dad9;
     color: #09565d;
-    width: 308%;
-    margin-left: -20px;
-    padding-left: 20px;
+    width: 100%;
+    /* margin-left: -20px;
+    padding-left: 20px; */
 }
 
 .side-panel-active a{
     color: #09565d !important;
+}
+
+.side-panel-hover{
+    border-left: 0;
+    transition: all .2;
+}
+
+.side-panel-hover:hover{
+    border-left: 5px solid #b2dad9;
 }
 
 /* ======= effect side panel resize ========== */
