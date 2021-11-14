@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <h1>Exam</h1>
+    <h1>Ujian</h1>
 
     <div class="d-flex">
         <div class="w-200px">
