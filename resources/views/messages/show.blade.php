@@ -5,7 +5,7 @@
     <div class="card-body p-5">
     <h1>Pengumuman</h1>
     <br>
-    <table style="width:18%">
+    <table style="">
         <tr>
             <td>
                 <h5>Pengirim</h5>
