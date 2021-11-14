@@ -4,23 +4,20 @@
 
 @section('content')
 
-    <h1>Exam</h1>
+    <h1>Ujian</h1>
 
     <div class="d-flex">
         <div class="w-200px">
             @foreach($examType as $item)
-           
-                <div class="cursor-pointer card-box mb-2" onclick="window.location='{{route('exlist',$item->type)}}'">
+            
+                <div class="cursor-pointer card-shadow card-box mb-2 {{ isset($exType) ? $exType == $item->type ? 'active' : ''  : '' }}" onclick="window.location='{{route('exlist',$item->type)}}'">
                     <div>{{$item->type}}</div>
                     <div class="text-right">{{$item->total}} Ujian</div>
                 </div>
 
             @endforeach
         </div>
-        <div class="ml-20 w-85">
-            @yield('mainContent')
-
-        </div>
+        @yield('mainContent')
 
     </div>
 

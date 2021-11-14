@@ -33,7 +33,7 @@
     @else
         <div class="d-flex">
             <div class="{{ str_contains(url()->current(), '/dashboard') ?  'side-panel-menu bg-hijau-tua' : 'resize-side-panel side-panel-menu bg-hijau-tua'  }}">
-                <div class="profile-wrapper">
+                <div class="profile-wrapper px-20px pt-20">
                     <div class="profile-picture">
                         @if(Auth::user()->profile_picture) 
                             <img class="w-auto h-100" src="{{ asset('storage/images/'.Auth::user()->profile_picture) }}" alt="">
@@ -54,7 +54,7 @@
                 </div>
                  
                 <div class="list-panel-menu mt-20">
-                    <div class="d-flex a-center py-1 {{Route::current()->getName() == 'home' ? 'side-panel-active' : ''}}">
+                    <div class="d-flex a-center side-panel-hover px-20px py-1 {{Route::current()->getName() == 'home' ? 'side-panel-active' : ''}}">
                         <div class="fs-25 w-25px">
                             <i class="fas fa-chart-line"></i>
                         </div>
@@ -62,7 +62,7 @@
                             <a href="{{route('home')}}" class="btn text-white" style="width: 140px;">Halaman Utama</a>
                         </div>
                     </div>
-                    <div class="d-flex a-center py-1 {{Route::current()->getName() == 'admin.schedule' || Request::path() == 'schedules' || Request::is('schedules*') ? 'side-panel-active' : ''}}">
+                    <div class="d-flex a-center side-panel-hover px-20px py-1 {{Route::current()->getName() == 'admin.schedule' || Request::path() == 'schedules' || Request::is('schedules*') ? 'side-panel-active' : ''}}">
                         <div class="fs-25 w-25px">
                             <i class="far fa-calendar-alt"></i>
                         </div>
@@ -76,7 +76,7 @@
                         </div>
                     </div>
                     @can('viewAny', App\Models\Assignment::class )
-                        <div class="d-flex a-center py-1 {{ Request::path() == 'assignments' || Request::is('assignments*') ? 'side-panel-active' : ''}}">
+                        <div class="d-flex a-center side-panel-hover px-20px py-1 {{ Request::path() == 'assignments' || Request::is('assignments*') ? 'side-panel-active' : ''}}">
                             <div class="fs-25 w-25px">
                                 <i class="fas fa-pencil-ruler"></i>
                             </div>
@@ -86,7 +86,7 @@
                         </div>
                     @endcan
                     @can('viewAny', App\Models\Exam::class)
-                    <div class="d-flex a-center py-1 {{ Request::path() == 'exams' || Request::is('exams*') ? 'side-panel-active' : ''}}">
+                    <div class="d-flex a-center side-panel-hover px-20px py-1 {{ Request::path() == 'exams' || Request::is('exams*') ? 'side-panel-active' : ''}}">
                         <div class="fs-25 w-25px">
                             <i class="fas fa-paste"></i>
                         </div>
@@ -97,7 +97,7 @@
                     </div>
                     @endcan
                     
-                    <div class="d-flex a-center py-1 {{Route::current()->getName() == 'courses.index' || Request::is('courses*') ? 'side-panel-active' : ''}}">
+                    <div class="d-flex a-center side-panel-hover px-20px py-1 {{Route::current()->getName() == 'courses.index' || Request::is('courses*') ? 'side-panel-active' : ''}}">
                         <div class="fs-25 w-25px">
                             <i class="fas fa-book"></i>
                         </div>
@@ -107,7 +107,7 @@
                         </div>
                     </div>
                     @can('viewAny', App\Models\Classes::class )
-                        <div class="d-flex a-center py-1 {{Route::current()->getName() == 'classes.index' || Request::is('classes*') ? 'side-panel-active' : ''}}">
+                        <div class="d-flex a-center side-panel-hover px-20px py-1 {{Route::current()->getName() == 'classes.index' || Request::is('classes*') ? 'side-panel-active' : ''}}">
                             <div class="fs-20 w-25px">
                                 <i class="fas fa-chalkboard"></i>
                             </div>
@@ -117,7 +117,7 @@
                         </div>
                     @endcan
 
-                    <div class="d-flex a-center py-1 {{Route::current()->getName() == 'absents.users' || Request::is('absent*') ? 'side-panel-active' : ''}}">
+                    <div class="d-flex a-center side-panel-hover px-20px py-1 {{Route::current()->getName() == 'absents.users' || Request::is('absent*') ? 'side-panel-active' : ''}}">
                         <div class="fs-25 w-25px">
                             <i class="fas fa-clipboard-list"></i>
                         </div>
@@ -136,7 +136,7 @@
                     </div>
                    
                     @can('viewAny', App\Models\User::class)
-                    <div class="d-flex a-center py-1 {{Route::current()->getName() == 'users.index' || Request::is('users*') ? 'side-panel-active' : ''}}">
+                    <div class="d-flex a-center side-panel-hover px-20px py-1 {{Route::current()->getName() == 'users.index' || Request::is('users*') ? 'side-panel-active' : ''}}">
                         <div class="fs-20 w-25px">
                             <i class="fas fa-user"></i>
                         </div>
@@ -145,7 +145,7 @@
                         </div>
                     </div>
                     @endcan
-                    <div class="d-flex a-center py-1 {{Route::current()->getName() == 'messages.index' || Request::is('messages*') ? 'side-panel-active' : ''}}">
+                    <div class="d-flex a-center side-panel-hover px-20px py-1 {{Route::current()->getName() == 'messages.index' || Request::is('messages*') ? 'side-panel-active' : ''}}">
                         <div class="fs-20 w-25px">
                             <i class="fas fa-bullhorn"></i>
                         </div>
@@ -155,7 +155,7 @@
                     </div>
                     
                     @can('viewAny', App\Models\User::class)
-                        <div class="d-flex a-center py-1 {{Route::current()->getName() == 'contents.index' ? 'side-panel-active' : ''}}">
+                        <div class="d-flex a-center side-panel-hover px-20px py-1 {{Route::current()->getName() == 'contents.index' ? 'side-panel-active' : ''}}">
                             <div class="fs-20 w-25px">
                                 <i class="fas fa-tools"></i>
                             </div>
@@ -165,7 +165,7 @@
                         </div>
                     @endcan
                     @if (Auth::user())
-                    <div class="d-flex a-center py-1">
+                    <div class="d-flex a-center px-20px py-1">
                         <div class="fs-20 w-25px">
                             <i class="fs-20 fas fa-sign-out-alt"></i>
                         </div>

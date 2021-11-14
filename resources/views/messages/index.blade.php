@@ -4,6 +4,8 @@
 @section('title', 'Pengumuman | OneRoom')
 
 @section('content')
+<div class="card-shadow bg-white m-5 border-radius-8px" style="width: auto; height: auto;">
+    <div class="card-body">
     <h1>Pengumuman</h1>
     <br>
     <br>
@@ -18,7 +20,9 @@
                 <th scope="col">Judul</th>
                 <th scope="col">Pengirim</th> 
                 <th scope="col">Tanggal</th>
+                @can('create', App\Models\Message::class )
                 <th scope="col">Aksi</th>
+                @endcan
             </tr>
         </thead>
         <tbody>
@@ -50,6 +54,8 @@
         </tbody>
     </table>
     {{ $messages->links() }}
+    </div>
+</div>
 
 <form action="{{ route('messages.store') }}" method="POST" enctype="multipart/form-data">
 @csrf
