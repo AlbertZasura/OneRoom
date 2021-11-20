@@ -84,12 +84,7 @@
                     @endforeach
                 </tbody>
             </table>
-<<<<<<< HEAD
             {{ $users->links() }}
-=======
-        </div>
-        {{ $users->links() }}
->>>>>>> 2f9983e0dcaeebd840fa0d209220a4e920d3ac7b
         </div>
     </div>
 @stop
