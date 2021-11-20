@@ -59,6 +59,21 @@ class User extends Authenticatable
         return Arr::get($this->roles, $value);
     }
 
+    public function humanizeRole()
+    {
+        switch ($this->role) {
+            case 'teacher':
+                return 'Guru';
+                break;
+            case 'student':
+                return 'Siswa';
+                break;
+            default:
+                return $this->role;
+                break;
+        }
+    }
+
     public function scopeFilter($query, array $filters){
         $query->when($filters['search'] ?? false, function($query, $search){
             return $query->where('name','like','%'.$search.'%');

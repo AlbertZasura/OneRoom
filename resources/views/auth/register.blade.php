@@ -7,7 +7,7 @@
                 @csrf
                 @include('components.notifications')
                 <h1 class="fw-normal"><strong>Daftar</strong></h1>
-                <h5 class="mb-4 fw-normal">Sebagai {{$role}}</h5>
+                <h5 class="mb-4 fw-normal">Sebagai {{$humanizeRole}}</h5>
                 <div class="form-floating mb-2">
                     <input type="text"  name="name" class="form-control form-input-color rounded-top @error('name')is-invalid @enderror" value="{{old('name')}}" id="name" placeholder="ex: John Doe..." required autocomplete="name" autofocus>
                     <label for="name">Nama</label>
@@ -18,7 +18,7 @@
                 @if ($role !="admin")
                 <div class="form-floating mb-2">
                     <input type="text"  name="identification_number" class="form-control form-input-color @error('identification_number')is-invalid @enderror" value="{{old('identification_number')}}" id="identification_number" placeholder="ex: 1234..." required >
-                    <label for="identification_number">Nomor Induk {{$role}}</label>
+                    <label for="identification_number">Nomor Induk {{$humanizeRole}}</label>
                     @error('identification_number')
                     <div class="invalid-feedback">{{ $message}}</div>
                     @enderror

@@ -46,7 +46,7 @@
                             </td>
                             <td>
                                 <p>
-                                    {{ $user->role }}
+                                    {{ $user->humanizeRole() }}
                                     {{ $user->course($class->id)->pluck('name')->implode(', ') }}
                                 </p> 
                             </td>
