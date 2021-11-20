@@ -42,7 +42,6 @@
                             <img class="w-auto h-100" src="{{ asset('img/profile.png') }}" alt="">
                         @endif
                     </div>
-
                 </div>
                 <div class="overflow-hidden">
                     <div class="text-profile">
@@ -92,8 +91,11 @@
                             <i class="fas fa-paste"></i>
                         </div>
                         <div class="fs-18 ml-20">
-                            <a href="{{route('exams.index')}}" class="btn text-white">Ujian</a>
-                            
+                            @if(Auth::user()->usersCorses()->get()->count() > 0)
+                                <a href="{{route('exams.index')}}" class="btn text-white">Ujian</a>
+                            @else
+                                <a href="/errormapping" class="btn text-white">Ujian</a>
+                            @endif
                         </div>
                     </div>
                     @endcan

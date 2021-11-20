@@ -89,6 +89,10 @@ Route::middleware('auth')->group(function () {
 
 });
 
+Route::get('/errormapping',function() {
+    return view('warnings.warningPage');
+});
+
 // Route::get('/exams/list', function () {
 //     return view('welcome');
 // })->name('Elist');
