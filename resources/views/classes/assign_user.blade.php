@@ -14,7 +14,7 @@
                         <select class="form-select" name="role">
                             <option selected value="">Semua</option>
                             <option value="1">Guru</option>
-                            <option value="2">Murid</option>
+                            <option value="2">Siswa</option>
                         </select>
                     </div>
                     <div class="col-md-4">
@@ -44,7 +44,7 @@
                                 <p>{{ $user->name }}</p> 
                             </td>
                             <td>
-                                <p>{{ $user->role }}</p> 
+                                <p>{{ $user->humanizeRole() }}</p> 
                             </td>
                             <td>
                                 <form action="/classes/{{$class->id}}/assign_user/{{$user->id}}?type=attach" method="POST">

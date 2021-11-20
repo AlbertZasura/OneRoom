@@ -49,7 +49,7 @@
                     <a>{{ $user->created_at->format('d M Y') }}</a> 
                 </td>
                 <td>
-                    <a>{{ $user->role }}</a>
+                    <a>{{ $user->humanizeRole() }}</a>
                 </td>
                 <td>
                     <div class="d-flex">
@@ -97,7 +97,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="message-text" class="col-form-label"><b>Jabatan</b></label>
-                            <input type="text" name="role" class="form-control" id="role" value="{{ $user->role }}" readonly>
+                            <input type="text" name="role" class="form-control" id="role" value="{{ $user->humanizeRole() }}" readonly>
                         </div>
                         
                 </div>

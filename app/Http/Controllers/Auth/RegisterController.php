@@ -93,10 +93,16 @@ class RegisterController extends Controller
     public function showRegistrationForm()
     {
         $role=request()->get('role');
-        if (!in_array($role,["student","teacher","admin"])) {
-            $role="student"; 
+        if ($role=="teacher") {
+            $humanizeRole="Guru";
+        }elseif ($role=="admin") {
+            $humanizeRole="Admin";
+        }else{
+            $humanizeRole="Siswa";
+            $role="student";
         }
-        return view('auth.register',['role'=> $role]);
+
+        return view('auth.register',['role'=> $role,'humanizeRole'=> $humanizeRole]);
     }
 
     /**

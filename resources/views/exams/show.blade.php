@@ -8,7 +8,7 @@
     <div class="w-25">
       
             <div class="d-flex" style="width:500px">
-                <select class="form-select form-select-lg mb-3" id="courseFilter" onchange="getCourse()" aria-label=".form-select-lg example">
+                <select class="form-select form-select-lg mb-3 mr-10" id="courseFilter" onchange="getCourse()" aria-label=".form-select-lg example">
                     <option value="all" {{ request()->input('course_id') ? '' : 'selected' }} >Pilih Semua</option>
                     @foreach($course as $it)
                         <option value="{{$it->id}}" {{ request()->input('course_id') ? request()->input('course_id') == $it->id ? 'selected' : '' : '' }}>{{$it->name}}</option>
@@ -53,15 +53,21 @@
             @endcan --}}
        
     </div>
-    
-    
+    @can('viewStudent', App\Models\Exam::class)
+        <div class="alert alert-warning alert-dismissible fade show mt-3" role="alert">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor" class="bi bi-exclamation-triangle-fill flex-shrink-0 me-2" viewBox="0 0 16 16" role="img" aria-label="Warning:">
+                <path d="M8.982 1.566a1.13 1.13 0 0 0-1.96 0L.165 13.233c-.457.778.091 1.767.98 1.767h13.713c.889 0 1.438-.99.98-1.767L8.982 1.566zM8 5c.535 0 .954.462.9.995l-.35 3.507a.552.552 0 0 1-1.1 0L7.1 5.995A.905.905 0 0 1 8 5zm.002 6a1 1 0 1 1 0 2 1 1 0 0 1 0-2z"/>
+            </svg>
+            <strong>Note!</strong>  Jika sudah melewati tenggat waktu yang telah di tentukan, anda tidak bisa mengumpulkan ujian lagi!
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endcan
     <table class="table table-hover">
         <thead>
             <tr>
                 <th scope="col">Nama Ujian</th>
                 <th scope="col">Waktu Ujian</th>
                 <th scope="col">Action</th>
-                <th scope="col"></th>
                 @can('viewTeacher', App\Models\Exam::class )
                     <th scope="col">Jumlah Pengumpulan</th>
                 @endcan
@@ -171,7 +177,7 @@
         <div class="accordion-item">
             <h2 class="accordion-header" >
                 <button class="accordion-button collapsed accordion-button-none" type="button" onclick="openEditSession()" >
-                    <span class="text-navi fw-bolder d-flex" style="height: 20px;"><i class="far fa-plus-square" style="margin-top: 3px; margin-right: 10px;"></i> <p>Tambah Ujian</p></span>
+                    <span class="color-hijau-tua fw-bolder d-flex" style="height: 20px;"><i class="far fa-plus-square" style="margin-top: 3px; margin-right: 10px;"></i> <p>Tambah Ujian</p></span>
                 </button>
             </h2>
         </div>
@@ -179,15 +185,23 @@
     </div>
     
     <div class="d-none" id="formEditSession">
-        <form action="/exams/createExam?type={{$exType}}&class_id={{request()->input('class_id')}}&course_id={{request()->input('course_id')}}" method="post" enctype="multipart/form-data">
+        <form class="py-4" action="/exams/createExam?type={{$exType}}&class_id={{request()->input('class_id')}}&course_id={{request()->input('course_id')}}" method="post" enctype="multipart/form-data">
             @csrf
             <label for="exampleInputEmail1" class="form-label">Nama Ujian</label>
             <input type="text" name="title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
             <br>
             <label for="exampleInputEmail1" class="form-label">Waktu Ujian</label>
             
-            <input type="datetime-local" name="startDate" class="datetimepicker form-control" id="deadline" required>
-            <input type="datetime-local" name="deadline" class="datetimepicker form-control" id="deadline" required>
+            <div class="d-flex">
+                <div class="mr-10"> 
+                    <label for="exampleInputEmail1" class="form-label">Mulai</label>
+                    <input type="datetime-local" name="startDate" class="datetimepicker form-control" id="deadline" required>
+                </div>
+                <div>
+                <label for="exampleInputEmail1" class="form-label">Berakhir</label>
+                    <input type="datetime-local" name="deadline" class="datetimepicker form-control" id="deadline" required>
+                </div>
+            </div>
     
             <br>
             
@@ -208,7 +222,7 @@
                     <span>Semua Pelajaran</span>
                 @endif
     
-                <button type="submit" class="btn btn-dark form-control">Upload Now</button>
+                <button type="submit" class="btn bg-hijau-tua text-white rounded-pill form-control mt-20">Unggah Ujian</button>
             @else    
     
                 @if(request()->input('class_id'))
@@ -223,7 +237,7 @@
                     <div>Mata Pelajaran Belum Dipilih(tolong pilih salah satu pelarajaran melelui filter dibagian atas)</div>
                 @endif
     
-                <button class="btn btn-dark form-control disabled">Upload Now</button>
+                <button class="btn bg-hijau-tua text-white form-control rounded-pill disabled mt-20">Unggah Ujian</button>
     
             @endif
         </form>
