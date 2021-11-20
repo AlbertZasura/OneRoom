@@ -38,7 +38,7 @@
     
     <tbody id = "myTable">
     @foreach ($users as $key => $user )
-            <tr class='clickable-row' data-bs-toggle="modal" data-bs-target="#modal{{$user->id}}" >
+            <tr class='clickable-row' >
                 <td>
                     <a>{{ $key+1}}</a>
                 </td>
@@ -66,7 +66,7 @@
                     </div>
                 </td>
                 <td>
-                    
+                    <button class="btn btn-fill-green rounded-pill" id= "myButton" type="button" data-bs-toggle="modal" data-bs-target="#modal{{$user->id}}">Lihat Detail</button>
                 </td>
             </tr>
 

@@ -54,10 +54,14 @@
             <a> {{ $message->content }}</a>
             <br>
             <br>
+            @empty($message->file)
+            <a></a>
+            @else
             <h6>File Attachments :</h6>
             <div onclick="window.location='{{route('downloadMessage',$message->id)}}'" class="">
                 <i class="fas fa-paperclip"></i> 
             </div>
+            @endempty
         </div>
     </div>
     </div>
