@@ -17,24 +17,28 @@
                     </form>
                 </div>
             </div>
-            <table class="table table-hover">
-                <thead>
-                    <th>No.</th>
-                    <th>Kelas</th>
-                    <th>Aksi</th>
-                </thead>
-                <tbody>
-                    @foreach ($classes as $key => $c )
-                        <tr>
-                            <th>{{ $key+1 }}</th>
-                            <td>{{ $c->name }}</td>
-                            <td>
-                                <a class="btn btn-fill-green rounded-pill" href={{ route('classes.schedules.index',$c) }}>Lihat Jadwal</a>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>   
+            
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                        <th>No.</th>
+                        <th>Kelas</th>
+                        <th>Aksi</th>
+                    </thead>
+                    <tbody>
+                        @foreach ($classes as $key => $c )
+                            <tr>
+                                <th>{{ $key+1 }}</th>
+                                <td>{{ $c->name }}</td>
+                                <td>
+                                    <a class="btn btn-fill-green rounded-pill" href={{ route('classes.schedules.index',$c) }}>Lihat Jadwal</a>
+                                </td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>   
+            </div>
+            
         </div>
     </div> 
 @endsection

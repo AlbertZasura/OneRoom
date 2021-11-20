@@ -13,46 +13,49 @@
         <button class="btn btn-outline-secondary" id="open-popup" ><i class="fas fa-plus"></i></i>&nbsp Tambah Pengumuman</button>
     @endcan
     
-    <table class="table table-hover" style="">
-        <thead>
-        <tr>
-                <th scope="col">Waktu</th>
-                <th scope="col">Judul</th>
-                <th scope="col">Pengirim</th> 
-                <th scope="col">Tanggal</th>
-                @can('create', App\Models\Message::class )
-                <th scope="col">Aksi</th>
-                @endcan
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($messages as $key => $message )
-                <tr class='clickable-row' data-href="{{ route('messages.show',$message->id) }}">
-                    <td>
-                        <a>{{ $message->created_at->format('H:i') }}</a> 
-                    </td>
-                    <td style="width:30%">
-                        <a>{{ $message->title }}</a>
-                    </td>
-                    <td>
-                        <a>{{ $message->user->name }}</a>
-                    </td>
-                    <td>
-                        <a>{{ $message->created_at->format('d M Y') }}</a>
-                    </td>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+            <tr>
+                    <th scope="col">Waktu</th>
+                    <th scope="col">Judul</th>
+                    <th scope="col">Pengirim</th> 
+                    <th scope="col">Tanggal</th>
                     @can('create', App\Models\Message::class )
-                    <td>
-                        <form action="{{  route('messages.destroy',$message->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')      
-                            <button class="btn" type="submit" onclick="return confirm('Apakah Anda yakin untuk menghapus pengumuman?')"><i class="fas fa-times fa-lg" style="color:red"></i></button>
-                        </form>
-                    </td>
+                    <th scope="col">Aksi</th>
                     @endcan
                 </tr>
-            @endforeach
-        </tbody>
-    </table>
+            </thead>
+            <tbody>
+                @foreach ($messages as $key => $message )
+                    <tr class='clickable-row' data-href="{{ route('messages.show',$message->id) }}">
+                        <td>
+                            <a>{{ $message->created_at->format('H:i') }}</a> 
+                        </td>
+                        <td style="width:30%">
+                            <a>{{ $message->title }}</a>
+                        </td>
+                        <td>
+                            <a>{{ $message->user->name }}</a>
+                        </td>
+                        <td>
+                            <a>{{ $message->created_at->format('d M Y') }}</a>
+                        </td>
+                        @can('create', App\Models\Message::class )
+                        <td>
+                            <form action="{{  route('messages.destroy',$message->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')      
+                                <button class="btn" type="submit" onclick="return confirm('Apakah Anda yakin untuk menghapus pengumuman?')"><i class="fas fa-times fa-lg" style="color:red"></i></button>
+                            </form>
+                        </td>
+                        @endcan
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+    
     {{ $messages->links() }}
     </div>
 </div>
