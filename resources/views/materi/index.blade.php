@@ -5,8 +5,6 @@
 @section('content')
 
     <h1>Materi</h1>
-    <br>
-    <br>
 
     <div class="d-flex">
         <div class="w-200px">
@@ -18,7 +16,7 @@
             
             @can ('viewStudent', App\Models\Course::class)
                 @foreach($course as $i)
-                    <div class="cursor-pointer card-box mb-2" onclick="window.location='{{route('courses.show',$i->id)}}'">
+                    <div class="cursor-pointer card-shadow card-box mb-2 {{ request()->input('class_id') != '' ? request()->input('class_id') == $i->id ? 'active' : ''  : '' }}" onclick="window.location='{{route('courses.show',$i->id)}}'">
                         <div>{{$i->name}}</div>
                         <div class="text-right">{{$i->sessionClasses(Auth::user()->classes->first()->id)->count()}} Materi</div>
                     </div>
@@ -26,9 +24,8 @@
             @endcan
 
             @can('viewTeacher', App\Models\Course::class)
-
                 @foreach($user_class as $user_classes)
-                    <div class="cursor-pointer card-box mb-2" onclick="window.location='/teacherCourse?class_id={{$user_classes->id}}'">
+                    <div class="cursor-pointer card-shadow card-box mb-2 {{ request()->input('class_id') != '' ? request()->input('class_id') == $user_classes->id ? 'active' : ''  : '' }}" onclick="window.location='/teacherCourse?class_id={{$user_classes->id}}'">
                         <div>{{$user_classes->name}}</div>
                         <div class="text-right">{{$user_classes->classesCourse->unique()->count()}} Pelajaran</div>
                     </div>
@@ -39,7 +36,7 @@
             @can('viewAdmin', App\Models\Course::class)
 
                 @foreach($user_class as $user_classes)
-                    <div class="cursor-pointer card-box mb-2" onclick="window.location='/teacherCourse?class_id={{$user_classes->id}}'">
+                    <div class="cursor-pointer card-shadow card-box mb-2" onclick="window.location='/teacherCourse?class_id={{$user_classes->id}}'">
                         <div>{{$user_classes->name}}</div>
                         <div class="text-right">{{$user_classes->classesCourse->unique()->count()}} Pelajaran</div>
                     </div>
