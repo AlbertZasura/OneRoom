@@ -9,7 +9,7 @@
             <h1>Daftar Anggota Sekolah</h1>    
             <br>
             <form action="/classes/{{$class->id}}/assign_user">
-                <div class="row mb-3">
+                <div class="row mb-3 g-2">
                     <div class="col-md-2">
                         <select class="form-select" name="role">
                             <option selected value="">Semua</option>
@@ -20,7 +20,7 @@
                     <div class="col-md-4">
                         <div class="input-group mb-3">
                             <input type="text" class="form-control" placeholder="Cari Nama" name="search" value="{{ request('search') }}">
-                            <button class="btn btn-outline-green" type="submit"><i class='fa fa-search '></i></button>
+                            <button class="btn btn-fill-green" type="submit"><i class='fa fa-search '></i></button>
                         </div>
                     </div>
                 </div>

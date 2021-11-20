@@ -19,16 +19,16 @@
             @if ($role==="teacher")
                 <input type="hidden" name="schedule" value="{{ $schedule->id }}">
             @endif
-            <div class="row mb-3">
+            <div class="row g-2">
                 @can('isAdmin')
                     <div class="col-md-3">
-                        <div class="input-group mb-3">
+                        <div class="input-group">
                             <input type="date" name="date" class="form-control" value="{{ request('date') }}" id="date">
                         </div>
                     </div>
                 @endcan
                 <div class="col-md-3">
-                    <div class="input-group mb-3">
+                    <div class="input-group">
                         <input type="text" class="form-control" placeholder="Cari Nama {{ $role==="teacher" ? "Siswa" : "Guru" }}" name="search" value="{{ request('search') }}">
                         <button class="btn btn-fill-green" type="submit"><i class='fa fa-search '></i></button>
                     </div>

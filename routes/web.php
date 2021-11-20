@@ -25,9 +25,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 
-Auth::routes();
+Auth::routes(['verify' => true]);
 
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth','verified'])->group(function () {
     Route::get('/', [DashboardController::class, 'index'])->name('home');
     Route::resource('contents', ContentController::class);
     Route::resource('messages', MessageController::class);

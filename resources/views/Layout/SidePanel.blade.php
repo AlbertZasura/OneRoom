@@ -48,138 +48,139 @@
                         <div class="text-center fw-bold fs-5" style="white-space: nowrap;">
                             {{ Auth::user()->name }}
                         </div>
-                        <div class="text-center fs-6 edit-prof-wrap"><a href="/profiles" class="text-white text-decoration-none">Ganti profil</a></div>
-
+                        @can('isVerify')
+                            <div class="text-center fs-6 edit-prof-wrap"><a href="/profiles" class="text-white text-decoration-none">Ganti profil</a></div>
+                        @endcan
                     </div>
                 </div>
-                 
                 <div class="list-panel-menu mt-20">
-                    <div class="d-flex a-center side-panel-hover px-20px py-1 {{Route::current()->getName() == 'home' ? 'side-panel-active' : ''}}">
-                        <div class="fs-25 w-25px">
-                            <i class="fas fa-chart-line"></i>
-                        </div>
-                        <div class="fs-18 ml-20">
-                            <a href="{{route('home')}}" class="btn text-white" style="width: 149px;">Halaman Utama</a>
-                        </div>
-                    </div>
-                    <div class="d-flex a-center side-panel-hover px-20px py-1 {{Route::current()->getName() == 'admin.schedule' || Request::path() == 'schedules' || Request::is('schedules*') ? 'side-panel-active' : ''}}">
-                        <div class="fs-25 w-25px">
-                            <i class="far fa-calendar-alt"></i>
-                        </div>
-                        <div class="fs-18 ml-20">
-                            @can('schedulesChart', App\Models\Schedule::class )
-                                <a href="/schedules" class="btn text-white">Jadwal</a>
-                            @endcan
-                            @can('listClass', App\Models\Schedule::class )
-                                <a href="{{ route('admin.schedule') }}" class="btn text-white">Jadwal</a>
-                            @endcan
-                        </div>
-                    </div>
-                    @can('viewAny', App\Models\Assignment::class )
-                        <div class="d-flex a-center side-panel-hover px-20px py-1 {{ Request::path() == 'assignments' || Request::is('assignments*') ? 'side-panel-active' : ''}}">
+                    @can('isVerify')
+                        <div class="d-flex a-center side-panel-hover px-20px py-1 {{Route::current()->getName() == 'home' ? 'side-panel-active' : ''}}">
                             <div class="fs-25 w-25px">
-                                <i class="fas fa-pencil-ruler"></i>
+                                <i class="fas fa-chart-line"></i>
                             </div>
                             <div class="fs-18 ml-20">
-                                <a href="/assignments" class="btn text-white">Tugas</a>
+                                <a href="{{route('home')}}" class="btn text-white" style="width: 140px;">Halaman Utama</a>
                             </div>
                         </div>
-                    @endcan
-                    @can('viewAny', App\Models\Exam::class)
-                    <div class="d-flex a-center side-panel-hover px-20px py-1 {{ Request::path() == 'exams' || Request::is('exams*') ? 'side-panel-active' : ''}}">
-                        <div class="fs-25 w-25px">
-                            <i class="fas fa-paste"></i>
-                        </div>
-                        <div class="fs-18 ml-20">
-                            @if(Auth::user()->usersCorses()->get()->count() > 0)
-                                <a href="{{route('exams.index')}}" class="btn text-white">Ujian</a>
-                            @else
-                                <a href="/errormapping" class="btn text-white">Ujian</a>
-                            @endif
-                        </div>
-                    </div>
-                    @endcan
-                    
-                    <div class="d-flex a-center side-panel-hover px-20px py-1 {{Route::current()->getName() == 'courses.index' || Request::is('courses*') ? 'side-panel-active' : ''}}">
-                        <div class="fs-25 w-25px">
-                            <i class="fas fa-book"></i>
-                        </div>
-                        <div class="fs-18 ml-20">
-                            <a href="{{route('courses.index')}}" class="btn text-white">Materi</a>
-                            
-                        </div>
-                    </div>
-                    @can('viewAny', App\Models\Classes::class )
-                        <div class="d-flex a-center side-panel-hover px-20px py-1 {{Route::current()->getName() == 'classes.index' || Request::is('classes*') ? 'side-panel-active' : ''}}">
-                            <div class="fs-20 w-25px">
-                                <i class="fas fa-chalkboard"></i>
+                        <div class="d-flex a-center side-panel-hover px-20px py-1 {{Route::current()->getName() == 'admin.schedule' || Request::path() == 'schedules' || Request::is('schedules*') ? 'side-panel-active' : ''}}">
+                            <div class="fs-25 w-25px">
+                                <i class="far fa-calendar-alt"></i>
                             </div>
                             <div class="fs-18 ml-20">
-                                <a href="{{route('classes.index')}}" class="btn text-white">Kelas</a>
+                                @can('schedulesChart', App\Models\Schedule::class )
+                                    <a href="/schedules" class="btn text-white">Jadwal</a>
+                                @endcan
+                                @can('listClass', App\Models\Schedule::class )
+                                    <a href="{{ route('admin.schedule') }}" class="btn text-white">Jadwal</a>
+                                @endcan
                             </div>
                         </div>
-                    @endcan
+                        @can('viewAny', App\Models\Assignment::class )
+                            <div class="d-flex a-center side-panel-hover px-20px py-1 {{ Request::path() == 'assignments' || Request::is('assignments*') ? 'side-panel-active' : ''}}">
+                                <div class="fs-25 w-25px">
+                                    <i class="fas fa-pencil-ruler"></i>
+                                </div>
+                                <div class="fs-18 ml-20">
+                                    <a href="/assignments" class="btn text-white">Tugas</a>
+                                </div>
+                            </div>
+                        @endcan
+                        @can('viewAny', App\Models\Exam::class)
+                        <div class="d-flex a-center side-panel-hover px-20px py-1 {{ Request::path() == 'exams' || Request::is('exams*') ? 'side-panel-active' : ''}}">
+                            <div class="fs-25 w-25px">
+                                <i class="fas fa-paste"></i>
+                            </div>
+                            <div class="fs-18 ml-20">
+                                @if(Auth::user()->usersCorses()->get()->count() > 0)
+                                    <a href="{{route('exams.index')}}" class="btn text-white">Ujian</a>
+                                @else
+                                    <a href="/errormapping" class="btn text-white">Ujian</a>
+                                @endif
+                            </div>
+                        </div>
+                        @endcan
+                        
+                        <div class="d-flex a-center side-panel-hover px-20px py-1 {{Route::current()->getName() == 'courses.index' || Request::is('courses*') ? 'side-panel-active' : ''}}">
+                            <div class="fs-25 w-25px">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <div class="fs-18 ml-20">
+                                <a href="{{route('courses.index')}}" class="btn text-white">Materi</a>
+                                
+                            </div>
+                        </div>
+                        @can('viewAny', App\Models\Classes::class )
+                            <div class="d-flex a-center side-panel-hover px-20px py-1 {{Route::current()->getName() == 'classes.index' || Request::is('classes*') ? 'side-panel-active' : ''}}">
+                                <div class="fs-20 w-25px">
+                                    <i class="fas fa-chalkboard"></i>
+                                </div>
+                                <div class="fs-18 ml-20">
+                                    <a href="{{route('classes.index')}}" class="btn text-white">Kelas</a>
+                                </div>
+                            </div>
+                        @endcan
 
-                    <div class="d-flex a-center side-panel-hover px-20px py-1 {{Route::current()->getName() == 'absents.users' || Request::is('absent*') ? 'side-panel-active' : ''}}">
-                        <div class="fs-25 w-25px">
-                            <i class="fas fa-clipboard-list"></i>
-                        </div>
-                        <div class="fs-18 ml-20">
-                            @can('course', App\Models\Absent::class )
-                                <a href="/absent" class="btn text-white">Absen</a>
-                            @endcan
-
-                            @can('absentGrid', App\Models\Absent::class )
-                                <a href="/absents" class="btn text-white">Absen</a>
-                            @endcan
-                            @if (Auth::user()->role=="admin")
-                                <a href="/absents/users?date={{ now()->format('Y-m-d') }}" class="btn text-white">Absen</a>
-                            @endif
-                        </div>
-                    </div>
-                   
-                    @can('viewAny', App\Models\User::class)
-                    <div class="d-flex a-center side-panel-hover px-20px py-1 {{Route::current()->getName() == 'users.index' || Request::is('users*') ? 'side-panel-active' : ''}}">
-                        <div class="fs-20 w-25px">
-                            <i class="fas fa-user"></i>
-                        </div>
-                        <div class="fs-18 ml-20">
-                            <a href="{{route('users.index')}}" class="btn text-white">Akun</a>
-                        </div>
-                    </div>
-                    @endcan
-                    <div class="d-flex a-center side-panel-hover px-20px py-1 {{Route::current()->getName() == 'messages.index' || Request::is('messages*') ? 'side-panel-active' : ''}}">
-                        <div class="fs-20 w-25px">
-                            <i class="fas fa-bullhorn"></i>
-                        </div>
-                        <div class="fs-18 ml-20">
-                            <a href="{{route('messages.index')}}" class="btn text-white">Pengumuman</a>
-                        </div>
-                    </div>
-                    
-                    @can('viewAny', App\Models\User::class)
-                        <div class="d-flex a-center side-panel-hover px-20px py-1 {{Route::current()->getName() == 'contents.index' ? 'side-panel-active' : ''}}">
-                            <div class="fs-20 w-25px">
-                                <i class="fas fa-tools"></i>
+                        <div class="d-flex a-center side-panel-hover px-20px py-1 {{Route::current()->getName() == 'absents.users' || Request::is('absent*') ? 'side-panel-active' : ''}}">
+                            <div class="fs-25 w-25px">
+                                <i class="fas fa-clipboard-list"></i>
                             </div>
                             <div class="fs-18 ml-20">
-                                <a href="{{route('contents.index')}}" class="btn text-white">Konten</a>
+                                @can('course', App\Models\Absent::class )
+                                    <a href="/absent" class="btn text-white">Absen</a>
+                                @endcan
+
+                                @can('absentGrid', App\Models\Absent::class )
+                                    <a href="/absents" class="btn text-white">Absen</a>
+                                @endcan
+                                @if (Auth::user()->role=="admin")
+                                    <a href="/absents/users?date={{ now()->format('Y-m-d') }}" class="btn text-white">Absen</a>
+                                @endif
                             </div>
                         </div>
+                    
+                        @can('viewAny', App\Models\User::class)
+                        <div class="d-flex a-center side-panel-hover px-20px py-1 {{Route::current()->getName() == 'users.index' || Request::is('users*') ? 'side-panel-active' : ''}}">
+                            <div class="fs-20 w-25px">
+                                <i class="fas fa-user"></i>
+                            </div>
+                            <div class="fs-18 ml-20">
+                                <a href="{{route('users.index')}}" class="btn text-white">Akun</a>
+                            </div>
+                        </div>
+                        @endcan
+                        <div class="d-flex a-center side-panel-hover px-20px py-1 {{Route::current()->getName() == 'messages.index' || Request::is('messages*') ? 'side-panel-active' : ''}}">
+                            <div class="fs-20 w-25px">
+                                <i class="fas fa-bullhorn"></i>
+                            </div>
+                            <div class="fs-18 ml-20">
+                                <a href="{{route('messages.index')}}" class="btn text-white">Pengumuman</a>
+                            </div>
+                        </div>
+                        
+                        @can('viewAny', App\Models\User::class)
+                            <div class="d-flex a-center side-panel-hover px-20px py-1 {{Route::current()->getName() == 'contents.index' ? 'side-panel-active' : ''}}">
+                                <div class="fs-20 w-25px">
+                                    <i class="fas fa-tools"></i>
+                                </div>
+                                <div class="fs-18 ml-20">
+                                    <a href="{{route('contents.index')}}" class="btn text-white">Konten</a>
+                                </div>
+                            </div>
+                        @endcan
+                           
                     @endcan
-                    @if (Auth::user())
-                    <div class="d-flex a-center side-panel-hover px-20px py-1">
+                    <div class="d-flex a-center px-20px py-1">
                         <div class="fs-20 w-25px">
                             <i class="fs-20 fas fa-sign-out-alt"></i>
                         </div>
                         <div class="fs-18 ml-20">
                             <form action="/logout" method="POST">   
                                 @csrf
-                                <button type="submit" class="btn text-white">Keluar</button>
+                                <button type="submit" class="btn text-white" onclick="return confirm('Apakah Anda yakin untuk keluar?')">Keluar</button>
                             </form>
                         </div>
                     </div>
-                    @endif
                 </div>
             </div>
 
