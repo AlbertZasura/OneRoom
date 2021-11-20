@@ -110,9 +110,13 @@
     background: rgba(57, 189, 200, 0.2);
 }
 
+.bg-grey{
+    background: #e5e5e5;
+}
+
 .btn-add-course {
-    border-color: #1597E5;
-    color: #1597E5;
+    border-color: #09565d;
+    color: #09565d;
     background: #fff;
     transition: all .2s;
 }
@@ -120,7 +124,7 @@
 .btn-add-course:hover {
     border-color: #fff;
     color: #fff;
-    background: #1597E5;
+    background: #09565d;
     transition: all .2s;
 }
 
@@ -158,10 +162,11 @@
 }
 
 .box-course-create {
-    border: 2px solid black;
+    border: 2px solid #09565d;
     border-radius: 5px;
     padding: 21px;
     height: 100%;
+    background: #fff;
 }
 
 .mr-10 {

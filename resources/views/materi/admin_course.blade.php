@@ -3,8 +3,7 @@
 @section('title', 'Materi | OneRoom')
 
 @section('content')
-<h1>Materi</h1>
-<br>
+<h1>Mapping</h1>
 <br>
 
 <div class="container">
@@ -25,22 +24,23 @@
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Tambah Mata Pelajaran</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
+                          
                             <div class="modal-body">
+                                <div class="d-flex justify-content-between a-center px-2">
+                                    <h5 class="modal-title" id="exampleModalLabel">Tambah Mata Pelajaran</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
                                 <form action="course/createCourse" method="POST">
                                 @csrf
                                     <div class="modal-body">
                                         <div>
                                             <label class="col-form-label">Nama Mata Pelajaran</label>
-                                            <input type="text" name="name" class="form-control" >
+                                            <input type="text" name="name" class="form-control form-input-color" >
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                        <button type="button" class="btn btn-outline-green rounded-pill px-20px" data-bs-dismiss="modal">Batal</button>
+                                        <button type="submit" class="btn btn-fill-green rounded-pill px-20px">Simpan</button>
                                     </div>
                                 </form>
                             </div>
@@ -139,7 +139,7 @@
     </div>
 
     <div class="d-flex justify-content-end mt-20" onclick="save()">
-        <button class="btn save-btn-1"> Save </button>
+        <button class="btn btn-fill-green rounded-pill px-4"> Simpan </button>
     </div>
 
     
