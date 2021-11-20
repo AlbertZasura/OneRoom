@@ -456,3 +456,49 @@ body{
 }
 
 /* ======= end effect register and login ========== */
+
+.show-on-dekstop{
+    display: block;
+}
+
+.show-on-mobile{
+    display: none;
+}
+
+.overlay-side-menu{
+    position: fixed; 
+    /* display: none; */
+    width: 0; 
+    height: 100%; 
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 2; 
+    transition: all .1s;
+}
+
+@media (max-width: 767px){
+    .show-on-dekstop{
+        display: none;
+    }
+    
+    .show-on-mobile{
+        display: block;
+    }
+    .resize-side-panel {
+        width: 0;
+    }
+    .mobile-w-100{
+        width: 100% !important;
+    }
+
+    .resize-side-panel .profile-picture{
+        width: 150px ;
+        height: 150px ;
+    }
+    .resize-side-panel .text-profile{
+        top: 0;
+    }
+}
