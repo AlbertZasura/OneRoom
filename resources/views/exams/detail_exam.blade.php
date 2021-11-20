@@ -78,7 +78,7 @@
                                             <label for="score86" class="col-form-label">Nilai</label>
                                         </div>
                                         <div class="col-auto">
-                                            <input type="number"  name="score" class="form-control" >
+                                            <input type="number"  name="score" class="form-control form-input-color" >
                                         </div>
                                     </div>
                                 </div>

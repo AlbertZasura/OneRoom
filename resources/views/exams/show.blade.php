@@ -188,18 +188,18 @@
         <form class="py-4" action="/exams/createExam?type={{$exType}}&class_id={{request()->input('class_id')}}&course_id={{request()->input('course_id')}}" method="post" enctype="multipart/form-data">
             @csrf
             <label for="exampleInputEmail1" class="form-label">Nama Ujian</label>
-            <input type="text" name="title" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <input type="text" name="title" class="form-control form-input-color" id="exampleInputEmail1" aria-describedby="emailHelp">
             <br>
             <label for="exampleInputEmail1" class="form-label">Waktu Ujian</label>
             
             <div class="d-flex">
                 <div class="mr-10"> 
                     <label for="exampleInputEmail1" class="form-label">Mulai</label>
-                    <input type="datetime-local" name="startDate" class="datetimepicker form-control" id="deadline" required>
+                    <input type="datetime-local" name="startDate" class="datetimepicker form-control form-input-color" id="deadline" required>
                 </div>
                 <div>
                 <label for="exampleInputEmail1" class="form-label">Berakhir</label>
-                    <input type="datetime-local" name="deadline" class="datetimepicker form-control" id="deadline" required>
+                    <input type="datetime-local" name="deadline" class="datetimepicker form-control form-input-color" id="deadline" required>
                 </div>
             </div>
     

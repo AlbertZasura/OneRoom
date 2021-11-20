@@ -111,8 +111,8 @@
 }
 
 .btn-add-course {
-    border-color: #1597E5;
-    color: #1597E5;
+    border-color: #09565d;
+    color: #09565d;
     background: #fff;
     transition: all .2s;
 }
@@ -120,7 +120,7 @@
 .btn-add-course:hover {
     border-color: #fff;
     color: #fff;
-    background: #1597E5;
+    background: #09565d;
     transition: all .2s;
 }
 

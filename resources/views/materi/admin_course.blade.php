@@ -24,22 +24,23 @@
                 <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Tambah Mata Pelajaran</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
+                          
                             <div class="modal-body">
+                                <div class="d-flex justify-content-between a-center px-2">
+                                    <h5 class="modal-title" id="exampleModalLabel">Tambah Mata Pelajaran</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
                                 <form action="course/createCourse" method="POST">
                                 @csrf
                                     <div class="modal-body">
                                         <div>
                                             <label class="col-form-label">Nama Mata Pelajaran</label>
-                                            <input type="text" name="name" class="form-control" >
+                                            <input type="text" name="name" class="form-control form-input-color" >
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                        <button type="submit" class="btn btn-primary">Save changes</button>
+                                        <button type="button" class="btn btn-outline-green rounded-pill" data-bs-dismiss="modal">Batal</button>
+                                        <button type="submit" class="btn btn-fill-green rounded-pill">Simpan</button>
                                     </div>
                                 </form>
                             </div>
