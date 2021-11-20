@@ -166,7 +166,7 @@
                         </div>
                     @endcan
                     @if (Auth::user())
-                    <div class="d-flex a-center px-20px py-1">
+                    <div class="d-flex a-center side-panel-hover px-20px py-1">
                         <div class="fs-20 w-25px">
                             <i class="fs-20 fas fa-sign-out-alt"></i>
                         </div>

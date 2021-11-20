@@ -110,6 +110,10 @@
     background: rgba(57, 189, 200, 0.2);
 }
 
+.bg-grey{
+    background: #e5e5e5;
+}
+
 .btn-add-course {
     border-color: #09565d;
     color: #09565d;

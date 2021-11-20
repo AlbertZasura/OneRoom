@@ -39,8 +39,8 @@
                                         </div>
                                     </div>
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-outline-green rounded-pill" data-bs-dismiss="modal">Batal</button>
-                                        <button type="submit" class="btn btn-fill-green rounded-pill">Simpan</button>
+                                        <button type="button" class="btn btn-outline-green rounded-pill px-20px" data-bs-dismiss="modal">Batal</button>
+                                        <button type="submit" class="btn btn-fill-green rounded-pill px-20px">Simpan</button>
                                     </div>
                                 </form>
                             </div>
@@ -139,7 +139,7 @@
     </div>
 
     <div class="d-flex justify-content-end mt-20" onclick="save()">
-        <button class="btn save-btn-1"> Save </button>
+        <button class="btn btn-fill-green rounded-pill px-4"> Simpan </button>
     </div>
 
     
