@@ -28,7 +28,7 @@
             </form>
         </div>
         <div class="ml-20 w-85">
-            <div class="card-shadow bg-white rounded-3">
+            <div class="card-shadow bg-white m-5 border-radius-8px">
                 <div class="card-body">
                     <div id='wrap' class="container">
                         <div id='calendar'></div>
