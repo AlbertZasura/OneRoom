@@ -50,12 +50,12 @@
                     <form class="py-4" action="/session/insert?class_id={{$seletedClass->id}}&course_id={{isset($selected_course) ? $selected_course->id : $course_teacher->first()->id}}" method="post" enctype="multipart/form-data">
                         @csrf
                         <label for="exampleInputEmail1" class="form-label">Nama Materi</label>
-                        <input type="text" name="title" value="{{ old('title') }}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                        <input type="text" name="title" value="{{ old('title') }}" class="form-control form-input-color" id="exampleInputEmail1" aria-describedby="emailHelp" required>
                         <br>
                         <label for="exampleInputEmail1" class="form-label">Deskripsi Materi</label>
-                        <input type="text" name="description" value="{{ old('description') }}" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" required>
+                        <input type="text" name="description" value="{{ old('description') }}" class="form-control form-input-color" id="exampleInputEmail1" aria-describedby="emailHelp" required>
                         <br>
-                        <input type="file" name="file_upload" id="" class="form-control" required><br>
+                        <input type="file" name="file_upload" id="" class="form-control " required><br>
                         <button type="submit" class="btn bg-hijau-tua text-white rounded-pill form-control mt-20">Unggah Materi</button>
                     </form>
     
