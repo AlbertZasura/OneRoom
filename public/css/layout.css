@@ -158,10 +158,11 @@
 }
 
 .box-course-create {
-    border: 2px solid black;
+    border: 2px solid #09565d;
     border-radius: 5px;
     padding: 21px;
     height: 100%;
+    background: #fff;
 }
 
 .mr-10 {

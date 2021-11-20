@@ -3,8 +3,7 @@
 @section('title', 'Materi | OneRoom')
 
 @section('content')
-<h1>Materi</h1>
-<br>
+<h1>Mapping</h1>
 <br>
 
 <div class="container">
