@@ -16,7 +16,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
             </div>
         @endif
-    
+
+        <div class="card" >
         <div class="d-grid d-md-flex align-items-center p-3">
             <i class='fs-25 fa fa-file-signature me-2'></i>
             <nav style="--bs-breadcrumb-divider: '>';" class="me-auto" aria-label="breadcrumb">
@@ -34,6 +35,8 @@
                 <button class="btn" type="submit" onclick="return confirm('Apakah Anda yakin untuk menghapus tugas {{ $assignment->title }} ?')"><i class='fs-25 fa fa-trash text-danger'></i></button>
             </form>
             <p class="m-1">{{$assignment->users->count()}} / {{$assignment->class->students->count()}}</p>
+        </div>
+        </div>
         </div>
         <div class="d-grid d-md-flex align-items-center p-3">
             <a href="{{ route('assignments.export',$assignment->id) }}" class="ms-auto btn btn-fill-green rounded-pill">Export Excel</a>
