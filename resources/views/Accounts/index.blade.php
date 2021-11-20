@@ -56,12 +56,12 @@
                         <form action="{{ route('users.update', $user->id) }}" method="POST">
                             @csrf
                             @method('PUT')
-                            <button class="btn" type="submit" onclick="return confirm('Apakah Anda yakin untuk menerima {{ $user->name }}?')"><i class="fas fa-check fa-lg" style="color:green"></i></button>
+                            <button class="btn" id="acceptUser" type="submit" onsubmit="acceptUserBtn(event)"><i class="fas fa-check fa-lg" style="color:green"></i></button>
                         </form>
                         <form action="{{  route('users.destroy',$user->id) }}" method="POST">
                             @csrf
                             @method('DELETE')      
-                            <button class="btn" type="submit" onclick="return confirm('Apakah Anda yakin untuk menolak {{ $user->name }}?')"><i class="fas fa-times fa-lg" style="color:red"></i></button>
+                            <button class="btn" id="deleteUser" type="submit" onsubmit="deleteUserBtn(event)"><i class="fas fa-times fa-lg" style="color:red"></i></button>
                         </form>
                     </div>
                 </td>
@@ -119,6 +119,44 @@
     //         });
     //     });
     // });
+
+    function acceptUserBtn(e){
+            e.preventDefault();
+            var form = document.getElementById("acceptUser")
+            Swal.fire({
+                    title: `Terima Pengguna`,
+                    text: "Apakah Anda yakin untuk menerima pengguna?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya',
+                    cancelButtonText: 'Tidak',
+            })
+            .then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        
+    }
+
+    function deleteUserBtn(e){
+            e.preventDefault();
+            var form = document.getElementById("deleteUser")
+            Swal.fire({
+                    title: `Tolak Pengguna`,
+                    text: "Apakah Anda yakin untuk menolak pengguna?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya',
+                    cancelButtonText: 'Tidak',
+            })
+            .then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        
+    }
 
     function selectTable() {
         let dropdown, filter;
