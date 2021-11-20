@@ -232,7 +232,7 @@ class ExamController extends Controller
         $this->authorize('viewListSubmit', App\Models\Exam::class);
         $exam_user = Exam::find($exam_id);
 
-        $t = $exam_user->users;
+        $t = $exam_user->users()->paginate(25);;
 
         // dd($exam_user->users);
         return view('exams.detail_exam', [
