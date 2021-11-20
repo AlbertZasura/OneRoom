@@ -106,7 +106,11 @@
                                 <i class="fas fa-book"></i>
                             </div>
                             <div class="fs-18 ml-20">
-                                <a href="{{route('courses.index')}}" class="btn text-white">Materi</a>
+                                @if(Auth::user()->usersCorses()->get()->count() > 0 || Auth::user()->role == 'admin')
+                                    <a href="{{route('courses.index')}}" class="btn text-white">Materi</a>
+                                @else
+                                    <a href="/errormapping" class="btn text-white">Ujian</a>
+                                @endif
                                 
                             </div>
                         </div>
