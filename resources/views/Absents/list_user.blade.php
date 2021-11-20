@@ -40,42 +40,44 @@
                 </div>
             </div>
         </form>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Nama {{ $role==="teacher" ? "Siswa" : "Guru" }}</th>
-                    <th>Jam</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($users as $key => $user )
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
                     <tr>
-                        <th>
-                            <p>{{ $key+1 }}.</p> 
-                        </th>
-                        <td>
-                            <p>{{ $user->name }}</p> 
-                        </td>
-                        <td>
-                            @if ($role==="teacher")
-                                <p>{{ $user->absent_schedule($schedule->id)->first() ? $user->absent_schedule($schedule->id)->first()->created_at->format('H:i') : "-" }} </p> 
-                            @else
-                                <p>{{ $user->check_absent(request('date'))?$user->check_absent(request('date'))->created_at->format('H:i'):'-'}}</p>
-                            @endif
-                        </td>
-                        <td>
-                            @if ($role==="teacher")
-                                <p> {{ $user->absent_schedule($schedule->id)->first() ? $user->absent_schedule($schedule->id)->first()->status : (now()->gte($schedule->date) ? "Tidak Hadir" : "-") }} </p> 
-                            @else
-                                <p>{{ $user->check_absent(request('date'))?$user->check_absent(request('date'))->status:(now()->gte(request('date')) ? "Tidak Hadir" : "-")}}</p>
-                            @endif
-                        </td>
+                        <th>No</th>
+                        <th>Nama {{ $role==="teacher" ? "Siswa" : "Guru" }}</th>
+                        <th>Jam</th>
+                        <th>Status</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach ($users as $key => $user )
+                        <tr>
+                            <th>
+                                <p>{{ $key+1 }}.</p> 
+                            </th>
+                            <td>
+                                <p>{{ $user->name }}</p> 
+                            </td>
+                            <td>
+                                @if ($role==="teacher")
+                                    <p>{{ $user->absent_schedule($schedule->id)->first() ? $user->absent_schedule($schedule->id)->first()->created_at->format('H:i') : "-" }} </p> 
+                                @else
+                                    <p>{{ $user->check_absent(request('date'))?$user->check_absent(request('date'))->created_at->format('H:i'):'-'}}</p>
+                                @endif
+                            </td>
+                            <td>
+                                @if ($role==="teacher")
+                                    <p> {{ $user->absent_schedule($schedule->id)->first() ? $user->absent_schedule($schedule->id)->first()->status : (now()->gte($schedule->date) ? "Tidak Hadir" : "-") }} </p> 
+                                @else
+                                    <p>{{ $user->check_absent(request('date'))?$user->check_absent(request('date'))->status:(now()->gte(request('date')) ? "Tidak Hadir" : "-")}}</p>
+                                @endif
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
         {{ $users->links() }}
        </div>
    </div>

@@ -22,16 +22,19 @@ class ExamController extends Controller
     public function index()
     {
         $this->authorize('viewAny', App\Models\Exam::class);
+        if(Auth::user()->classes->isEmpty()){
+            return view('warnings/warningPage');
+        }
+        
         $exam = Exam::all();
 
         $course = '';
         $exType = '';
         $class = '';
         
+
         if(Auth::user()->role == 'student'){
             $student_class = Auth::user()->classes->first();
-            
-
             $exam_type = DB::table('exams')
                             ->select('type', DB::raw('count(*) as total'))
                             ->where('class_id','like',$student_class->id)
@@ -42,27 +45,6 @@ class ExamController extends Controller
                             ->select('type', DB::raw('count(*) as total'))
                             ->groupBy('type')
                             ->get();
-
-            // if(count($exam_type) == 0){
-            //     $exam_type = collect([
-            //         [
-            //             'type' => 'ujian tengah semester',
-            //             'total' => '0'
-            //         ],
-            //         [
-            //             'type' => 'ujian akhir semester',
-            //             'total' => '0'
-            //         ],
-            //         [
-            //             'type' => 'ulangan',
-            //             'total' => '0'
-            //         ],
-            //     ]);
-
-            //     $test = $exam_type->first();
-                
-            // }
-                            
         }
         return view('exams.index', [
             'exam' => $exam,

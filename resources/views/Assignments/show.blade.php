@@ -42,48 +42,50 @@
         <div class="d-grid d-md-flex align-items-center p-3">
             <a href="{{ route('assignments.export',$assignment->id) }}" class="ms-auto btn btn-fill-green rounded-pill">Export Excel</a>
         </div>
-        <table class="table table-hover">
-            <thead>
-                <tr>
-                    <th>No</th>
-                    <th>Nama Siswa</th>
-                    <th>Tanggal Submit</th>
-                    <th>Notes</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach ($users as $key => $user )
+        <div class="table-responsive">
+            <table class="table table-hover">
+                <thead>
                     <tr>
-                        <th>
-                            <p>{{ $key+1 }}.</p> 
-                        </th>
-                        <td>
-                            <p>{{ $user->name }}</p> 
-                        </td>
-                        <td>
-                            <p>{{ $user->pivot->created_at }}</p> 
-                        </td>
-                        <td>
-                            <p>{{ $user->pivot->notes }}</p> 
-                        </td>
-                        <td>
-                            <div class="align-item-center">
-                                <a href="{{ route('assignments.download',$assignment->id) }}?type=answer&u={{$user->id}}&t={{$user->pivot->created_at}}" class="btn"><i class='fs-25 fa fa-download'></i></a>
-                                @if ($user->pivot->score)
-                                    <h4 class="d-inline-block {{($assignment->kkm() > $user->pivot->score) ? 'text-danger' : 'text-success'}}">{{ $user->pivot->score }}</h4> 
-                                @else
-                                    @if(now()->gte($assignment->deadline))
-                                        <a data-bs-toggle="modal" data-bs-target="#scoringAssignments{{$user->id}}" class="btn"><i class='fs-25 fa fa-plus '></i></a>
-                                        @include('assignments._scoring')
-                                    @endif
-                                @endif
-                            </div>
-                        </td>
+                        <th>No</th>
+                        <th>Nama Siswa</th>
+                        <th>Tanggal Submit</th>
+                        <th>Notes</th>
+                        <th>Aksi</th>
                     </tr>
-                @endforeach
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    @foreach ($users as $key => $user )
+                        <tr>
+                            <th>
+                                <p>{{ $key+1 }}.</p> 
+                            </th>
+                            <td>
+                                <p>{{ $user->name }}</p> 
+                            </td>
+                            <td>
+                                <p>{{ $user->pivot->created_at }}</p> 
+                            </td>
+                            <td>
+                                <p>{{ $user->pivot->notes }}</p> 
+                            </td>
+                            <td>
+                                <div class="align-item-center">
+                                    <a href="{{ route('assignments.download',$assignment->id) }}?type=answer&u={{$user->id}}&t={{$user->pivot->created_at}}" class="btn"><i class='fs-25 fa fa-download'></i></a>
+                                    @if ($user->pivot->score)
+                                        <h4 class="d-inline-block {{($assignment->kkm() > $user->pivot->score) ? 'text-danger' : 'text-success'}}">{{ $user->pivot->score }}</h4> 
+                                    @else
+                                        @if(now()->gte($assignment->deadline))
+                                            <a data-bs-toggle="modal" data-bs-target="#scoringAssignments{{$user->id}}" class="btn"><i class='fs-25 fa fa-plus '></i></a>
+                                            @include('assignments._scoring')
+                                        @endif
+                                    @endif
+                                </div>
+                            </td>
+                        </tr>
+                    @endforeach
+                </tbody>
+            </table>
+        </div>
         {{ $users->links() }}
         </div>
     </div>

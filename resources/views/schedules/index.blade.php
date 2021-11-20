@@ -41,47 +41,51 @@
                     </a>
                 </div>
             </div>    
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Hari</th>
-                        <th>Mata Pelajaran</th>
-                        <th>Jam</th>
-                        <th>Aksi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($schedules as $key => $s )
+
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
                         <tr>
-                            <th>
-                                <p>{{ $key+1 }}.</p> 
-                            </th>
-                            <td>
-                                <p>{{ \Carbon\Carbon::parse($s->date)->isoFormat('dddd, D MMMM Y') }}</p> 
-                            </td>
-                            <td>
-                                <p>{{ $s->course->name }}</p> 
-                            </td>
-                            <td>
-                                <p>{{ $s->start_time}} - {{ $s->end_time}}
-                                </p> 
-                            </td>
-                            <td>
-                                <div class="d-flex align-items-center">
-                                    <a data-bs-toggle="modal" data-bs-target="#editSchedules{{ $s->id }}" class="btn btn-sm btn-fill-green rounded-pill">Ubah Jadwal</a>
-                                    <form action="{{ route('classes.schedules.destroy',[$class,$s]) }}" method="POST">   
-                                        @csrf
-                                        @method('DELETE')      
-                                        <button class="btn" type="submit" onclick="return confirm('Apakah Anda yakin untuk menghapus jadwal {{ $s->course->name }} ?')"><i class='fa fa-trash text-danger'></i></button>
-                                    </form>
-                                </div>
-                                @include('schedules._edit')
-                            </td>
-                        </tr> 
-                    @endforeach
-                </tbody>
-            </table>
+                            <th>#</th>
+                            <th>Hari</th>
+                            <th>Mata Pelajaran</th>
+                            <th>Jam</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($schedules as $key => $s )
+                            <tr>
+                                <th>
+                                    <p>{{ $key+1 }}.</p> 
+                                </th>
+                                <td>
+                                    <p>{{ \Carbon\Carbon::parse($s->date)->isoFormat('dddd, D MMMM Y') }}</p> 
+                                </td>
+                                <td>
+                                    <p>{{ $s->course->name }}</p> 
+                                </td>
+                                <td>
+                                    <p>{{ $s->start_time}} - {{ $s->end_time}}
+                                    </p> 
+                                </td>
+                                <td>
+                                    <div class="d-flex align-items-center">
+                                        <a data-bs-toggle="modal" data-bs-target="#editSchedules{{ $s->id }}" class="btn btn-sm btn-fill-green rounded-pill">Ubah Jadwal</a>
+                                        <form action="{{ route('classes.schedules.destroy',[$class,$s]) }}" method="POST">   
+                                            @csrf
+                                            @method('DELETE')      
+                                            <button class="btn" type="submit" onclick="return confirm('Apakah Anda yakin untuk menghapus jadwal {{ $s->course->name }} ?')"><i class='fa fa-trash text-danger'></i></button>
+                                        </form>
+                                    </div>
+                                    @include('schedules._edit')
+                                </td>
+                            </tr> 
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
+            
             @include('schedules._create')
         </div>
     </div>

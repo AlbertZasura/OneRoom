@@ -39,11 +39,15 @@ class ClassController extends Controller
             default:
                 $classes = Auth::user()->classes;
                 break;
-
         }
-        return view('classes.index', [
-            'classes' => $classes
-        ]);
+
+        if(Auth::user()->role!='admin' && $classes->isEmpty()){
+            return view('warnings/warningPage');
+        }else{
+            return view('classes.index', [
+                'classes' => $classes
+            ]);
+        }
     }
 
     /**
