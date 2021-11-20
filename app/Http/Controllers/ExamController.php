@@ -42,7 +42,26 @@ class ExamController extends Controller
                             ->select('type', DB::raw('count(*) as total'))
                             ->groupBy('type')
                             ->get();
-    
+
+            // if(count($exam_type) == 0){
+            //     $exam_type = collect([
+            //         [
+            //             'type' => 'ujian tengah semester',
+            //             'total' => '0'
+            //         ],
+            //         [
+            //             'type' => 'ujian akhir semester',
+            //             'total' => '0'
+            //         ],
+            //         [
+            //             'type' => 'ulangan',
+            //             'total' => '0'
+            //         ],
+            //     ]);
+
+            //     $test = $exam_type->first();
+                
+            // }
                             
         }
         return view('exams.index', [
@@ -217,7 +236,7 @@ class ExamController extends Controller
 
         // dd($exam_user->users);
         return view('exams.detail_exam', [
-            'userList' => $t, 'exam_id' => $exam_id,
+            'userList' => $t, 'exam_id' => $exam_id, 'exam' => $exam_user
         ]);
     }
 
