@@ -30,6 +30,9 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
+        Gate::define('isVerify', function($user){
+            return $user->hasVerifiedEmail();
+        });
         Gate::define('isAdmin', function($user){
             return $user->role == 'admin';
         });

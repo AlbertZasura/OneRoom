@@ -26,7 +26,7 @@
                             <td>{{ $content->updated_at }}</td>
                             <td>
                                 <a data-bs-toggle="modal" data-bs-target="#editContents{{ $content->id }}" class="btn btn-fill-green rounded-pill">
-                                    <i class='fa fa-pen'></i> Ubah
+                                     Ubah
                                 </a>
                                 @include('contents._edit')
                             </td>
