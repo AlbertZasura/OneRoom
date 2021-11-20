@@ -32,8 +32,19 @@
             @yield('contentGuest')
         </div>
     @else
+        <div class="show-on-mobile position-fixed w-100" style="z-index: 1;">
+            <div class="d-flex justify-content-between a-center px-2 py-3 bg-hijau-tua text-white">
+                <div class="d-flex a-center">
+                    <img class="mr-10" src="{{ asset('img/Logo-OneRoom.png') }}" alt="logo_oneRoom" style="width:20px; height: 20px; filter: brightness(0) invert(1);"> 
+                    <span>OneRoom</span>
+                </div>
+                <i class="fas fa-bars mr-10" style="margin-top: 1px;" onclick="showMenuMobile()"></i>
+            </div>
+        </div>
+        <div id="overlay" class="overlay-side-menu show-on-mobile" style="z-index: 1;"></div>
         <div class="d-flex">
-            <div class="{{ str_contains(url()->current(), '/dashboard') ?  'side-panel-menu bg-hijau-tua' : 'resize-side-panel side-panel-menu bg-hijau-tua'  }}">
+            <div id="sidePanel" class="{{ str_contains(url()->current(), '/dashboard') ?  'side-panel-menu bg-hijau-tua' : 'resize-side-panel side-panel-menu bg-hijau-tua'  }}">
+                <div class="position-relative show-on-mobile"><i class="pos-absolute fas fa-times fs-25" style="right: 11px; top: 12px;" onclick="hideMenuMobile()"></i></div>
                 <div class="profile-wrapper px-20px pt-20">
                     <div class="profile-picture">
                         @if(Auth::user()->profile_picture) 
@@ -60,13 +71,13 @@
                                 <i class="fas fa-chart-line"></i>
                             </div>
                             <div class="fs-18 ml-20">
-                                <a href="{{route('home')}}" class="btn text-white" style="width: 140px;">Halaman Utama</a>
+                                <a href="{{route('home')}}" class="btn text-white mobile-w-100" style="width: 149px;">Halaman Utama</a>
                             </div>
                         </div>
                         <div class="d-flex a-center side-panel-hover px-20px py-1 {{Route::current()->getName() == 'admin.schedule' || Request::path() == 'schedules' || Request::is('schedules*') ? 'side-panel-active' : ''}}">
                             <div class="fs-25 w-25px">
                                 <i class="far fa-calendar-alt"></i>
-                            </div>
+                            </div>  
                             <div class="fs-18 ml-20">
                                 @can('schedulesChart', App\Models\Schedule::class )
                                     <a href="/schedules" class="btn text-white">Jadwal</a>
@@ -187,5 +198,18 @@
 
         </div>
     @endif
+
+    <script>
+
+        function showMenuMobile(){
+            $('#sidePanel').animate({width: '100%'}, 0.5);
+            $('#overlay').animate({width: '100%'}, 0.2);
+        }
+        function hideMenuMobile(){
+            $('#sidePanel').animate({width: '0'}, 0.1);
+            $('#overlay').delay(160).animate({width: '0'});
+        }
+
+    </script>
 </body>
 </html>

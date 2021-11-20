@@ -25,87 +25,90 @@
         </div>
     </div>
     
-    <table class="table table-hover table-responsive" id="tableSearch">
-        <thead>
-            <tr>
-                <th scope="col">No</th>
-                <th scope="col">Nama Akun</th>
-                <th scope="col">Tanggal Daftar</th> 
-                <th scope="col">Jabatan</th>
-                <th scope="col">Aksi</th>
-            </tr>
-        </thead>   
-    
-    <tbody id = "myTable">
-    @foreach ($users as $key => $user )
-            <tr class='clickable-row' >
-                <td>
-                    <a>{{ $key+1}}</a>
-                </td>
-                <td>
-                    <a>{{ $user->name }}</a>
-                </td>
-                <td>
-                    <a>{{ $user->created_at->format('d M Y') }}</a> 
-                </td>
-                <td>
-                    <a>{{ $user->humanizeRole() }}</a>
-                </td>
-                <td>
-                    <div class="d-flex">
-                        <form action="{{ route('users.update', $user->id) }}" method="POST">
-                            @csrf
-                            @method('PUT')
-                            <button class="btn" id="acceptUser" type="submit" onsubmit="acceptUserBtn(event)"><i class="fas fa-check fa-lg" style="color:green"></i></button>
-                        </form>
-                        <form action="{{  route('users.destroy',$user->id) }}" method="POST">
-                            @csrf
-                            @method('DELETE')      
-                            <button class="btn" id="deleteUser" type="submit" onsubmit="deleteUserBtn(event)"><i class="fas fa-times fa-lg" style="color:red"></i></button>
-                        </form>
-                    </div>
-                </td>
-                <td>
-                    <button class="btn btn-fill-green rounded-pill" id= "myButton" type="button" data-bs-toggle="modal" data-bs-target="#modal{{$user->id}}">Lihat Detail</button>
-                </td>
-            </tr>
+    <div class="table-responsive">
+        <table class="table table-hover table-responsive" id="tableSearch">
+            <thead>
+                <tr>
+                    <th scope="col">No</th>
+                    <th scope="col">Nama Akun</th>
+                    <th scope="col">Tanggal Daftar</th> 
+                    <th scope="col">Jabatan</th>
+                    <th scope="col">Aksi</th>
+                </tr>
+            </thead>   
+        
+        <tbody id = "myTable">
+        @foreach ($users as $key => $user )
+                <tr class='clickable-row' >
+                    <td>
+                        <a>{{ $key+1}}</a>
+                    </td>
+                    <td>
+                        <a>{{ $user->name }}</a>
+                    </td>
+                    <td>
+                        <a>{{ $user->created_at->format('d M Y') }}</a> 
+                    </td>
+                    <td>
+                        <a>{{ $user->humanizeRole() }}</a>
+                    </td>
+                    <td>
+                        <div class="d-flex">
+                            <form action="{{ route('users.update', $user->id) }}" method="POST">
+                                @csrf
+                                @method('PUT')
+                                <button class="btn" id="acceptUser" type="submit" onsubmit="acceptUserBtn(event)"><i class="fas fa-check fa-lg" style="color:green"></i></button>
+                            </form>
+                            <form action="{{  route('users.destroy',$user->id) }}" method="POST">
+                                @csrf
+                                @method('DELETE')      
+                                <button class="btn" id="deleteUser" type="submit" onsubmit="deleteUserBtn(event)"><i class="fas fa-times fa-lg" style="color:red"></i></button>
+                            </form>
+                        </div>
+                    </td>
+                    <td>
+                        <button class="btn btn-fill-green rounded-pill" id= "myButton" type="button" data-bs-toggle="modal" data-bs-target="#modal{{$user->id}}">Lihat Detail</button>
+                    </td>
+                </tr>
 
-            
-            <div class="modal fade" id="modal{{$user->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog" >
-                    <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" >Detail Informasi</h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                
+                <div class="modal fade" id="modal{{$user->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" >
+                        <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" >Detail Informasi</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <div class="mb-3">
+                                <label for="recipient-name" class="col-form-label"><b>Nama</b></label>
+                                <input type="text" name="name" class="form-control" id="name" value="{{ $user->name }}" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message-text" class="col-form-label"><b>Nomor Induk</b></label>
+                                <input type="text" name="identification_number" class="form-control" id="identification_number" value="{{ $user->identification_number }}" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message-text" class="col-form-label"><b>Nomor Handphone</b></label>
+                                <input type="text" name="phone" class="form-control" id="phone" value="{{ $user->phone }}" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message-text" class="col-form-label"><b>Email</b></label>
+                                <input type="text" name="email" class="form-control" id="email" value="{{ $user->email }}" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="message-text" class="col-form-label"><b>Jabatan</b></label>
+                                <input type="text" name="role" class="form-control" id="role" value="{{ $user->humanizeRole() }}" readonly>
+                            </div>
+                            
                     </div>
-                    <div class="modal-body">
-                        <div class="mb-3">
-                            <label for="recipient-name" class="col-form-label"><b>Nama</b></label>
-                            <input type="text" name="name" class="form-control" id="name" value="{{ $user->name }}" readonly>
-                        </div>
-                        <div class="mb-3">
-                            <label for="message-text" class="col-form-label"><b>Nomor Induk</b></label>
-                            <input type="text" name="identification_number" class="form-control" id="identification_number" value="{{ $user->identification_number }}" readonly>
-                        </div>
-                        <div class="mb-3">
-                            <label for="message-text" class="col-form-label"><b>Nomor Handphone</b></label>
-                            <input type="text" name="phone" class="form-control" id="phone" value="{{ $user->phone }}" readonly>
-                        </div>
-                        <div class="mb-3">
-                            <label for="message-text" class="col-form-label"><b>Email</b></label>
-                            <input type="text" name="email" class="form-control" id="email" value="{{ $user->email }}" readonly>
-                        </div>
-                        <div class="mb-3">
-                            <label for="message-text" class="col-form-label"><b>Jabatan</b></label>
-                            <input type="text" name="role" class="form-control" id="role" value="{{ $user->humanizeRole() }}" readonly>
-                        </div>
-                        
                 </div>
-            </div>
-            
-            @endforeach
-        </tbody>   
-    </table>
+                
+                @endforeach
+            </tbody>   
+        </table>
+    </div>
+    
     {{ $users->links() }}
     </div>
 </div> 

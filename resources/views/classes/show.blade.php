@@ -24,44 +24,46 @@
                     <i class='fa fa-plus '></i> Tambah Anggota
                 </a>
             @endcan
-            <table class="table table-hover">
-                <thead>
-                    <tr>
-                        <th>No</th>
-                        <th>Nama</th>
-                        <th>Jabatan</th>
-                        @can('assign_user', App\Models\Classes::class )
-                            <th>Aksi</th>
-                        @endcan
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach ($users as $key => $user )
+            <div class="table-responsive">
+                <table class="table table-hover">
+                    <thead>
                         <tr>
-                            <th>
-                                <p>{{ $key+1 }}.</p> 
-                            </th>
-                            <td>
-                                <p>{{ $user->name }}</p> 
-                            </td>
-                            <td>
-                                <p>
-                                    {{ $user->humanizeRole() }}
-                                    {{ $user->course($class->id)->pluck('name')->implode(', ') }}
-                                </p> 
-                            </td>
+                            <th>No</th>
+                            <th>Nama</th>
+                            <th>Jabatan</th>
                             @can('assign_user', App\Models\Classes::class )
-                                <td>
-                                    <form action="/classes/{{$class->id}}/assign_user/{{$user->id}}?type=detach" method="POST">
-                                        @csrf
-                                        <button type="submit" class="btn btn-outline-green rounded-pill" onclick="return confirm('Apakah Anda yakin untuk mengeluarkan {{ $user->name }} dari kelas?')">Keluarkan</button>
-                                    </form>
-                                </td>
+                                <th>Aksi</th>
                             @endcan
                         </tr>
-                    @endforeach
-                </tbody>
-            </table>
+                    </thead>
+                    <tbody>
+                        @foreach ($users as $key => $user )
+                            <tr>
+                                <th>
+                                    <p>{{ $key+1 }}.</p> 
+                                </th>
+                                <td>
+                                    <p>{{ $user->name }}</p> 
+                                </td>
+                                <td>
+                                    <p>
+                                        {{ $user->humanizeRole() }}
+                                        {{ $user->course($class->id)->pluck('name')->implode(', ') }}
+                                    </p> 
+                                </td>
+                                @can('assign_user', App\Models\Classes::class )
+                                    <td>
+                                        <form action="/classes/{{$class->id}}/assign_user/{{$user->id}}?type=detach" method="POST">
+                                            @csrf
+                                            <button type="submit" class="btn btn-outline-green rounded-pill" onclick="return confirm('Apakah Anda yakin untuk mengeluarkan {{ $user->name }} dari kelas?')">Keluarkan</button>
+                                        </form>
+                                    </td>
+                                @endcan
+                            </tr>
+                        @endforeach
+                    </tbody>
+                </table>
+            </div>
             {{ $users->links() }}
         </div>
     </div>

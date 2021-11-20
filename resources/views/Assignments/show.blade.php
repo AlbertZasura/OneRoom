@@ -42,7 +42,7 @@
             <div class="d-grid d-md-flex align-items-center p-3">
                 <a href="{{ route('assignments.export',$assignment->id) }}" class="ms-auto btn btn-fill-green rounded-pill">Export Excel</a>
             </div>
-            <table class="table table-hover">
+            <table class="table table-responsive">
                 <thead>
                     <tr>
                         <th>No</th>
@@ -84,7 +84,12 @@
                     @endforeach
                 </tbody>
             </table>
+<<<<<<< HEAD
             {{ $users->links() }}
+=======
+        </div>
+        {{ $users->links() }}
+>>>>>>> 2f9983e0dcaeebd840fa0d209220a4e920d3ac7b
         </div>
     </div>
 @stop

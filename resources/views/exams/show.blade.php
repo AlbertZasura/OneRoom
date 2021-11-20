@@ -62,113 +62,115 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endcan
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th scope="col">Nama Ujian</th>
-                <th scope="col">Waktu Ujian</th>
-                <th scope="col">Action</th>
-                @can('viewTeacher', App\Models\Exam::class )
-                    <th scope="col">Jumlah Pengumpulan</th>
-                @endcan
-                @can('viewStudent', App\Models\Exam::class)
-                    <th scope="col">Score</td>
-                @endcan
-                
-            </tr>
-        </thead>
-        <tbody>
-            @foreach($exam as $i)
-            <tr>
-                @can('viewTeacher', App\Models\Exam::class )
-                    <td onclick="window.location='{{route('examsubmitlist',$i->id)}}'">{{$i->title}}</td>
-                @endcan
-                @can('viewStudent', App\Models\Exam::class)
-                    <td>{{$i->title}}</td>
-                @endcan
-                @can('viewTeacher', App\Models\Exam::class )
-                    <td onclick="window.location='{{route('examsubmitlist',$i->id)}}'">
-                        <div>Dari {{date('d-m-Y', strtotime($i->start_date))}} {{date('H:i', strtotime($i->start_date))}}</div>
-                        <div>Sampai {{date('d-m-Y', strtotime($i->end_date))}} {{date('H:i', strtotime($i->end_date))}}</div>
-                    </td>
-                @endcan
-                @can('viewStudent', App\Models\Exam::class)
-                    <td>
-                        <div>Dari {{date('d-m-Y', strtotime($i->start_date))}} {{date('H:i', strtotime($i->start_date))}}</div>
-                        <div>Sampai {{date('d-m-Y', strtotime($i->end_date))}} {{date('H:i', strtotime($i->end_date))}}</div>
-                    </td>
-                @endcan
-                <td class="fs-25">
-                    <div class="d-flex a-center">
-                        @if(now()->gte($i->start_date))
-                            <i class="fas fa-download mr-10 cursor-pointer" onclick="window.location='{{route('downloadexams', $i->id)}}'"></i>
-                        @endif
-                        @can('viewTeacher', App\Models\Exam::class )
-                            <form action="{{ route('exams.destroy',[$i]) }}" onsubmit="deleteExamBtn(event)" id="delteForm" method="POST">   
-                                @csrf
-                                @method('DELETE')     
-                                <button class="btn" type="submit"><i class="far fa-trash-alt text-danger mr-10 cursor-pointer"></i></button>
-                            </form>
-                        @endcan
-                        @can('viewStudent', App\Models\Exam::class)
-                            @if(now()->lte($i->end_date))
-                                <i class="fas fa-upload cursor-pointer" data-bs-toggle="modal" data-bs-target="#exampleModal{{$i->id}}"></i>
-                            @endif
-                        @endcan
-                    </div>
+    <div class="table-responsive">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Nama Ujian</th>
+                    <th scope="col">Waktu Ujian</th>
+                    <th scope="col">Action</th>
+                    @can('viewTeacher', App\Models\Exam::class )
+                        <th scope="col">Jumlah Pengumpulan</th>
+                    @endcan
+                    @can('viewStudent', App\Models\Exam::class)
+                        <th scope="col">Score</td>
+                    @endcan
                     
-                    <div class="modal fade" id="exampleModal{{$i->id}}" tabindex="-1" aria-labelledby="exampleModalLabel{{$i->id}}" aria-hidden="true">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel{{$i->id}}">Unggah {{$i->type}} {{$i->title}}</h5>
-                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                </div>
-                                
-                                <form action="/exams/submitExam?e={{$i->id}}" method="POST" enctype="multipart/form-data">
-                                @csrf
-                                    <div class="modal-body">
-                                        <div class="row g-3 align-items-center">
-                                            <div class="col-auto">
-                                                <label for="note86" class="col-form-label">Notes</label>
-                                            </div>
-                                            <div class="col-auto">
-                                                <input type="text"  name="notes" class="form-control" >
-                                            </div>
-                                        </div>
-                                        <div class="input-group mb-3">
-                                            <input type="file" name="file_upload" class="form-control" id="inputGroupFile01">
-                                        </div>
-                                    </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                        <button type="submit" class="btn btn-primary">Submit</button>
-                                    </div>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($exam as $i)
+                <tr>
+                    @can('viewTeacher', App\Models\Exam::class )
+                        <td onclick="window.location='{{route('examsubmitlist',$i->id)}}'">{{$i->title}}</td>
+                    @endcan
+                    @can('viewStudent', App\Models\Exam::class)
+                        <td>{{$i->title}}</td>
+                    @endcan
+                    @can('viewTeacher', App\Models\Exam::class )
+                        <td onclick="window.location='{{route('examsubmitlist',$i->id)}}'">
+                            <div>Dari {{date('d-m-Y', strtotime($i->start_date))}} {{date('H:i', strtotime($i->start_date))}}</div>
+                            <div>Sampai {{date('d-m-Y', strtotime($i->end_date))}} {{date('H:i', strtotime($i->end_date))}}</div>
+                        </td>
+                    @endcan
+                    @can('viewStudent', App\Models\Exam::class)
+                        <td>
+                            <div>Dari {{date('d-m-Y', strtotime($i->start_date))}} {{date('H:i', strtotime($i->start_date))}}</div>
+                            <div>Sampai {{date('d-m-Y', strtotime($i->end_date))}} {{date('H:i', strtotime($i->end_date))}}</div>
+                        </td>
+                    @endcan
+                    <td class="fs-25">
+                        <div class="d-flex a-center">
+                            @if(now()->gte($i->start_date))
+                                <i class="fas fa-download mr-10 cursor-pointer" onclick="window.location='{{route('downloadexams', $i->id)}}'"></i>
+                            @endif
+                            @can('viewTeacher', App\Models\Exam::class )
+                                <form action="{{ route('exams.destroy',[$i]) }}" onsubmit="deleteExamBtn(event)" id="delteForm" method="POST">   
+                                    @csrf
+                                    @method('DELETE')     
+                                    <button class="btn" type="submit"><i class="far fa-trash-alt text-danger mr-10 cursor-pointer"></i></button>
                                 </form>
+                            @endcan
+                            @can('viewStudent', App\Models\Exam::class)
+                                @if(now()->lte($i->end_date))
+                                    <i class="fas fa-upload cursor-pointer" data-bs-toggle="modal" data-bs-target="#exampleModal{{$i->id}}"></i>
+                                @endif
+                            @endcan
+                        </div>
+                        
+                        <div class="modal fade" id="exampleModal{{$i->id}}" tabindex="-1" aria-labelledby="exampleModalLabel{{$i->id}}" aria-hidden="true">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel{{$i->id}}">Unggah {{$i->type}} {{$i->title}}</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    
+                                    <form action="/exams/submitExam?e={{$i->id}}" method="POST" enctype="multipart/form-data">
+                                    @csrf
+                                        <div class="modal-body">
+                                            <div class="row g-3 align-items-center">
+                                                <div class="col-auto">
+                                                    <label for="note86" class="col-form-label">Notes</label>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <input type="text"  name="notes" class="form-control" >
+                                                </div>
+                                            </div>
+                                            <div class="input-group mb-3">
+                                                <input type="file" name="file_upload" class="form-control" id="inputGroupFile01">
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                </td>
+                    </td>
+                    
+                        <td>
+                            
+                            @can('viewTeacher', $i)
+                            {{$i->users->count()}} / {{count($i->class->first()->users->where('role','like','student'))}} Pengumpulan
+                            @endcan
+                        </td>
                 
-                    <td>
-                        
-                        @can('viewTeacher', $i)
-                        {{$i->users->count()}} / {{count($i->class->first()->users->where('role','like','student'))}} Pengumpulan
-                        @endcan
-                    </td>
-               
-                @can('viewStudent', App\Models\Exam::class)
-                    <td>
-                        @if($i->usersExams(Auth::id())->first())
-                            <div>{{$i->usersExams(Auth::id())->first()->pivot->score}}</div>
-                        @endif
-                    </td>
-                @endcan
-            </tr>
-    
-            @endforeach
-        </tbody>
-    </table>
+                    @can('viewStudent', App\Models\Exam::class)
+                        <td>
+                            @if($i->usersExams(Auth::id())->first())
+                                <div>{{$i->usersExams(Auth::id())->first()->pivot->score}}</div>
+                            @endif
+                        </td>
+                    @endcan
+                </tr>
+        
+                @endforeach
+            </tbody>
+        </table>
+    </div>
 
     <script>
         function deleteExamBtn(e){
