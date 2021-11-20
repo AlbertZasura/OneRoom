@@ -102,12 +102,7 @@
                                 <i class="fas fa-book"></i>
                             </div>
                             <div class="fs-18 ml-20">
-                                @if(Auth::user()->usersCorses()->get()->count() > 0 || Auth::user()->role == 'admin')
-                                    <a href="{{route('courses.index')}}" class="btn text-white">Materi</a>
-                                @else
-                                    <a href="/errormapping" class="btn text-white">Ujian</a>
-                                @endif
-                                
+                                <a href="{{route('courses.index')}}" class="btn text-white">Materi</a>
                             </div>
                         </div>
                         @can('viewAny', App\Models\Classes::class )
