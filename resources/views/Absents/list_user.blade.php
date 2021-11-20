@@ -4,7 +4,7 @@
 @section('title', 'Absen | OneRoom')
 
 @section('content')
-   <div class="card-shadow bg-white">
+   <div class="card-shadow bg-white m-5 border-radius-8px">
        <div class="card-body">
         @can('isTeacher')
             <h1>{{ "Daftar Absen Siswa Kelas ".$schedule->class->name }}</h1> 
