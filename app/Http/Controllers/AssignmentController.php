@@ -23,6 +23,9 @@ class AssignmentController extends Controller
     public function course(Course $course)
     {
         $this->authorize('viewAny', App\Models\Assignment::class);
+        if(Auth::user()->classes->isEmpty()){
+            return view('warnings/warningPage');
+        }
         $courses = Course::whereHas('classes.users',function(Builder $query){
             $query->where('user_id',Auth::user()->id);
         })->get();

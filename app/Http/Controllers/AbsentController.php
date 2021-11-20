@@ -37,9 +37,13 @@ class AbsentController extends Controller
         $courses = Course::whereHas('classes.users',function(Builder $query){
             $query->where('user_id',Auth::user()->id);
         })->get();
-        return view('absents.course', [
-            'courses' => $courses
-        ]);
+        if ($courses->isEmpty()){
+            return view('warnings/warningPage');
+        }else{
+            return view('absents.course', [
+                'courses' => $courses
+            ]);
+        }
     }
     
      public function index(Course $course)

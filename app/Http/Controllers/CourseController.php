@@ -47,11 +47,12 @@ class CourseController extends Controller
                     'class' => $class
                 ]);
             }
-
             
         }else{
-            
             $cls = Auth::user()->classes->first();
+            if(empty($cls)){
+                return view('warnings/warningPage');
+            }
             $course = $cls->courses;
             $userClass = Auth::user()->usersClasses;
 
@@ -60,9 +61,7 @@ class CourseController extends Controller
                 'cls' => $cls,
                 'user_class' => $userClass->unique()
             ]);
-
         }
-
     }
 
     /**
