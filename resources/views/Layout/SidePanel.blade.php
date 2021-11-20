@@ -60,7 +60,7 @@
                             <i class="fas fa-chart-line"></i>
                         </div>
                         <div class="fs-18 ml-20">
-                            <a href="{{route('home')}}" class="btn text-white" style="width: 140px;">Halaman Utama</a>
+                            <a href="{{route('home')}}" class="btn text-white" style="width: 149px;">Halaman Utama</a>
                         </div>
                     </div>
                     <div class="d-flex a-center side-panel-hover px-20px py-1 {{Route::current()->getName() == 'admin.schedule' || Request::path() == 'schedules' || Request::is('schedules*') ? 'side-panel-active' : ''}}">
