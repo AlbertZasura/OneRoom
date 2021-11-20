@@ -104,10 +104,10 @@
                             <i class="fas fa-download mr-10 cursor-pointer" onclick="window.location='{{route('downloadexams', $i->id)}}'"></i>
                         @endif
                         @can('viewTeacher', App\Models\Exam::class )
-                            <form action="{{ route('exams.destroy',[$i]) }}" method="POST">   
+                            <form action="{{ route('exams.destroy',[$i]) }}" onsubmit="deleteExamBtn(event)" id="delteForm" method="POST">   
                                 @csrf
                                 @method('DELETE')     
-                                <button class="btn" type="submit" onclick="return confirm('Apakah Anda yakin untuk menghapus ujian ini {{ $i->title }} ?')"><i class="far fa-trash-alt text-danger mr-10 cursor-pointer"></i></button>
+                                <button class="btn" type="submit"><i class="far fa-trash-alt text-danger mr-10 cursor-pointer"></i></button>
                             </form>
                         @endcan
                         @can('viewStudent', App\Models\Exam::class)
@@ -169,18 +169,70 @@
             @endforeach
         </tbody>
     </table>
+
+    <script>
+        function deleteExamBtn(e){
+            e.preventDefault();
+            var form = document.getElementById("delteForm")
+            Swal.fire({
+                    title: `Hapus Ujain`,
+                    text: "Apakah Anda Yakin ingin menghapus Ujian ini?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya',
+                    cancelButtonText: 'Tidak',
+            })
+            .then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        
+        }
+    </script>
     
     @can('viewTeacher', App\Models\Exam::class )
     
     <div>
     
-        <div class="accordion-item">
-            <h2 class="accordion-header" >
-                <button class="accordion-button collapsed accordion-button-none" type="button" onclick="openEditSession()" >
-                    <span class="color-hijau-tua fw-bolder d-flex" style="height: 20px;"><i class="far fa-plus-square" style="margin-top: 3px; margin-right: 10px;"></i> <p>Tambah Ujian</p></span>
-                </button>
-            </h2>
-        </div>
+        @if(request()->input('class_id') && request()->input('course_id'))
+        
+
+            <div class="accordion-item">
+                <h2 class="accordion-header" >
+                    <button class="accordion-button collapsed accordion-button-none" type="button" onclick="openEditSession()" >
+                        <span class="color-hijau-tua fw-bolder d-flex" style="height: 20px;"><i class="far fa-plus-square" style="margin-top: 3px; margin-right: 10px;"></i> <p>Tambah Ujian</p></span>
+                    </button>
+                </h2>
+            </div>
+        @else    
+
+            
+
+            <div class="accordion-item bg-grey">
+                <h2 class="accordion-header" >
+                    <button class="accordion-button collapsed accordion-button-none bg-grey" type="button" >
+                        <span class="color-hijau-tua fw-bolder d-flex" style="height: 20px;"><i class="far fa-plus-square" style="margin-top: 3px; margin-right: 10px;"></i> <p>Tambah Ujian</p></span>
+                    </button>
+                </h2>
+                <div class="ml-20 mb-10">
+
+                    @if(request()->input('class_id'))
+                        {{-- <div>Ujian akan dibuat untuk kelas <strong>{{$class->find(request()->input('class_id'))->name}}</strong></div> --}}
+                    @else    
+                        <div class="text-danger">Kelas Belum Dipilih(tolong pilih salah satu kelas melelui filter dibagian atas)</div>
+                    @endif
+    
+                    @if(request()->input('course_id'))
+                        <div>Mata pelajaran ujian yang dibuat yaitu <strong>{{$course->find(request()->input('course_id'))->name}}</strong></div>
+                    @else    
+                        <div class="text-danger">Dan Mata Pelajaran Belum Dipilih(tolong pilih salah satu pelarajaran melelui filter dibagian atas)</div>
+                    @endif
+                </div>
+            </div>
+
+        @endif
+
     
     </div>
     
@@ -188,25 +240,25 @@
         <form class="py-4" action="/exams/createExam?type={{$exType}}&class_id={{request()->input('class_id')}}&course_id={{request()->input('course_id')}}" method="post" enctype="multipart/form-data">
             @csrf
             <label for="exampleInputEmail1" class="form-label">Nama Ujian</label>
-            <input type="text" name="title" class="form-control form-input-color" id="exampleInputEmail1" aria-describedby="emailHelp">
+            <input type="text" name="title" value="{{old('title')}}" class="form-control form-input-color" id="exampleInputEmail1" aria-describedby="emailHelp">
             <br>
             <label for="exampleInputEmail1" class="form-label">Waktu Ujian</label>
             
             <div class="d-flex">
                 <div class="mr-10"> 
                     <label for="exampleInputEmail1" class="form-label">Mulai</label>
-                    <input type="datetime-local" name="startDate" class="datetimepicker form-control form-input-color" id="deadline" required>
+                    <input type="datetime-local" value="{{old('startDate')}}" name="startDate" class="datetimepicker form-control form-input-color" id="deadline" required>
                 </div>
                 <div>
                 <label for="exampleInputEmail1" class="form-label">Berakhir</label>
-                    <input type="datetime-local" name="deadline" class="datetimepicker form-control form-input-color" id="deadline" required>
+                    <input type="datetime-local" value="{{old('deadline')}}" name="deadline" class="datetimepicker form-control form-input-color" id="deadline" required>
                 </div>
             </div>
     
             <br>
             
             <br>
-            <input type="file" name="file_upload" class="form-control"><br>
+            <input type="file" name="file_upload" value="{{old('file_upload')}}" class="form-control"><br>
     
             @if(request()->input('class_id') && request()->input('course_id'))
     
@@ -228,13 +280,13 @@
                 @if(request()->input('class_id'))
                     <div>Ujian akan dibuat untuk kelas <strong>{{$class->find(request()->input('class_id'))->name}}</strong></div>
                 @else    
-                    <div>Kelas Belum Dipilih(tolong pilih salah satu kelas melelui filter dibagian atas)</div>
+                    <div class="text-danger">Kelas Belum Dipilih(tolong pilih salah satu kelas melelui filter dibagian atas)</div>
                 @endif
     
                 @if(request()->input('course_id'))
                     <div>Mata pelajaran ujian yang dibuat yaitu <strong>{{$course->find(request()->input('course_id'))->name}}</strong></div>
                 @else    
-                    <div>Mata Pelajaran Belum Dipilih(tolong pilih salah satu pelarajaran melelui filter dibagian atas)</div>
+                    <div class="text-danger">Mata Pelajaran Belum Dipilih(tolong pilih salah satu pelarajaran melelui filter dibagian atas)</div>
                 @endif
     
                 <button class="btn bg-hijau-tua text-white form-control rounded-pill disabled mt-20">Unggah Ujian</button>
