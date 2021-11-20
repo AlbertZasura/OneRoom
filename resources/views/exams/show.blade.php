@@ -175,7 +175,7 @@
             e.preventDefault();
             var form = document.getElementById("delteForm")
             Swal.fire({
-                    title: `Hapus Ujain`,
+                    title: `Hapus Ujian`,
                     text: "Apakah Anda Yakin ingin menghapus Ujian ini?",
                     icon: "warning",
                     showCancelButton: true,
