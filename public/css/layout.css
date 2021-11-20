@@ -504,4 +504,7 @@ body{
     .mobile-ml-0{
         margin-left: 0 !important;
     }
+    .mobile-mt-50{
+        margin-top: 50px !important;
+    }
 }
