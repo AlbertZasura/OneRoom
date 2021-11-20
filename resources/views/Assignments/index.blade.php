@@ -61,12 +61,12 @@
                                     </form>
                                 @endcan
                                 @can('upload', App\Models\Assignment::class)
-                                    @php($userAssignment = $assignment->users()->where('users.id', Auth::user()->id)->latest()->first())
-                                    @if (now()->lt($assignment->deadline) && empty($userAssignment))
+                                    @if (now()->lt($assignment->deadline))
                                         <a data-bs-toggle="modal" data-bs-target="#uploadAssignments{{ $assignment->id }}"
                                             class="btn"><i class='fs-25 fa fa-upload '></i></a>
                                         @include('assignments._upload')
-                                    @else
+                                    @elseif (now()->gte($assignment->deadline))
+                                        @php($userAssignment = $assignment->users()->where('users.id', Auth::user()->id)->latest()->first())
                                         @if (!empty($userAssignment) && !is_null($userAssignment->pivot->score))
                                             <h1 class="btn fs-25 {{($assignment->kkm() > $userAssignment->pivot->score) ? 'text-danger' : 'text-success'}}"> {{ $userAssignment->pivot->score }} </h1>
                                         @else
