@@ -242,16 +242,16 @@
             // setCookie('windowLocation',window.location.href,1)
         }
 
-        $(document).ready(function(){
-            let cookie = getCookie('isOpenMenu');
-            var x = location.hash;
-            console.log('cookie ', cookie)
-            if(cookie == 'true'){
-                $("#cardMenu").animate({right: '100%'})
-                $("#cardMenu2").animate({left: '0'})
-                openCardMenu();
-            }
-        });
+        // $(document).ready(function(){
+        //     let cookie = getCookie('isOpenMenu');
+        //     var x = location.hash;
+        //     console.log('cookie ', cookie)
+        //     if(cookie == 'true'){
+        //         $("#cardMenu").animate({right: '100%'})
+        //         $("#cardMenu2").animate({left: '0'})
+        //         openCardMenu();
+        //     }
+        // });
 
         $(document).ready(function(){
             var location = getCookie('windowLocation')

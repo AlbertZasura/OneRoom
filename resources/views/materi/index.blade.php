@@ -45,12 +45,20 @@
             @endcan
         </div>
         <div id="cardMenu2" class="mobile-ml-0 mobile-card-menu2 mobile-w-100 ml-20 w-85">
-            
+        
             @yield('mainContent')
 
         </div>
 
     </div>
 
+    <script>
+        @if(Request::is('courses/*') || Request::is('teacherCourse*'))
+            $(document).ready(function(){
+                $("#cardMenu").animate({right: '100%'})
+                $("#cardMenu2").animate({left: '0'})
+            });
+        @endif
+    </script>
    
 @stop
