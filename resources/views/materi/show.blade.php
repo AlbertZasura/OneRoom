@@ -2,6 +2,7 @@
 @section('title', 'Materi | OneRoom')
 @section('mainContent')
 
+@can('viewTeacher', App\Models\Course::class)
 <div class=" card-shadow bg-white p-3 border-radius-8px">
     <div class="show-on-mobile">
         <div class="d-flex a-center mobile-mb-20">
@@ -9,7 +10,6 @@
             <h1 class="mobile-mb-0">Materi</h1>
         </div>
     </div>
-    @can('viewTeacher', App\Models\Course::class)
         <select id="courseSelect" class="form-select mb-3" aria-label="Default select example" onchange="chooseSession(); openCardMenu()">
             @foreach($course_teacher as $course_teachers)
                 <option value="{{$course_teachers->id}}" {{ isset($selected_course) ? $selected_course->id == $course_teachers->id ? 'selected' : '' : ''}} >{{$course_teachers->name}}</option>
@@ -85,20 +85,27 @@
                     }
                 </script>
         
-    @endcan
-
-</div>
+        
+    </div>
+@endcan
 
 
 @can ('viewStudent', App\Models\Course::class)
 
+<div class="card-shadow bg-white p-3 border-radius-8px">
+    <div class="show-on-mobile">
+        <div class="d-flex a-center mobile-mb-20">
+            <i class="fas fa-arrow-left mr-10 fs-20" onclick="window.history.go(-1); return false; closeCardMenu()"></i>
+            <h1 class="mobile-mb-0">Materi</h1>
+        </div>
+    </div>
     <div class="d-flex">
         <h2>{{$cls->first()->name}}</h2>
         <h2 class="mx-3">{{$selectedCourse->name}}</h2>
     </div>
-
+    
     @if(isset($ses))
-
+    
         @foreach($ses as $item)
             
             <div class="mb-10">
@@ -128,7 +135,7 @@
                         </button>
                     </h2>
                 </div>
-
+    
             </div>
             <div class="d-none" id="formEditSession">
                 <form action="/session" method="post" enctype="multipart/form-data">
@@ -143,12 +150,14 @@
                     <input type="text" name="coId" value="{{$courseId}}" class="d-none">
                     <button type="submit" onclick="; closeCardMenu()" class="btn btn-dark form-control">Upload Now</button>
                 </form>
-
+    
             </div>
         @endcan
     @else
-        <span>No Data</span>
+        <span>Tidak ada Materi yang tersedia</span>
     @endif
+</div>
+
 
 @endcan
 
