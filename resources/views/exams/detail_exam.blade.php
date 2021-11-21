@@ -16,27 +16,31 @@
             </div>
         @endif
         <div class="card" >
-            <div class="d-grid d-md-flex align-items-center p-3">
+            <div class="d-lg-grid d-lg-flex align-items-center p-3">
+                <div class="d-flex me-auto justify-content-center">
                 <i class='fs-25 fa fa-file-signature me-2'></i>
-                <nav style="--bs-breadcrumb-divider: '>';" class="me-auto" aria-label="breadcrumb">
-                    <ol class="breadcrumb m-0">
-                        <li class="breadcrumb-item"><a href="{{route('exlist',$exam->type)}}">{{$exam->courses->name}}</a></li>
-                        <li class="breadcrumb-item"><a href="{{route('exlist',$exam->type)}}">{{$exam->class->name}}</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">{{$exam->title}}</li>
-                    </ol>
-                </nav>
-                <p class="ms-auto {{(now()->gte($exam->end_date)) ? "text-danger" : "text-success"}}">{{$exam->end_date}}</p>
-                <a href="{{route('downloadexams', $exam->id)}}" class="btn ms-auto"><i class='fs-25 fa fa-download'></i></a>
-                <form action="{{ route('exams.destroy',[$exam]) }}" method="POST">   
-                    @csrf
-                    @method('DELETE')      
-                    <button class="btn" type="submit" onclick="return confirm('Apakah Anda yakin untuk menghapus tugas {{ $exam->title }} ?')"><i class='fs-25 fa fa-trash text-danger'></i></button>
-                </form>
-                <p class="m-1">{{$exam->users->count()}} / {{count($exam->class->first()->users->where('role','like','student'))}}</p>
+                    <nav style="--bs-breadcrumb-divider: '>';" class="me-auto" aria-label="breadcrumb">
+                        <ol class="breadcrumb m-0">
+                            <li class="breadcrumb-item"><a href="{{route('exlist',$exam->type)}}">{{$exam->courses->name}}</a></li>
+                            <li class="breadcrumb-item"><a href="{{route('exlist',$exam->type)}}">{{$exam->class->name}}</a></li>
+                            <li class="breadcrumb-item active" aria-current="page">{{$exam->title}}</li>
+                        </ol>
+                    </nav>
+                </div>
+                <p class="my-2 text-center {{(now()->gte($exam->end_date)) ? "text-danger" : "text-success"}}">{{$exam->end_date}}</p>
+                <div class="d-flex ms-auto justify-content-center">
+                    <a href="{{route('downloadexams', $exam->id)}}" class="btn"><i class='fs-25 fa fa-download'></i></a>
+                    <form action="{{ route('exams.destroy',[$exam]) }}" method="POST">   
+                        @csrf
+                        @method('DELETE')      
+                        <button class="btn" type="submit" onclick="return confirm('Apakah Anda yakin untuk menghapus tugas {{ $exam->title }} ?')"><i class='fs-25 fa fa-trash text-danger'></i></button>
+                    </form>
+                    <p class="m-1">{{$exam->users->count()}} / {{count($exam->class->first()->users->where('role','like','student'))}}</p>
+                </div>
             </div>
         </div>
-        <div class="py-3">
-            <a href="{{ route('exams.export',$exam_id) }}" class="btn btn-primary rounded-pill">Export Excel</a>
+        <div class="d-grid d-md-flex align-items-center p-3 justify-content-center">
+            <a href="{{ route('exams.export',$exam_id) }}" class="ms-auto btn btn-fill-green rounded-pill">Export Excel</a>
         </div>
 
         <div class="table-responsive">

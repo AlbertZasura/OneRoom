@@ -1,7 +1,7 @@
 @extends('Layout.SidePanel')
 @section('title', 'Pengumuman  | OneRoom')
 @section('content')
-<div class="card-shadow bg-white m-lg-5 border-radius-8px " >
+<div class="card-shadow bg-white m-lg-5 border-radius-8px" >
     <div class="card-body p-5">
     <h1>Pengumuman</h1>
     <br>
@@ -48,7 +48,7 @@
 
     <br>
     
-    <div class="card" style="width: 60%; height: 50%;">
+    <div class="card mobile-w-100" style="width: 60%; height: 50%;">
         <div class="card-body">
             <h6>Isi :</h6>
             <a> {{ $message->content }}</a>

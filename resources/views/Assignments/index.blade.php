@@ -51,47 +51,64 @@
                         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                     </div>
                 @endcan
-                <div class="row g-2">
-                    @foreach ($assignments as $assignment)
-                        <div class="card p-3">
-                            <div class="d-grid d-md-flex align-items-center">
-                                <i class='fs-25 fa fa-file-signature me-2'></i>
-                                <h5 class="card-title me-auto">{{ $assignment->title }}</h5>
-                                <h6 class="card-title ms-auto {{ now()->gte($assignment->deadline) ? 'text-danger' : 'text-success' }}"> Deadline {{ $assignment->deadline }}</h6>
-                                <a href="{{ route('assignments.download', $assignment->id) }}?type=question" class="btn ms-auto"><i class='fs-25 fa fa-download'></i></a>
-                                @can('delete', $assignment)
-                                    <form action="{{ route('course.assignments.destroy', [$course, $assignment]) }}" method="POST">
-                                        @csrf
-                                        @method('DELETE')
-                                        <button class="btn" type="submit" onclick="return confirm('Apakah Anda yakin untuk menghapus tugas {{ $assignment->title }}?')"><i class='fs-25 fa fa-trash text-danger'></i></button>
-                                    </form>
-                                @endcan
-                                @can('upload', App\Models\Assignment::class)
-                                    @php($userAssignment = $assignment->users()->where('users.id', Auth::user()->id)->latest()->first())
-                                    <a data-bs-toggle="modal" data-bs-target="#assignments{{ $assignment->id }}History" class="btn"><i class='fs-25 fas fa-history'></i></a>
-                                    @include('assignments._history')
-                                    @if (now()->lt($assignment->deadline))
-                                        <a data-bs-toggle="modal" data-bs-target="#uploadAssignments{{ $assignment->id }}"
-                                            class="btn"><i class='fs-25 fa fa-upload '></i></a>
-                                        @include('assignments._upload')
-                                    @elseif (now()->gte($assignment->deadline))
-                                        @if (!empty($userAssignment) && !is_null($userAssignment->pivot->score))
-                                            <h1 class="btn m-0 fs-25 {{($assignment->kkm() > $userAssignment->pivot->score) ? 'text-danger' : 'text-success'}}"> {{ $userAssignment->pivot->score }} </h1>
-                                        @else
-                                            <h1 class="btn fs-25 text-danger m-0">- </h1>
-                                        @endif
-                                    @endif
-                                    
-                                @endcan
-                                @can('view', $assignment)
-                                    <a href="{{ route('course.assignments.show', [$course, $assignment]) }}"class="m-1 btn">
-                                        {{ $assignment->users->count() }} / {{ $assignment->class->students->count() }}
-                                    </a>
-                                @endcan
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
+                   
+                    <div class="table-responsive-lg">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Nama Tugas</th>
+                                    <th scope="col">Tenggat waktu</th>
+                                    <th scope="col">Aksi</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            @foreach ($assignments as $assignment)
+                                <tr>
+                                    <td>
+                                        <h5 class="card-title me-auto">{{ $assignment->title }}</h5>
+                                    </td>
+                                    <td>
+                                        <h6 class="card-title ms-auto {{ now()->gte($assignment->deadline) ? 'text-danger' : 'text-success' }}"> Deadline {{ $assignment->deadline }}</h6>
+                                    </td>
+                                    <td>
+                                        <div class="d-flex a-center">
+                                            <a href="{{ route('assignments.download', $assignment->id) }}?type=question" class="btn ms-auto"><i class='fs-25 fa fa-download'></i></a>
+                                            @can('delete', $assignment)
+                                                <form action="{{ route('course.assignments.destroy', [$course, $assignment]) }}" method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn" type="submit" onclick="return confirm('Apakah Anda yakin untuk menghapus tugas {{ $assignment->title }}?')"><i class='fs-25 fa fa-trash text-danger'></i></button>
+                                                </form>
+                                            @endcan
+                                            @can('upload', App\Models\Assignment::class)
+                                            @php($userAssignment = $assignment->users()->where('users.id', Auth::user()->id)->latest()->first())
+                                            <a data-bs-toggle="modal" data-bs-target="#assignments{{ $assignment->id }}History" class="btn"><i class='fs-25 fas fa-history'></i></a>
+                                            @include('assignments._history')
+                                            @if (now()->lt($assignment->deadline))
+                                                <a data-bs-toggle="modal" data-bs-target="#uploadAssignments{{ $assignment->id }}"
+                                                    class="btn"><i class='fs-25 fa fa-upload '></i></a>
+                                                @include('assignments._upload')
+                                            @elseif (now()->gte($assignment->deadline))
+                                                @if (!empty($userAssignment) && !is_null($userAssignment->pivot->score))
+                                                    <h1 class="btn m-0 fs-25 {{($assignment->kkm() > $userAssignment->pivot->score) ? 'text-danger' : 'text-success'}}"> {{ $userAssignment->pivot->score }} </h1>
+                                                @else
+                                                    <h1 class="btn fs-25 text-danger m-0">- </h1>
+                                                @endif
+                                            @endif
+                                            
+                                            @endcan
+                                            @can('view', $assignment)
+                                                <a href="{{ route('course.assignments.show', [$course, $assignment]) }}"class="m-1 btn">
+                                                    {{ $assignment->users->count() }} / {{ $assignment->class->students->count() }}
+                                                </a>
+                                            @endcan
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
+                            </tbody>
+                        </table>
+                    </div>                  
             @else
                 <h3 class="text-center">Tidak ada Tugas</h3>
             @endif
