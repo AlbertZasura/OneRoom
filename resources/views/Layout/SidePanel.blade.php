@@ -235,17 +235,17 @@
 
         function closeCardMenu(){
             setCookie('isOpenMenu','false',1);
-            setCookie('windowLocation',window.location.href,1)
         }
 
         function openCardMenu(){
             setCookie('isOpenMenu','true',0);
-            setCookie('windowLocation',window.location.href,1)
+            // setCookie('windowLocation',window.location.href,1)
         }
 
         $(document).ready(function(){
             let cookie = getCookie('isOpenMenu');
             var x = location.hash;
+            console.log('cookie ', cookie)
             if(cookie == 'true'){
                 $("#cardMenu").animate({right: '100%'})
                 $("#cardMenu2").animate({left: '0'})
@@ -255,8 +255,11 @@
 
         $(document).ready(function(){
             var location = getCookie('windowLocation')
+            console.log("location = ", location);
+            console.log("window.location.href = ", window.location.href);
             if(location != window.location.href){
-                closeCardMenu()
+                setCookie('isOpenMenu','false',1);
+                setCookie('windowLocation',window.location.href,1)
             }
         });
 
