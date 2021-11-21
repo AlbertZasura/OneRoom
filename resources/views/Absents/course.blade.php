@@ -10,7 +10,7 @@
             <h1 class="show-on-mobile">Absen</h1>
             @can('viewAny', App\Models\Absent::class )
                 @foreach ($courses as $c )
-                <div class="card {{ ($c->id===request('course_id')) ? " color-hijau-tua"  : "bg-hijau-tua text-white" }} mb-3">
+                <div class="card {{ (isset($course) && $c->id===$course->id) ? " color-hijau-tua"  : "bg-hijau-tua text-white" }} mb-3">
                     <div class="card-body">
                         <div class="text-capitalize fs-16">{{$c->name}}</div>
                         <a href="{{route('course.absents.index',$c)}}" class="stretched-link"></a>

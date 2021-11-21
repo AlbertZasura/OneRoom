@@ -69,6 +69,7 @@ class AbsentController extends Controller
         }
 
         return view('absents.index', [
+            'course'=> $course,
             'courses' => $courses,
             'schedules'=> $schedules->get()
         ]);
