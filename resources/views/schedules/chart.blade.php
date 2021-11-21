@@ -17,14 +17,16 @@
             @endforeach
         </div>
         <div class="ml-20 w-85">
-           <div class="card-shadow bg-white m-lg-5 border-radius-8px">
+           <div class="card bg-white m-lg-5 border-radius-8px">
                <div class="card-body">
                 @foreach ($schedules_group as $sch)
                     @include('schedules._show')
                 @endforeach
-                <div id='wrap' class="container">
-                    <div id='calendar'></div>
-                    <div style='clear:both'></div>
+                <div class="col-md-12">
+                    <div id='wrap' class="container">
+                        <div id='calendar'></div>
+                        <div style='clear:both'></div>
+                    </div>
                 </div>
                </div>
            </div>
