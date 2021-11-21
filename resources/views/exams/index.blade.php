@@ -4,10 +4,10 @@
 
 @section('content')
 
-    <h1>Ujian</h1>
+    <h1 class="show-on-dekstop">Ujian</h1>
 
-    <div class="d-flex">
-        <div class="w-200px">
+    <div class="d-flex mobile-overflow-hidden mobile-w-100">
+        <div id="cardMenu" class="mobile-card-menu mobile-w-100 w-200px">
             @can('viewStudent', App\Models\Exam::class)
                 @foreach($examType as $item)
                 
@@ -40,5 +40,15 @@
         @yield('mainContent')
 
     </div>
+
+    <script>
+        @if(Request::is('exams/*'))
+            $(document).ready(function(){
+                $("#cardMenu").animate({right: '100%'})
+                $("#cardMenu2").animate({left: '0'})
+            });
+        @endif
+    </script>
+
 
 @stop
