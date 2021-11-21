@@ -269,8 +269,6 @@
 
         $(document).ready(function(){
             var location = getCookie('windowLocation')
-            console.log("location = ", location);
-            console.log("window.location.href = ", window.location.href);
             if(location != window.location.href){
                 setCookie('isOpenMenu','false',1);
                 setCookie('windowLocation',window.location.href,1)
