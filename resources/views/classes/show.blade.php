@@ -5,6 +5,12 @@
 
 @section('show')
     <div class="card-shadow bg-white rounded-3">
+        <div class="show-on-mobile">
+            <div class="d-flex a-center px-20px pt-20">
+                <i class="fas fa-arrow-left mr-10 fs-20" onclick="window.history.go(-1); return false;"></i>
+                <h1 class="mobile-mb-0">Kelas</h1>
+            </div>
+        </div>
         <div class="card-body">
             <div class="d-flex align-items-center">
                 @can('delete', $class )
