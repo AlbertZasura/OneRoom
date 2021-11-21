@@ -3,8 +3,8 @@
 @section('title', 'Jadwal | OneRoom')
 
 @section('content')
-    <div class="card-shadow bg-white  m-lg-5 border-radius-8px">
-        <div class="card-body">
+    <div class="card-shadow bg-white m-lg-5 border-radius-8px">
+        <div class="card-body p-lg-5">
             <h1>Jadwal</h1>
             <br>
             <div class="row mb-3">

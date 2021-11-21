@@ -17,7 +17,7 @@ class ScheduleController extends Controller
      */
     public function schedulesChart(){
         $this->authorize('schedulesChart', App\Models\Schedule::class);
-        $schedules = Schedule::whereIn('class_id',Auth::user()->classes->pluck('id'));
+        $schedules = Schedule::with(['course','class'])->whereIn('class_id',Auth::user()->classes->pluck('id'));
         return view('schedules.chart', [
             'schedules' => $schedules->get(),
             'schedules_group' => $schedules->get()->groupBy('date'),
@@ -35,7 +35,7 @@ class ScheduleController extends Controller
      public function index(Classes $class)
     {
         $this->authorize('viewAny', App\Models\Schedule::class);
-        $schedules = Schedule::where('class_id',$class->id)->filter(request(['course','weekday']))->orderBy('date')->get();
+        $schedules = Schedule::with('course')->where('class_id',$class->id)->filter(request(['course','weekday']))->orderBy('date')->get();
         return view('schedules.index', [
             'schedules' => $schedules,
             'class' => $class

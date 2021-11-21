@@ -4,6 +4,12 @@
 
 @section('show')
     <div class="card-shadow bg-white m-lg-5 border-radius-8px">
+        <div class="show-on-mobile">
+            <div class="d-flex a-center px-20px pt-20">
+                <i class="fas fa-arrow-left mr-10 fs-20" onclick="window.history.go(-1); return false;"></i>
+                <h1 class="mobile-mb-0">Absent</h1>
+            </div>
+        </div>
         <div class="card-body">
             <h3>Daftar Pertemuan</h3>
             <div class="table-responsive">

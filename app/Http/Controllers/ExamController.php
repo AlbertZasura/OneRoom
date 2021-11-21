@@ -116,15 +116,7 @@ class ExamController extends Controller
 
         $user = User::find(Auth::id());
 
-        // dd($user->examsId($id));
-
         $exam = Exam::find($id);
-
-        // $user->examsId(request()->input('pivotId'));
-
-        // dd($exam->usersExams($user->id));
-        // $exam_file = $exam->usersExams($user->id)->first()->pivot;
-        
        
         $file_path = public_path('storage/file/'.$exam->file);
         return response()->download($file_path);
@@ -182,21 +174,8 @@ class ExamController extends Controller
     //guru
     public function assignExamScore(Request $request, $id, Exam $exam){
         $this->authorize('update', $exam);
-
-        // dd(request()->input('pivotId'));
-        // $exam_id
-        // dd(request()->input('e'));
         $user = User::find($id);
-        // dd($user->exams()->first()->pivot);
-        // $user->exams()->attach($request->e, ['score' => $request->score]);
         $user->examsId(request()->input('pivotId'))->updateExistingPivot($request->e, ['score' => $request->score]);
-
-
-
-        // dd($id);
-        // $exam_user = Exam::find($id);
-        // dd($exam_user->users);
-        // $exam_user->users->attach($user_id, ['score' => $request->score]);
 
         
         return redirect()->route('examsubmitlist', $request->e)->with('success','Score successfully created.');    
@@ -211,7 +190,6 @@ class ExamController extends Controller
 
         $t = $exam_user->users()->paginate(25);;
 
-        // dd($exam_user->users);
         return view('exams.detail_exam', [
             'userList' => $t, 'exam_id' => $exam_id, 'exam' => $exam_user
         ]);
@@ -252,9 +230,6 @@ class ExamController extends Controller
 
             $last_exam = Exam::latest('created_at')->first();
 
-            // $last_exam->courses()->attach(request()->input('course_id'));
-
-    
             return redirect()->route('exams.index')->with('success','Ujian Berhasil Dibuat.');
 
         }else{
@@ -299,10 +274,8 @@ class ExamController extends Controller
 
         if(Auth::user()->role == 'teacher'){
 
-            // $course = Course::all();
             $course = Auth::user()->usersCorses->unique();
             
-            // $class = Classes::all();
             $class = Auth::user()->usersClasses->unique();
     
 
@@ -318,22 +291,14 @@ class ExamController extends Controller
             
             if(request()->input('course_id')){
                 $class = $course->find(request()->input('course_id'))->classes;
-                // dd($class);
-                // if($c->exams != null){
+                
                     $exam = Exam::where('type','like', $type)->where('course_id', 'like', request()->input('course_id'))->get();
-                // }else{
-                //     $exam = [];
-                // }
             }
             
             if(request()->input('course_id') && request()->input('class_id')){
-                // if($c->exams != null){
                     $exam = Exam::where('type','like', $type)
                     ->where('class_id', 'like', request()->input('class_id'))
                     ->where('course_id', 'like', request()->input('course_id'))->get();
-                // }else{
-                //     $exam = [];
-                // }
             }
             
             
@@ -356,7 +321,6 @@ class ExamController extends Controller
 
         }else{
 
-            // dd(Auth::user()->classes->first()->id);
             $exam = Exam::where('type','like', $type)->where('class_id', 'like', Auth::user()->classes->first()->id)->get();
     
             $ex = Exam::where('type','like', $type)->first();
@@ -365,22 +329,16 @@ class ExamController extends Controller
             $student_class = Auth::user()->classes->first();
             
             if(request()->input('course_id')){
-                // $exam = $c->exams->where('type','like', $type);
                 $exam = Exam::where('type','like', $type)
                 ->where('class_id', 'like', $student_class->id)
                 ->where('course_id', 'like', request()->input('course_id'))->get();
             }
             
-            // if(request()->input('course_id') && request()->input('class_id')){
-            //     $exam = $c->exams->where('type','like', $type)->where('class_id', 'like', request()->input('class_id'));
-            // }
             
             
-            // $course = Course::all();
             $course = Auth::user()->classes->first()->courses->unique();
             
             $class = Classes::all();
-            // $class = Auth::user()->usersClasses->unique();
             $student_exam = Exam::where('class_id','like',$student_class->id)->get();
             $exType = $type;
 
@@ -390,7 +348,6 @@ class ExamController extends Controller
                             ->groupBy('type')
                             ->get();
             
-            // dd($exam_type);
             return view('exams.show', [
                 'exam' => $exam,
                 'examType' => $exam_type,

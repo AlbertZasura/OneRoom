@@ -16,7 +16,7 @@
             
             @can ('viewStudent', App\Models\Course::class)
                 @foreach($course as $i)
-                    <div class="cursor-pointer card-shadow card-box mb-2 {{ request()->input('class_id') != '' ? request()->input('class_id') == $i->id ? 'active' : ''  : '' }}" onclick="window.location='{{route('courses.show',$i->id)}}'; openCardMenu()">
+                    <div class="cursor-pointer card-shadow card-box mb-2 {{ isset($courseId) ? $courseId == $i->id ? 'active' : ''  : '' }}" onclick="window.location='{{route('courses.show',$i->id)}}'; openCardMenu()">
                         <div>{{$i->name}}</div>
                         <div class="text-right">{{$i->sessionClasses(Auth::user()->classes->first()->id)->count()}} Materi</div>
                     </div>

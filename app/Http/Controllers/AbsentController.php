@@ -24,7 +24,7 @@ class AbsentController extends Controller
     public function absentGrid(){
         $this->authorize('absentGrid', Absent::class);
         $classes = Auth::user()->classes;
-        $schedules = Schedule::whereIn('class_id',Auth::user()->classes->pluck('id'))->filter(request(['class']));
+        $schedules = Schedule::with('course')->whereIn('class_id',Auth::user()->classes->pluck('id'))->filter(request(['class']));
         return view('absents.grid', [
             'schedules' => $schedules->get(),
             'classes' => $classes
@@ -69,6 +69,7 @@ class AbsentController extends Controller
         }
 
         return view('absents.index', [
+            'course'=> $course,
             'courses' => $courses,
             'schedules'=> $schedules->get()
         ]);

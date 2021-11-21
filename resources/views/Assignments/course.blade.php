@@ -7,11 +7,11 @@
     <div class="d-flex mobile-overflow-hidden mobile-w-100">
         <div id="cardMenu" class="mobile-card-menu mobile-w-100 w-200px">
             @foreach ($courses as $c )
-            <div class="card {{ (isset($course) && $course->id===$c->id) ? "bg-biru-muda color-hijau-tua"  : "bg-hijau-tua text-white" }} mb-3">
+            <div class="card {{ (isset($course) && $course->id===$c->id) ? " color-hijau-tua"  : "bg-hijau-tua text-white" }} mb-3">
                 <div class="card-body">
-                    <h5 class="card-title">{{$c->name}}</h5>
+                    <div class="text-capitalize fs-16">{{$c->name}}</div>
                     <a href="{{route('course.assignments.index',$c)}}" class="stretched-link"></a>
-                    <p class="card-text text-end"><small> {{$c->classAssignments(Auth::user()->classes->pluck('id'))->count()}} Tugas</small></p>
+                    <p class="card-text text-end fs-14 mt-2"><small> {{$c->classAssignments(Auth::user()->classes->pluck('id'))->count()}} Tugas</small></p>
                 </div>
             </div>
             @endforeach

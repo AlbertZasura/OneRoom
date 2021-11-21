@@ -11,7 +11,7 @@
     <!-- <h1>Mapping Mata Pelajaran</h1> -->
 
     <div class="row">
-        <div class="col">
+        <div class="col mobile-col-none mobile-w-100">
             <div class="text-center fw-bold fs-20 mb-3">Mata Pelajaran</div>
             
             <div class="box-course-create scroll-y custom-scroll-y" style="height: 600px;">
@@ -66,7 +66,7 @@
             </div>
         </div>
     
-        <div class="col">
+        <div class="col mobile-col-none mobile-w-100">
             <div class="text-center fw-bold fs-20 mb-3">Guru</div>
             <div class="box-course-create scroll-y custom-scroll-y" style="height: 600px;">
                 @foreach($teacher as $teachers)
@@ -78,12 +78,22 @@
             </div>
         </div>
     
-        <div class="col">
+        <div class="col mobile-col-none mobile-w-100">
             <div class="text-center fw-bold fs-20 mb-3">Kelas</div>
             <div class="box-course-create scroll-y custom-scroll-y" style="height: 600px;">
-            @isset($selectedTeacher)
-                <div>Pilih Kelas Yang akan di ajar oleh <strong class="text-blue">{{$selectedTeacher->name}}</strong> dengan mata pelajaran <strong class="text-blue">{{$selectedCourse->name}}</strong></div>
-            @endisset
+
+            @if(request()->input('selectTeacherId') && request()->input('selectCourseId'))
+                @if(count($class) == 0)
+                    <div class="text-danger">Kelas Tidak ditemukan, mohon untuk bisa menempatkan guru di dalam kelas terlebih dahulu</div>
+                @else
+                    @isset($selectedTeacher)
+                        <div>Pilih Kelas Yang akan di ajar oleh <strong class="text-blue">{{$selectedTeacher->name}}</strong> dengan mata pelajaran <strong class="text-blue">{{$selectedCourse->name}}</strong></div>
+                    @endisset
+                @endif
+
+            @endif
+
+            
 
             @php ($flag = 0)
             
@@ -131,7 +141,7 @@
                     @endif
                 @endforeach
             @else
-                <div>Kelas Tidak Tersedia atau guru belum ditentukan penempatan kelasnya</div>
+                <div></div>
             @endif
             </div>
         </div>
