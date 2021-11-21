@@ -6,6 +6,22 @@
 
     <h1 class="show-on-dekstop">Ujian</h1>
 
+    @can('viewStudent', App\Models\Exam::class)
+
+        @if(count($examType) == 0)
+            <div class="container">
+                <div class="card-shadow bg-white border-radius-8px ">
+                    <div class="d-flex justify-content-center pt-20">
+                        <img src="{{ asset('img/Logo-OneRoom.png') }}" alt="">
+                    </div>
+                    <div class="fs-20 p-4 text-center">
+                        Tidak Ada Ujian Yang tersedia
+                    </div> 
+                </div>
+            </div>
+        @endif
+    @endcan
+
     <div class="d-flex mobile-overflow-hidden mobile-w-100">
         <div id="cardMenu" class="mobile-card-menu mobile-w-100 w-200px">
             @can('viewStudent', App\Models\Exam::class)

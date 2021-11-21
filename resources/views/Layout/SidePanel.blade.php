@@ -190,14 +190,14 @@
                         @endcan
                            
                     @endcan
-                    <div class="d-flex a-center px-20px py-1">
+                    <div class="d-flex a-center side-panel-hover px-20px py-1">
                         <div class="fs-20 w-25px">
                             <i class="fs-20 fas fa-sign-out-alt"></i>
                         </div>
                         <div class="fs-18 ml-20">
-                            <form action="/logout" method="POST">   
+                            <form id="logoutForm" action="/logout" method="POST" onsubmit="logout(event)">   
                                 @csrf
-                                <button type="submit" class="btn text-white" onclick="return confirm('Apakah Anda yakin untuk keluar?')">Keluar</button>
+                                <button type="submit" class="btn text-white">Keluar</button>
                             </form>
                         </div>
                     </div>
@@ -214,6 +214,25 @@
     @endif
 
     <script>
+
+        function logout(e){
+            e.preventDefault();
+            var form = document.getElementById("logoutForm");
+            Swal.fire({
+                    title: `Logout`,
+                    text: "Apakah Anda Yakin ingin Keluar dari OneRoom?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya',
+                    cancelButtonText: 'Tidak',
+            })
+            .then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        
+        }
 
         function showMenuMobile(){
             $('#sidePanel').animate({width: '100%'}, 0.5);
@@ -253,24 +272,11 @@
 
         function openCardMenu(){
             setCookie('isOpenMenu','true',0);
-            // setCookie('windowLocation',window.location.href,1)
         }
 
-        // $(document).ready(function(){
-        //     let cookie = getCookie('isOpenMenu');
-        //     var x = location.hash;
-        //     console.log('cookie ', cookie)
-        //     if(cookie == 'true'){
-        //         $("#cardMenu").animate({right: '100%'})
-        //         $("#cardMenu2").animate({left: '0'})
-        //         openCardMenu();
-        //     }
-        // });
 
         $(document).ready(function(){
             var location = getCookie('windowLocation')
-            console.log("location = ", location);
-            console.log("window.location.href = ", window.location.href);
             if(location != window.location.href){
                 setCookie('isOpenMenu','false',1);
                 setCookie('windowLocation',window.location.href,1)
