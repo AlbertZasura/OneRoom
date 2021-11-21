@@ -43,10 +43,10 @@
                         </td>
                         @can('create', App\Models\Message::class )
                         <td>
-                            <form action="{{  route('messages.destroy',$message->id) }}" method="POST">
+                            <form action="{{  route('messages.destroy',$message->id) }}" onsubmit="deleteAnnouncementBtn(event)" id="deleteAnouncementForm"  method="POST" >
                                 @csrf
                                 @method('DELETE')      
-                                <button class="btn" type="submit" onclick="return confirm('Apakah Anda yakin untuk menghapus pengumuman?')"><i class="fas fa-times fa-lg" style="color:red"></i></button>
+                                <button class="btn" type="submit" ><i class="fas fa-times fa-lg" style="color:red"></i></button>
                             </form>
                         </td>
                         @endcan
@@ -102,5 +102,25 @@
             window.location = $(this).data("href");
         });
     });
+
+    function deleteAnnouncementBtn(e){
+            e.preventDefault();
+            var form = document.getElementById("deleteAnouncementForm")
+            Swal.fire({
+                    title: `Hapus Pengumuman`,
+                    text: "Apakah Anda yakin untuk menghapus pengumuman?",
+                    icon: "warning",
+                    showCancelButton: true,
+                    confirmButtonText: 'Ya',
+                    cancelButtonText: 'Tidak',
+            })
+            .then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        
+    }
+
 </script>
 @stop
