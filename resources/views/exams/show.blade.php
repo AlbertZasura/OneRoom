@@ -253,7 +253,7 @@
             <br>
             <label for="exampleInputEmail1" class="form-label">Waktu Ujian</label>
             
-            <div class="d-flex">
+            <div class="d-flex flex-wrap">
                 <div class="mr-10"> 
                     <label for="exampleInputEmail1" class="form-label">Mulai</label>
                     <input type="datetime-local" value="{{old('startDate')}}" name="startDate" class="datetimepicker form-control form-input-color" id="deadline" required>
