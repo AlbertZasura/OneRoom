@@ -152,6 +152,8 @@ class ExamController extends Controller
     public function submitExams(Request $request){
         $this->authorize('submitExam', App\Models\Exam::class);
 
+        $exam = Exam::find($request->e);
+
         $request->validate([
             'file_upload' => 'required|file|max:10000', // max 10MB
         ]);
@@ -160,22 +162,15 @@ class ExamController extends Controller
         $DateFormat = Carbon::parse($todayDate)->format('Y-m-d');
         $TimeFormat = Carbon::parse($todayDate)->format('H-i-s');
         $user = User::find(Auth::user()->id);
-        // dd($user->id);
-        // dd($user->exams());
         $file = $request->file('file_upload');
         $fileName =  Auth::id()."_".$DateFormat."_".$TimeFormat."_".$file->getClientOriginalName();
         if($request->file('file_upload')){
             $file->storeAs('public/file', $fileName);
-            $user->exams()->attach($request->e, ['file' => $fileName, 'notes' => $request->notes]);
-
-            // Session::create([
-            //     'title' => $request->title,
-            //     'description' => $request->description,
-            //     'file' => $fileName,
-            //     'user_id' =>Auth::id(),
-            //     'course_id' => $request->coId
-            // ]);
-    
+            if($exam->users()->where('users.id', Auth::user()->id)->get()->isEmpty()){
+                $user->exams()->attach($request->e, ['file' => $fileName, 'notes' => $request->notes]);
+            }else{
+                $exam->users()->updateExistingPivot(Auth::user()->id, ['file' => $fileName, 'notes' => $request->notes]);
+            }
             return redirect()->route('exams.index')->with('success','exams created successfully.');
 
         }else{

@@ -115,6 +115,8 @@
                                 @if(now()->lte($i->end_date))
                                     <i class="fas fa-upload cursor-pointer" data-bs-toggle="modal" data-bs-target="#exampleModal{{$i->id}}"></i>
                                 @endif
+                                <a data-bs-toggle="modal" data-bs-target="#exams{{ $i->id }}History" class="btn"><i class='fs-25 fas fa-history'></i></a>
+                                @include('exams._history')
                             @endcan
                         </div>
                         
