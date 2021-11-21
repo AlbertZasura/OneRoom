@@ -97,7 +97,7 @@ class AssignmentController extends Controller
         Assignment::create([
                 'title' => $request->title,
                 'deadline' => Carbon::parse($request->deadline)->format('Y-m-d H:i:s'),
-                'file' => 'app/public/file/'.$fileName,
+                'file' => $fileName,
                 'user_id' =>Auth::id(),
                 'course_id' => $course->id,
                 'class_id' => $request->class
@@ -167,9 +167,9 @@ class AssignmentController extends Controller
         $user=request()->input('u');
         $time=request()->input('t');
         if ($type==='answer') {
-            $pathToFile = storage_path($assignment->usersFile($time)->first()->pivot->file);
+            $pathToFile = storage_path('app\public\file\\'.$assignment->usersFile($time)->first()->pivot->file);
         }else if ($type==='question') {
-            $pathToFile = storage_path($assignment->file);
+            $pathToFile = storage_path('app\public\file\\'.$assignment->file);
         }
         return response()->download($pathToFile);
     }
@@ -185,10 +185,18 @@ class AssignmentController extends Controller
         $file = $request->file('file');
         $fileName =  now()->format('Y-m-d-H-i-s')."".Auth::id()."_".$file->getClientOriginalName();
         $file->storeAs('public/file', $fileName);
-        $assignment->users()->attach(Auth::user()->id,[
-            'file' => 'app/public/file/'.$fileName,
-            'notes' => $request->notes
-        ]);
+        if($assignment->users()->where('users.id', Auth::user()->id)->get()->isEmpty()){
+            $assignment->users()->attach(Auth::user()->id,[
+                'file' => $fileName,
+                'notes' => $request->notes
+            ]);
+        }else{
+            $assignment->users()->updateExistingPivot(Auth::user()->id,[
+                'file' => $fileName,
+                'notes' => $request->notes
+            ]);
+        }
+       
         Alert::success('Berhasil', "Tugas berhasil dikumpulkan!");
         return back();
     }

@@ -61,18 +61,21 @@
                                     </form>
                                 @endcan
                                 @can('upload', App\Models\Assignment::class)
+                                    @php($userAssignment = $assignment->users()->where('users.id', Auth::user()->id)->latest()->first())
+                                    <a data-bs-toggle="modal" data-bs-target="#assignments{{ $assignment->id }}History" class="btn"><i class='fs-25 fas fa-history'></i></a>
+                                    @include('assignments._history')
                                     @if (now()->lt($assignment->deadline))
                                         <a data-bs-toggle="modal" data-bs-target="#uploadAssignments{{ $assignment->id }}"
                                             class="btn"><i class='fs-25 fa fa-upload '></i></a>
                                         @include('assignments._upload')
                                     @elseif (now()->gte($assignment->deadline))
-                                        @php($userAssignment = $assignment->users()->where('users.id', Auth::user()->id)->latest()->first())
                                         @if (!empty($userAssignment) && !is_null($userAssignment->pivot->score))
                                             <h1 class="btn fs-25 {{($assignment->kkm() > $userAssignment->pivot->score) ? 'text-danger' : 'text-success'}}"> {{ $userAssignment->pivot->score }} </h1>
                                         @else
-                                            <h1 class="text-danger m-0">- </h1>
+                                            <h1 class="btn fs-25 text-danger m-0">- </h1>
                                         @endif
                                     @endif
+                                    
                                 @endcan
                                 @can('view', $assignment)
                                     <a href="{{ route('course.assignments.show', [$course, $assignment]) }}"class="m-1 btn">

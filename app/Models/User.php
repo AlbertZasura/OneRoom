@@ -89,7 +89,7 @@ class User extends Authenticatable implements MustVerifyEmail
     }
 
     public function assignments(){
-        return $this->belongsToMany(Assignment::class,'assignments_users','user_id','assignment_id')->withPivot('notes', 'score', 'file')->withTimestamps(); 
+        return $this->belongsToMany(Assignment::class,'assignments_users','user_id','assignment_id')->using(AssignmentUser::class)->withPivot('notes', 'score', 'file')->withTimestamps(); 
     }
 
     public function classes(){
