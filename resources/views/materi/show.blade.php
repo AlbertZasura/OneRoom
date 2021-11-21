@@ -3,9 +3,11 @@
 @section('mainContent')
 
 <div class=" card-shadow bg-white p-3 border-radius-8px">
-    <div class="show-on-mobile d-flex a-center mobile-mb-20">
-        <i class="fas fa-arrow-left mr-10 fs-20" onclick="window.history.go(-1); return false; closeCardMenu()"></i>
-        <h1 class="mobile-mb-0">Materi</h1>
+    <div class="show-on-mobile">
+        <div class="d-flex a-center mobile-mb-20">
+            <i class="fas fa-arrow-left mr-10 fs-20" onclick="window.history.go(-1); return false; closeCardMenu()"></i>
+            <h1 class="mobile-mb-0">Materi</h1>
+        </div>
     </div>
     @can('viewTeacher', App\Models\Course::class)
         <select id="courseSelect" class="form-select mb-3" aria-label="Default select example" onchange="chooseSession(); openCardMenu()">
