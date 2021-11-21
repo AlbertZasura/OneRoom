@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="card-shadow bg-white m-lg-5 border-radius-8px" style="width: auto; height: auto;">
-    <div class="card-body p-5">
+    <div class="card-body p-lg-5">
     <h1>Daftar Akun</h1>
     <div class="row g-2">
         <div class="col-md-2">
@@ -17,9 +17,9 @@
         
         <div class="col-md-3">
             <form action="/accounts">
-                <div class="input-group" style="width:300px">
+                <div class="input-group">
                     <input type="text" id="myInput" class="form-control" placeholder="Cari nama" name="search">
-                    <button class="btn btn-outline-secondary" type="submit"><i class='fa fa-search '></i></button>
+                    <button class="btn btn-fill-green" type="submit"><i class='fa fa-search '></i></button>
                 </div>
             </form>
         </div>

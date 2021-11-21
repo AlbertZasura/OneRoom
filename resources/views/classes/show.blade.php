@@ -20,7 +20,7 @@
                 @endcan --}}
             </div>
             @can('user_list', App\Models\Classes::class )
-                <a href="/classes/{{$class->id}}/assign_user" class="btn btn-outline-green float-end">
+                <a href="/classes/{{$class->id}}/assign_user" class="btn btn-outline-green">
                     <i class='fa fa-plus '></i> Tambah Anggota
                 </a>
             @endcan

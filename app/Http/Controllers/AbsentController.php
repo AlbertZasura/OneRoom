@@ -89,7 +89,7 @@ class AbsentController extends Controller
         }
         return view('absents.list_user', [
             'schedule' => $schedule,
-            'users' => $users->paginate(20)->appends(['date' => request('date'), 'schedule' => request('schedule')]),
+            'users' => $users->paginate(25)->appends(['date' => request('date'), 'schedule' => request('schedule')]),
             'role' => $role
         ]);
     }

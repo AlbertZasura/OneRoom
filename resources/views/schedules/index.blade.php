@@ -8,7 +8,7 @@
             <h1>Jadwal kelas {{ $class->name }}</h1>
             <br>
             <form action="{{ route('classes.schedules.index',$class) }}">
-                <div class="row">
+                <div class="row g-2">
                     <div class="col-md-2">
                         <select class="form-select" name="weekday">
                             <option value="">Semua Hari</option>
@@ -46,7 +46,7 @@
                 <table class="table table-hover">
                     <thead>
                         <tr>
-                            <th>#</th>
+                            <th>No</th>
                             <th>Hari</th>
                             <th>Mata Pelajaran</th>
                             <th>Jam</th>

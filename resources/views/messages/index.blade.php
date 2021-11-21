@@ -5,9 +5,8 @@
 
 @section('content')
 <div class="card-shadow bg-white m-lg-5 border-radius-8px" style="width: auto; height: auto;">
-    <div class="card-body p-5">
+    <div class="card-body p-lg-5">
     <h1>Pengumuman</h1>
-    <br>
     <br>
     @can('create', App\Models\Message::class )
         <button class="btn btn-outline-secondary" id="open-popup" ><i class="fas fa-plus"></i></i>&nbsp Tambah Pengumuman</button>

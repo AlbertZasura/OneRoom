@@ -76,7 +76,6 @@
     // window.onLoad = function(){
 
         if (document.getElementById("action-closes-popup")) {
-            console.log("testing")
             document.getElementById("action-closes-popup").addEventListener("click", function() {
                 let popup =  document.getElementById("pop-up-content")
                 let overlay =  document.getElementById("overlayPopup")
