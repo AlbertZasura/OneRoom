@@ -707,3 +707,27 @@ table.fc-header {
     text-align: right;
     padding-right: 10px;
 }
+
+/* responsive */
+
+@media (max-width:768px) {
+    .fc-header-title h2 {
+        font-size: 20px;
+        margin-bottom: 0px;
+    }
+
+    .fc-text-arrow {
+        margin: 0 .1em;
+        font-size: 1em;
+        line-height: 0px;
+        /* for IE7 */
+    }
+
+    .fc-button{
+        font-size: 0.6em;
+    }
+    .fc-header td {
+        white-space: nowrap;
+        padding: 15px 5px 0px;
+    }
+}
