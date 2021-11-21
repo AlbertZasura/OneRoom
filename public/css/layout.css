@@ -488,6 +488,7 @@ body{
         display: block;
     }
     .resize-side-panel {
+        overflow: scroll;
         width: 0;
     }
     .mobile-w-100{
@@ -504,7 +505,31 @@ body{
     .mobile-ml-0{
         margin-left: 0 !important;
     }
-    .mobile-mt-50{
-        margin-top: 50px !important;
+    .mobile-mt-70{
+        margin-top: 70px !important;
     }
+    .mobile-min-w-149{
+        min-width: 149px;
+    }
+
+    .mobile-overflow-hidden{
+        overflow: hidden !important;
+    }
+    .mobile-card-menu{
+        position: absolute;
+        right: 0;
+        padding: 0 13px;
+    }
+    .mobile-card-menu2{
+        position: relative;
+        left: 100%;
+    }
+    .mobile-mb-0{
+        margin-bottom: 0 !important;
+    }
+
+    .mobile-mb-20{
+        margin-bottom: 20px !important;
+    }
+    
 }

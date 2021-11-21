@@ -3,10 +3,10 @@
 @section('title', 'Akun | OneRoom')
 
 @section('content')
-<div class="card-shadow bg-white m-5 border-radius-8px" style="width: auto; height: auto;">
+<div class="card-shadow bg-white m-lg-5 border-radius-8px" style="width: auto; height: auto;">
     <div class="card-body p-5">
     <h1>Daftar Akun</h1>
-    <div class="row mb-1">
+    <div class="row g-2">
         <div class="col-md-2">
             <select class="form-select" id = "filterTable" oninput="selectTable()" aria-label="Default select example">
                 <option value="">Semua Jabatan</option>
@@ -26,7 +26,7 @@
     </div>
     
     <div class="table-responsive">
-        <table class="table table-hover table-responsive" id="tableSearch">
+        <table class="table table-hover" id="tableSearch">
             <thead>
                 <tr>
                     <th scope="col">No</th>
@@ -54,15 +54,15 @@
                     </td>
                     <td>
                         <div class="d-flex">
-                            <form action="{{ route('users.update', $user->id) }}" method="POST">
+                            <form action="{{ route('users.update', $user->id) }}" onsubmit="acceptUserBtn(event)" id="acceptUser" method="POST">
                                 @csrf
                                 @method('PUT')
-                                <button class="btn" id="acceptUser" type="submit" onsubmit="acceptUserBtn(event)"><i class="fas fa-check fa-lg" style="color:green"></i></button>
+                                <button class="btn" type="submit" ><i class="fas fa-check fa-lg" style="color:green"></i></button>
                             </form>
-                            <form action="{{  route('users.destroy',$user->id) }}" method="POST">
+                            <form action="{{  route('users.destroy',$user->id) }}" onsubmit="deleteUserBtn(event)" id="deleteUser" method="POST">
                                 @csrf
                                 @method('DELETE')      
-                                <button class="btn" id="deleteUser" type="submit" onsubmit="deleteUserBtn(event)"><i class="fas fa-times fa-lg" style="color:red"></i></button>
+                                <button class="btn" type="submit" ><i class="fas fa-times fa-lg" style="color:red"></i></button>
                             </form>
                         </div>
                     </td>

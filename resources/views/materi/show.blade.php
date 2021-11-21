@@ -3,9 +3,12 @@
 @section('mainContent')
 
 <div class=" card-shadow bg-white p-3 border-radius-8px">
-    <h1>Materi</h1>
+    <div class="show-on-mobile d-flex a-center mobile-mb-20">
+        <i class="fas fa-arrow-left mr-10 fs-20" onclick="window.history.go(-1); return false; closeCardMenu()"></i>
+        <h1 class="mobile-mb-0">Materi</h1>
+    </div>
     @can('viewTeacher', App\Models\Course::class)
-        <select id="courseSelect" class="form-select mb-3" aria-label="Default select example" onchange="chooseSession()">
+        <select id="courseSelect" class="form-select mb-3" aria-label="Default select example" onchange="chooseSession(); openCardMenu()">
             @foreach($course_teacher as $course_teachers)
                 <option value="{{$course_teachers->id}}" {{ isset($selected_course) ? $selected_course->id == $course_teachers->id ? 'selected' : '' : ''}} >{{$course_teachers->name}}</option>
             @endforeach
@@ -17,7 +20,7 @@
                 <div class="mb-10">
                     <div class="accordion-item">
                         <h2 class="accordion-header d-flex a-center" id="heading{{$item->id}}">
-                            <i onclick="deleteSessionBtn( {{$item->id}} ) " class="ml-20 fs-20 far fa-trash-alt text-danger mr-10 cursor-pointer"></i>
+                            <i onclick="deleteSessionBtn( {{$item->id}} ) ; openCardMenu()" class="ml-20 fs-20 far fa-trash-alt text-danger mr-10 cursor-pointer"></i>
                             <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{$item->id}}" aria-expanded="false" aria-controls="collapseTwo">
                                 <span class="color-hijau-tua fw-bolder">{{$item->title}}</span>
                             </button>
@@ -25,7 +28,7 @@
                         <div id="collapse{{$item->id}}" class="accordion-collapse collapse" aria-labelledby="heading{{$item->id}}" data-bs-parent="#accordionExample">
                             <div class="accordion-body">
                                 <div>{{$item->description}}</div>
-                                <div onclick="window.location='{{route('uploaded',$item->id)}}'" class="cursor-pointer d-flex a-center color-hijau-tua view-session">
+                                <div onclick="window.location='{{route('uploaded',$item->id)}}'; openCardMenu()" class="cursor-pointer d-flex a-center color-hijau-tua view-session">
                                     <i class="fas fa-scroll mr-10"></i> <span>Lihat Materi</span>
                                 </div>
                             </div>
@@ -39,7 +42,7 @@
                 <div>
                     <div class="accordion-item">
                         <h2 class="accordion-header" >
-                            <button class="accordion-button collapsed accordion-button-none" type="button" onclick="openEditSession()" >
+                            <button class="accordion-button collapsed accordion-button-none" type="button" onclick="openEditSession(); openCardMenu()" >
                                 <span class="color-hijau-tua fw-bolder d-flex" style="height: 20px;"><i class="far fa-plus-square" style="margin-top: 3px; margin-right: 10px;"></i> <p>Tambah Materi</p></span>
                             </button>
                         </h2>
@@ -106,7 +109,7 @@
                     <div id="collapse{{$item->id}}" class="accordion-collapse collapse" aria-labelledby="heading{{$item->id}}" data-bs-parent="#accordionExample">
                         <div class="accordion-body">
                             <div>{{$item->description}}</div>
-                            <div onclick="window.location='{{route('uploaded',$item->id)}}'" class="cursor-pointer d-flex a-center color-hijau-tua view-session">
+                            <div onclick="window.location='{{route('uploaded',$item->id)}}'; openCardMenu()" class="cursor-pointer d-flex a-center color-hijau-tua view-session">
                                 <i class="fas fa-scroll mr-10"></i> <span>Lihat Materi</span>
                             </div>
                         </div>
@@ -118,7 +121,7 @@
             <div>
                 <div class="accordion-item">
                     <h2 class="accordion-header" >
-                        <button class="accordion-button collapsed accordion-button-none" type="button" onclick="openEditSession()" >
+                        <button class="accordion-button collapsed accordion-button-none" type="button" onclick="openEditSession(); openCardMenu()" >
                             <span class="color-hijau-tua fw-bolder d-flex" style="height: 20px;"><i class="far fa-plus-square" style="margin-top: 3px; margin-right: 10px;"></i> <p>Tambah Materi</p></span>
                         </button>
                     </h2>
@@ -136,7 +139,7 @@
                     <br>
                     <input type="file" name="file_upload" id="" class="form-control" required><br>
                     <input type="text" name="coId" value="{{$courseId}}" class="d-none">
-                    <button type="submit" class="btn btn-dark form-control">Upload Now</button>
+                    <button type="submit" onclick="; closeCardMenu()" class="btn btn-dark form-control">Upload Now</button>
                 </form>
 
             </div>
@@ -162,7 +165,7 @@
                 <div id="collapse{{$item->id}}" class="accordion-collapse collapse" aria-labelledby="heading{{$item->id}}" data-bs-parent="#accordionExample">
                     <div class="accordion-body">
                         <div>{{$item->description}}</div>
-                        <div onclick="window.location='{{route('uploaded',$item->id)}}'" class="cursor-pointer d-flex a-center color-hijau-tua view-session">
+                        <div onclick="window.location='{{route('uploaded',$item->id)}}'; openCardMenu()" class="cursor-pointer d-flex a-center color-hijau-tua view-session">
                             <i class="fas fa-scroll mr-10"></i> <span>Lihat Materi</span>
                         </div>
                     </div>

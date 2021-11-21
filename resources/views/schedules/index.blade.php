@@ -3,7 +3,7 @@
 @section('title', "Jadwal Kelas {$class->name} | OneRoom")
 
 @section('content')
-    <div class="card-shadow bg-white m-5 border-radius-8px">
+    <div class="card-shadow bg-white m-lg-5 border-radius-8px">
         <div class="card-body">
             <h1>Jadwal kelas {{ $class->name }}</h1>
             <br>
