@@ -70,7 +70,7 @@
                                         @include('assignments._upload')
                                     @elseif (now()->gte($assignment->deadline))
                                         @if (!empty($userAssignment) && !is_null($userAssignment->pivot->score))
-                                            <h1 class="btn fs-25 {{($assignment->kkm() > $userAssignment->pivot->score) ? 'text-danger' : 'text-success'}}"> {{ $userAssignment->pivot->score }} </h1>
+                                            <h1 class="btn m-0 fs-25 {{($assignment->kkm() > $userAssignment->pivot->score) ? 'text-danger' : 'text-success'}}"> {{ $userAssignment->pivot->score }} </h1>
                                         @else
                                             <h1 class="btn fs-25 text-danger m-0">- </h1>
                                         @endif
