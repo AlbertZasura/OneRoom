@@ -5,7 +5,7 @@
 
 @section('content')
     <div class="card-shadow m-lg-5 bg-white border-radius-8px">
-        <div class="card-body">
+        <div class="card-body p-lg-5">
             <h1>Konten</h1>
             <div class="table-responsive">
                 <table class="table">
