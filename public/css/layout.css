@@ -531,5 +531,9 @@ body{
     .mobile-mb-20{
         margin-bottom: 20px !important;
     }
+
+    .mobile-col-none{
+        flex: none !important;
+    }
     
 }

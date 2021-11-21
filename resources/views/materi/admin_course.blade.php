@@ -11,7 +11,7 @@
     <!-- <h1>Mapping Mata Pelajaran</h1> -->
 
     <div class="row">
-        <div class="col">
+        <div class="col mobile-col-none mobile-w-100">
             <div class="text-center fw-bold fs-20 mb-3">Mata Pelajaran</div>
             
             <div class="box-course-create scroll-y custom-scroll-y" style="height: 600px;">
@@ -66,7 +66,7 @@
             </div>
         </div>
     
-        <div class="col">
+        <div class="col mobile-col-none mobile-w-100">
             <div class="text-center fw-bold fs-20 mb-3">Guru</div>
             <div class="box-course-create scroll-y custom-scroll-y" style="height: 600px;">
                 @foreach($teacher as $teachers)
@@ -78,7 +78,7 @@
             </div>
         </div>
     
-        <div class="col">
+        <div class="col mobile-col-none mobile-w-100">
             <div class="text-center fw-bold fs-20 mb-3">Kelas</div>
             <div class="box-course-create scroll-y custom-scroll-y" style="height: 600px;">
             @isset($selectedTeacher)
