@@ -28,7 +28,7 @@
             </thead>
             <tbody>
                 @foreach ($messages as $key => $message )
-                    <tr class='clickable-row' data-href="{{ route('messages.show',$message->id) }}">
+                    <tr>
                         <td>
                             <a>{{ $message->created_at->format('H:i') }}</a> 
                         </td>
@@ -50,6 +50,9 @@
                             </form>
                         </td>
                         @endcan
+                        <td>
+                            <a class="btn btn-fill-green rounded-pill" role="button" id= "myButton" type="button"  href="{{ route('messages.show',$message->id) }}">Lihat Detail</a>
+                        </td>
                     </tr>
                 @endforeach
             </tbody>
