@@ -3,7 +3,7 @@
 @section('title', 'Absen | OneRoom')
 
 @section('show')
-    <div class="card-shadow bg-white m-5 border-radius-8px">
+    <div class="card-shadow bg-white m-lg-5 border-radius-8px">
         <div class="card-body">
             <h3>Daftar Pertemuan</h3>
             <div class="table-responsive">

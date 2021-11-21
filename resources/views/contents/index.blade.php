@@ -4,7 +4,7 @@
 @section('title', 'Konten | OneRoom')
 
 @section('content')
-    <div class="card-shadow m-5 bg-white border-radius-8px">
+    <div class="card-shadow m-lg-5 bg-white border-radius-8px">
         <div class="card-body">
             <h1>Konten</h1>
             <div class="table-responsive">
