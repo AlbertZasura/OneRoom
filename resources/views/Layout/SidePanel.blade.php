@@ -108,6 +108,7 @@
                         </div>
                         @endcan
                         
+                        @can('viewAny', App\Models\Assignment::class )
                         <div class="d-flex a-center side-panel-hover px-20px py-1 {{Route::current()->getName() == 'courses.index' || Request::is('courses*') ? 'side-panel-active' : ''}}">
                             <div class="fs-25 w-25px">
                                 <i class="fas fa-book"></i>
@@ -116,6 +117,19 @@
                                 <a href="{{route('courses.index')}}" class="btn text-white">Materi</a>
                             </div>
                         </div>
+                        @endcan
+
+                        @can('viewAny', App\Models\User::class)
+                        <div class="d-flex a-center side-panel-hover px-20px py-1 {{Route::current()->getName() == 'courses.index' || Request::is('courses*') ? 'side-panel-active' : ''}}">
+                            <div class="fs-25 w-25px">
+                                <i class="fas fa-school"></i>
+                            </div>
+                            <div class="fs-18 ml-20">
+                                <a href="{{route('courses.index')}}" class="btn text-white">Pemetaan</a>
+                            </div>
+                        </div>
+                        @endcan
+                        
                         @can('viewAny', App\Models\Classes::class )
                             <div class="d-flex a-center side-panel-hover px-20px py-1 {{Route::current()->getName() == 'classes.index' || Request::is('classes*') ? 'side-panel-active' : ''}}">
                                 <div class="fs-20 w-25px">

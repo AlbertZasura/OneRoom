@@ -3,11 +3,16 @@
 @section('title', 'Ujian | OneRoom')
 @section('mainContent')
 
-<div class="ml-20 w-85 card-shadow bg-white p-3 border-radius-8px" style="margin-right: 1%;">
-
-    <div class="w-25">
+<div id="cardMenu2" class="mobile-ml-0 mobile-card-menu2 mobile-w-100 ml-20 w-85 card-shadow bg-white p-3 border-radius-8px" style="margin-right: 1%;">
+    <div class="show-on-mobile">
+        <div class="d-flex a-center mobile-mb-20">
+            <i class="fas fa-arrow-left mr-10 fs-20" onclick="window.history.go(-1); return false;"></i>
+            <h1 class="mobile-mb-0">Ujian</h1>
+        </div>
+    </div>
+    <div class="mobile-w-100 w-25">
       
-            <div class="d-flex" style="width:500px">
+            <div class="mobile-w-100 d-flex" style="width:500px">
                 <select class="form-select form-select-lg mb-3 mr-10" id="courseFilter" onchange="getCourse()" aria-label=".form-select-lg example">
                     <option value="all" {{ request()->input('course_id') ? '' : 'selected' }} >Pilih Semua</option>
                     @foreach($course as $it)
@@ -62,7 +67,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endcan
-    <div class="table-responsive">
+    <div class="table-responsive-lg">
         <table class="table table-hover">
             <thead>
                 <tr>
