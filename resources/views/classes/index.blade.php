@@ -17,11 +17,11 @@
                 @include('classes._create')
             @endcan
             @foreach ($classes as $key => $c )
-                <div class="card {{ (isset($class) && $class->id===$c->id) ? "bg-biru-muda color-hijau-tua"  : "bg-hijau-tua text-white" }} mb-3">
+                <div class="card {{ (isset($class) && $class->id===$c->id) ? " color-hijau-tua"  : "bg-hijau-tua text-white" }} mb-3">
                     <div class="card-body">
-                        <h5 class="card-title">{{$c->name}}</h5>
+                        <div class="text-capitalize fs-16">{{$c->name}}</div>
                         <a href="{{route('classes.show',$c->id)}}" class="stretched-link"></a>
-                        <p class="card-text text-end"><small> {{$c->users->count()}} orang</small></p>
+                        <p class="card-text text-end fs-14 mt-2"><small> {{$c->users->count()}} orang</small></p>
                     </div>
                 </div>
             @endforeach
