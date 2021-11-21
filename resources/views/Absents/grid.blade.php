@@ -4,8 +4,8 @@
 
 @section('content')
 <h1>Absent</h1><br>
-    <div class="d-flex">
-        <div class="w-200px">
+    <div class="row g-2">
+        <div class="col-md-3">
             <form action="/absents" class="row mb-3">
                 <div class="col-md-12 mb-2">
                     <select class="form-select" name="class">
@@ -27,8 +27,8 @@
                 </div>
             </form>
         </div>
-        <div class="ml-20 w-85">
-            <div class="card-shadow bg-white m-lg-5 border-radius-8px">
+        <div class="col-md-9">
+            <div class="card-shadow bg-white m-lg-2 rounded">
                 <div class="card-body">
                     <div id='wrap' class="container">
                         <div id='calendar'></div>
@@ -38,7 +38,6 @@
             </div>
         </div>
     </div>
-
 <script>
     $(document).ready(function() {
         var date = new Date();
