@@ -1,7 +1,7 @@
 @extends('Layout.SidePanel')
 @section('title', 'Pengumuman  | OneRoom')
 @section('content')
-<div class="card-shadow bg-white m-5 border-radius-8px " >
+<div class="card-shadow bg-white m-lg-5 border-radius-8px " >
     <div class="card-body p-5">
     <h1>Pengumuman</h1>
     <br>

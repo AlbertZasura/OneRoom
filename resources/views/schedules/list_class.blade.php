@@ -3,7 +3,7 @@
 @section('title', 'Jadwal | OneRoom')
 
 @section('content')
-    <div class="card-shadow bg-white  m-5 border-radius-8px">
+    <div class="card-shadow bg-white  m-lg-5 border-radius-8px">
         <div class="card-body">
             <h1>Jadwal</h1>
             <br>
