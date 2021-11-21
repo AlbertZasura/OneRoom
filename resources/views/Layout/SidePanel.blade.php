@@ -71,7 +71,7 @@
                                 <i class="fas fa-chart-line"></i>
                             </div>
                             <div class="fs-18 ml-20">
-                                <a href="{{route('home')}}" class="btn text-white mobile-w-100" style="width: 149px;">Halaman Utama</a>
+                                <a href="{{route('home')}}" class="btn text-white mobile-w-100 mobile-min-w-149" style="width: 149px;">Halaman Utama</a>
                             </div>
                         </div>
                         <div class="d-flex a-center side-panel-hover px-20px py-1 {{Route::current()->getName() == 'admin.schedule' || Request::path() == 'schedules' || Request::is('schedules*') ? 'side-panel-active' : ''}}">
@@ -190,7 +190,7 @@
                 </div>
             </div>
 
-            <div class="mobile-ml-0 container mobile-mt-50 {{ str_contains(url()->current(), '/dashboard') ?  'w-100' : 'ml-70 w-100'  }}">
+            <div class="mobile-ml-0 container mobile-mt-70 {{ str_contains(url()->current(), '/dashboard') ?  'w-100' : 'ml-70 w-100'  }}">
                 @include('components.notifications')
                 @include('sweetalert::alert')
                 @yield('content')
@@ -209,6 +209,56 @@
             $('#sidePanel').animate({width: '0'}, 0.1);
             $('#overlay').delay(160).animate({width: '0'});
         }
+
+        function setCookie(name,value,days) {
+            var expires = "";
+            if (days) {
+                var date = new Date();
+                date.setTime(date.getTime() + (days*24*60*60*1000));
+                expires = "; expires=" + date.toUTCString();
+            }
+            document.cookie = name + "=" + (value || "")  + expires + "; path=/";
+        }
+        function getCookie(name) {
+            var nameEQ = name + "=";
+            var ca = document.cookie.split(';');
+            for(var i=0;i < ca.length;i++) {
+                var c = ca[i];
+                while (c.charAt(0)==' ') c = c.substring(1,c.length);
+                if (c.indexOf(nameEQ) == 0) return c.substring(nameEQ.length,c.length);
+            }
+            return null;
+        }
+        function eraseCookie(name) {   
+            document.cookie = name +'=; Path=/; Expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+        }
+
+        function closeCardMenu(){
+            setCookie('isOpenMenu','false',1);
+            setCookie('windowLocation',window.location.href,1)
+        }
+
+        function openCardMenu(){
+            setCookie('isOpenMenu','true',0);
+            setCookie('windowLocation',window.location.href,1)
+        }
+
+        $(document).ready(function(){
+            let cookie = getCookie('isOpenMenu');
+            var x = location.hash;
+            if(cookie == 'true'){
+                $("#cardMenu").animate({right: '100%'})
+                $("#cardMenu2").animate({left: '0'})
+                openCardMenu();
+            }
+        });
+
+        $(document).ready(function(){
+            var location = getCookie('windowLocation')
+            if(location != window.location.href){
+                closeCardMenu()
+            }
+        });
 
     </script>
 </body>
