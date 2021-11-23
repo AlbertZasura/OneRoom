@@ -159,8 +159,7 @@
                     </td>
                     
                     @can('viewTeacher', $i)
-                        <td>
-                            
+                        <td class="cursor-pointer" onclick="window.location='{{route('examsubmitlist',$i->id)}}'">
                             {{$i->users->count()}} / {{count($i->class->first()->users->where('role','like','student'))}} Pengumpulan
                         </td>
                     @endcan
