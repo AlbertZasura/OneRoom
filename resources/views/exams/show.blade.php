@@ -158,17 +158,17 @@
                         </div>
                     </td>
                     
+                    @can('viewTeacher', $i)
                         <td>
                             
-                            @can('viewTeacher', $i)
                             {{$i->users->count()}} / {{count($i->class->first()->users->where('role','like','student'))}} Pengumpulan
-                            @endcan
                         </td>
-                
+                    @endcan
+                        
                     @can('viewStudent', App\Models\Exam::class)
                         <td>
                             @if($i->usersExams(Auth::id())->first())
-                                <div>{{$i->usersExams(Auth::id())->first()->pivot->score}}</div>
+                                <div class="{{(App\Models\Exam::first()->kkm() > $i->usersExams(Auth::id())->first()->pivot->score) ? 'text-danger' : 'text-success'}}">{{$i->usersExams(Auth::id())->first()->pivot->score}}</div>
                             @endif
                         </td>
                     @endcan
