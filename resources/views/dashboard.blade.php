@@ -12,7 +12,7 @@
                     <div class="d-flex justify-content-between align-items-center monserrta-font">
                         <i class="fas fa-calendar color-hijau-tua"></i>
                         <h4 class="ms-3 mb-0 fw-bold">{{ now()->isoFormat('dddd, D MMMM Y')  }}</h4>
-                        <a href="/schedules" class="ms-auto text-decoration-none color-hijau-tua">View more</a>
+                        <a href="/schedules" class="ms-auto text-decoration-none color-hijau-tua">Selengkapnya</a>
                     </div>
                     <div class="h-100">
                         @if (!$schedules->isEmpty())
@@ -66,7 +66,7 @@
                 <div class="d-flex justify-content-between align-items-center monserrta-font">
                     <i class="color-hijau-tua fas fa-bullhorn"></i>
                     <h4 class="ms-3 mb-0 fw-bold">Pengumuman</h4>
-                    <a href="{{ route('messages.index') }}" class="color-hijau-tua ms-auto text-decoration-none">View more</a>
+                    <a href="{{ route('messages.index') }}" class="color-hijau-tua ms-auto text-decoration-none">Selengkapnya</a>
                 </div>
                 <div class="h-100">
                     <table class="table table-hover table-borderless mb-0 mt-20">

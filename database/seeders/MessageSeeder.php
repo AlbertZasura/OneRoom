@@ -24,5 +24,6 @@ class MessageSeeder extends Seeder
             ]);
             $messages->save();
         }
+
     }
 }
