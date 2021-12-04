@@ -14,12 +14,12 @@ class MessageSeeder extends Seeder
      */
     public function run()
     {
-        $faker = \Faker\Factory::create();
-        for ($i=0; $i < 5; $i++) { 
+        $faker = \Faker\Factory::create('id_ID');
+        for ($i=0; $i < 30; $i++) { 
             $messages = new Message;
             $messages->fill([
-                "user_id" => rand(1,10),
-                'title' => "PENGUMUMAN",
+                "user_id" => rand(1,30),
+                'title' => $faker->word,
                 'content' => $faker->text,
                 'file' => 'soal_mtk.pdf'
             ]);
