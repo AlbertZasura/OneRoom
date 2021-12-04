@@ -27,7 +27,7 @@
                         </ol>
                     </nav>
                 </div>
-                <p class="my-2 text-center {{(now()->gte($exam->end_date)) ? "text-danger" : "text-success"}}">{{$exam->end_date}}</p>
+                <p class="my-2 text-center {{(now()->gte($exam->end_date)) ? "text-danger" : "text-success"}}">{{ \Carbon\Carbon::parse($exam->end_date)->isoFormat('dddd, D MMMM Y') }}, {{date('H:i', strtotime($exam->end_date))}}</p>
                 <div class="d-flex ms-auto justify-content-center">
                     <a href="{{route('downloadexams', $exam->id)}}" class="btn"><i class='fs-25 fa fa-download'></i></a>
                     <form action="{{ route('exams.destroy',[$exam]) }}" method="POST">   
@@ -50,7 +50,8 @@
                         <th scope="col">Nama Siswa</th>
                         <th scope="col">Waktu Pengumpulan</th>
                         <th scope="col">Catatan</th>
-                        <th scope="col"></th>
+                        <th scope="col">Aksi</th>
+                        <th scope="col">Nilai</th>
                     </tr>
                 </thead>
                 <tbody>

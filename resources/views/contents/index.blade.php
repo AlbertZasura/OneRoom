@@ -24,7 +24,7 @@
                                 <th scope="row">{{ $key+1 }}</th>
                                 <td>{{ $content->name }}</td>
                                 <td>{{ $content->value }}</td>
-                                <td>{{ $content->updated_at }}</td>
+                                <td>{{  \Carbon\Carbon::parse($content->updated_at)->isoFormat('D MMMM Y, H:mm')  }}</td>
                                 <td>
                                     <a data-bs-toggle="modal" data-bs-target="#editContents{{ $content->id }}" class="btn btn-fill-green rounded-pill">
                                         Ubah

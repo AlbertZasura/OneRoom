@@ -67,7 +67,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
         </div>
     @endcan
-    <div class="table-responsive-lg">
+    <div class="table-responsive-lg custom-scroll-y" style="max-height: 367px; overflow-y: scroll">
         <table class="table table-hover">
             <thead>
                 <tr>
@@ -78,7 +78,7 @@
                         <th scope="col">Jumlah Pengumpulan</th>
                     @endcan
                     @can('viewStudent', App\Models\Exam::class)
-                        <th scope="col">Score</td>
+                        <th scope="col">Nilai</td>
                     @endcan
                     
                 </tr>
@@ -94,14 +94,14 @@
                     @endcan
                     @can('viewTeacher', App\Models\Exam::class )
                         <td onclick="window.location='{{route('examsubmitlist',$i->id)}}'">
-                            <div>Dari {{date('d-m-Y', strtotime($i->start_date))}} {{date('H:i', strtotime($i->start_date))}}</div>
-                            <div>Sampai {{date('d-m-Y', strtotime($i->end_date))}} {{date('H:i', strtotime($i->end_date))}}</div>
+                            <div><strong>Dari</strong> {{ \Carbon\Carbon::parse($i->start_date)->isoFormat('dddd, D MMMM Y') }}, {{date('H:i', strtotime($i->start_date))}}</div>
+                            <div><strong>Sampai</strong> {{ \Carbon\Carbon::parse($i->end_date)->isoFormat('dddd, D MMMM Y') }}, {{date('H:i', strtotime($i->end_date))}}</div>
                         </td>
                     @endcan
                     @can('viewStudent', App\Models\Exam::class)
                         <td>
-                            <div>Dari {{date('d-m-Y', strtotime($i->start_date))}} {{date('H:i', strtotime($i->start_date))}}</div>
-                            <div>Sampai {{date('d-m-Y', strtotime($i->end_date))}} {{date('H:i', strtotime($i->end_date))}}</div>
+                            <div> <strong>Dari</strong> {{ \Carbon\Carbon::parse($i->start_date)->isoFormat('dddd, D MMMM Y') }}, {{date('H:i', strtotime($i->start_date))}}</div>
+                            <div> <strong>Sampai</strong> {{ \Carbon\Carbon::parse($i->end_date)->isoFormat('dddd, D MMMM Y') }}, {{date('H:i', strtotime($i->end_date))}}</div>
                         </td>
                     @endcan
                     <td class="fs-25">
