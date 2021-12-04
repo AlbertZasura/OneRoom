@@ -15,7 +15,7 @@ class SessionSeeder extends Seeder
     public function run()
     {
         $faker = \Faker\Factory::create();
-        for ($i=0; $i < 20; $i++) { 
+        for ($i=0; $i < 100; $i++) { 
             $sessions = new Session;
             $sessions->fill([
                 'title' => $faker->sentence,
