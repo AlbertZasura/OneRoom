@@ -51,4 +51,8 @@ class Classes extends Model
         return $this->belongsToMany(Classes::class,'courses_classes_users', 'class_id', 'user_id')->withPivot('course_id')->withTimestamps(); 
     }
 
+    public function teachersCourses($user_id){
+        return $this->classesCourse()->wherePivot('user_id',$user_id);
+    }
+
 }
