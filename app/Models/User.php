@@ -119,6 +119,10 @@ class User extends Authenticatable implements MustVerifyEmail
     public function usersClasses(){
         return $this->belongsToMany(Classes::class,'courses_classes_users', 'user_id', 'class_id')->withPivot('course_id')->withTimestamps(); 
     }
+    
+    public function classCourses($course){
+        return $this->usersClasses()->wherePivot('course_id',$course); 
+    }
 
     public function absents(){
         return $this->hasMany(Absent::class);
