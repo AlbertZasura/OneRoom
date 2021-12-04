@@ -14,15 +14,16 @@ class SessionSeeder extends Seeder
      */
     public function run()
     {
-        for ($i=0; $i < 5; $i++) { 
+        $faker = \Faker\Factory::create();
+        for ($i=0; $i < 20; $i++) { 
             $sessions = new Session;
             $sessions->fill([
-                'title' => 'Testing',
-                'description' => 'Testing description',
-                'file' => 'materi_mtk.pdf',
+                'title' => $faker->sentence,
+                'description' => $faker->text,
+                'file' => asset('img/Logo-OneRoom.png'),
                 "user_id" => $i+1,
-                "course_id" => $i+1,
-                "class_id" => $i+1,
+                "course_id" => rand(1, 6),
+                "class_id" => rand(1, 6),
             ]);
             $sessions->save();
         }
