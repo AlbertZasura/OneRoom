@@ -47,7 +47,7 @@
                         <a>{{ $user->name }}</a>
                     </td>
                     <td>
-                        <a>{{ $user->created_at->format('d M Y') }}</a> 
+                        <a>{{  \Carbon\Carbon::parse($user->created_at)->isoFormat('D MMMM Y, H:mm')  }}</a>
                     </td>
                     <td>
                         <a>{{ $user->humanizeRole() }}</a>

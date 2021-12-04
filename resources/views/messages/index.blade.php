@@ -31,14 +31,14 @@
                         <td>
                             <a>{{ $message->created_at->format('H:i') }}</a> 
                         </td>
-                        <td style="width:30%">
+                        <td style="width:20%">
                             <a>{{ $message->title }}</a>
                         </td>
                         <td>
                             <a>{{ $message->user->name }}</a>
                         </td>
                         <td>
-                            <a>{{ $message->created_at->format('d M Y') }}</a>
+                            <a>{{  \Carbon\Carbon::parse($message->created_at)->isoFormat('D MMMM Y')  }}</a>
                         </td>
                         @can('create', App\Models\Message::class )
                         <td>

@@ -4,6 +4,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
     use App\Models\Message;
 use Nette\Utils\Random;
+use Illuminate\Support\Facades\DB;
 
 class MessageSeeder extends Seeder
 {
@@ -25,5 +26,6 @@ class MessageSeeder extends Seeder
             ]);
             $messages->save();
         }
+
     }
 }

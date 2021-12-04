@@ -27,7 +27,7 @@
                 <h5>:</h5>
             </td>
             <td>
-                <a>&nbsp;  {{ $message->created_at->format('d M Y') }}</a>
+                <a>&nbsp;  {{  \Carbon\Carbon::parse($message->created_at)->isoFormat('D MMMM Y')  }}</a>
                 <br>
             </td>
             
