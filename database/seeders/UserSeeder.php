@@ -31,7 +31,7 @@ class UserSeeder extends Seeder
 
         $user = new User();
         $user->fill([
-            'name' => 'Teacher',
+            'name' => 'Guru',
             'email' => 'teacher@example.com',
             'phone' => '1234567890',
             'identification_number' => "12345678",
