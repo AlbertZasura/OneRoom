@@ -281,24 +281,24 @@ class ExamController extends Controller
 
             if(request()->input('class_id')){
                 $course = $class->find(request()->input('class_id'))->courses;
-                $exam = Exam::where('type','like', $type)->where('class_id', 'like', request()->input('class_id'))->get();
+                $exam = Exam::where('type','like', $type)->where('class_id', 'like', request()->input('class_id'))->where('user_id','like',Auth::id())->get();
             }else{
-                $exam = Exam::where('type','like', $type)->get();
+                $exam = Exam::where('type','like', $type)->where('user_id','like',Auth::id())->get();
             }
     
-            $ex = Exam::where('type','like', $type)->first();
+            $ex = Exam::where('type','like', $type)->where('user_id','like',Auth::id())->first();
             $c = Course::find(request()->input('course_id'));
             
             if(request()->input('course_id')){
                 $class = $course->find(request()->input('course_id'))->classes;
                 
-                    $exam = Exam::where('type','like', $type)->where('course_id', 'like', request()->input('course_id'))->get();
+                    $exam = Exam::where('type','like', $type)->where('course_id', 'like', request()->input('course_id'))->where('user_id','like',Auth::id())->get();
             }
             
             if(request()->input('course_id') && request()->input('class_id')){
                     $exam = Exam::where('type','like', $type)
                     ->where('class_id', 'like', request()->input('class_id'))
-                    ->where('course_id', 'like', request()->input('course_id'))->get();
+                    ->where('course_id', 'like', request()->input('course_id'))->where('user_id','like',Auth::id())->get();
             }
             
             
