@@ -12,7 +12,10 @@
     </div>
         <select id="courseSelect" class="form-select mb-3" aria-label="Default select example" onchange="chooseSession(); openCardMenu()">
             @foreach($course_teacher as $course_teachers)
-                <option value="{{$course_teachers->id}}" {{ isset($selected_course) ? $selected_course->id == $course_teachers->id ? 'selected' : '' : ''}} >{{$course_teachers->name}}</option>
+            
+                @if( $course_teachers->pivot->user_id == Auth::id())
+                    <option value="{{$course_teachers->id}}" {{ isset($selected_course) ? $selected_course->id == $course_teachers->id ? 'selected' : '' : ''}} >{{$course_teachers->name}}</option>
+                @endif
             @endforeach
         </select>
     
