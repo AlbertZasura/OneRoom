@@ -17,27 +17,28 @@
         </select>
     
         @if(isset($ses))
-            @foreach($ses as $item)
-                
-                <div class="mb-10">
-                    <div class="accordion-item">
-                        <h2 class="accordion-header d-flex a-center" id="heading{{$item->id}}">
-                            <i onclick="deleteSessionBtn( {{$item->id}} ) ; openCardMenu()" class="ml-20 fs-20 far fa-trash-alt text-danger mr-10 cursor-pointer"></i>
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{$item->id}}" aria-expanded="false" aria-controls="collapseTwo">
-                                <span class="color-hijau-tua fw-bolder">{{$item->title}}</span>
-                            </button>
-                        </h2>
-                        <div id="collapse{{$item->id}}" class="accordion-collapse collapse" aria-labelledby="heading{{$item->id}}" data-bs-parent="#accordionExample">
-                            <div class="accordion-body">
-                                <div>{{$item->description}}</div>
-                                <div onclick="window.location='{{route('uploaded',$item->id)}}'; openCardMenu()" class="cursor-pointer d-flex a-center color-hijau-tua view-session">
-                                    <i class="fas fa-scroll mr-10"></i> <span>Lihat Materi</span>
+            <div class="scroll-y custom-scroll-y" style="max-height: 444px;">
+                @foreach($ses as $item)
+                    <div class="mb-10">
+                        <div class="accordion-item">
+                            <h2 class="accordion-header d-flex a-center" id="heading{{$item->id}}">
+                                <i onclick="deleteSessionBtn( {{$item->id}} ) ; openCardMenu()" class="ml-20 fs-20 far fa-trash-alt text-danger mr-10 cursor-pointer"></i>
+                                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{$item->id}}" aria-expanded="false" aria-controls="collapseTwo">
+                                    <span class="color-hijau-tua fw-bolder">{{$item->title}}</span>
+                                </button>
+                            </h2>
+                            <div id="collapse{{$item->id}}" class="accordion-collapse collapse" aria-labelledby="heading{{$item->id}}" data-bs-parent="#accordionExample">
+                                <div class="accordion-body">
+                                    <div>{{$item->description}}</div>
+                                    <div onclick="window.location='{{route('uploaded',$item->id)}}'; openCardMenu()" class="cursor-pointer d-flex a-center color-hijau-tua view-session">
+                                        <i class="fas fa-scroll mr-10"></i> <span>Lihat Materi</span>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            @endforeach
+                @endforeach
+            </div>
         @else
             <span>No Data</span>
         @endif
