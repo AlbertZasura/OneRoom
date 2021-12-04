@@ -22,7 +22,7 @@ class SessionSeeder extends Seeder
                 'description' => $faker->text,
                 'file' => asset('img/Logo-OneRoom.png'),
                 "user_id" => $i+1,
-                "course_id" => rand(1, 6),
+                "course_id" => rand(1, 15),
                 "class_id" => rand(1, 6),
             ]);
             $sessions->save();
