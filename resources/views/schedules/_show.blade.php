@@ -2,7 +2,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header border-bottom-0">
-                <h5 class="modal-title" id="exampleModalLabel">Jadwal {{ $sch->first()->date }}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Jadwal {{  \Carbon\Carbon::parse($sch->first()->date)->isoFormat('dddd, D MMMM Y') }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">

@@ -68,7 +68,7 @@
                                         <h5 class="card-title me-auto">{{ $assignment->title }}</h5>
                                     </td>
                                     <td>
-                                        <h6 class="card-title ms-auto {{ now()->gte($assignment->deadline) ? 'text-danger' : 'text-success' }}"> Deadline {{ $assignment->deadline }}</h6>
+                                        <h6 class="card-title ms-auto {{ now()->gte($assignment->deadline) ? 'text-danger' : 'text-success' }}">{{  \Carbon\Carbon::parse($assignment->deadline)->isoFormat('dddd, D MMMM Y H:mm')  }}</h6>
                                     </td>
                                     <td>
                                         <div class="d-flex a-center">
