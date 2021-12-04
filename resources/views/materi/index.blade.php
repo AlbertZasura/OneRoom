@@ -27,7 +27,7 @@
                 @foreach($user_class as $user_classes)
                     <div class="cursor-pointer card-shadow card-box mb-2 {{ request()->input('class_id') != '' ? request()->input('class_id') == $user_classes->id ? 'active' : ''  : '' }}" onclick="window.location='/teacherCourse?class_id={{$user_classes->id}}'; openCardMenu()">
                         <div>{{$user_classes->name}}</div>
-                        <div class="text-right">{{$user_classes->classesCourse->unique()->count()}} Pelajaran</div>
+                        <div class="text-right">{{$user_classes->teachersCourses(Auth::id())->count()}} Pelajaran</div>
                     </div>
                 @endforeach
 

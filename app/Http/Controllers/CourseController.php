@@ -127,6 +127,13 @@ class CourseController extends Controller
         $user = User::find(Auth::id());
         $class = Classes::find(request()->input('class_id'));
         $courseTeacher = $class->classesCourse;
+        // foreach($class->classesCourse as $item){
+        //     if($item->getOriginal('pivot_user_id') == Auth::id())
+        //     {
+        //         $courseTeacher->push($item);
+        //     }
+        // }
+        // dd($class->teachersCourses(Auth::id())->toSql());
         $cls = $user->classes;
         $userClass = $user->usersClasses->unique();
         $course = $courseTeacher->first();

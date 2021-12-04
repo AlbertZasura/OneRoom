@@ -20,15 +20,24 @@ class AssignmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function course(Course $course)
+    public function course()
     {
         $this->authorize('viewAny', App\Models\Assignment::class);
         if(Auth::user()->classes->isEmpty()){
             return view('warnings/warningPage');
         }
-        $courses = Course::whereHas('classes.users',function(Builder $query){
-            $query->where('user_id',Auth::user()->id);
-        })->get();
+        switch(Auth::user()->role){
+            case 'student':
+                $courses = Course::whereHas('classes.users',function(Builder $query){
+                    $query->where('user_id',Auth::user()->id);
+                })->get();
+                break;
+            case 'teacher':
+                $courses = Course::whereHas('classes',function(Builder $query){
+                    $query->where('user_id',Auth::user()->id);
+                })->get();
+                break;
+        }
         return view('assignments.course', [
             'courses' => $courses
         ]);
@@ -38,16 +47,19 @@ class AssignmentController extends Controller
     {
         $this->authorize('viewAny', App\Models\Assignment::class);
         $user = Auth::user();
-        $courses = Course::whereHas('classes.users',function(Builder $query) use ($user){
-            $query->where('user_id',$user->id);
-        })->get();
         // $assignments = is_null($course->classes->first()) ? '': $course->classes->first()->assignments ;
         switch(Auth::user()->role){
             case 'student':
+                $courses = Course::whereHas('classes.users',function(Builder $query) use ($user){
+                    $query->where('user_id',$user->id);
+                })->get();
                 $assignments = Assignment::where('course_id',$course->id)->where('class_id',$user->classes->first()->id);
                 break;
             case 'teacher':
-                $classes = Classes::whereRelation('users','users.id',$user->id)->whereRelation('courses','courses.id',$course->id)->get();
+                $courses = Course::whereHas('classes',function(Builder $query)use ($user){
+                    $query->where('user_id',$user->id);
+                })->get();
+                $classes = $user->classCourses($course->id)->get();
                 $assignments = Assignment::where('course_id',$course->id)->whereIn('class_id',$user->classes->pluck('id'));
                 if (request('class')) {
                     $assignments =$assignments->where('class_id',request('class'));
