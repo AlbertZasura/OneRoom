@@ -23,7 +23,7 @@
                                     @php($assignment = $audit->new_values)
                                     <tr>
                                         <th scope="row">{{ $key + 1 }}</th>
-                                        <td>{{ $assignment['updated_at'] }}</td>
+                                        <td>{{  \Carbon\Carbon::parse($assignment['updated_at'])->isoFormat('D MMMM Y, H:mm')  }}</td>
                                         <td>{{ $assignment['notes'] }}</td>
                                         <td>
                                             <a download="{{ $assignment['file'] }}"

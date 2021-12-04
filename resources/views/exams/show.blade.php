@@ -73,7 +73,7 @@
                 <tr>
                     <th scope="col">Nama Ujian</th>
                     <th scope="col">Waktu Ujian</th>
-                    <th scope="col">Action</th>
+                    <th scope="col">Aksi</th>
                     @can('viewTeacher', App\Models\Exam::class )
                         <th scope="col">Jumlah Pengumpulan</th>
                     @endcan

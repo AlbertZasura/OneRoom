@@ -59,7 +59,8 @@
                     <tr>
                         <td>{{$item->name}}</td>
                         <td>
-                            <div>{{date('d-m-Y', strtotime($item->created_at))}} {{date('H:i', strtotime($item->update_at))}}</div>
+                            <div>{{  \Carbon\Carbon::parse($item->pivot->updated_at)->isoFormat('D MMMM Y, H:mm')  }}</div>
+                            
                         </td>
                         <td>
                             <div>{{$item->pivot->notes ? $item->pivot->notes : 'Tidak ada catatan' }}</div>
