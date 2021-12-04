@@ -67,7 +67,7 @@
                                 <p>{{ $user->name }}</p> 
                             </td>
                             <td>
-                                <p>{{ $user->pivot->created_at }}</p> 
+                                <p>{{  \Carbon\Carbon::parse($user->pivot->created_at)->isoFormat('D MMMM Y, H:mm')  }}</p>
                             </td>
                             <td>
                                 <p>{{ $user->pivot->notes }}</p> 

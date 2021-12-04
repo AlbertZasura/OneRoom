@@ -3,7 +3,7 @@
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header border-bottom-0">
-                <h5 class="modal-title" id="exampleModalLabel">Riwayat Pengumpulan Tugas {{ $i->title }}</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Riwayat Pengumpulan Ujian {{ $i->title }}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
@@ -23,7 +23,7 @@
                                     @php($exam = $item->new_values)
                                     <tr>
                                         <th scope="row">{{ $key + 1 }}</th>
-                                        <td>{{ $exam['updated_at'] }}</td>
+                                        <td>{{  \Carbon\Carbon::parse( $exam['updated_at'])->isoFormat('D MMMM Y, H:mm')  }}</td>
                                         <td>{{ $exam['notes'] }}</td>
                                         <td>
                                             <a download="{{ $exam['file'] }}"
