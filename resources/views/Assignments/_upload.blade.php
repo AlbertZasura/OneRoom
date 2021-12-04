@@ -1,8 +1,8 @@
 <div class="modal fade" id="uploadAssignments{{$assignment->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Upload Tugas {{$assignment->title}}</h5>
+            <div class="modal-header border-bottom-0">
+                <h5 class="modal-title" id="exampleModalLabel">Unggah Tugas {{$assignment->title}}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form action="{{route('assignments.upload',$assignment)}}" method="POST"  enctype="multipart/form-data">
@@ -23,9 +23,9 @@
                         <div class="errors">{{$message}}</div>
                     @enderror
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancel</button>
-                    <button type="submit" class="btn btn-primary">Submit</button>
+                <div class="modal-footer border-top-0">
+                    <button type="button" class="btn btn-outline-green rounded-pill" data-bs-dismiss="modal">Batal</button>
+                    <button type="submit" class="btn btn-fill-green rounded-pill">Simpan</button>
                 </div>
             </form>
         </div>

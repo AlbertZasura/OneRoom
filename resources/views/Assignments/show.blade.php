@@ -30,7 +30,7 @@
                         </nav>
                     </div>
                    
-                    <p class="my-2 text-center {{(now()->gte($assignment->deadline)) ? "text-danger" : "text-success"}}">{{$assignment->deadline}}</p>
+                    <p class="my-2 text-center {{(now()->gte($assignment->deadline)) ? "text-danger" : "text-success"}}">{{  \Carbon\Carbon::parse($assignment->deadline)->isoFormat('dddd, D MMMM Y H:mm')  }}</p>
                     <div class="d-flex ms-auto justify-content-center">
                         <a href="{{ route('assignments.download',$assignment->id) }}?type=question" class="btn"><i class='fs-25 fa fa-download'></i></a>
                         <form action="{{ route('course.assignments.destroy',[$course,$assignment]) }}" method="POST">   
