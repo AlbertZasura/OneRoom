@@ -136,21 +136,17 @@
                                     <form action="/exams/submitExam?e={{$i->id}}" method="POST" enctype="multipart/form-data">
                                     @csrf
                                         <div class="modal-body">
-                                            <div class="row g-3 align-items-center">
-                                                <div class="col-auto">
-                                                    <label for="note86" class="col-form-label">Notes</label>
-                                                </div>
-                                                <div class="col-auto">
-                                                    <input type="text"  name="notes" class="form-control" >
-                                                </div>
+                                            <div class="mt-0 mx-2">
+                                                <label class="col-form-label" style="font-size: 16px;">Catatan</label>
+                                                <input type="text"  name="notes" class="form-control form-input-color" >
                                             </div>
-                                            <div class="input-group mb-3">
+                                            <div class="input-group mb-3 mx-2 mt-20">
                                                 <input type="file" name="file_upload" class="form-control" id="inputGroupFile01">
                                             </div>
                                         </div>
                                         <div class="modal-footer">
-                                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-                                            <button type="submit" class="btn btn-primary">Submit</button>
+                                            <button type="button" class="btn btn-outline-green rounded-pill px-20px" data-bs-dismiss="modal">Batal</button>
+                                            <button type="submit" class="btn btn-fill-green rounded-pill px-20px">Simpan</button>
                                         </div>
                                     </form>
                                 </div>
