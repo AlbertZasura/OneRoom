@@ -1,6 +1,6 @@
 @extends('Layout.SidePanel')
 
-@section('title', 'Materi | OneRoom')
+@section('title', 'Mapping | OneRoom')
 
 @section('content')
 <h1>Mapping</h1>
