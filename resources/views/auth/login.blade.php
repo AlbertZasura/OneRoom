@@ -68,8 +68,8 @@
                                 class="form-control form-input-color rounded-bottom @error('password')is-invalid @enderror"
                                 id="passwordLogin" required autocomplete="current-password">
                             <label for="password">Password</label>
-                            <i class="far fa-eye visible-password" id="openEye" onclick="showPassword()"></i>
-                            <i class="far fa-eye-slash visible-password d-none" id="closeEye" onclick="hidePassword()"></i>
+                            {{-- <i class="far fa-eye visible-password" id="openEye" onclick="showPassword()"></i>
+                            <i class="far fa-eye-slash visible-password d-none" id="closeEye" onclick="hidePassword()"></i> --}}
                             @error('password')
                                 <div class="invalid-feedback"><strong>{{ $message }}</strong></div>
                             @enderror
@@ -107,16 +107,16 @@
         @include('auth._role_modal')
     </div>
     <script>
-        function showPassword() {
-            document.getElementById("passwordLogin").type = 'text'
-            document.getElementById("openEye").classList.add("d-none")
-            document.getElementById("closeEye").classList.remove("d-none")
-        }
+        // function showPassword() {
+        //     document.getElementById("passwordLogin").type = 'text'
+        //     document.getElementById("openEye").classList.add("d-none")
+        //     document.getElementById("closeEye").classList.remove("d-none")
+        // }
 
-        function hidePassword() {
-            document.getElementById("passwordLogin").type = 'password'
-            document.getElementById("openEye").classList.remove("d-none")
-            document.getElementById("closeEye").classList.add("d-none")
-        }
+        // function hidePassword() {
+        //     document.getElementById("passwordLogin").type = 'password'
+        //     document.getElementById("openEye").classList.remove("d-none")
+        //     document.getElementById("closeEye").classList.add("d-none")
+        // }
     </script>
 @endsection

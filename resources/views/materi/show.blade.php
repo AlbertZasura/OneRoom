@@ -18,7 +18,7 @@
                 @endif
             @endforeach
         </select>
-    
+        
         @if(isset($ses))
             <div class="scroll-y custom-scroll-y" style="max-height: 444px;">
                 @foreach($ses as $item)
@@ -32,10 +32,9 @@
                             </h2>
                             <div id="collapse{{$item->id}}" class="accordion-collapse collapse" aria-labelledby="heading{{$item->id}}" data-bs-parent="#accordionExample">
                                 <div class="accordion-body">
-                                    <div>{{$item->description}}</div>
-                                    <div onclick="window.location='{{route('uploaded',$item->id)}}'; openCardMenu()" class="cursor-pointer d-flex a-center color-hijau-tua view-session">
-                                        <i class="fas fa-scroll mr-10"></i> <span>Lihat Materi</span>
-                                    </div>
+                                    <p>{{$item->description}}</p>
+                                    <p class="color-hijau-tua m-0"><i class="fas fa-scroll mr-10"></i> <span>Unduh Materi</span></p>
+                                    <a href="{{route('uploaded',$item->id)}}" target="_blank"><small>{{ $item->file }}</small></a>
                                 </div>
                             </div>
                         </div>

@@ -10,8 +10,8 @@
         <div class="col-md-2">
             <select class="form-select" id = "filterTable" oninput="selectTable()" aria-label="Default select example">
                 <option value="">Semua Jabatan</option>
-                <option value="teacher">teacher</option>
-                <option value="student">student</option>
+                <option value="guru">Guru</option>
+                <option value="siswa">Siswa</option>
             </select>
         </div>
         

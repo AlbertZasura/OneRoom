@@ -50,7 +50,7 @@
                         @if(Auth::user()->profile_picture) 
                             <img class="w-auto h-100" src="{{ asset('storage/images/'.Auth::user()->profile_picture) }}" alt="">
                         @else
-                            <img class="w-auto h-100" src="{{ asset('img/profile.png') }}" alt="">
+                            <img class="img-fluid img-thumbnail" src="{{ asset('img/profile.png') }}" alt="">
                         @endif
                     </div>
                 </div>
