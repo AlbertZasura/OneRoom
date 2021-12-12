@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/layout.css') }}">
     <link href="{{ asset('css/fullcalendar.css') }}" rel='stylesheet' />
-    <link href="{{ asset('css/fullcalendar.print.css') }}" rel='stylesheet' media='print'/>
+    <link href="{{ asset('css/fullcalendar.print.css') }}" rel='stylesheet' media='print'/> 
     <script src="https://kit.fontawesome.com/6538af5efe.js" crossorigin="anonymous"></script>
     <link href='https://fonts.googleapis.com/css?family=Montserrat:100,200,300,400,500,600,700,800,900' rel='stylesheet'>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>

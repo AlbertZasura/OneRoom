@@ -100,7 +100,7 @@ class ExamController extends Controller
             'class_id' => $request->class_id
         ]);
 
-        return redirect()->route('exams.index')->with('success','Exam created successfully.');
+        return redirect()->route('exams.index')->with('success','Ujian berhasil ditambahkan!');
     }
 
     /**
@@ -163,7 +163,7 @@ class ExamController extends Controller
             }else{
                 $exam->users()->updateExistingPivot(Auth::user()->id, ['file' => $fileName, 'notes' => $request->notes]);
             }
-            return redirect()->route('exams.index')->with('success','exams created successfully.');
+            return redirect()->route('exams.index')->with('success','Ujian berhasil dikumpulkan!');
 
         }else{
             dd("no file upload");
@@ -178,7 +178,7 @@ class ExamController extends Controller
         $user->examsId(request()->input('pivotId'))->updateExistingPivot($request->e, ['score' => $request->score]);
 
         
-        return redirect()->route('examsubmitlist', $request->e)->with('success','Score successfully created.');    
+        return redirect()->route('examsubmitlist', $request->e)->with('success','Ujian berhasil dinilai.');    
         
         
     }
