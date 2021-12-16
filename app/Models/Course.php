@@ -40,8 +40,16 @@ class Course extends Model
         return $this->hasMany(Assignment::class);
     }
 
+    public function posts(){
+        return $this->hasMany(Post::class);
+    }
+
     public function classAssignments($class){
         return $this->assignments()->whereIn('class_id', $class);
+    }
+
+    public function classPosts($class){
+        return $this->posts()->whereIn('class_id', $class);
     }
 
     public function exams(){
