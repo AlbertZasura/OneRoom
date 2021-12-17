@@ -40,6 +40,7 @@
                             @can('assign_user', App\Models\Classes::class )
                                 <th>Aksi</th>
                             @endcan
+                            <th>Contact</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -65,6 +66,29 @@
                                         </form>
                                     </td>
                                 @endcan
+                                <td>
+                                    <button class="btn btn-outline-green rounded-pill d-flex a-center" data-bs-toggle="modal" data-bs-target="#exampleModal{{$user->id}}">
+                                        <i class="fab fa-whatsapp mr-10 fs-25"></i> {{ $user->phone }}
+                                    </button>
+                                    
+                                    <div class="modal fade" id="exampleModal{{$user->id}}" tabindex="-1" aria-labelledby="exampleModalLabel{{$user->id}}" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-body">
+                                                    <div>
+                                                        <label class="col-form-label">Kirim Pesan Ke {{ $user->name }} melalui whatsapp</label>
+                                                        <input id="message{{$user->id}}" type="text" class="form-control form-input-color" >
+                                                    </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-outline-green rounded-pill px-20px" data-bs-dismiss="modal">Batal</button>
+                                                    <button onclick="sendMessage( '{{$user->phone}}', {{$user->id}} )" class="btn btn-fill-green rounded-pill px-20px">Simpan</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                                
                             </tr>
                         @endforeach
                     </tbody>
@@ -73,4 +97,19 @@
             {{ $users->links() }}
         </div>
     </div>
+
+    <script>
+        function sendMessage(phone, id){
+            phone = phone.replace(/\s/g, '');
+            var msg = document.getElementById('message'+id).value;
+            if(phone.startsWith('0')){
+                phone = 62 + phone.slice(1);
+            }
+
+            var link = "https://api.whatsapp.com/send?phone="+ phone +"&text=" + msg;
+
+            window.open(link, '_blank');
+            
+        }
+    </script>
 @endsection
