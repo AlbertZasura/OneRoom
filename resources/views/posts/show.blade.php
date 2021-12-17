@@ -88,7 +88,7 @@
                         </div>
                         <div class="col-md-10">
                             <p class="card-text">{{ $comment->description }}</p>
-                            <a href="{{ route('comments.download',$post->id) }}">{{ $comment->attachment }}</a>
+                            <a href="{{ route('comments.download',$comment->id) }}">{{ $comment->attachment }}</a>
                         </div>
                     </div>
                     @can('delete', $comment)

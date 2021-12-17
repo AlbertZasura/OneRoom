@@ -128,7 +128,7 @@ class PostController extends Controller
 
     public function download(Post $post)
     {
-        $pathToFile = storage_path('app\public\file\\'.$post->attachment);
+        $pathToFile = storage_path('app\public\file\\' . $post->attachment);
         return response()->download($pathToFile);
     }
 }
