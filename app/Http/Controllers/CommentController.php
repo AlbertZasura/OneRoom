@@ -27,8 +27,8 @@ class CommentController extends Controller
         ]);
         if(!empty($request->file('attachment'))){
             $file = $request->file('attachment');
-            $fileName =  now()->format('Y-m-d-H-i-s')."".Auth::id()."_".$file->getClientOriginalName();
-            $file->storeAs('public/file', $fileName);
+            $filename =  now()->format('Y-m-d-H-i-s')."".Auth::id()."_".$file->getClientOriginalName();
+            $file->storeAs('public/file', $filename);
         }else{
             $filename='';
         }
@@ -56,13 +56,15 @@ class CommentController extends Controller
 
     public function destroy(Post $post, Comment $comment)
     {
-        // $this->authorize('delete', $post);
+        $this->authorize('delete', $comment);
         $comment->delete();
         Alert::success('Berhasil', "Komentar berhasil dihapus!");
         return back();
     }
 
-    public function downloadFile($id)
+    public function download(Comment $comment)
     {
+        $pathToFile = storage_path('app\public\file\\'.$comment->attachment);
+        return response()->download($pathToFile);
     }
 }

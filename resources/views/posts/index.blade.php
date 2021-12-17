@@ -72,16 +72,16 @@
                                     </td>
                                     <td>
                                         <div class="d-flex a-center">
-                                            {{-- @can('delete', $post) --}}
-                                            <form action="{{ route('course.posts.destroy', [$course, $post]) }}"
-                                                method="POST">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button class="btn" type="submit"
-                                                    onclick="return confirm('Apakah Anda yakin untuk menghapus forum {{ $post->title }}?')"><i
-                                                        class='fs-25 fa fa-trash text-danger'></i></button>
-                                            </form>
-                                            {{-- @endcan --}}
+                                            @can('delete', $post)
+                                                <form action="{{ route('course.posts.destroy', [$course, $post]) }}"
+                                                    method="POST">
+                                                    @csrf
+                                                    @method('DELETE')
+                                                    <button class="btn" type="submit"
+                                                        onclick="return confirm('Apakah Anda yakin untuk menghapus forum {{ $post->title }}?')"><i
+                                                            class='fs-25 fa fa-trash text-danger'></i></button>
+                                                </form>
+                                            @endcan
                                             <a href="{{ route('course.posts.show', [$course, $post]) }}"
                                                 class="m-1 btn">
                                                 {{ $post->comments->count() }} komentar

@@ -25,13 +25,15 @@
                     </div>
 
                     <div class="d-flex ms-auto justify-content-center">
-                        <form action="{{ route('course.posts.destroy', [$course, $post]) }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button class="btn" type="submit"
-                                onclick="return confirm('Apakah Anda yakin untuk menghapus forum {{ Str::limit($post->title, 50)  }} ?')"><i
-                                    class='fs-25 fa fa-trash text-danger'></i></button>
-                        </form>
+                        @can('delete', $post)
+                            <form action="{{ route('course.posts.destroy', [$course, $post]) }}" method="POST">
+                                @csrf
+                                @method('DELETE')
+                                <button class="btn" type="submit"
+                                    onclick="return confirm('Apakah Anda yakin untuk menghapus forum {{ Str::limit($post->title, 50)  }} ?')"><i
+                                        class='fs-25 fa fa-trash text-danger'></i></button>
+                            </form>
+                        @endcan
                         <p class="btn m-0">{{ $post->comments->count() }} Komentar</p>
                     </div>
                 </div>
@@ -58,6 +60,7 @@
                     <div class="col-md-10">
                         <h4 class="card-title">{{ $post->title }}</h4>
                         <p class="card-text">{{ $post->description }}</p>
+                        <a href="{{ route('posts.download',$post->id) }}">{{ $post->attachment }}</a>
                     </div>
                 </div>
                 <div class="card-footer bg-white border-top-0 text-end">
@@ -85,9 +88,10 @@
                         </div>
                         <div class="col-md-10">
                             <p class="card-text">{{ $comment->description }}</p>
-                            <p class="card-text">{{ $comment->attachment }}</p>
+                            <a href="{{ route('comments.download',$post->id) }}">{{ $comment->attachment }}</a>
                         </div>
                     </div>
+                    @can('delete', $comment)
                     <div class="card-footer bg-white border-top-0 text-end">
                         <div class="align-item-center">
                             <form action="{{ route('post.comments.destroy', [$post, $comment]) }}" method="POST">
@@ -99,6 +103,7 @@
                             </form>
                         </div>
                     </div>
+                    @endcan
                 </div>
             @endforeach
             <form action="{{ route('post.comments.store', $post) }}" method="POST" enctype="multipart/form-data">

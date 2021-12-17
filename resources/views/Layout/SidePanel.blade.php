@@ -100,7 +100,7 @@
                                 @endcan
                             </div>
                         </div>
-                        @can('viewAny', App\Models\Assignment::class)
+                        @can('viewAny', App\Models\Post::class)
                             <div
                                 class="d-flex a-center side-panel-hover px-20px py-1 {{ Request::path() == 'posts' || Request::is('posts*') ? 'side-panel-active' : '' }}">
                                 <div class="fs-25 w-25px">

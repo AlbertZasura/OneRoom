@@ -61,9 +61,11 @@ Route::middleware(['auth','verified'])->group(function () {
     Route::resource('session', SessionController::class);
 
     Route::get('/posts', [PostController::class, 'course']);
+    Route::get('/posts/{post}/download', [PostController::class, 'download'])->name('posts.download');
     Route::resource('course.posts', PostController::class);
     Route::resource('post.comments', CommentController::class);
-    
+    Route::get('/comments/{comment}/download', [CommentController::class, 'download'])->name('comments.download');
+
     Route::get('courses/download/{id}', [CourseController::class, 'downloadFile'])->name('uploaded');
     Route::resource('courses', CourseController::class);
     Route::post('course/createCourse', [CourseController::class, 'createCourse']);

@@ -13,7 +13,7 @@ class PostController extends Controller
 {
     public function course()
     {
-        // $this->authorize('viewAny', App\Models\Assignment::class);
+        $this->authorize('viewAny', App\Models\Post::class);
         if (Auth::user()->classes->isEmpty()) {
             return view('warnings/warningPage');
         }
@@ -36,7 +36,7 @@ class PostController extends Controller
 
     public function index(Course $course)
     {
-        // $this->authorize('viewAny', App\Models\Assignment::class);
+        $this->authorize('viewAny', App\Models\Post::class);
         $user = Auth::user();
         switch (Auth::user()->role) {
             case 'student':
@@ -75,7 +75,6 @@ class PostController extends Controller
 
     public function store(Request $request, Course $course)
     {
-        // $this->authorize('create', App\Models\Assignment::class);
         $request->validate([
             'title' => 'required',
             'description' => 'required',
@@ -83,8 +82,8 @@ class PostController extends Controller
         ]);
         if (!empty($request->file('attachment'))) {
             $file = $request->file('attachment');
-            $fileName =  now()->format('Y-m-d-H-i-s') . "" . Auth::id() . "_" . $file->getClientOriginalName();
-            $file->storeAs('public/file', $fileName);
+            $filename =  now()->format('Y-m-d-H-i-s') . "" . Auth::id() . "_" . $file->getClientOriginalName();
+            $file->storeAs('public/file', $filename);
         } else {
             $filename = '';
         }
@@ -103,7 +102,7 @@ class PostController extends Controller
     public function show(Course $course, Post $post)
     {
         // $this->authorize('view', $post);
-        $comments = $post->comments()->paginate(25);
+        $comments = $post->comments;
         return view('posts.show', [
             'post' => $post,
             'course' => $course,
@@ -127,7 +126,9 @@ class PostController extends Controller
         return redirect()->route('course.posts.index', $course);
     }
 
-    public function downloadFile($id)
+    public function download(Post $post)
     {
+        $pathToFile = storage_path('app\public\file\\'.$post->attachment);
+        return response()->download($pathToFile);
     }
 }
