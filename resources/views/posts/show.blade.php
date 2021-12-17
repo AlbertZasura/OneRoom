@@ -64,7 +64,7 @@
                     </div>
                 </div>
                 <div class="card-footer bg-white border-top-0 text-end">
-                    <a href="#" class="btn btn-outline-green rounded-pill">Balas</a>
+                    <button onclick="autoScroll()" class="btn btn-outline-green rounded-pill">Balas</button>
                 </div>
             </div>
             @foreach ($comments as $key => $comment)
@@ -106,31 +106,63 @@
                     @endcan
                 </div>
             @endforeach
-            <form action="{{ route('post.comments.store', $post) }}" method="POST" enctype="multipart/form-data">
-                <div class="modal-body">
-                    @csrf
-                    <div class="form-group mb-3">
-                        <label for="description" class="col-form-label"><b>Deskripsi</b></label>
-                        <textarea class="form-control @error('description')is-invalid @enderror" style="height:150px"
-                            id="description" name="description" placeholder="Komentar" required></textarea>
-                        @error('description')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
+            <div class="accordion-item mb-4" id="makePost">
+                <h2 class="accordion-header" >
+                    <button class="accordion-button collapsed accordion-button-none" type="button" onclick="openEditSession()" >
+                        <span class="color-hijau-tua fw-bolder d-flex" style="height: 20px;"><i class="far fa-plus-square" style="margin-top: 3px; margin-right: 10px;"></i> 
+                            <p>Buat balasan baru</p>
+                        </span>
+                    </button>
+                </h2>
+            </div>
+            <div class="d-none" id="formEditSession">
+                <form action="{{ route('post.comments.store', $post) }}" method="POST" enctype="multipart/form-data">
+                    <div class="modal-body">
+                        @csrf
+                        <div class="form-group mb-3">
+                            <label for="description" class="col-form-label"><b>Deskripsi</b></label>
+                            <textarea class="form-control @error('description')is-invalid @enderror" style="height:150px"
+                                id="description" name="description" placeholder="Komentar" required></textarea>
+                            @error('description')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+                        <div class="form-group mb-3">
+                            <label class="col-form-label" for="attachment"><b>Attachment</b> (optional)</label>
+                            <input type="file" name="attachment" class="form-control @error('attachment')is-invalid @enderror"
+                                id="attachment">
+                            @error('attachment')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
                     </div>
-                    <div class="form-group mb-3">
-                        <label class="col-form-label" for="attachment"><b>Attachment</b> (optional)</label>
-                        <input type="file" name="attachment" class="form-control @error('attachment')is-invalid @enderror"
-                            id="attachment">
-                        @error('attachment')
-                            <div class="invalid-feedback">{{ $message }}</div>
-                        @enderror
+                    <div class="modal-footer border-top-0">
+                        <button type="button" class="btn btn-outline-green rounded-pill" data-bs-dismiss="modal">Batal</button>
+                        <button type="submit" class="btn btn-fill-green rounded-pill">Simpan</button>
                     </div>
-                </div>
-                <div class="modal-footer border-top-0">
-                    <button type="button" class="btn btn-outline-green rounded-pill" data-bs-dismiss="modal">Batal</button>
-                    <button type="submit" class="btn btn-fill-green rounded-pill">Simpan</button>
-                </div>
-            </form>
+                </form>
+
+            </div>
         </div>
     </div>
+
+    <script>
+        function openEditSession(){
+            document.getElementById("formEditSession").classList.toggle("d-none");
+            $(document).scrollTop($(document).height(), 100);
+        }
+
+        function getOffset(el) {
+            const rect = el.getBoundingClientRect();
+            return {
+                left: rect.left + window.scrollX,
+                top: rect.top + window.scrollY
+            };
+        }
+
+        function autoScroll() {
+            $('body,html').animate({ scrollTop: getOffset(document.getElementById("makePost")).top - 150 }, 500);
+            openEditSession();
+        }
+    </script>
 @stop
