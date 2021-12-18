@@ -54,14 +54,14 @@
                     </div>
                     <div class="col-md-11 col-12">
                         <div class="row">
-                            <div class="col-10 col-12">
+                            <div class="col-md-10 col-12">
                                 <div>
                                     <h4 class="card-title">{{ $post->title }}</h4>
                                     <p class="card-text">{{ $post->description }}</p>
                                     <a href="{{ route('posts.download',$post->id) }}">{{ $post->attachment }}</a>
                                 </div>
                             </div>
-                            <div class="col-2 col-12">
+                            <div class="col-md-2 col-12">
                                 <div class="text-end">
                                     <p class="card-text mb-0">
                                         <small class="text-muted">{{ \Carbon\Carbon::parse($post->created_at)->isoFormat('D MMMM Y') }}</small>
