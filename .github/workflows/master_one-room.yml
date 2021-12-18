@@ -56,5 +56,5 @@ jobs:
         with:
           app-name: 'one-room'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_DF8431AFBAD845F3A866CB6B0FBE0005 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_0E807B24F6CF4D778E0F26EC21940029 }}
           package: .
