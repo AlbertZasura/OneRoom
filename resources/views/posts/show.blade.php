@@ -81,11 +81,11 @@
             @foreach ($comments as $key => $comment)
                 @if($comment->user_id == Auth::id())
                     <div class="card my-4 p-md-2 bg-biru-muda border-0 pos-relative">
-                        <div class="card-body row">
+                        <div class="card-body row mobile-col-reverse">
                             <div class="col-md-11">
-                                <div class="row">
-                                    <div class="col-2">
-                                        <div>
+                                <div class="row mobile-col-reverse">
+                                    <div class="col-2 col-12">
+                                        <div class="mobile-text-end">
                                             <p class="card-text mb-0"><small
                                                     class="text-muted">{{ \Carbon\Carbon::parse($comment->created_at)->isoFormat('D MMMM Y') }}</small>
                                             </p>
@@ -109,7 +109,7 @@
                                         @endcan
                                         </div>
                                     </div>
-                                    <div class="text-end col-10">
+                                    <div class="text-end mobile-text-start col-10 col-12">
                                         <p class="card-text">{{ $comment->description }}</p>
                                         <a href="{{ route('comments.download',$comment->id) }}">{{ $comment->attachment }}</a>
                                     </div>
@@ -126,7 +126,7 @@
                                             <img class="img-fluid img-thumbnail" src="{{ asset('img/profile.png') }}" alt="">
                                         @endif
                                     </div>
-                                    <p class="card-text mt-2">{{ $comment->user->name }}</p>
+                                    <p class="card-text mt-2 mobile-mb-20">{{ $comment->user->name }}</p>
                                 </div>
                             </div>
                         </div>
@@ -135,7 +135,7 @@
                 @else
                 <div class="card my-4 p-md-2 bg-light-toska border-0 pos-relative">
                     <div class="card-body row">
-                        <div class="col-md-1 text-center">
+                        <div class="col-md-1 col-12 text-center">
                             <div>
                                 <div class="profile-picture" style="width: 70px; height: 70px;">
                                     @if ($comment->user->profile_picture)
@@ -145,16 +145,16 @@
                                         <img class="img-fluid img-thumbnail" src="{{ asset('img/profile.png') }}" alt="">
                                     @endif
                                 </div>
-                                <p class="card-text mt-2">{{ $comment->user->name }}</p>
+                                <p class="card-text mt-2 mobile-mb-20">{{ $comment->user->name }}</p>
                             </div>
                         </div>
-                        <div class="col-md-11">
+                        <div class="col-md-11 col-12">
                                 <div class="row">
-                                    <div class="text-start col-10">
+                                    <div class="text-start col-10 col-12 mobile-mb-20">
                                         <p class="card-text">{{ $comment->description }}</p>
                                         <a href="{{ route('comments.download',$comment->id) }}">{{ $comment->attachment }}</a>
                                     </div>
-                                    <div class="col-2">
+                                    <div class="col-2 col-12">
                                         <div class="text-end">
                                             <p class="card-text mb-0"><small
                                                     class="text-muted">{{ \Carbon\Carbon::parse($comment->created_at)->isoFormat('D MMMM Y') }}</small>
@@ -170,7 +170,7 @@
                                                         <form action="{{ route('post.comments.destroy', [$post, $comment]) }}" method="POST">
                                                             @csrf
                                                             @method('DELETE')
-                                                            <button class="btn pos-absolute" style="bottom: 8px; right: 11px;" type="submit"
+                                                            <button class="btn pos-absolute mobile-r-78" style="bottom: 8px; right: 11px;" type="submit"
                                                                 onclick="return confirm('Apakah Anda yakin untuk menghapus komentar ini?')"><i
                                                                     class='fs-25 fa fa-trash text-danger'></i></button>
                                                         </form>

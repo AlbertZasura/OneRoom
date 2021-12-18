@@ -554,5 +554,17 @@ body{
     .mobile-text-end{
         text-align: end !important;
     }
+
+    .mobile-text-start{
+        text-align: start !important;
+    }
+
+    .mobile-r-78{
+        right: 78% !important;
+    }
+
+    .mobile-col-reverse{
+        flex-direction: column-reverse !important;
+    }
     
 }
