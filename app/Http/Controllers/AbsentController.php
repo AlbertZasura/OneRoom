@@ -25,7 +25,7 @@ class AbsentController extends Controller
         $this->authorize('absentGrid', Absent::class);
         $classes = Auth::user()->classes;
         $schedules = Schedule::with('course')->whereIn('class_id',Auth::user()->classes->pluck('id'))->filter(request(['class']));
-        return view('absents.grid', [
+        return view('Absents.grid', [
             'schedules' => $schedules->get(),
             'classes' => $classes
         ]);
@@ -40,7 +40,7 @@ class AbsentController extends Controller
         if ($courses->isEmpty()){
             return view('warnings/warningPage');
         }else{
-            return view('absents.course', [
+            return view('Absents.course', [
                 'courses' => $courses
             ]);
         }
@@ -68,7 +68,7 @@ class AbsentController extends Controller
                 // break;
         }
 
-        return view('absents.index', [
+        return view('Absents.index', [
             'course'=> $course,
             'courses' => $courses,
             'schedules'=> $schedules->get()
@@ -88,7 +88,7 @@ class AbsentController extends Controller
                 $users = User::where('role',1)->filter(request(['search']));
                 break;
         }
-        return view('absents.list_user', [
+        return view('Absents.list_user', [
             'schedule' => $schedule,
             'users' => $users->paginate(25)->appends(['date' => request('date'), 'schedule' => request('schedule')]),
             'role' => $role
