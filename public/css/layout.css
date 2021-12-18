@@ -507,7 +507,9 @@ body{
     .mobile-w-100{
         width: 100% !important;
     }
-
+    .mobile-w-50{
+        width: 50% !important;
+    }
     .resize-side-panel .profile-picture{
         width: 150px ;
         height: 150px ;
@@ -547,6 +549,10 @@ body{
 
     .mobile-col-none{
         flex: none !important;
+    }
+
+    .mobile-text-end{
+        text-align: end !important;
     }
     
 }

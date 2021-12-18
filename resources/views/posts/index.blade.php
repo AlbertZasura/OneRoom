@@ -15,7 +15,7 @@
             @php($selectedClasses = $classes->first())
             @can('isTeacher')
                 <form action="{{ route('course.posts.index', $course) }}" class="row mb-3">
-                    <div class="col-md-6">
+                    <div class="col-md-6 col-6">
                         <select class="form-select" name="class" id="filterClass" oninput="filterByClass()">
                             @foreach ($classes as $key => $class)
                                 @if (request()->get('class'))
@@ -32,7 +32,7 @@
                         </select>
 
                     </div>
-                    <div class="col-md-2">
+                    <div class="col-md-2 col-4">
                         <button type="submit" class="btn btn-fill-green">
                             <i class='fa fa-search'></i> Cari
                         </button>
@@ -96,19 +96,19 @@
                 <div class="card">
                     <div class="py-1 px-3">
                         <div class="row align-items-baseline">
-                            <div class="col-3">
+                            <div class="col-3 mobile-w-100">
                                 <p class="card-title me-auto">{{ Str::limit($post->title, 50) }}</p>
                             </div>
-                            <div class="col-2">
+                            <div class="col-2 mobile-w-50">
                                 <p class="card-title me-auto">{{ $post->user->name }}</p>
                             </div>
-                            <div class="col-4">
-                                <h6 class="card-title ms-auto">
+                            <div class="col-4 mobile-w-50">
+                                <h6 class="card-title ms-auto mobile-text-end">
                                     {{ \Carbon\Carbon::parse($post->created_at)->isoFormat('dddd, D MMMM Y H:mm') }}
                                 </h6>
                             </div>
-                            <div class="col-3">
-                                <div class="d-flex a-center">
+                            <div class="col-3 mobile-w-100">
+                                <div class="d-flex a-center  justify-content-between">
                                     @can('delete', $post)
                                         <form action="{{ route('course.posts.destroy', [$course, $post]) }}"
                                             method="POST">
