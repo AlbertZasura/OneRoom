@@ -98,8 +98,8 @@
                                             
                                             @endcan
                                             @can('view', $assignment)
-                                                <a href="{{ route('course.assignments.show', [$course, $assignment]) }}"class="m-1 btn">
-                                                    {{ $assignment->users->count() }} / {{ $assignment->class->students->count() }}
+                                                <a href="{{ route('course.assignments.show', [$course, $assignment]) }}"class="m-1 btn btn-outline-green rounded-pill px-20px">
+                                                    {{ $assignment->users->count() }} / {{ $assignment->class->students->count() }} 
                                                 </a>
                                             @endcan
                                         </div>

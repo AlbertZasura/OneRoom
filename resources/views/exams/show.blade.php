@@ -155,8 +155,10 @@
                     </td>
                     
                     @can('viewTeacher', $i)
-                        <td class="cursor-pointer" onclick="window.location='{{route('examsubmitlist',$i->id)}}'">
-                            {{$i->users->count()}} / {{count($i->class->first()->users->where('role','like','student'))}} Pengumpulan
+                        <td>
+                            <a href="{{route('examsubmitlist',$i->id)}}" class="btn btn-outline-green rounded-pill px-20px">
+                                {{$i->users->count()}} / {{count($i->class->first()->users->where('role','like','student'))}} Pengumpulan
+                            </a>
                         </td>
                     @endcan
                         

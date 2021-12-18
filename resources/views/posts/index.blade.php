@@ -120,7 +120,7 @@
                                         </form>
                                     @endcan
                                     <a href="{{ route('course.posts.show', [$course, $post]) }}"
-                                        class="btn">
+                                        class="btn btn-outline-green rounded-pill px-20px">
                                         {{ $post->comments->count() }} komentar
                                     </a>
                                 </div>
