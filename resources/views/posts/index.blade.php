@@ -46,7 +46,7 @@
 
 
             @if (!$posts->isEmpty())
-                <div class="table-responsive-lg">
+                <!-- <div class="table-responsive-lg">
                     <table class="table table-hover">
                         <thead>
                             <tr>
@@ -92,6 +92,42 @@
                             @endforeach
                         </tbody>
                     </table>
+                </div> -->
+                <div class="card">
+                    <div class="py-1 px-3">
+                        <div class="row align-items-baseline">
+                            <div class="col-3">
+                                <p class="card-title me-auto">{{ Str::limit($post->title, 50) }}</p>
+                            </div>
+                            <div class="col-2">
+                                <p class="card-title me-auto">{{ $post->user->name }}</p>
+                            </div>
+                            <div class="col-4">
+                                <h6 class="card-title ms-auto">
+                                    {{ \Carbon\Carbon::parse($post->created_at)->isoFormat('dddd, D MMMM Y H:mm') }}
+                                </h6>
+                            </div>
+                            <div class="col-3">
+                                <div class="d-flex a-center">
+                                    @can('delete', $post)
+                                        <form action="{{ route('course.posts.destroy', [$course, $post]) }}"
+                                            method="POST">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button class="btn" type="submit"
+                                                onclick="return confirm('Apakah Anda yakin untuk menghapus forum {{ $post->title }}?')"><i
+                                                    class='fs-25 fa fa-trash text-danger'></i></button>
+                                        </form>
+                                    @endcan
+                                    <a href="{{ route('course.posts.show', [$course, $post]) }}"
+                                        class="btn">
+                                        {{ $post->comments->count() }} komentar
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
                 </div>
             @else
                 <h3 class="text-center">Tidak ada Forum</h3>
