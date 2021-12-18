@@ -39,15 +39,10 @@
                 </div>
             </div>
 
-            <div class="card my-4 p-md-2">
-                <div class="card-header border-bottom-0 bg-white text-end">
-                    <p class="card-text"><small
-                            class="text-muted">{{ \Carbon\Carbon::parse($post->created_at)->isoFormat('D MMMM Y, H:mm') }}</small>
-                    </p>
-                </div>
+            <div class="card my-4 p-md-2 pos-relative">
                 <div class="card-body row">
-                    <div class="col-md-2 text-center">
-                        <div class="profile-picture">
+                    <div class="col-md-1 text-center">
+                        <div class="profile-picture" style="width: 70px; height: 70px;">
                             @if ($post->user->profile_picture)
                                 <img class="img-thumbnail img-fluid"
                                     src="{{ asset('storage/images/' . $post->user->profile_picture) }}" alt="">
@@ -57,54 +52,140 @@
                         </div>
                         <p class="card-text">{{ $post->user->name }}</p>
                     </div>
-                    <div class="col-md-10">
-                        <h4 class="card-title">{{ $post->title }}</h4>
-                        <p class="card-text">{{ $post->description }}</p>
-                        <a href="{{ route('posts.download',$post->id) }}">{{ $post->attachment }}</a>
+                    <div class="col-md-11">
+                        <div class="row">
+                            <div class="col-10">
+                                <div>
+                                    <h4 class="card-title">{{ $post->title }}</h4>
+                                    <p class="card-text">{{ $post->description }}</p>
+                                    <a href="{{ route('posts.download',$post->id) }}">{{ $post->attachment }}</a>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="text-end">
+                                    <p class="card-text mb-0">
+                                        <small class="text-muted">{{ \Carbon\Carbon::parse($post->created_at)->isoFormat('D MMMM Y') }}</small>
+                                    </p>
+                                    <p class="card-text">
+                                        <small class="text-muted">{{ \Carbon\Carbon::parse($post->created_at)->isoFormat('H:mm') }}</small>
+                                    </p>
+                                </div>
+                                <div class="d-flex justify-content-end">
+                                    <button onclick="autoScroll()" style="  right: 20px;  bottom: 12px;" class="pos-absolute btn btn-outline-green rounded-pill">Balas</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-                <div class="card-footer bg-white border-top-0 text-end">
-                    <button onclick="autoScroll()" class="btn btn-outline-green rounded-pill">Balas</button>
                 </div>
             </div>
             @foreach ($comments as $key => $comment)
-                <div class="card my-4 p-md-2">
-                    <div class="card-header border-bottom-0 bg-white text-end">
-                        <p class="card-text"><small
-                                class="text-muted">{{ \Carbon\Carbon::parse($comment->created_at)->isoFormat('D MMMM Y, H:mm') }}</small>
-                        </p>
-                    </div>
-                    <div class="card-body row">
-                        <div class="col-md-2 text-center">
-                            <div class="profile-picture">
-                                @if ($comment->user->profile_picture)
-                                    <img class="img-thumbnail img-fluid"
-                                        src="{{ asset('storage/images/' . $comment->user->profile_picture) }}" alt="">
-                                @else
-                                    <img class="img-fluid img-thumbnail" src="{{ asset('img/profile.png') }}" alt="">
-                                @endif
+                @if($comment->user_id == Auth::id())
+                    <div class="card my-4 p-md-2 bg-biru-muda border-0 pos-relative">
+                        <div class="card-body row">
+                            <div class="col-md-11">
+                                <div class="row">
+                                    <div class="col-2">
+                                        <div>
+                                            <p class="card-text mb-0"><small
+                                                    class="text-muted">{{ \Carbon\Carbon::parse($comment->created_at)->isoFormat('D MMMM Y') }}</small>
+                                            </p>
+                                            <p class="card-text"><small
+                                                    class="text-muted">{{ \Carbon\Carbon::parse($comment->created_at)->isoFormat('H:mm') }}</small>
+                                            </p>
+                                        </div>
+                                        <div>
+                                        @can('delete', $comment)
+                                            <div class="card-footer bg-biru-muda border-top-0 text-start">
+                                                <div class="align-item-center">
+                                                    <form action="{{ route('post.comments.destroy', [$post, $comment]) }}" method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button class="btn pos-absolute" style="bottom: 8px; left: 11px;" type="submit"
+                                                            onclick="return confirm('Apakah Anda yakin untuk menghapus komentar ini?')"><i
+                                                                class='fs-25 fa fa-trash text-danger'></i></button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        @endcan
+                                        </div>
+                                    </div>
+                                    <div class="text-end col-10">
+                                        <p class="card-text">{{ $comment->description }}</p>
+                                        <a href="{{ route('comments.download',$comment->id) }}">{{ $comment->attachment }}</a>
+                                    </div>
+
+                                </div>
                             </div>
-                            <p class="card-text">{{ $comment->user->name }}</p>
+                            <div class="col-md-1 text-center">
+                                <div>
+                                    <div class="profile-picture" style="width: 70px; height: 70px;">
+                                        @if ($comment->user->profile_picture)
+                                            <img class="img-thumbnail img-fluid"
+                                                src="{{ asset('storage/images/' . $comment->user->profile_picture) }}" alt="">
+                                        @else
+                                            <img class="img-fluid img-thumbnail" src="{{ asset('img/profile.png') }}" alt="">
+                                        @endif
+                                    </div>
+                                    <p class="card-text mt-2">{{ $comment->user->name }}</p>
+                                </div>
+                            </div>
                         </div>
-                        <div class="col-md-10">
-                            <p class="card-text">{{ $comment->description }}</p>
-                            <a href="{{ route('comments.download',$comment->id) }}">{{ $comment->attachment }}</a>
-                        </div>
+                       
                     </div>
-                    @can('delete', $comment)
-                    <div class="card-footer bg-white border-top-0 text-end">
-                        <div class="align-item-center">
-                            <form action="{{ route('post.comments.destroy', [$post, $comment]) }}" method="POST">
-                                @csrf
-                                @method('DELETE')
-                                <button class="btn" type="submit"
-                                    onclick="return confirm('Apakah Anda yakin untuk menghapus komentar ini?')"><i
-                                        class='fs-25 fa fa-trash text-danger'></i></button>
-                            </form>
+                @else
+                <div class="card my-4 p-md-2 bg-light-toska border-0 pos-relative">
+                    <div class="card-body row">
+                        <div class="col-md-1 text-center">
+                            <div>
+                                <div class="profile-picture" style="width: 70px; height: 70px;">
+                                    @if ($comment->user->profile_picture)
+                                        <img class="img-thumbnail img-fluid"
+                                            src="{{ asset('storage/images/' . $comment->user->profile_picture) }}" alt="">
+                                    @else
+                                        <img class="img-fluid img-thumbnail" src="{{ asset('img/profile.png') }}" alt="">
+                                    @endif
+                                </div>
+                                <p class="card-text mt-2">{{ $comment->user->name }}</p>
+                            </div>
                         </div>
+                        <div class="col-md-11">
+                                <div class="row">
+                                    <div class="text-start col-10">
+                                        <p class="card-text">{{ $comment->description }}</p>
+                                        <a href="{{ route('comments.download',$comment->id) }}">{{ $comment->attachment }}</a>
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="text-end">
+                                            <p class="card-text mb-0"><small
+                                                    class="text-muted">{{ \Carbon\Carbon::parse($comment->created_at)->isoFormat('D MMMM Y') }}</small>
+                                            </p>
+                                            <p class="card-text"><small
+                                                    class="text-muted">{{ \Carbon\Carbon::parse($comment->created_at)->isoFormat('H:mm') }}</small>
+                                            </p>
+                                        </div>
+                                        <div>
+                                            @can('delete', $comment)
+                                                <div class="card-footer border-top-0 text-end">
+                                                    <div class="align-item-center">
+                                                        <form action="{{ route('post.comments.destroy', [$post, $comment]) }}" method="POST">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button class="btn pos-absolute" style="bottom: 8px; right: 11px;" type="submit"
+                                                                onclick="return confirm('Apakah Anda yakin untuk menghapus komentar ini?')"><i
+                                                                    class='fs-25 fa fa-trash text-danger'></i></button>
+                                                        </form>
+                                                    </div>
+                                                </div>
+                                            @endcan
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                       
                     </div>
-                    @endcan
-                </div>
+                @endif
             @endforeach
             <div class="accordion-item mb-4" id="makePost">
                 <h2 class="accordion-header" >
