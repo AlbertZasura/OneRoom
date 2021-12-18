@@ -82,7 +82,7 @@
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-outline-green rounded-pill px-20px" data-bs-dismiss="modal">Batal</button>
-                                                    <button onclick="sendMessage( '{{$user->phone}}', {{$user->id}} )" class="btn btn-fill-green rounded-pill px-20px">Simpan</button>
+                                                    <button onclick="sendMessage( '{{$user->phone}}', {{$user->id}} )" class="btn btn-fill-green rounded-pill px-20px">Kirim</button>
                                                 </div>
                                             </div>
                                         </div>
