@@ -165,7 +165,7 @@
                                         </div>
                                         <div>
                                             @can('delete', $comment)
-                                                <div class="card-footer border-top-0 text-end">
+                                                <div class="card-footer bg-light-toska border-top-0 text-end">
                                                     <div class="align-item-center">
                                                         <form action="{{ route('post.comments.destroy', [$post, $comment]) }}" method="POST">
                                                             @csrf
