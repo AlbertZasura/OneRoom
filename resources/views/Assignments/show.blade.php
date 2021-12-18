@@ -80,7 +80,7 @@
                                     @else
                                         @if(now()->gte($assignment->deadline))
                                             <a data-bs-toggle="modal" data-bs-target="#scoringAssignments{{$user->id}}" class="btn"><i class='fs-25 fa fa-plus '></i></a>
-                                            @include('assignments._scoring')
+                                            @include('Assignments._scoring')
                                         @endif
                                     @endif
                                 </div>

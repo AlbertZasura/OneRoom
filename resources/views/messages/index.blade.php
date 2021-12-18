@@ -7,12 +7,12 @@
 <div class="card-shadow bg-white m-lg-5 border-radius-8px" style="width: auto; height: auto;">
     <div class="card-body p-lg-5">
     <h1>Pengumuman</h1>
-    <br>
     @can('create', App\Models\Message::class )
+        <br>
         <button class="btn btn-outline-secondary" id="open-popup" ><i class="fas fa-plus"></i></i>&nbsp Tambah Pengumuman</button>
     @endcan
     
-    <div class="table-responsive">
+    <div class="table-responsive mt-4">
         <table class="table table-hover">
             <thead>
             <tr>

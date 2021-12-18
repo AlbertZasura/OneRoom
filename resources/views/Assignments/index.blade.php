@@ -38,7 +38,7 @@
                 <a data-bs-toggle="modal" data-bs-target="#createAssignments" class="btn btn-outline-green mb-3 ">
                     <i class='fa fa-plus '></i> Tambah Tugas
                 </a>
-                @include('assignments._create')
+                @include('Assignments._create')
             @endcan
 
             @if (!$assignments->isEmpty())
@@ -83,11 +83,11 @@
                                             @can('upload', App\Models\Assignment::class)
                                             @php($userAssignment = $assignment->users()->where('users.id', Auth::user()->id)->latest()->first())
                                             <a data-bs-toggle="modal" data-bs-target="#assignments{{ $assignment->id }}History" class="btn"><i class='fs-25 fas fa-history'></i></a>
-                                            @include('assignments._history')
+                                            @include('Assignments._history')
                                             @if (now()->lt($assignment->deadline))
                                                 <a data-bs-toggle="modal" data-bs-target="#uploadAssignments{{ $assignment->id }}"
                                                     class="btn"><i class='fs-25 fa fa-upload '></i></a>
-                                                @include('assignments._upload')
+                                                @include('Assignments._upload')
                                             @elseif (now()->gte($assignment->deadline))
                                                 @if (!empty($userAssignment) && !is_null($userAssignment->pivot->score))
                                                     <h1 class="btn m-0 fs-25 {{($assignment->kkm() > $userAssignment->pivot->score) ? 'text-danger' : 'text-success'}}"> {{ $userAssignment->pivot->score }} </h1>
