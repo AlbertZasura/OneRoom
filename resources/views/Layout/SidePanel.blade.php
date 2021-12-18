@@ -104,7 +104,7 @@
                             <div
                                 class="d-flex a-center side-panel-hover px-20px py-1 {{ Request::path() == 'posts' || Request::is('posts*') ? 'side-panel-active' : '' }}">
                                 <div class="fs-25 w-25px">
-                                    <i class="fas fa-pencil-ruler"></i>
+                                    <i class="fas fa-comments"></i>
                                 </div>
                                 <div class="fs-18 ml-20">
                                     <a href="/posts" class="btn text-white">Forum</a>
