@@ -68,14 +68,14 @@
                         <div class="text-center fw-bold fs-5" style="white-space: nowrap;">
                             {{ Auth::user()->name }}
                         </div>
-                        @can('isVerify')
+                        {{-- @can('isVerify') --}}
                             <div class="text-center fs-6 edit-prof-wrap"><a href="/profiles"
                                     class="text-white text-decoration-none">Ganti profil</a></div>
-                        @endcan
+                        {{-- @endcan --}}
                     </div>
                 </div>
                 <div class="list-panel-menu mt-20">
-                    @can('isVerify')
+                    {{-- @can('isVerify') --}}
                         <div
                             class="d-flex a-center side-panel-hover px-20px py-1 {{ Route::current()->getName() == 'home' ? 'side-panel-active' : '' }}">
                             <div class="fs-25 w-25px">
@@ -223,7 +223,7 @@
                             </div>
                         @endcan
 
-                    @endcan
+                    {{-- @endcan --}}
                     <div class="d-flex a-center side-panel-hover px-20px py-1">
                         <div class="fs-20 w-25px">
                             <i class="fs-20 fas fa-sign-out-alt"></i>
