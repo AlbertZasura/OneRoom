@@ -91,15 +91,15 @@
                             </div>
                         </div> --}}
                         <button class="my-4 w-100 btn btn-lg btn-fill-green rounded-pill" type="submit">Login</button>
-                        {{-- <div class="mb-3">
+                        <div class="mb-3">
                             @if (Route::has('password.request'))
                                 <p class="text-muted m-0">Lupa password?
-                                    <a class="mb-3 cursor-pointer" href="{{ route('password.request') }}">
+                                    <a class="mb-3 cursor-pointer" href="#">
                                         Reset Password
                                     </a>
                                 </p>
                             @endif
-                        </div> --}}
+                        </div>
                     </form>
                 </div>
             </main>
