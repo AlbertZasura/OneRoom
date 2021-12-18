@@ -94,7 +94,7 @@
                         <div class="mb-3">
                             @if (Route::has('password.request'))
                                 <p class="text-muted m-0">Lupa password?
-                                    <a class="mb-3 cursor-pointer" href="{{ route('password.request') }}">
+                                    <a class="mb-3 cursor-pointer" href="#">
                                         Reset Password
                                     </a>
                                 </p>
