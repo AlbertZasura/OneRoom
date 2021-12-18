@@ -41,7 +41,7 @@
 
             <div class="card my-4 p-md-2 pos-relative">
                 <div class="card-body row">
-                    <div class="col-md-1 text-center">
+                    <div class="col-md-1 col-12 text-center">
                         <div class="profile-picture" style="width: 70px; height: 70px;">
                             @if ($post->user->profile_picture)
                                 <img class="img-thumbnail img-fluid"
@@ -50,18 +50,18 @@
                                 <img class="img-fluid img-thumbnail" src="{{ asset('img/profile.png') }}" alt="">
                             @endif
                         </div>
-                        <p class="card-text">{{ $post->user->name }}</p>
+                        <p class="card-text mobile-mb-20">{{ $post->user->name }}</p>
                     </div>
-                    <div class="col-md-11">
+                    <div class="col-md-11 col-12">
                         <div class="row">
-                            <div class="col-10">
+                            <div class="col-10 col-12">
                                 <div>
                                     <h4 class="card-title">{{ $post->title }}</h4>
                                     <p class="card-text">{{ $post->description }}</p>
                                     <a href="{{ route('posts.download',$post->id) }}">{{ $post->attachment }}</a>
                                 </div>
                             </div>
-                            <div class="col-2">
+                            <div class="col-2 col-12">
                                 <div class="text-end">
                                     <p class="card-text mb-0">
                                         <small class="text-muted">{{ \Carbon\Carbon::parse($post->created_at)->isoFormat('D MMMM Y') }}</small>
@@ -71,7 +71,7 @@
                                     </p>
                                 </div>
                                 <div class="d-flex justify-content-end">
-                                    <button onclick="autoScroll()" style="  right: 20px;  bottom: 12px;" class="pos-absolute btn btn-outline-green rounded-pill">Balas</button>
+                                    <button onclick="autoScroll()" style="  right: 20px;  bottom: 12px;" class="pos-absolute mobile-r-78 btn btn-outline-green rounded-pill">Balas</button>
                                 </div>
                             </div>
                         </div>
