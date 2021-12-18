@@ -105,9 +105,9 @@ Route::get('/errormapping',function() {
     return view('warnings.warningPage');
 });
 
-Route::get('/foo', function () {
-    Artisan::call('storage:link');
-});
+// Route::get('/foo', function () {
+//     Artisan::call('storage:link');
+// });
 
 // Route::get('/exams/list', function () {
 //     return view('welcome');

@@ -47,7 +47,7 @@
                         @csrf
 
                         @include('components.notifications')
-                        <h1 class="mt-3 fw-normal"><strong>Albert</strong></h1>
+                        <h1 class="mt-3 fw-normal"><strong>Login</strong></h1>
                         <p class="text-muted m-0 mb-3">Belum punya akun?
                             <a class="cursor-pointer" data-bs-toggle="modal" data-bs-target="#registerModal">
                                 Daftar disini
