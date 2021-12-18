@@ -13,6 +13,7 @@ use App\Http\Controllers\ContentController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -102,6 +103,10 @@ Route::middleware(['auth'])->group(function () {
 
 Route::get('/errormapping',function() {
     return view('warnings.warningPage');
+});
+
+Route::get('/foo', function () {
+    Artisan::call('storage:link');
 });
 
 // Route::get('/exams/list', function () {
