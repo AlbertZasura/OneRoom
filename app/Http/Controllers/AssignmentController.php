@@ -38,7 +38,7 @@ class AssignmentController extends Controller
                 })->get();
                 break;
         }
-        return view('assignments.course', [
+        return view('Assignments.course', [
             'courses' => $courses
         ]);
     }
@@ -70,7 +70,7 @@ class AssignmentController extends Controller
         }
 
         
-        return view('assignments.index', [
+        return view('Assignments.index', [
             'course' => $course,
             'courses' => $courses,
             'assignments'=> $assignments->latest()->get(),
@@ -128,7 +128,7 @@ class AssignmentController extends Controller
     {
         $this->authorize('view', $assignment);
         $users= $assignment->users()->paginate(25);
-        return view('assignments.show', [
+        return view('Assignments.show', [
             'assignment' => $assignment,
             'course' => $course,
             'users'=> $users
