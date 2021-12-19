@@ -21,6 +21,12 @@ class UserPolicy
         return $user->role === "admin" ? Response::allow() : Response::deny('You are not an Admin.');
     }
 
+    public function notAdminView(User $user)
+    {
+        return in_array($user->role,["teacher","student"]) ? Response::allow() : Response::deny('You cannot access.');
+    }
+
+
     /**
      * Determine whether the user can view the model.
      *
