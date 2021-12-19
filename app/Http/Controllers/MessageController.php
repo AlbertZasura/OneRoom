@@ -59,6 +59,7 @@ class MessageController extends Controller
             $file->storeAs('public/file', $fileName);
         }
 
+
         Message::create([
             'user_id' => Auth::user()->id,
             'title' => $request->title,

@@ -141,8 +141,11 @@
                                                 <input type="text"  name="notes" class="form-control form-input-color" >
                                             </div>
                                             <div class="input-group mb-3 mx-2 mt-20">
-                                                <input type="file" name="file_upload" class="form-control" id="inputGroupFile01">
+                                                <input type="file" name="file_upload" class="form-control @error('file_upload')is-invalid @enderror" id="inputGroupFile01">
                                             </div>
+                                            @error('file_upload')
+                                                <div class="invalid-feedback">{{$message}}</div>
+                                            @enderror
                                         </div>
                                         <div class="modal-footer">
                                             <button type="button" class="btn btn-outline-green rounded-pill px-20px" data-bs-dismiss="modal">Batal</button>

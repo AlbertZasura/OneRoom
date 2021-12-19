@@ -17,7 +17,7 @@
                     @enderror
                     <div class="form-group mb-3">
                         <label class="col-form-label" for="file"><b>File</b></label>
-                        <input type="file" name="file" class="form-control" id="file" required>
+                        <input type="file" name="file" class="form-control @error('file')is-invalid @enderror" id="file" required>
                     </div>
                     @error('file')
                         <div class="errors">{{$message}}</div>
