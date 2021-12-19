@@ -106,6 +106,12 @@
         <h2>{{$cls->first()->name}}</h2>
         <h2 class="mx-3">{{$selectedCourse->name}}</h2>
     </div>
+
+    @if($ses->count() == 0)
+        <div class="text-center mt-20 mb-10 pb-20">
+            <h3>Tidak ada materi yang tersedia.</h3>
+        </div>
+    @endif
     
     @if(isset($ses))
     
