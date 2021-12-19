@@ -47,7 +47,7 @@
 
                 <div class="cursor-pointer card-shadow card-box mb-2 {{ $exType != '' ? $exType == 'ulangan' ? 'active' : ''  : '' }}" onclick="window.location='{{route('exlist','ulangan')}}'">
                     <div class="text-capitalize">ulangan</div>
-                    <div class="text-right">{{App\Models\Exam::where('type','like','ulangan')->count()}} Ujian</div>
+                    <a class="text-right">{{App\Models\Exam::where('type','like','ulangan')->count()}} Ujian</div>
                 </div>
 
                 
