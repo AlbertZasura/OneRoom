@@ -40,7 +40,7 @@
                             @can('assign_user', App\Models\Classes::class )
                                 <th>Aksi</th>
                             @endcan
-                            <th>Contact</th>
+                            <th>Kontak</th>
                         </tr>
                     </thead>
                     <tbody>
