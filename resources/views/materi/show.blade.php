@@ -18,6 +18,12 @@
                 @endif
             @endforeach
         </select>
+
+        @if($ses->count() == 0)
+            <div class="text-center mt-20 mb-10 pb-20">
+                <h3>Tidak ada materi yang tersedia.</h3>
+            </div>
+        @endif
         
         @if(isset($ses))
             <div class="scroll-y custom-scroll-y" style="max-height: 444px;">
