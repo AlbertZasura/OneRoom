@@ -60,7 +60,6 @@
                     </div>
     
                 </div>
-                
                 <div class="d-none" id="formEditSession">
                     <form class="py-4" action="/session/insert?class_id={{$seletedClass->id}}&course_id={{isset($selected_course) ? $selected_course->id : $course_teacher->first()->id}}" method="post" enctype="multipart/form-data">
                         @csrf

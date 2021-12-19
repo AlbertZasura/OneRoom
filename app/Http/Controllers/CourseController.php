@@ -126,8 +126,7 @@ class CourseController extends Controller
         $this->authorize('viewTeacher', App\Models\Course::class);
         $user = User::find(Auth::id());
         $class = Classes::find(request()->input('class_id'));
-        $courseTeacher = $class->teachersCourses(Auth::id())->get();
-        // dd($courseTeacher);
+        $courseTeacher = $class->classesCourse;
         // foreach($class->classesCourse as $item){
         //     if($item->getOriginal('pivot_user_id') == Auth::id())
         //     {
@@ -237,7 +236,6 @@ class CourseController extends Controller
         $todayDate = Carbon::now();
         $DateFormat = Carbon::parse($todayDate)->format('Y-m-d');
         $TimeFormat = Carbon::parse($todayDate)->format('H-i-s');
-
 
         $file = $request->file('file_upload');
         $fileName =  Auth::id()."_".$DateFormat."_".$TimeFormat."_".$file->getClientOriginalName();
