@@ -111,7 +111,6 @@ class MessageController extends Controller
      */
     public function destroy(Message $message)
     {
-        dd($message);
         $message->delete();
         Alert::success('Berhasil', 'Pengumuman berhasil dihapus!');
         return redirect()->route('messages.index');
