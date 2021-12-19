@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\DB;
 use App\Models\Exam;
 use App\Models\User;
@@ -22,29 +23,29 @@ class ExamController extends Controller
     public function index()
     {
         $this->authorize('viewAny', App\Models\Exam::class);
-        if(Auth::user()->classes->isEmpty()){
+        if (Auth::user()->classes->isEmpty()) {
             return view('warnings/warningPage');
         }
-        
+
         $exam = Exam::all();
 
         $course = '';
         $exType = '';
         $class = '';
-        
 
-        if(Auth::user()->role == 'student'){
+
+        if (Auth::user()->role == 'student') {
             $student_class = Auth::user()->classes->first();
             $exam_type = DB::table('exams')
-                            ->select('type', DB::raw('count(*) as total'))
-                            ->where('class_id','like',$student_class->id)
-                            ->groupBy('type')
-                            ->get();
-        }else{
+                ->select('type', DB::raw('count(*) as total'))
+                ->where('class_id', 'like', $student_class->id)
+                ->groupBy('type')
+                ->get();
+        } else {
             $exam_type = DB::table('exams')
-                            ->select('type', DB::raw('count(*) as total'))
-                            ->groupBy('type')
-                            ->get();
+                ->select('type', DB::raw('count(*) as total'))
+                ->groupBy('type')
+                ->get();
         }
         return view('exams.index', [
             'exam' => $exam,
@@ -53,9 +54,6 @@ class ExamController extends Controller
             'exType'  => $exType,
             'class' => $class
         ]);
-
-
-        
     }
 
     /**
@@ -100,7 +98,7 @@ class ExamController extends Controller
             'class_id' => $request->class_id
         ]);
 
-        return redirect()->route('exams.index')->with('success','Ujian berhasil ditambahkan!');
+        return redirect()->route('exams.index')->with('success', 'Ujian berhasil ditambahkan!');
     }
 
     /**
@@ -110,38 +108,40 @@ class ExamController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     //download soal
-    public function downloadExamsUser($id, Exam $exam){
+    //download soal
+    public function downloadExamsUser($id, Exam $exam)
+    {
         $this->authorize('downloadExamQuestions', $exam);
 
         $user = User::find(Auth::id());
 
         $exam = Exam::find($id);
-       
-        $file_path = public_path('storage/file/'.$exam->file);
-        return response()->download($file_path);
 
+        $file_path = public_path('storage/file/' . $exam->file);
+        return response()->download($file_path);
     }
 
     //download jawaban 
-    public function downloadExamStudent(Exam $exam){
+    public function downloadExamStudent(Exam $exam)
+    {
         $this->authorize('downloadExamAnswer', $exam);
-       
+
         $user = User::find(request()->input('user_id'));
 
         $exam = Exam::find(request()->input('e'));
 
         $exam->usersExams(request()->input('user_id'));
-        
+
         $exam_file = $exam->usersExams(request()->input('user_id'))->first()->pivot;
 
-        $file_path = public_path('storage/file/'.$exam_file->file);
+        $file_path = public_path('storage/file/' . $exam_file->file);
 
         return response()->download($file_path);
     }
 
     //siswa
-    public function submitExams(Request $request){
+    public function submitExams(Request $request)
+    {
         $this->authorize('submitExam', App\Models\Exam::class);
 
         $exam = Exam::find($request->e);
@@ -155,36 +155,30 @@ class ExamController extends Controller
         $TimeFormat = Carbon::parse($todayDate)->format('H-i-s');
         $user = User::find(Auth::user()->id);
         $file = $request->file('file_upload');
-        $fileName =  Auth::id()."_".$DateFormat."_".$TimeFormat."_".$file->getClientOriginalName();
-        if($request->file('file_upload')){
-            $file->storeAs('public/file', $fileName);
-            if($exam->users()->where('users.id', Auth::user()->id)->get()->isEmpty()){
-                $user->exams()->attach($request->e, ['file' => $fileName, 'notes' => $request->notes]);
-            }else{
-                $exam->users()->updateExistingPivot(Auth::user()->id, ['file' => $fileName, 'notes' => $request->notes]);
-            }
-            return redirect()->route('exams.index')->with('success','Ujian berhasil dikumpulkan!');
-
-        }else{
-            // dd("no file upload");
+        $fileName =  Auth::id() . "_" . $DateFormat . "_" . $TimeFormat . "_" . $file->getClientOriginalName();
+        $file->storeAs('public/file', $fileName);
+        if ($exam->users()->where('users.id', Auth::user()->id)->get()->isEmpty()) {
+            $user->exams()->attach($request->e, ['file' => $fileName, 'notes' => $request->notes]);
+        } else {
+            $exam->users()->updateExistingPivot(Auth::user()->id, ['file' => $fileName, 'notes' => $request->notes]);
         }
-
+        return redirect()->route('exams.index')->with('success', 'Ujian berhasil dikumpulkan!');
     }
 
     //guru
-    public function assignExamScore(Request $request, $id, Exam $exam){
+    public function assignExamScore(Request $request, $id, Exam $exam)
+    {
         $this->authorize('update', $exam);
         $user = User::find($id);
         $user->examsId(request()->input('pivotId'))->updateExistingPivot($request->e, ['score' => $request->score]);
 
-        
-        return redirect()->route('examsubmitlist', $request->e)->with('success','Ujian berhasil dinilai.');    
-        
-        
+
+        return redirect()->route('examsubmitlist', $request->e)->with('success', 'Ujian berhasil dinilai.');
     }
 
     //list yg udah submit
-    public function userSubmitList($exam_id){
+    public function userSubmitList($exam_id)
+    {
         $this->authorize('viewListSubmit', App\Models\Exam::class);
         $exam_user = Exam::find($exam_id);
 
@@ -196,7 +190,8 @@ class ExamController extends Controller
     }
 
     //GURU
-    public function createExams(Request $request){
+    public function createExams(Request $request)
+    {
         $this->authorize('create', App\Models\Exam::class);
 
         $request->validate([
@@ -210,56 +205,47 @@ class ExamController extends Controller
         $DateFormat = Carbon::parse($todayDate)->format('Y-m-d');
         $TimeFormat = Carbon::parse($todayDate)->format('H-i-s');
         $file = $request->file('file_upload');
-        $fileName =  Auth::id()."_".$DateFormat."_".$TimeFormat."_".$file->getClientOriginalName();
-        
+        $fileName =  Auth::id() . "_" . $DateFormat . "_" . $TimeFormat . "_" . $file->getClientOriginalName();
+
         $user = User::find(Auth::user()->id);
 
-        if($request->file('file_upload')){
-            $file->storeAs('public/file', $fileName);
-            
-            Exam::create([
-                'title' => $request->title,
-                'type' => request()->input('type'),
-                'start_date' => $request->startDate,
-                'end_date' => $request->deadline,
-                'file' => $fileName,
-                'user_id' =>Auth::id(),
-                'class_id' => request()->input('class_id'),
-                'course_id' => request()->input('course_id'),
-            ]);
+        $file->storeAs('public/file', $fileName);
 
-            $last_exam = Exam::latest('created_at')->first();
+        Exam::create([
+            'title' => $request->title,
+            'type' => request()->input('type'),
+            'start_date' => $request->startDate,
+            'end_date' => $request->deadline,
+            'file' => $fileName,
+            'user_id' => Auth::id(),
+            'class_id' => request()->input('class_id'),
+            'course_id' => request()->input('course_id'),
+        ]);
 
-            return redirect()->route('exams.index')->with('success','Ujian Berhasil Dibuat.');
+        $last_exam = Exam::latest('created_at')->first();
 
-        }else{
-            dd("no file upload");
-        }
-
-        
-
-
-        
+        return redirect()->route('exams.index')->with('success', 'Ujian Berhasil Dibuat.');
     }
 
     //guru siswa
-    public function filterExam($type, $course_id){
+    public function filterExam($type, $course_id)
+    {
         $this->authorize('view', App\Models\Exam::class);
 
-        $ex = Exam::where('type','like', $type)->first();
+        $ex = Exam::where('type', 'like', $type)->first();
 
-        $exam = DB::table('exams')->where('type','like', $type)->get();
+        $exam = DB::table('exams')->where('type', 'like', $type)->get();
 
         $course = $ex->courses;
 
         $exType = $type;
 
         $exam_type = DB::table('exams')
-                        ->select('type', DB::raw('count(*) as total'))
-                        ->groupBy('type')
-                        ->get();
+            ->select('type', DB::raw('count(*) as total'))
+            ->groupBy('type')
+            ->get();
 
-        
+
         return view('exams.show', [
             'exam' => $exam,
             'examType' => $exam_type,
@@ -269,48 +255,49 @@ class ExamController extends Controller
     }
 
     //keseluruhan
-    public function listExam($type){
+    public function listExam($type)
+    {
         $this->authorize('viewAny', App\Models\Exam::class);
 
-        if(Auth::user()->role == 'teacher'){
+        if (Auth::user()->role == 'teacher') {
 
             $course = Auth::user()->usersCorses->unique();
-            
-            $class = Auth::user()->usersClasses->unique();
-    
 
-            if(request()->input('class_id')){
+            $class = Auth::user()->usersClasses->unique();
+
+
+            if (request()->input('class_id')) {
                 $course = $class->find(request()->input('class_id'))->courses;
-                $exam = Exam::where('type','like', $type)->where('class_id', 'like', request()->input('class_id'))->where('user_id','like',Auth::id())->get();
-            }else{
-                $exam = Exam::where('type','like', $type)->where('user_id','like',Auth::id())->get();
+                $exam = Exam::where('type', 'like', $type)->where('class_id', 'like', request()->input('class_id'))->where('user_id', 'like', Auth::id())->get();
+            } else {
+                $exam = Exam::where('type', 'like', $type)->where('user_id', 'like', Auth::id())->get();
             }
-    
-            $ex = Exam::where('type','like', $type)->where('user_id','like',Auth::id())->first();
+
+            $ex = Exam::where('type', 'like', $type)->where('user_id', 'like', Auth::id())->first();
             $c = Course::find(request()->input('course_id'));
-            
-            if(request()->input('course_id')){
+
+            if (request()->input('course_id')) {
                 $class = $course->find(request()->input('course_id'))->classes;
-                
-                    $exam = Exam::where('type','like', $type)->where('course_id', 'like', request()->input('course_id'))->where('user_id','like',Auth::id())->get();
+
+                $exam = Exam::where('type', 'like', $type)->where('course_id', 'like', request()->input('course_id'))->where('user_id', 'like', Auth::id())->get();
             }
-            
-            if(request()->input('course_id') && request()->input('class_id')){
-                    $exam = Exam::where('type','like', $type)
+
+            if (request()->input('course_id') && request()->input('class_id')) {
+                $exam = Exam::where('type', 'like', $type)
                     ->where('class_id', 'like', request()->input('class_id'))
-                    ->where('course_id', 'like', request()->input('course_id'))->where('user_id','like',Auth::id())->get();
+                    ->where('course_id', 'like', request()->input('course_id'))->where('user_id', 'like', Auth::id())->get();
             }
-            
-            
-            
+
+
+
             $exType = $type;
-    
+
             $exam_type = DB::table('exams')
-                            ->select('type', DB::raw('count(*) as total'))
-                            ->groupBy('type')
-                            ->get();
-    
-            
+                ->select('type', DB::raw('count(*) as total'))
+                ->groupBy('type')
+                ->get();
+
+
             return view('exams.show', [
                 'exam' => $exam,
                 'examType' => $exam_type,
@@ -318,36 +305,35 @@ class ExamController extends Controller
                 'exType'  => $exType,
                 'class' => $class
             ]);
+        } else {
 
-        }else{
+            $exam = Exam::where('type', 'like', $type)->where('class_id', 'like', Auth::user()->classes->first()->id)->get();
 
-            $exam = Exam::where('type','like', $type)->where('class_id', 'like', Auth::user()->classes->first()->id)->get();
-    
-            $ex = Exam::where('type','like', $type)->first();
+            $ex = Exam::where('type', 'like', $type)->first();
             $c = Course::find(request()->input('course_id'));
 
             $student_class = Auth::user()->classes->first();
-            
-            if(request()->input('course_id')){
-                $exam = Exam::where('type','like', $type)
-                ->where('class_id', 'like', $student_class->id)
-                ->where('course_id', 'like', request()->input('course_id'))->get();
+
+            if (request()->input('course_id')) {
+                $exam = Exam::where('type', 'like', $type)
+                    ->where('class_id', 'like', $student_class->id)
+                    ->where('course_id', 'like', request()->input('course_id'))->get();
             }
-            
-            
-            
+
+
+
             $course = Auth::user()->classes->first()->courses->unique();
-            
+
             $class = Classes::all();
-            $student_exam = Exam::where('class_id','like',$student_class->id)->get();
+            $student_exam = Exam::where('class_id', 'like', $student_class->id)->get();
             $exType = $type;
 
             $exam_type = DB::table('exams')
-                            ->select('type', DB::raw('count(*) as total'))
-                            ->where('class_id','like',$student_class->id)
-                            ->groupBy('type')
-                            ->get();
-            
+                ->select('type', DB::raw('count(*) as total'))
+                ->where('class_id', 'like', $student_class->id)
+                ->groupBy('type')
+                ->get();
+
             return view('exams.show', [
                 'exam' => $exam,
                 'examType' => $exam_type,
@@ -355,9 +341,7 @@ class ExamController extends Controller
                 'exType'  => $exType,
                 'class' => $class
             ]);
-
         }
-
     }
 
     //guru siswa
@@ -367,16 +351,15 @@ class ExamController extends Controller
         $exam = Exam::all();
 
         $exam_type = DB::table('exams')
-                        ->select('type', DB::raw('count(*) as total'))
-                        ->groupBy('type')
-                        ->get();
+            ->select('type', DB::raw('count(*) as total'))
+            ->groupBy('type')
+            ->get();
 
-        
+
         return view('exams.show', [
             'exam' => $exam,
             'examType' => $exam_type
         ]);
-
     }
 
     /**
@@ -399,7 +382,7 @@ class ExamController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-     //ga kepake
+    //ga kepake
     public function update(Request $request, Exam $exam)
     {
         $request->validate([
@@ -424,11 +407,12 @@ class ExamController extends Controller
             'class_id' => $request->class_id
         ]);
 
-        return redirect()->route('exams.index')->with('success','Exam updated successfully.');
+        return redirect()->route('exams.index')->with('success', 'Exam updated successfully.');
     }
 
     //guru
-    public function export(Exam $exam){
+    public function export(Exam $exam)
+    {
         $this->authorize('exportScore', $exam);
         return Excel::download(new ExamsExport($exam->id), "Daftar Siswa kelas {$exam->class->name} - {$exam->title}.xlsx");
     }
@@ -445,6 +429,6 @@ class ExamController extends Controller
         $this->authorize('delete', $exam);
         $exam->delete();
         return redirect()->route('exams.index')
-                        ->with('success','Exam deleted successfully');
+            ->with('success', 'Exam deleted successfully');
     }
 }
