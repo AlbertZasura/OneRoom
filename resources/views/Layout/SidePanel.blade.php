@@ -79,7 +79,7 @@
                         <div
                             class="d-flex a-center side-panel-hover px-20px py-1 {{ Route::current()->getName() == 'home' ? 'side-panel-active' : '' }}">
                             <div class="fs-25 w-25px">
-                                <i class="fas fa-chart-line"></i>
+                                <i class="fas fa-home"></i>
                             </div>
                             <div class="fs-18 ml-20">
                                 <a href="{{ route('home') }}" class="btn text-white mobile-w-100 mobile-min-w-149"
@@ -162,7 +162,7 @@
                             <div
                                 class="d-flex a-center side-panel-hover px-20px py-1 {{ Route::current()->getName() == 'classes.index' || Request::is('classes*') ? 'side-panel-active' : '' }}">
                                 <div class="fs-20 w-25px">
-                                    <i class="fas fa-chalkboard"></i>
+                                    <i class="fas fa-chalkboard-teacher"></i>
                                 </div>
                                 <div class="fs-18 ml-20">
                                     <a href="{{ route('classes.index') }}" class="btn text-white">Kelas</a>
