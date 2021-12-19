@@ -54,10 +54,12 @@
                 <div class="position-relative show-on-mobile"><i class="pos-absolute fas fa-times fs-25"
                         style="right: 11px; top: 12px;" onclick="hideMenuMobile()"></i></div>
                 <div class="profile-wrapper px-20px pt-20">
-                    <div class="profile-picture">
+                    <div class="profile-picture d-flex justify-content-center">
                         @if (Auth::user()->profile_picture)
-                            <img class="w-auto h-100"
+                        <div>
+                            <img class="w-100 h-auto"
                                 src="{{ asset('storage/images/' . Auth::user()->profile_picture) }}" alt="">
+                        </div>
                         @else
                             <img class="img-fluid img-thumbnail" src="{{ asset('img/profile.png') }}" alt="">
                         @endif

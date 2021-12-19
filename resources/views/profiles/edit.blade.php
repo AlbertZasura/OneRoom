@@ -14,9 +14,17 @@
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center ">
                             @if(Auth::user()->profile_picture) 
-                            <img class="img-fluid rounded-circle img-thumbnail" id="image_preview" style="width:200px;height:200px;" src="storage/images/{{ Auth::user()->profile_picture }}">
+                            <div class="profile-picture d-flex justify-content-center">
+                                <div>
+                                    <img class="w-100 h-auto" id="image_preview" style="width:200px;height:200px;" src="storage/images/{{ Auth::user()->profile_picture }}">
+                                </div>
+                            </div>
                             @else
-                            <img class="img-fluid rounded-circle img-thumbnail" id="image_preview" style="width:200px;height:200px;" src="{{ ('img/profile.png') }}">
+                            <div class="profile-picture d-flex justify-content-center">
+                                <div>
+                                    <img class="w-100 h-auto" id="image_preview" style="width:200px;height:200px;" src="{{ ('img/profile.png') }}">
+                                </div>
+                            </div>
                             @endif 
                             <div>
                                 <label for="profile_picture" class="btn"><b>Ubah Gambar Profil</b></label>
