@@ -6,7 +6,7 @@
 <div class="card-shadow bg-white m-lg-5 border-radius-8px" style="width: auto; height: auto;">
     <div class="card-body p-lg-5">
     <h1>Daftar Akun</h1>
-    <div class="row g-2">
+    <div class="row g-2 mt-4">
         <div class="col-md-2">
             <select class="form-select" id = "filterTable" oninput="selectTable()" aria-label="Default select example">
                 <option value="">Semua Jabatan</option>
@@ -54,12 +54,12 @@
                     </td>
                     <td>
                         <div class="d-flex">
-                            <form action="{{ route('users.update', $user->id) }}" onsubmit="acceptUserBtn(event)" id="acceptUser" method="POST">
+                            <form action="{{ route('users.update', [$user]) }}" onsubmit="acceptUserBtn(event, {{ $user->id }})" id="acceptUser{{ $user->id }}" method="POST">
                                 @csrf
                                 @method('PUT')
                                 <button class="btn" type="submit" ><i class="fas fa-check fa-lg" style="color:green"></i></button>
                             </form>
-                            <form action="{{  route('users.destroy',$user->id) }}" onsubmit="deleteUserBtn(event)" id="deleteUser" method="POST">
+                            <form action="{{  route('users.destroy',[$user]) }}" onsubmit="deleteUserBtn(event, {{ $user->id }})" id="deleteUser{{ $user->id }}" method="POST">
                                 @csrf
                                 @method('DELETE')      
                                 <button class="btn" type="submit" ><i class="fas fa-times fa-lg" style="color:red"></i></button>
@@ -70,7 +70,6 @@
                         <button class="btn btn-fill-green rounded-pill" id= "myButton" type="button" data-bs-toggle="modal" data-bs-target="#modal{{$user->id}}">Lihat Detail</button>
                     </td>
                 </tr>
-
                 
                 <div class="modal fade" id="modal{{$user->id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                     <div class="modal-dialog" >
@@ -123,9 +122,9 @@
     //     });
     // });
 
-    function acceptUserBtn(e){
+    function acceptUserBtn(e, id){
             e.preventDefault();
-            var form = document.getElementById("acceptUser")
+            var form = document.getElementById("acceptUser" + id)
             Swal.fire({
                     title: `Terima Pengguna`,
                     text: "Apakah Anda yakin untuk menerima pengguna?",
@@ -142,9 +141,9 @@
         
     }
 
-    function deleteUserBtn(e){
+    function deleteUserBtn(e, id){
             e.preventDefault();
-            var form = document.getElementById("deleteUser")
+            var form = document.getElementById("deleteUser" + id)
             Swal.fire({
                     title: `Tolak Pengguna`,
                     text: "Apakah Anda yakin untuk menolak pengguna?",
