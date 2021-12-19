@@ -1,5 +1,5 @@
-<div class="modal fade" id="exams{{ $i->id }}History" tabindex="-1"
-    aria-labelledby="exampleModalLabel" aria-hidden="true">
+<div class="modal fade" id="exams{{ $i->id }}History" tabindex="-1" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header border-bottom-0">
@@ -18,12 +18,13 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @if(!$i->users()->get()->isEmpty())
-                                @foreach($i->users()->first()->pivot->audits as $key=>$item)
+                            @if (!$i->users()->get()->isEmpty())
+                                @foreach ($i->users()->first()->pivot->audits as $key => $item)
                                     @php($exam = $item->new_values)
                                     <tr>
                                         <th scope="row">{{ $key + 1 }}</th>
-                                        <td>{{  \Carbon\Carbon::parse( $exam['updated_at'])->isoFormat('D MMMM Y, H:mm')  }}</td>
+                                        <td>{{ \Carbon\Carbon::parse($exam['updated_at'])->isoFormat('D MMMM Y, H:mm') }}
+                                        </td>
                                         <td>{{ $exam['notes'] }}</td>
                                         <td>
                                             <a download="{{ $exam['file'] }}"
@@ -34,7 +35,7 @@
                                         </td>
                                     </tr>
                                 @endforeach
-                            @endif 
+                            @endif
                         </tbody>
                     </table>
                 </div>

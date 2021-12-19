@@ -179,9 +179,9 @@ class AssignmentController extends Controller
         $user=request()->input('u');
         $time=request()->input('t');
         if ($type==='answer') {
-            $pathToFile = storage_path('app\public\file\\'.$assignment->usersFile($time)->first()->pivot->file);
+            $pathToFile = storage_path('app/public/file/'.$assignment->usersFile($time)->first()->pivot->file);
         }else if ($type==='question') {
-            $pathToFile = storage_path('app\public\file\\'.$assignment->file);
+            $pathToFile = storage_path('app/public/file/'.$assignment->file);
         }
         return response()->download($pathToFile);
     }

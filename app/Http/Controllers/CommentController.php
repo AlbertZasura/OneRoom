@@ -64,7 +64,7 @@ class CommentController extends Controller
 
     public function download(Comment $comment)
     {
-        $pathToFile = storage_path('app\public\file\\'.$comment->attachment);
+        $pathToFile = storage_path('app/public/file/'.$comment->attachment);
         return response()->download($pathToFile);
     }
 }
