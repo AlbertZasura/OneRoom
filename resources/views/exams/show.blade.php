@@ -110,7 +110,7 @@
                                 <i class="fas fa-download mr-10 cursor-pointer" onclick="window.location='{{route('downloadexams', $i->id)}}'"></i>
                             @endif
                             @can('viewTeacher', App\Models\Exam::class )
-                                <form action="{{ route('exams.destroy',[$i]) }}" onsubmit="deleteExamBtn(event)" id="delteForm" method="POST">   
+                                <form action="{{ route('exams.destroy',[$i]) }}" onsubmit="deleteExamBtn(event, {{ $i->id }})" id="delteForm{{ $i->id }}" method="POST">   
                                     @csrf
                                     @method('DELETE')     
                                     <button class="btn" type="submit"><i class="far fa-trash-alt text-danger mr-10 cursor-pointer"></i></button>
@@ -177,9 +177,9 @@
     </div>
 
     <script>
-        function deleteExamBtn(e){
+        function deleteExamBtn(e, id){
             e.preventDefault();
-            var form = document.getElementById("delteForm")
+            var form = document.getElementById("delteForm" + id)
             Swal.fire({
                     title: `Hapus Ujian`,
                     text: "Apakah Anda Yakin ingin menghapus Ujian ini?",
