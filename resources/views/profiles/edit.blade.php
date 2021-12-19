@@ -31,11 +31,13 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                                 @enderror
                             </div>
+                            @can('notAdminView', App\Models\User::class )
                             <div class="col-md-12"><label class="labels">Nomor Induk</label><input type="text" class="form-control form-input-color  @error('identification_number')is-invalid @enderror" name="identification_number" id="identification_number" placeholder="ex: 1234..." value="{{ old('identification_number', Auth::user()->identification_number) }}" required>
                                 @error('identification_number')
                                 <div class="invalid-feedback">{{ $message}}</div>
                                 @enderror
                             </div>
+                            @endcan
                             <div class="col-md-12"><label class="labels">Nomor Handphone</label><input type="text" class="form-control form-input-color  @error('phone')is-invalid @enderror" name="phone" id="phone" placeholder="ex: 081312122161..." value="{{ old('phone', Auth::user()->phone) }}" required>
                                 @error('phone')
                                 <div class="invalid-feedback">{{ $message}}</div>

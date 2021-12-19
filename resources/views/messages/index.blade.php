@@ -42,7 +42,7 @@
                         </td>
                         @can('create', App\Models\Message::class )
                         <td>
-                            <form action="{{  route('messages.destroy',$message->id) }}" onsubmit="deleteAnnouncementBtn(event)" id="deleteAnouncementForm"  method="POST" >
+                            <form action="{{  route('messages.destroy',[$message]) }}" onsubmit="deleteAnnouncementBtn(event, {{ $message->id }})" id="deleteAnouncementForm{{$message->id}}"  method="POST" >
                                 @csrf
                                 @method('DELETE')      
                                 <button class="btn" type="submit" ><i class="fas fa-times fa-lg" style="color:red"></i></button>
@@ -53,6 +53,7 @@
                             <a class="btn btn-fill-green rounded-pill" role="button" id= "myButton" type="button"  href="{{ route('messages.show',$message->id) }}">Lihat Detail</a>
                         </td>
                     </tr>
+                    
                 @endforeach
             </tbody>
         </table>
@@ -105,9 +106,10 @@
         });
     });
 
-    function deleteAnnouncementBtn(e){
+
+    function deleteAnnouncementBtn(e, id){
             e.preventDefault();
-            var form = document.getElementById("deleteAnouncementForm")
+            var form = document.getElementById("deleteAnouncementForm"+ id)
             Swal.fire({
                     title: `Hapus Pengumuman`,
                     text: "Apakah Anda yakin untuk menghapus pengumuman?",
@@ -123,6 +125,9 @@
             });
         
     }
-
 </script>
+
+
+
+
 @stop

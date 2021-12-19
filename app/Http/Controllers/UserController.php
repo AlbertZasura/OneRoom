@@ -22,7 +22,7 @@ class UserController extends Controller
         $users = User::where('status', 0);
 
         if(request('search')){
-            $users = User::latest()->where('name', 'like', '%' . request('search') .'%')->paginate(25);
+            $users = User::latest()->where('name', 'like', '%' . request('search') .'%')->where('status', 0)->paginate(25);
         }
         else{
             $users = User::where('status', 0)->whereIn('role',[1,2])->paginate(25);
@@ -146,10 +146,11 @@ class UserController extends Controller
     public function destroy(User $user)
     {
         $this->authorize('update', $user);
-        $user->update([
-            'user_id' => Auth::user()->id,
-            'status' => "2"
-        ]);
+        $user->delete();
+        // $user->update([
+        //     'user_id' => Auth::user()->id,
+        //     'status' => "2"
+        // ]);
 
         Alert::warning('Berhasil', 'Pengguna berhasil ditolak!');
         return back(); 
