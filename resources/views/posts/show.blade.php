@@ -196,7 +196,7 @@
                     </button>
                 </h2>
             </div>
-            <div class="d-none" id="formEditSession">
+            <div id="formEditSession">
                 <form action="{{ route('post.comments.store', $post) }}" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         @csrf
@@ -218,7 +218,7 @@
                         </div>
                     </div>
                     <div class="modal-footer border-top-0">
-                        <button type="button" class="btn btn-outline-green rounded-pill" onclick="cancelCraete()">Batal</button>
+                        <button type="button" class="btn btn-outline-green rounded-pill" onclick="openEditSession()">Batal</button>
                         <button type="submit" class="btn btn-fill-green rounded-pill">Simpan</button>
                     </div>
                 </form>
@@ -229,12 +229,13 @@
 
     <script>
 
-        function cancelCraete(){
-            document.getElementById("formEditSession").classList.add("d-none");
-        }
+        // function cancelCraete(){
+        //     document.getElementById("formEditSession").classList.add("d-none");
+        // }
 
         function openEditSession(){
-            document.getElementById("formEditSession").classList.toggle("d-none");
+            // document.getElementById("formEditSession").classList.toggle("d-none");
+            $("#formEditSession").toggle(200);
             $(document).scrollTop($(document).height(), 100);
         }
 
