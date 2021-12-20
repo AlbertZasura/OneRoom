@@ -233,6 +233,10 @@
         //     document.getElementById("formEditSession").classList.add("d-none");
         // }
 
+        $( document ).ready(function() {
+            $("#formEditSession").hide();
+        });
+
         function openEditSession(){
             // document.getElementById("formEditSession").classList.toggle("d-none");
             $("#formEditSession").toggle(200);
@@ -249,7 +253,8 @@
 
         function autoScroll() {
             $('body,html').animate({ scrollTop: getOffset(document.getElementById("makePost")).top - 150 }, 500);
-            openEditSession();
+            $("#formEditSession").show(200);
+            $(document).scrollTop($(document).height(), 100);
         }
     </script>
 @stop
