@@ -84,7 +84,7 @@
                         <div class="card-body row mobile-col-reverse">
                             <div class="col-md-11">
                                 <div class="row mobile-col-reverse">
-                                    <div class="col-2 col-12">
+                                    <div class="col-md-2 col-12">
                                         <div class="mobile-text-end">
                                             <p class="card-text mb-0"><small
                                                     class="text-muted">{{ \Carbon\Carbon::parse($comment->created_at)->isoFormat('D MMMM Y') }}</small>
@@ -109,7 +109,7 @@
                                         @endcan
                                         </div>
                                     </div>
-                                    <div class="text-end mobile-text-start col-10 col-12">
+                                    <div class="text-end mobile-text-start col-md-10 col-12">
                                         <p class="card-text">{{ $comment->description }}</p>
                                         <a href="{{ route('comments.download',$comment->id) }}">{{ $comment->attachment }}</a>
                                     </div>
@@ -196,7 +196,7 @@
                     </button>
                 </h2>
             </div>
-            <div class="d-none" id="formEditSession">
+            <div id="formEditSession">
                 <form action="{{ route('post.comments.store', $post) }}" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         @csrf
@@ -218,7 +218,7 @@
                         </div>
                     </div>
                     <div class="modal-footer border-top-0">
-                        <button type="button" class="btn btn-outline-green rounded-pill" data-bs-dismiss="modal">Batal</button>
+                        <button type="button" class="btn btn-outline-green rounded-pill" onclick="openEditSession()">Batal</button>
                         <button type="submit" class="btn btn-fill-green rounded-pill">Simpan</button>
                     </div>
                 </form>
@@ -228,8 +228,18 @@
     </div>
 
     <script>
+
+        // function cancelCraete(){
+        //     document.getElementById("formEditSession").classList.add("d-none");
+        // }
+
+        $( document ).ready(function() {
+            $("#formEditSession").hide();
+        });
+
         function openEditSession(){
-            document.getElementById("formEditSession").classList.toggle("d-none");
+            // document.getElementById("formEditSession").classList.toggle("d-none");
+            $("#formEditSession").toggle(200);
             $(document).scrollTop($(document).height(), 100);
         }
 
@@ -243,7 +253,8 @@
 
         function autoScroll() {
             $('body,html').animate({ scrollTop: getOffset(document.getElementById("makePost")).top - 150 }, 500);
-            openEditSession();
+            $("#formEditSession").show(200);
+            $(document).scrollTop($(document).height(), 100);
         }
     </script>
 @stop

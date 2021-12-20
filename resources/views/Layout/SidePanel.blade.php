@@ -54,7 +54,7 @@
                 <div class="position-relative show-on-mobile"><i class="pos-absolute fas fa-times fs-25"
                         style="right: 11px; top: 12px;" onclick="hideMenuMobile()"></i></div>
                 <div class="profile-wrapper px-20px pt-20">
-                    <div class="profile-picture d-flex justify-content-center">
+                    <div class="profile-picture d-flex justify-content-center a-center">
                         @if (Auth::user()->profile_picture)
                         <div>
                             <img class="w-100 h-auto"

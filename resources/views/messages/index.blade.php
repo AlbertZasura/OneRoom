@@ -85,7 +85,10 @@
                 </div>
                 <div class="mb-3">
                     <label for="message-text" class="col-form-label"><b>File</b></label>
-                    <input class="form-control" name="file" type="file" id="file" >
+                    <input class="form-control @error('file')is-invalid @enderror" name="file" type="file" id="file" >
+                    @error('file')
+                        <div class="invalid-feedback">{{$message}}</div>
+                    @enderror
                 </div>
                 </form>
             </div>
@@ -105,6 +108,17 @@
             window.location = $(this).data("href");
         });
     });
+
+    111
+
+    // var uploadField = document.getElementById("file");
+
+    // uploadField.onchange = function() {
+    //     if(this.files[0].size > 10000){
+    //     alert("File is too big!");
+    //     this.value = "";
+    //     };
+    // };
 
 
     function deleteAnnouncementBtn(e, id){
@@ -127,7 +141,10 @@
     }
 </script>
 
-
-
+@if($errors)
+    <script>
+        $('#pop-up-content').modal('show');
+    </script>
+@endif
 
 @stop
