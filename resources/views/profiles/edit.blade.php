@@ -14,7 +14,7 @@
                     <div class="card-body">
                         <div class="d-flex flex-column align-items-center text-center ">
                             @if(Auth::user()->profile_picture) 
-                            <div class="profile-picture d-flex justify-content-center">
+                            <div class="profile-picture d-flex justify-content-center a-center">
                                 <div>
                                     <img class="w-100 h-auto" id="image_preview" style="width:200px;height:200px;" src="storage/images/{{ Auth::user()->profile_picture }}">
                                 </div>
