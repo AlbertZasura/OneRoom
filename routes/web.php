@@ -105,10 +105,6 @@ Route::get('/errormapping',function() {
     return view('warnings.warningPage');
 });
 
-Route::get('/foo', function () {
-    Artisan::call('migrate:refresh');
-});
-
 // Route::get('/exams/list', function () {
 //     return view('welcome');
 // })->name('Elist');
