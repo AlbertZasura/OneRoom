@@ -71,8 +71,8 @@
                                         <h6 class="card-title ms-auto {{ now()->gte($assignment->deadline) ? 'text-danger' : 'text-success' }}">{{  \Carbon\Carbon::parse($assignment->deadline)->isoFormat('dddd, D MMMM Y H:mm')  }}</h6>
                                     </td>
                                     <td>
-                                        <div class="d-flex a-center">
-                                            <a href="{{ route('assignments.download', $assignment->id) }}?type=question" class="btn ms-auto"><i class='fs-25 fa fa-download'></i></a>
+                                        <div class="d-flex justify-content-start a-center">
+                                            <a href="{{ route('assignments.download', $assignment->id) }}?type=question" class="btn"><i class='fs-25 fa fa-download'></i></a>
                                             @can('delete', $assignment)
                                                 <form action="{{ route('course.assignments.destroy', [$course, $assignment]) }}" method="POST">
                                                     @csrf

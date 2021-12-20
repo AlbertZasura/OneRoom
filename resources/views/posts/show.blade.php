@@ -9,7 +9,7 @@
             <div class="card">
                 <div class="d-lg-grid d-lg-flex align-items-center p-3">
                     <div class="d-flex me-auto justify-content-center">
-                        <i class='fs-25 fa fa-file-signature me-2'></i>
+                        <i class='fs-25 fas fa-comments me-2'></i>
                         <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
                             <ol class="breadcrumb m-0">
                                 <li class="breadcrumb-item"><a
