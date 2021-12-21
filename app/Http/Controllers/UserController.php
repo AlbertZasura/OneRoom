@@ -112,7 +112,7 @@ class UserController extends Controller
     {
         $request->validate([
             'name' => 'required|max:255|min:4',
-            'identification_number' => $request->role==="admin" ? '':'required|numeric',
+            'identification_number' => $user->role==="admin" ? '':'required|numeric',
             'phone' => "required|numeric|unique:users,phone,$user->id",
             'email' => "required|email|unique:users,email,$user->id",
             'password' => $request->password ? 'required|min:6|confirmed' : '',
@@ -127,7 +127,7 @@ class UserController extends Controller
 
         $user->update([
             'name' => $request->name,
-            'identification_number' => $request->role==="admin" ? "0":$request->identification_number,
+            'identification_number' => $user->role==="admin" ? "0":$request->identification_number,
             'phone' => $request->phone,
             'email' => $request->email
         ]);
