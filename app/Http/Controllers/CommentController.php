@@ -22,7 +22,7 @@ class CommentController extends Controller
     {
         // $this->authorize('create', App\Models\Assignment::class);
         $request->validate([
-            'description' => 'required',
+            'description' => 'required', 
             'attachment' => 'file|max:10000', // max 10MB
         ]);
         if(!empty($request->file('attachment'))){
