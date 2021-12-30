@@ -227,15 +227,15 @@
                 <div class="ml-20 mb-10">
 
                     @if(request()->input('class_id'))
-                        {{-- <div>Ujian akan dibuat untuk kelas <strong>{{$class->find(request()->input('class_id'))->name}}</strong></div> --}}
+                        <div>Ujian yang dibuat untuk kelas <strong>{{$class->find(request()->input('class_id'))->name}}</strong></div>
                     @else    
-                        <div class="text-danger">Kelas Belum Dipilih(tolong pilih salah satu kelas melelui filter dibagian atas)</div>
+                        <div class="text-danger"><strong>Kelas Belum Dipilih</strong> (Silahkan pilih salah satu kelas melalui filter dibagian atas)</div>
                     @endif
     
                     @if(request()->input('course_id'))
                         <div>Mata pelajaran ujian yang dibuat yaitu <strong>{{$course->find(request()->input('course_id'))->name}}</strong></div>
                     @else    
-                        <div class="text-danger">Dan Mata Pelajaran Belum Dipilih(tolong pilih salah satu pelarajaran melelui filter dibagian atas)</div>
+                        <div class="text-danger"><strong>Mata Pelajaran Belum Dipilih</strong> (Silahkan pilih salah satu pelajaran melalui filter dibagian atas)</div>
                     @endif
                 </div>
             </div>
