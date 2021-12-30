@@ -50,7 +50,7 @@
         <div id="overlay" class="overlay-side-menu show-on-mobile" style="z-index: 1;"></div>
         <div class="d-flex">
             <div id="sidePanel"
-                class="{{ str_contains(url()->current(), '/dashboard') ? 'side-panel-menu bg-hijau-tua' : 'resize-side-panel side-panel-menu bg-hijau-tua' }}">
+                class="{{ str_contains(url()->current(), '/dashboard') ? 'side-panel-menu bg-hijau-tua' : 'resize-side-panel side-panel-menu bg-hijau-tua overflow-scroll custom-scroll-transparant' }}">
                 <div class="position-relative show-on-mobile"><i class="pos-absolute fas fa-times fs-25"
                         style="right: 11px; top: 12px;" onclick="hideMenuMobile()"></i></div>
                 <div class="profile-wrapper px-20px pt-20">

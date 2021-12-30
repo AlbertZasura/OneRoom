@@ -145,6 +145,24 @@
     background: #555;
 }
 
+.custom-scroll-transparant::-webkit-scrollbar {
+    width: 0px;
+}
+
+.custom-scroll-y-transparant::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.custom-scroll-y-transparant::-webkit-scrollbar-thumb {
+    background: transparent;
+    border-radius: 5px;
+}
+
+.custom-scroll-y-transparant::-webkit-scrollbar-thumb:hover {
+    background: transparent;
+}
+
+
 .text-navi {
     color: #3D6CB9;
 }
