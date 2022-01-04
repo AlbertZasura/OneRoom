@@ -27,6 +27,25 @@
     <script src="{{ asset('js/fullcalendar.js') }}" type="text/javascript"></script>
     {{-- <script src="{{ asset('js/mainscript.js')}}"></script> --}}
 
+    <style>
+        .custom-scroll-transparant::-webkit-scrollbar {
+            width: 0px;
+        }
+
+        .custom-scroll-y-transparant::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .custom-scroll-y-transparant::-webkit-scrollbar-thumb {
+            background: transparent;
+            border-radius: 5px;
+        }
+
+        .custom-scroll-y-transparant::-webkit-scrollbar-thumb:hover {
+            background: transparent;
+        }
+    </style>
+
 </head>
 
 <body>
