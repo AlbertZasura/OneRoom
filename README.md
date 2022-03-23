@@ -1,16 +1,22 @@
-## Cara Cloning
+# OneRoom
+OneRoom is a Learning Management System for School
 
-- Pertama **git clone {url}** pada folder yang diinginkan
-- buka vscode di terminal jalankan **composer install**
-- copy file **.env.example** ke file **.env**
-- di file **.env** ganti nama **database (DB_DATABASE)** sesuai database kamu
-- jalanin **php artisan key:generate**
-- jalanin **php artisan migrate**
-- jalanin **php artisan serve**
+## Laravel Setup
+First, Open your code editor then type:
+```
+composer install
+```
 
-[Detail](https://stackoverflow.com/questions/38602321/cloning-laravel-project-from-github)
+Rename `.env.example` file to `.env`
 
-## Contributions
-- Helena Helena
+Finally type:
+```
+php artisan key:generate
+php artisan migrate
+php artisan serve
+```
+
+## Contributors
+- Helena
 - Kadek
-- Albert Albert
+- Albert
